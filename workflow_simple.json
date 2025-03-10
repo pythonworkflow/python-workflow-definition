@@ -1,0 +1,21 @@
+{
+  "nodes": {
+    "0": "simple_workflow.add_x_and_y_and_z",
+    "1": "simple_workflow.add_x_and_y",
+    "2": "simple_workflow.add_x_and_y",
+    "3": "simple_workflow.add_x_and_y",
+    "4": 1,
+    "5": 2
+  },
+  "edges": [
+    {"target": 0, "targetHandle": "x", "source": 1, "sourceHandle": "x"},
+    {"target": 1, "targetHandle": "x", "source": 4, "sourceHandle": null},
+    {"target": 1, "targetHandle": "y", "source": 5, "sourceHandle": null},
+    {"target": 0, "targetHandle": "y", "source": 2, "sourceHandle": "y"},
+    {"target": 2, "targetHandle": "x", "source": 4, "sourceHandle": null},
+    {"target": 2, "targetHandle": "y", "source": 5, "sourceHandle": null},
+    {"target": 0, "targetHandle": "z", "source": 3, "sourceHandle": "z"},
+    {"target": 3, "targetHandle": "x", "source": 4, "sourceHandle": null},
+    {"target": 3, "targetHandle": "y", "source": 5, "sourceHandle": null}
+  ]
+}
