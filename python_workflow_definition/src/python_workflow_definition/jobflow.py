@@ -2,6 +2,7 @@ import json
 from importlib import import_module
 from inspect import isfunction
 
+import numpy as np
 from jobflow import job, Flow
 
 
@@ -215,3 +216,26 @@ def load_workflow_json(file_name):
         source_handles_dict=source_handles_dict,
     )
     return Flow(task_lst)
+
+
+def write_workflow_json(flow, file_name="workflow.json"):
+    flow_dict = flow.as_dict()
+    function_dict = get_function_dict(flow=flow)
+    nodes_dict, nodes_mapping_dict = get_nodes_dict(function_dict=function_dict)
+    edges_lst, nodes_dict = get_edges_and_extend_nodes(
+        flow_dict=flow_dict,
+        nodes_mapping_dict=nodes_mapping_dict,
+        nodes_dict=nodes_dict,
+    )
+
+    nodes_store_dict = {}
+    for k, v in nodes_dict.items():
+        if isfunction(v):
+            nodes_store_dict[k] = v.__module__ + "." + v.__name__
+        elif isinstance(v, np.ndarray):
+            nodes_store_dict[k] = v.tolist()
+        else:
+            nodes_store_dict[k] = v
+
+    with open(file_name, "w") as f:
+        json.dump({"nodes": nodes_store_dict, "edges": edges_lst}, f)
