@@ -164,7 +164,7 @@ def get_workflow(nodes_dict, input_dict, total_dict, source_handles_dict):
                     obj=memory_dict[vw['source']], source_handle=vw['sourceHandle'])
                 for kw, vw in total_dict[k].items()
             }
-            print(k, kwargs)
+            # print(k, kwargs)
             memory_dict[k] = fn(**kwargs)
     return list(memory_dict.values())
 
@@ -193,7 +193,20 @@ def load_workflow_json(file_name):
     with open(file_name, "r") as f:
         content = json.load(f)
 
-    edges_new_lst = content["edges"]
+    edges_new_lst = []
+    for edge in content["edges"]:
+        if edge['sourceHandle'] is None:
+            edges_new_lst.append(edge)
+        else:
+            edges_new_lst.append(
+                {
+                    'target': edge['target'],
+                    'targetHandle': edge['targetHandle'],
+                    'source': edge['source'],
+                    'sourceHandle': str(edge['sourceHandle']),
+                }
+            )
+
     nodes_new_dict = {}
     for k, v in content["nodes"].items():
         if isinstance(v, str) and "." in v:
