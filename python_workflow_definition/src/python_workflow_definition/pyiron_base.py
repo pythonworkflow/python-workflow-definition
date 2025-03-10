@@ -2,6 +2,7 @@ from importlib import import_module
 from inspect import isfunction
 import json
 
+import numpy as np
 from pyiron_base import job
 from pyiron_base.project.delayed import DelayedObject
 
@@ -231,6 +232,8 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
     for k, v in nodes_new_dict.items():
         if isfunction(v):
             nodes_store_dict[k] = v.__module__ + "." + v.__name__
+        elif isinstance(v, np.ndarray):
+            nodes_store_dict[k] = v.tolist()
         else:
             nodes_store_dict[k] = v
 
