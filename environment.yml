@@ -10,3 +10,4 @@ dependencies:
 - xmlschema=3.4.3
 - jobflow=0.1.19
 - pygraphviz=1.14
+- aiida-workgraph 0.4.10
