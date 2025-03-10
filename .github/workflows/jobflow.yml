@@ -21,8 +21,8 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
-        pip install -e aiida_qe_basic
         pip install -e adis_tools
+        pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         papermill universal_qe_to_jobflow.ipynb universal_qe_to_jobflow_out.ipynb -k "python3"
