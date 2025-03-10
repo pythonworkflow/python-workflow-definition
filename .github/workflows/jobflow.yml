@@ -26,3 +26,4 @@ jobs:
         conda install -c conda-forge jupyter papermill
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         papermill universal_qe_to_jobflow.ipynb universal_qe_to_jobflow_out.ipynb -k "python3"
+        papermill jobflow_to_pyiron_base.ipynb jobflow_to_pyiron_base_out.ipynb -k "python3"

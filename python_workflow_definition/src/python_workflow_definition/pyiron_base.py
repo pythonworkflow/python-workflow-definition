@@ -1,6 +1,8 @@
-import json
 from importlib import import_module
+from inspect import isfunction
+import json
 
+import numpy as np
 from pyiron_base import job
 from pyiron_base.project.delayed import DelayedObject
 
@@ -216,3 +218,24 @@ def load_workflow_json(project, file_name):
         pyiron_project=project,
     )
     return delayed_object_dict[list(delayed_object_dict.keys())[-1]]
+
+
+def write_workflow_json(delayed_object, file_name="workflow.json"):
+    nodes_dict, edges_lst = delayed_object.get_graph()
+    nodes_dict, edges_lst = remove_server_obj(nodes_dict=nodes_dict, edges_lst=edges_lst)
+    delayed_object_updated_dict, match_dict = get_unique_objects(nodes_dict=nodes_dict, edges_lst=edges_lst)
+    connection_dict, lookup_dict = get_connection_dict(delayed_object_updated_dict=delayed_object_updated_dict, match_dict=match_dict)
+    nodes_new_dict = get_nodes(connection_dict=connection_dict, delayed_object_updated_dict=delayed_object_updated_dict)
+    edges_new_lst = get_edges_dict(edges_lst=edges_lst, nodes_dict=nodes_dict, connection_dict=connection_dict, lookup_dict=lookup_dict)
+
+    nodes_store_dict = {}
+    for k, v in nodes_new_dict.items():
+        if isfunction(v):
+            nodes_store_dict[k] = v.__module__ + "." + v.__name__
+        elif isinstance(v, np.ndarray):
+            nodes_store_dict[k] = v.tolist()
+        else:
+            nodes_store_dict[k] = v
+
+    with open(file_name, "w") as f:
+        json.dump({"nodes": nodes_store_dict, "edges": edges_new_lst}, f)
