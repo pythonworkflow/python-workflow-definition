@@ -9,3 +9,4 @@ dependencies:
 - matplotlib=3.10.1
 - xmlschema=3.4.3
 - jobflow=0.1.19
+- pygraphviz=1.14
