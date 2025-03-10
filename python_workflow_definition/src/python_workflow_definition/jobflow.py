@@ -197,6 +197,8 @@ def load_workflow_json(file_name):
     for k, v in content["nodes"].items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
+            if p == "python_workflow_definition.pyiron_base":
+                p = "python_workflow_definition.jobflow"
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
         else:
