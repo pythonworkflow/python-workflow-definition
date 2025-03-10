@@ -1,3 +1,6 @@
+import json
+from importlib import import_module
+
 from pyiron_base import job
 from pyiron_base.project.delayed import DelayedObject
 
@@ -107,7 +110,7 @@ def get_unique_objects(nodes_dict, edges_lst):  # I need a pre-filter before thi
             delayed_object_dict[k] = v
         elif isinstance(v, list) and any([isinstance(el, DelayedObject) for el in v]):  # currently this replaces any list - what I need instead is some kind of virtual node - mixed nodes
             delayed_object_dict[k] = DelayedObject(function=get_list)
-            delayed_object_dict[k]._input = {i: el for el in enumerate(v)}
+            delayed_object_dict[k]._input = {i: el for i, el in enumerate(v)}
             delayed_object_dict[k]._python_function = get_list
         elif isinstance(v, dict) and any([isinstance(el, DelayedObject) for el in v.values()]):
             delayed_object_dict[k] = DelayedObject(function=get_dict, **v,)
@@ -187,3 +190,27 @@ def get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
     return edges_dict_lst
 
 
+def load_workflow_json(project, file_name):
+    with open(file_name, "r") as f:
+        content = json.load(f)
+
+    edges_new_lst = content["edges"]
+    nodes_new_dict = {}
+    for k, v in content["nodes"].items():
+        if isinstance(v, str) and "." in v:
+            p, m = v.rsplit('.', 1)
+            mod = import_module(p)
+            nodes_new_dict[int(k)] = getattr(mod, m)
+        else:
+            nodes_new_dict[int(k)] = v
+
+    total_lst = group_edges(edges_new_lst)
+    total_new_lst = resort_total_lst(total_lst=total_lst, nodes_dict=nodes_new_dict)
+    source_handle_dict = get_source_handles(edges_new_lst)
+    delayed_object_dict = get_delayed_object_dict(
+        total_lst=total_new_lst,
+        nodes_dict=nodes_new_dict,
+        source_handle_dict=source_handle_dict,
+        pyiron_project=project,
+    )
+    return delayed_object_dict[list(delayed_object_dict.keys())[-1]]
