@@ -1,3 +1,5 @@
+import json
+from importlib import import_module
 from inspect import isfunction
 
 from jobflow import job, Flow
@@ -186,6 +188,28 @@ def get_source_handles(edges_lst):
     }
 
 
-def find_root_node(nodes_dict, edges_lst):
-    source_count_dict = {k: sum([ed["source"] == k for ed in edges_lst]) for k in nodes_dict.keys()}
-    return min(source_count_dict, key=source_count_dict.get)
+def load_workflow_json(file_name):
+    with open(file_name, "r") as f:
+        content = json.load(f)
+
+    edges_new_lst = content["edges"]
+    nodes_new_dict = {}
+    for k, v in content["nodes"].items():
+        if isinstance(v, str) and "." in v:
+            p, m = v.rsplit('.', 1)
+            mod = import_module(p)
+            nodes_new_dict[int(k)] = getattr(mod, m)
+        else:
+            nodes_new_dict[int(k)] = v
+
+    source_handles_dict = get_source_handles(edges_lst=edges_new_lst)
+    total_dict = group_edges(edges_lst=edges_new_lst)
+    input_dict = get_input_dict(nodes_dict=nodes_new_dict)
+    new_total_dict = resort_total_lst(total_dict=total_dict, nodes_dict=nodes_new_dict)
+    task_lst = get_workflow(
+        nodes_dict=nodes_new_dict,
+        input_dict=input_dict,
+        total_dict=new_total_dict,
+        source_handles_dict=source_handles_dict,
+    )
+    return Flow(task_lst)

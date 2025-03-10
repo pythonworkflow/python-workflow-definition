@@ -1,0 +1,28 @@
+name: jobflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: "3.12"
+        environment-file: environment.yml
+        auto-activate-base: false
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        pip install -e aiida_qe_basic
+        pip install -e adis_tools
+        conda install -c conda-forge jupyter papermill
+        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        papermill universal_qe_to_jobflow.ipynb universal_qe_to_jobflow_out.ipynb -k "python3"
