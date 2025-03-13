@@ -123,8 +123,7 @@ def get_unique_objects(nodes_dict, edges_lst):  # I need a pre-filter before thi
     for dobj in delayed_object_dict.keys():
         match = False
         for obj in unique_lst:
-            # print(delayed_object_dict[dobj]._list_index, delayed_object_dict[dobj]._output_key, delayed_object_dict[obj]._list_index, delayed_object_dict[obj]._output_key)
-            if obj.split("_")[0] == dobj.split("_")[0] and delayed_object_dict[dobj]._input == delayed_object_dict[obj]._input:
+            if delayed_object_updated_dict[obj]._python_function == delayed_object_dict[dobj]._python_function and delayed_object_dict[dobj]._input == delayed_object_dict[obj]._input:
                 delayed_object_updated_dict[obj] = delayed_object_dict[obj]
                 match_dict[dobj] = obj
                 match = True
