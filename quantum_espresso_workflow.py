@@ -7,6 +7,7 @@ from ase.build import bulk
 from ase.io import write
 from adis_tools.parsers import parse_pw
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def write_input(input_dict, working_directory="."):
