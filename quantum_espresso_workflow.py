@@ -1,6 +1,5 @@
 import os
 import subprocess
-import numpy as np
 
 from ase.atoms import Atoms
 from ase.build import bulk
