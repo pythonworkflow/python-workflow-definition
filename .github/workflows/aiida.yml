@@ -1,4 +1,4 @@
-name: pyiron
+name: aiida
 
 on:
   push:
