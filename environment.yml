@@ -2,6 +2,7 @@ channels:
 - conda-forge
 dependencies:
 - python=3.12
+- aiida-workgraph=0.4.10
 - pyiron_base=0.11.7
 - qe=7.2
 - qe-tools=2.0.0
