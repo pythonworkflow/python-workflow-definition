@@ -34,7 +34,7 @@
     "31": "python_workflow_definition.pyiron_base.get_list"
   },
   "edges": [
-    {"target": 0, "targetHandle": "name", "source": 9, "sourceHandle": null},
+    {"target": 0, "targetHandle": "element", "source": 9, "sourceHandle": null},
     {"target": 0, "targetHandle": "a", "source": 10, "sourceHandle": null},
     {"target": 0, "targetHandle": "cubic", "source": 11, "sourceHandle": null},
     {"target": 1, "targetHandle": "working_directory", "source": 12, "sourceHandle": null},
