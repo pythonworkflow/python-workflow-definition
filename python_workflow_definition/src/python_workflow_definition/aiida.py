@@ -56,12 +56,15 @@ def write_workflow_json(wg):
 
 
 def load_workflow_json(filename):
+
     with open(filename) as f:
         data = json.load(f)
 
     wg = WorkGraph()
     task_name_mapping = {}
     # add tasks
+    name_counter = {}
+
     for name, identifier in data["nodes"].items():
         # if isinstance(identifier, str) and identifier in func_mapping:
         if isinstance(identifier, str) and "." in identifier:
@@ -71,12 +74,23 @@ def load_workflow_json(filename):
             func = task.pythonjob()(_func)
             # func = func_mapping[identifier]
             # I use the register_pickle_by_value, because the function is defined in a local file
-            wg.add_task(func, register_pickle_by_value=True, name=m)
+            try:
+                wg.add_task(func, register_pickle_by_value=True, name=m)
+            except ValueError:
+                if m in name_counter:
+                    name_counter[m] += 1
+                else:
+                    name_counter[m] = 0
+                name_ = f"{m}_{name_counter[m]}"
+
+                wg.add_task(func, register_pickle_by_value=True, name=name_)
+
             # Remove the default result output, because we will add the outputs later from the data in the link
             del wg.tasks[-1].outputs["result"]
         else:
             # data task
             wg.add_task(pickle_node, value=identifier, name=name)
+
         task_name_mapping[name] = wg.tasks[-1].name
     # add links
     for link in data["edges"]:
