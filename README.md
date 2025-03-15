@@ -62,6 +62,7 @@ The corresponding Jupyter notebooks demonstrate this functionality:
 |--------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | [universal_simple_to_jobflow.ipynb](universal_simple_to_jobflow.ipynb)         | Execute workflow defined in the Python Workflow Definition with jobflow.     |
 | [universal_simple_to_pyiron_base.ipynb](universal_simple_to_pyiron_base.ipynb) | Execute workflow defined in the Python Workflow Definition with pyrion_base. |
+| [universal_simple_to_python.ipynb](universal_simple_to_python.ipynb)           | Execute workflow defined in the Python Workflow Definition with Python.      |
 | [jobflow_to_pyiron_base_simple.ipynb](jobflow_to_pyiron_base_simple.ipynb)     | Define Workflow with jobflow and execute it with pyiron_base.                |
 | [pyiron_base_to_jobflow_simple.ipynb](pyiron_base_to_jobflow_simple.ipynb)     | Define Workflow with pyiron_base and execute it with jobflow.                |
 
@@ -76,5 +77,6 @@ initial structure is relaxed, afterwards it is strained and the total energy is 
 |------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | [universal_qe_to_jobflow.ipynb](universal_qe_to_jobflow.ipynb)         | Execute workflow defined in the Python Workflow Definition with jobflow.     |
 | [universal_qe_to_pyiron_base.ipynb](universal_qe_to_pyiron_base.ipynb) | Execute workflow defined in the Python Workflow Definition with pyrion_base. |
+| [universal_qe_to_python.ipynb](universal_qe_to_python.ipynb)           | Execute workflow defined in the Python Workflow Definition with Python.      |
 | [jobflow_to_pyiron_base_qe.ipynb](jobflow_to_pyiron_base_qe.ipynb)     | Define Workflow with jobflow and execute it with pyiron_base.                |
 | [pyiron_base_to_jobflow_qe.ipynb](pyiron_base_to_jobflow_qe.ipynb)     | Define Workflow with pyiron_base and execute it with jobflow.                |
