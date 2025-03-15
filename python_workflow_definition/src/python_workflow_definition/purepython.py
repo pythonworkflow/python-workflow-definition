@@ -3,7 +3,7 @@ from importlib import import_module
 from inspect import isfunction
 
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs
+from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles
 
 
 def resort_total_lst(total_lst, nodes_dict):
@@ -33,19 +33,6 @@ def group_edges(edges_lst):
             tmp_lst = [ed]
     total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
     return total_lst
-
-
-def get_source_handles(edges_lst):
-    source_handle_dict = {}
-    for ed in edges_lst:
-        if ed['source'] not in source_handle_dict.keys():
-            source_handle_dict[ed['source']] = [ed['sourceHandle']]
-        else:
-            source_handle_dict[ed['source']].append(ed['sourceHandle'])
-    return {
-        k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
-        for k, v in source_handle_dict.items()
-    }
 
 
 def get_value(result_dict, nodes_new_dict, link_dict):
