@@ -3,16 +3,7 @@ from importlib import import_module
 from inspect import isfunction
 
 
-def get_dict(**kwargs):
-    return {k: v for k, v in kwargs.items()}
-
-
-def get_list(**kwargs):
-    return list(kwargs.values())
-
-
-def get_kwargs(lst):
-    return {t['targetHandle']: {'source': t['source'], 'sourceHandle': t['sourceHandle']} for t in lst}
+from python_workflow_definition.shared import get_dict, get_list, get_kwargs
 
 
 def resort_total_lst(total_lst, nodes_dict):
@@ -80,8 +71,6 @@ def load_workflow_json(file_name):
     for k, v in content["nodes"].items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
-            if p == "python_workflow_definition.pyiron_base":
-                p = "python_workflow_definition.purepython"
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
         else:
