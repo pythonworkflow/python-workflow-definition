@@ -1,0 +1,29 @@
+name: python
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: "3.12"
+        environment-file: environment.yml
+        auto-activate-base: false
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        pip install -e adis_tools
+        pip install -e python_workflow_definition
+        conda install -c conda-forge jupyter papermill
+        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        papermill universal_simple_to_python.ipynb universal_simple_to_python_out.ipynb -k "python3"
+        papermill universal_qe_to_pythonipynb universal_qe_to_python_out.ipynb -k "python3"
