@@ -7,6 +7,10 @@ from python_workflow_definition.shared import get_dict, get_list, get_kwargs, ge
 from python_workflow_definition.purepython import resort_total_lst, group_edges
 
 
+def get_item(obj, key):
+    return obj[key]
+
+
 def _get_value(result_dict, nodes_new_dict, link_dict, exe):
     source, source_handle = link_dict["source"], link_dict["sourceHandle"]
     if source in result_dict.keys():
@@ -18,7 +22,7 @@ def _get_value(result_dict, nodes_new_dict, link_dict, exe):
     if source_handle is None:
         return result
     else:
-        return exe.submit(fn=getattr, object=result, name=source_handle)
+        return exe.submit(fn=get_item, obj=result, key=source_handle)
 
 
 def load_workflow_json(file_name, exe):
