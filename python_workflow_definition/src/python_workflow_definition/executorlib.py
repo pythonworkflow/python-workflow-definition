@@ -18,7 +18,7 @@ def _get_value(result_dict, nodes_new_dict, link_dict, exe):
     if source_handle is None:
         return result
     else:
-        return exe.submit(getattr, result, source_handle)
+        return exe.submit(fn=getattr, object=result, name=source_handle)
 
 
 def load_workflow_json(file_name, exe):
