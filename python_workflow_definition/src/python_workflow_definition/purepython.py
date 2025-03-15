@@ -3,7 +3,7 @@ from importlib import import_module
 from inspect import isfunction
 
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs
+from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles
 
 
 def resort_total_lst(total_lst, nodes_dict):
@@ -35,20 +35,7 @@ def group_edges(edges_lst):
     return total_lst
 
 
-def get_source_handles(edges_lst):
-    source_handle_dict = {}
-    for ed in edges_lst:
-        if ed['source'] not in source_handle_dict.keys():
-            source_handle_dict[ed['source']] = [ed['sourceHandle']]
-        else:
-            source_handle_dict[ed['source']].append(ed['sourceHandle'])
-    return {
-        k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
-        for k, v in source_handle_dict.items()
-    }
-
-
-def get_value(result_dict, nodes_new_dict, link_dict):
+def _get_value(result_dict, nodes_new_dict, link_dict):
     source, source_handle = link_dict["source"], link_dict["sourceHandle"]
     if source in result_dict.keys():
         result = result_dict[source]
@@ -85,7 +72,7 @@ def load_workflow_json(file_name):
         node = nodes_new_dict[lst[0]]
         if isfunction(node):
             kwargs = {
-                k: get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
+                k: _get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
                 for k, v in lst[1].items()
             }
             result_dict[lst[0]] = node(**kwargs)
