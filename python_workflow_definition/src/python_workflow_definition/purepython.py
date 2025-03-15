@@ -35,7 +35,7 @@ def group_edges(edges_lst):
     return total_lst
 
 
-def get_value(result_dict, nodes_new_dict, link_dict):
+def _get_value(result_dict, nodes_new_dict, link_dict):
     source, source_handle = link_dict["source"], link_dict["sourceHandle"]
     if source in result_dict.keys():
         result = result_dict[source]
@@ -72,7 +72,7 @@ def load_workflow_json(file_name):
         node = nodes_new_dict[lst[0]]
         if isfunction(node):
             kwargs = {
-                k: get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
+                k: _get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
                 for k, v in lst[1].items()
             }
             result_dict[lst[0]] = node(**kwargs)

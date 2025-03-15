@@ -4,7 +4,21 @@ from inspect import isfunction
 
 
 from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles
-from python_workflow_definition.purepython import resort_total_lst, group_edges, get_value
+from python_workflow_definition.purepython import resort_total_lst, group_edges
+
+
+def _get_value(result_dict, nodes_new_dict, link_dict, exe):
+    source, source_handle = link_dict["source"], link_dict["sourceHandle"]
+    if source in result_dict.keys():
+        result = result_dict[source]
+    elif source in nodes_new_dict.keys():
+        result = nodes_new_dict[source]
+    else:
+        raise KeyError()
+    if source_handle is None:
+        return result
+    else:
+        return exe.submit(getattr, result, source_handle)
 
 
 def load_workflow_json(file_name, exe):
@@ -30,7 +44,7 @@ def load_workflow_json(file_name, exe):
         node = nodes_new_dict[lst[0]]
         if isfunction(node):
             kwargs = {
-                k: get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
+                k: _get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v, exe=exe)
                 for k, v in lst[1].items()
             }
             result_dict[lst[0]] = exe.submit(node, **kwargs)
