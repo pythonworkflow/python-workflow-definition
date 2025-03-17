@@ -10,11 +10,6 @@ def pickle_node(value):
     return value
 
 
-def get_item(data: dict, key: str):
-    """Handle get item from the outputs"""
-    return data[key]
-
-
 def load_workflow_json(filename):
     with open(filename) as f:
         data = json.load(f)
@@ -86,14 +81,6 @@ def load_workflow_json(filename):
     return wg
 
 
-def get_list(**kwargs):
-    return list(kwargs.values())
-
-
-def get_dict(**kwargs):
-    return {k: v for k, v in kwargs.items()}
-
-
 def write_workflow_json(wg, file_name):
     wgdata = wg.to_dict()
     data = {"nodes": {}, "edges": []}
@@ -144,9 +131,6 @@ def write_workflow_json(wg, file_name):
 
     return data
 
-def pickle_node(value):
-    """Handle data nodes"""
-    return value
 
 def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
 
@@ -201,16 +185,22 @@ def construct_wg_qe(
 ):
 
     wg = WorkGraph()
+
+    wg.add_task(pickle_node_task, name="element", value="Al")
+    wg.add_task(pickle_node_task, name="kpts", value=[3, 3, 3])
+    wg.add_task(pickle_node_task, name="lattice", value=4.05)
+    wg.add_task(pickle_node_task, name="dynamic", value=True)
+
     wg.add_task(
         get_bulk_structure_task,
         name="bulk",
-        element="Al",
-        a=4.05,
-        cubic=True,
+        element=wg.tasks.element.outputs.result,
+        a=wg.tasks.lattice.outputs.result,
+        cubic=wg.tasks.dynamic.outputs.result,
         register_pickle_by_value=True,
     )
     wg.add_task(pickle_node_task, name="calculation", value="vc-relax")
-    wg.add_task(pickle_node_task, name="kpts", value=[3, 3, 3])
+
     wg.add_task(
         pickle_node_task,
         name="pseudopotentials",
@@ -227,18 +217,22 @@ def construct_wg_qe(
         smearing=wg.tasks.smearing.outputs.result,
         register_pickle_by_value=True,
     )
+    wg.add_task(pickle_node_task, name="scf_workdir", value="mini")
     wg.add_task(
         calculate_qe_task,
-        name=f"relax",
+        name="mini",
         input_dict=wg.tasks.get_dict.outputs.result,
-        working_directory="mini",
+        working_directory=wg.tasks.scf_workdir.outputs.result,
         register_pickle_by_value=True,
     )
+
+    wg.add_task(pickle_node_task, name="strain_lst", value=strain_lst)
+
     wg.add_task(
         generate_structures_task,
         name="generate_structures",
-        structure=wg.tasks.relax.outputs.structure,
-        strain_lst=strain_lst,
+        structure=wg.tasks.mini.outputs.structure,
+        strain_lst=wg.tasks.strain_lst.outputs.result,
         register_pickle_by_value=True,
     )
     # here we add the structure outputs based on the number of strains
@@ -261,22 +255,25 @@ def construct_wg_qe(
             smearing=wg.tasks.smearing.outputs.result,
             register_pickle_by_value=True,
         )
+        strain_dir = f"strain_{i}"
+        strain_dir_task = wg.add_task(pickle_node, name=strain_dir, value=strain_dir)
+
         qe_task = wg.add_task(
             calculate_qe_task,
             name=f"qe_{i}",
             input_dict=get_dict_task_.outputs.result,
-            working_directory=f"strain_{i}",
+            working_directory=strain_dir_task.outputs.result,
             register_pickle_by_value=True,
         )
         # collect energy and volume
         wg.add_link(qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
         wg.add_link(qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
 
-        wg.add_task(
-            plot_energy_volume_curve_task,
-            volume_lst=wg.tasks.get_volumes.outputs.result,
-            energy_lst=wg.tasks.get_energies.outputs.result,
-            register_pickle_by_value=True,
-        )
+    wg.add_task(
+        plot_energy_volume_curve_task,
+        volume_lst=wg.tasks.get_volumes.outputs.result,
+        energy_lst=wg.tasks.get_energies.outputs.result,
+        register_pickle_by_value=True,
+    )
 
     return wg
