@@ -92,7 +92,9 @@ def write_workflow_json(wg, file_name):
         callable_name = node["executor"]["callable_name"]
 
         if callable_name == "pickle_node":
-            aiida_node = data["nodes"][i] = node["inputs"]["sockets"]["value"]["property"]["value"]
+            aiida_node = data["nodes"][i] = node["inputs"]["sockets"]["value"][
+                "property"
+            ]["value"]
             try:
                 if isinstance(aiida_node, orm.List):
                     data["nodes"][i] = aiida_node.get_list()
@@ -101,10 +103,14 @@ def write_workflow_json(wg, file_name):
                 else:
                     data["nodes"][i] = aiida_node.value
             except:
-                import ipdb; ipdb.set_trace()
+                import traceback
+
+                traceback.print_stack()
+                raise
+                # raise
+                # import ipdb; ipdb.set_trace()
 
         else:
-
             callable_name = f"{node['executor']['module_path']}.{callable_name}"
 
             data["nodes"][i] = callable_name
@@ -118,9 +124,9 @@ def write_workflow_json(wg, file_name):
         ):
             link["from_socket"] = None
         link["source"] = node_name_mapping[link["from_node"]]
-        del link['from_node']
+        del link["from_node"]
         link["target"] = node_name_mapping[link["to_node"]]
-        del link['to_node']
+        del link["to_node"]
         link["sourceHandle"] = link.pop("from_socket")
         link["targetHandle"] = link.pop("to_socket")
         data["edges"].append(link)
@@ -133,7 +139,6 @@ def write_workflow_json(wg, file_name):
 
 
 def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
-
     helper_1 = task.pythonjob()(pickle_node)
     helper_2 = task.pythonjob()(pickle_node)
 
@@ -141,30 +146,22 @@ def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
     add_x_and_y_and_z = task.pythonjob()(add_x_and_y_and_z_func)
 
     # TODO: Create inputs rather than tasks out of data nodes
-    wg = WorkGraph('wg-simple')
+    wg = WorkGraph("wg-simple")
 
-    helper_task1 = wg.add_task(
-        helper_1,
-        name="x",
-        value=1
-    )
+    helper_task1 = wg.add_task(helper_1, name="x", value=1)
 
-    helper_task2 = wg.add_task(
-        helper_2,
-        name="y",
-        value=2
-    )
+    helper_task2 = wg.add_task(helper_2, name="y", value=2)
 
     add_x_and_y_task = wg.add_task(
         add_x_and_y,
-        name='add_x_and_y',
+        name="add_x_and_y",
         x=helper_task1.outputs.result,
         y=helper_task2.outputs.result,
     )
 
     add_x_and_y_and_z_task = wg.add_task(
         add_x_and_y_and_z,
-        name='add_x_and_y_and_z',
+        name="add_x_and_y_and_z",
         x=add_x_and_y_task.outputs.x,
         y=add_x_and_y_task.outputs.y,
         z=add_x_and_y_task.outputs.z,
@@ -176,37 +173,55 @@ def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
 def construct_wg_qe(
     get_dict_task,
     get_list_task,
-    pickle_node_task,
     get_bulk_structure_task,
     calculate_qe_task,
     generate_structures_task,
     plot_energy_volume_curve_task,
     strain_lst,
 ):
-
     wg = WorkGraph()
 
-    wg.add_task(pickle_node_task, name="element", value="Al")
-    wg.add_task(pickle_node_task, name="kpts", value=[3, 3, 3])
-    wg.add_task(pickle_node_task, name="lattice", value=4.05)
-    wg.add_task(pickle_node_task, name="dynamic", value=True)
+    # TODO: Change order of tasks, and then manually add links, such that we have the same order as in the original
+    # TODO: JSON, and can debug better
+    # pickle_node_task = task.pythonjob(pickle_node)
 
+    # task.pythonjob(outputs=["element"])(pickle_node), name="element", value="Al"
+
+    pickle_element = task.pythonjob(outputs=["element"])(pickle_node)
+    wg.add_task(pickle_element, name="pickle_element", value="Al")
+
+    del pickle_node.TaskCls
+
+    wg.add_task(task.pythonjob(outputs=["a"])(pickle_node), name="pickle_a", value=4.05)
+    del pickle_node.TaskCls
+    wg.add_task(
+        task.pythonjob(outputs=["cubic"])(pickle_node), name="pickle_cubic", value=True
+    )
+    del pickle_node.TaskCls
+
+    for task_ in wg.tasks:
+        print(task_.name, task_.outputs)
+
+    import ipdb; ipdb.set_trace()
     wg.add_task(
         get_bulk_structure_task,
         name="bulk",
-        element=wg.tasks.element.outputs.result,
-        a=wg.tasks.lattice.outputs.result,
-        cubic=wg.tasks.dynamic.outputs.result,
+        element=wg.tasks.pickle_element.outputs.element,
+        a=wg.tasks.pickle_a.outputs.a,
+        cubic=wg.tasks.pickle_cubic.outputs.result,
         register_pickle_by_value=True,
     )
-    wg.add_task(pickle_node_task, name="calculation", value="vc-relax")
+    wg.add_task(task.pythonjob()(pickle_node), name="calculation", value="vc-relax")
 
     wg.add_task(
-        pickle_node_task,
+        task.pythonjob(pickle_node),
         name="pseudopotentials",
         value={"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"},
     )
     wg.add_task(pickle_node_task, name="smearing", value=0.02)
+    wg.add_task(
+        task.pythonjob(outputs=["kpts"])(pickle_node), name="kpts_task", value=[3, 3, 3]
+    )
     wg.add_task(
         get_dict_task,
         name="get_dict",

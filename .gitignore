@@ -189,4 +189,13 @@ workflow_qe_pyiron_base.json
 mini/
 .bak/
 workgraph_qe.json
+aiida-qe-construct.json
+aiida_to_jobflow_qe.html
+aiida_to_pyiron_base_qe.html
+evcurve.png
+strain_0/
+strain_1/
+strain_2/
+strain_3/
+strain_4/
 
