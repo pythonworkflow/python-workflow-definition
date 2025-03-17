@@ -180,3 +180,13 @@ pyiron.log
 pyiron_draw.png
 python_workflow_definition/src/python_workflow_definition/__pycache__/
 test/
+workflow_simple_aiida.json
+workflow_simple_jobflow.json
+workflow_simple_pyiron_base.json
+workflow_qe_aiida.json
+workflow_qe_jobflow.json
+workflow_qe_pyiron_base.json
+mini/
+.bak/
+workgraph_qe.json
+
