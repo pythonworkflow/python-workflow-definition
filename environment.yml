@@ -2,7 +2,6 @@ channels:
 - conda-forge
 dependencies:
 - python=3.12
-- aiida-workgraph=0.4.10
 - pyiron_base=0.11.7
 - qe=7.2
 - qe-tools=2.0.0
@@ -11,3 +10,6 @@ dependencies:
 - xmlschema=3.4.3
 - jobflow=0.1.19
 - pygraphviz=1.14
+- pip
+- pip:
+  - git+https://github.com/aiidateam/aiida-workgraph.git@898b6eb4dada8ecc551b55378e1f3799720b7c5d
