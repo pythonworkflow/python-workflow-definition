@@ -24,11 +24,12 @@ jobs:
         pip install -e adis_tools
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
-        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         verdi presto --profile-name adis
     - name: Tests
       shell: bash -l {0}
       run: |
+        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        
         papermill universal_simple_to_jobflow.ipynb universal_simple_to_jobflow_out.ipynb -k "python3"
         papermill universal_qe_to_jobflow.ipynb universal_qe_to_jobflow_out.ipynb -k "python3"
 
