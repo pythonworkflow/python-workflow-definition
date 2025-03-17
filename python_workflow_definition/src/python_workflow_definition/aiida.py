@@ -2,6 +2,7 @@ from importlib import import_module
 import traceback
 from aiida_workgraph import WorkGraph, task
 import json
+from aiida import orm
 
 
 def pickle_node(value):
@@ -104,9 +105,16 @@ def write_workflow_json(wg, file_name):
         callable_name = node["executor"]["callable_name"]
 
         if callable_name == "pickle_node":
-            data["nodes"][i] = node["inputs"]["sockets"]["value"]["property"][
-                "value"
-            ].value
+            aiida_node = data["nodes"][i] = node["inputs"]["sockets"]["value"]["property"]["value"]
+            try:
+                if isinstance(aiida_node, orm.List):
+                    data["nodes"][i] = aiida_node.get_list()
+                elif isinstance(aiida_node, orm.Dict):
+                    data["nodes"][i] = aiida_node.get_dict()
+                else:
+                    data["nodes"][i] = aiida_node.value
+            except:
+                import ipdb; ipdb.set_trace()
 
         else:
 
