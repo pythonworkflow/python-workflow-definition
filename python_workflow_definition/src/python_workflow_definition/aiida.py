@@ -136,10 +136,139 @@ def write_workflow_json(wg, file_name):
 
     return data
 
+def pickle_node(value):
+    """Handle data nodes"""
+    return value
 
-# def construct_wg_simple():
+def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
 
-#     ...
+    helper_1 = task.pythonjob()(pickle_node)
+    helper_2 = task.pythonjob()(pickle_node)
 
-# def construct_qe_simple():
-#     ...
+    add_x_and_y = task.pythonjob(outputs=["x", "y", "z"])(add_x_and_y_func)
+    add_x_and_y_and_z = task.pythonjob()(add_x_and_y_and_z_func)
+
+    # TODO: Create inputs rather than tasks out of data nodes
+    wg = WorkGraph('wg-simple')
+
+    helper_task1 = wg.add_task(
+        helper_1,
+        name="x",
+        value=1
+    )
+
+    helper_task2 = wg.add_task(
+        helper_2,
+        name="y",
+        value=2
+    )
+
+    add_x_and_y_task = wg.add_task(
+        add_x_and_y,
+        name='add_x_and_y',
+        x=helper_task1.outputs.result,
+        y=helper_task2.outputs.result,
+    )
+
+    add_x_and_y_and_z_task = wg.add_task(
+        add_x_and_y_and_z,
+        name='add_x_and_y_and_z',
+        x=add_x_and_y_task.outputs.x,
+        y=add_x_and_y_task.outputs.y,
+        z=add_x_and_y_task.outputs.z,
+    )
+
+    return wg
+
+
+def construct_wg_qe(
+    get_dict_task,
+    get_list_task,
+    pickle_node_task,
+    get_bulk_structure_task,
+    calculate_qe_task,
+    generate_structures_task,
+    plot_energy_volume_curve_task,
+    strain_lst,
+):
+
+    wg = WorkGraph()
+    wg.add_task(
+        get_bulk_structure_task,
+        name="bulk",
+        element="Al",
+        a=4.05,
+        cubic=True,
+        register_pickle_by_value=True,
+    )
+    wg.add_task(pickle_node_task, name="calculation", value="vc-relax")
+    wg.add_task(pickle_node_task, name="kpts", value=[3, 3, 3])
+    wg.add_task(
+        pickle_node_task,
+        name="pseudopotentials",
+        value={"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"},
+    )
+    wg.add_task(pickle_node_task, name="smearing", value=0.02)
+    wg.add_task(
+        get_dict_task,
+        name="get_dict",
+        structure=wg.tasks.bulk.outputs.result,
+        calculation=wg.tasks.calculation.outputs.result,
+        kpts=wg.tasks.kpts.outputs.result,
+        pseudopotentials=wg.tasks.pseudopotentials.outputs.result,
+        smearing=wg.tasks.smearing.outputs.result,
+        register_pickle_by_value=True,
+    )
+    wg.add_task(
+        calculate_qe_task,
+        name=f"relax",
+        input_dict=wg.tasks.get_dict.outputs.result,
+        working_directory="mini",
+        register_pickle_by_value=True,
+    )
+    wg.add_task(
+        generate_structures_task,
+        name="generate_structures",
+        structure=wg.tasks.relax.outputs.structure,
+        strain_lst=strain_lst,
+        register_pickle_by_value=True,
+    )
+    # here we add the structure outputs based on the number of strains
+    del wg.tasks.generate_structures.outputs["result"]
+    for i in range(len(strain_lst)):
+        wg.tasks.generate_structures.add_output("workgraph.any", f"s_{i}")
+
+    wg.add_task(get_list_task, name="get_energies", register_pickle_by_value=True)
+    wg.add_task(get_list_task, name="get_volumes", register_pickle_by_value=True)
+    wg.add_task(pickle_node_task, name="calculation_scf", value="scf")
+
+    for i, strain in enumerate(strain_lst):
+        get_dict_task_ = wg.add_task(
+            get_dict_task,
+            name=f"get_dict_{i}",
+            calculation=wg.tasks.calculation_scf.outputs.result,
+            structure=wg.tasks.generate_structures.outputs[f"s_{i}"],
+            kpts=wg.tasks.kpts.outputs.result,
+            pseudopotentials=wg.tasks.pseudopotentials.outputs.result,
+            smearing=wg.tasks.smearing.outputs.result,
+            register_pickle_by_value=True,
+        )
+        qe_task = wg.add_task(
+            calculate_qe_task,
+            name=f"qe_{i}",
+            input_dict=get_dict_task_.outputs.result,
+            working_directory=f"strain_{i}",
+            register_pickle_by_value=True,
+        )
+        # collect energy and volume
+        wg.add_link(qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
+        wg.add_link(qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
+
+        wg.add_task(
+            plot_energy_volume_curve_task,
+            volume_lst=wg.tasks.get_volumes.outputs.result,
+            energy_lst=wg.tasks.get_energies.outputs.result,
+            register_pickle_by_value=True,
+        )
+
+    return wg
