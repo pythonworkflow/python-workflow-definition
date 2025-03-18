@@ -12,20 +12,24 @@ import numpy as np
 def write_input(input_dict, working_directory="."):
     filename = os.path.join(working_directory, "input.pwi")
     os.makedirs(working_directory, exist_ok=True)
-    write(
-        filename=filename,
-        images=Atoms(**input_dict["structure"]),
-        Crystal=True,
-        kpts=input_dict["kpts"],
-        input_data={
-            "calculation": input_dict["calculation"],
-            "occupations": "smearing",
-            "degauss": input_dict["smearing"],
-        },
-        pseudopotentials=input_dict["pseudopotentials"],
-        tstress=True,
-        tprnfor=True,
-    )
+    try:
+        write(
+            filename=filename,
+            images=Atoms(**input_dict["structure"]),
+            Crystal=True,
+            kpts=input_dict["kpts"],
+            input_data={
+                "calculation": input_dict["calculation"],
+                "occupations": "smearing",
+                "degauss": input_dict["smearing"],
+            },
+            pseudopotentials=input_dict["pseudopotentials"],
+            tstress=True,
+            tprnfor=True,
+        )
+    except KeyError:
+        print('INPUT_DICT')
+        print(input_dict)
 
 
 def collect_output(working_directory="."):
@@ -82,7 +86,7 @@ def get_bulk_structure(element, a, cubic):
         a=a,
         cubic=cubic,
     )
-    return atoms_to_json_dict(atoms=ase_atoms)
+    return {'structure': atoms_to_json_dict(atoms=ase_atoms)}
 
 
 def atoms_to_json_dict(atoms):

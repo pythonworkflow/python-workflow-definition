@@ -171,8 +171,6 @@ def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
 
 
 def construct_wg_qe(
-    get_dict,
-    get_list,
     get_bulk_structure,
     calculate_qe,
     generate_structures,
@@ -180,18 +178,22 @@ def construct_wg_qe(
     strain_lst,
 ):
 
+    from .shared import get_dict
+    from .shared import get_list
+
     # NOTE: `get_dict` is `get_input_dict`, to compile the input values for the calc tasks
     # NOTE: `add_link` must be from outputs to inputs
-    wg = WorkGraph()
+    wg = WorkGraph("wg-qe")
 
     get_bulk_structure_task = wg.add_task(
         get_bulk_structure,
-        name="bulk",
+        name="get_bulk_structure",
         register_pickle_by_value=True,
     )
 
     relax_task = wg.add_task(
         calculate_qe,
+        # ! I don't like the `mini` name...
         name="mini",
         register_pickle_by_value=True,
     )
@@ -207,7 +209,6 @@ def construct_wg_qe(
 
     scf_qe_tasks = []
     for i, strain in enumerate(strain_lst):
-
         generate_structures_task.add_output("workgraph.any", f"s_{i}")
 
         scf_qe_task = wg.add_task(
@@ -219,6 +220,7 @@ def construct_wg_qe(
 
     plot_energy_volume_curve_task = wg.add_task(
         plot_energy_volume_curve,
+        name="plot_energy_volume_curve",
         register_pickle_by_value=True,
     )
 
@@ -248,7 +250,10 @@ def construct_wg_qe(
 
     # ? relax or SCF, or general? -> Should be relax
     relax_get_dict_task = wg.add_task(
-        task.pythonjob(outputs=["dict"])(get_dict),
+        task.pythonjob(
+            # outputs=["structure", "calculation", "kpts", "pseudopotentials", "smearing"]
+            # outputs=["dict"]
+        )(get_dict),
         name="relax_get_dict",
         register_pickle_by_value=True,
     )
@@ -262,7 +267,7 @@ def construct_wg_qe(
     del pickle_node.TaskCls
 
     pickle_kpts_task = wg.add_task(
-        task.pythonjob(outputs=["kpts"])(pickle_node), name="kpts_task", value=[3, 3, 3]
+        task.pythonjob(outputs=["kpts"])(pickle_node), name="kpts_task", value=[1, 1, 1]  # FIXME: Back to [3, 3, 3]
     )
     del pickle_node.TaskCls
 
@@ -287,12 +292,11 @@ def construct_wg_qe(
 
     strain_dir_tasks, scf_get_dict_tasks = [], []
     for i, strain in enumerate(strain_lst):
-
         strain_dir = f"strain_{i}"
 
         strain_dir_task = wg.add_task(
             task.pythonjob()(pickle_node),
-            name=strain_dir,
+            name=f"pickle_{strain_dir}_dir",
             value=strain_dir,
             register_pickle_by_value=True,
         )
@@ -300,7 +304,16 @@ def construct_wg_qe(
         strain_dir_tasks.append(strain_dir_task)
 
         scf_get_dict_task = wg.add_task(
-            task.pythonjob(outputs=["dict"])(get_dict),
+            task.pythonjob(
+                # outputs=[
+                #     "dict"
+                #     # "structure",
+                #     # "calculation",
+                #     # "kpts",
+                #     # "pseudopotentials",
+                #     # "smearing",
+                # ]
+            )(get_dict),
             name=f"get_dict_{i}",
             register_pickle_by_value=True,
         )
@@ -330,55 +343,64 @@ def construct_wg_qe(
     del get_list.TaskCls
 
     # Add remaining links
-    wg.add_link(pickle_element_task.outputs.element, get_bulk_structure_task.inputs.element)
+    wg.add_link(
+        pickle_element_task.outputs.element, get_bulk_structure_task.inputs.element
+    )
     wg.add_link(pickle_a_task.outputs.a, get_bulk_structure_task.inputs.a)
     wg.add_link(pickle_cubic_task.outputs.cubic, get_bulk_structure_task.inputs.cubic)
 
     # `.set` rather than `.add_link`, as get_dict takes `**kwargs` as input
     relax_get_dict_task.set(
         {
-            "structure": get_bulk_structure_task.outputs.bulk_structure,
+            "structure": get_bulk_structure_task.outputs.structure,
             "calculation": pickle_calc_type_relax_task.outputs.calc,
             "kpts": pickle_kpts_task.outputs.kpts,
-            "pseudopotential": pickle_pp_task.outputs.pp,
+            "pseudopotentials": pickle_pp_task.outputs.pp,
             "smearing": pickle_smearing_task.outputs.smearing,
         }
     )
 
-    wg.add_link(relax_get_dict_task.outputs.dict, relax_task.inputs.input_dict)
+    wg.add_link(relax_get_dict_task.outputs.result, relax_task.inputs.input_dict)
     wg.add_link(
         pickle_relax_workdir_task.outputs.relax_workdir,
         relax_task.inputs.working_directory,
     )
 
     wg.add_link(relax_task.outputs.structure, generate_structures_task.inputs.structure)
-    wg.add_link(strain_lst_task.outputs.strain_lst, generate_structures_task.inputs.strain_lst)
+    wg.add_link(
+        strain_lst_task.outputs.strain_lst, generate_structures_task.inputs.strain_lst
+    )
 
-    counter = 0
-    for scf_get_dict_task, scf_qe_task, strain_dir_task in list(
-        zip(scf_get_dict_tasks, scf_qe_tasks, strain_dir_tasks)
+    for i, (scf_get_dict_task, scf_qe_task, strain_dir_task) in enumerate(
+        list(zip(scf_get_dict_tasks, scf_qe_tasks, strain_dir_tasks))
     ):
-        # print(scf_get_dict_task, scf_qe_task, strain_dir_task)
         scf_get_dict_task.set(
             {
                 "structure": generate_structures_task.outputs[f"s_{i}"],
                 "calculation": pickle_calc_type_scf_task.outputs.calc,
                 "kpts": pickle_kpts_task.outputs.kpts,
-                "pseudopotential": pickle_pp_task.outputs.pp,
+                "pseudopotentials": pickle_pp_task.outputs.pp,
                 "smearing": pickle_smearing_task.outputs.smearing,
             }
         )
 
-        wg.add_link(scf_get_dict_task.outputs.dict, scf_qe_task.inputs.input_dict)
-        wg.add_link(strain_dir_task.outputs.result, scf_qe_task.inputs.working_directory)
+        # import ipdb; ipdb.set_trace()
+        wg.add_link(scf_get_dict_task.outputs.result, scf_qe_task.inputs.input_dict)
+        wg.add_link(
+            strain_dir_task.outputs.result, scf_qe_task.inputs.working_directory
+        )
 
         # collect energy and volume
-        wg.add_link(scf_qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
-        wg.add_link(scf_qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
+        wg.add_link(scf_qe_task.outputs.energy, get_energies_task.inputs.kwargs)
+        wg.add_link(scf_qe_task.outputs.volume, get_volumes_task.inputs.kwargs)
 
-        counter += 1
-
-    wg.add_link(get_volumes_task.outputs.volumes, plot_energy_volume_curve_task.inputs.volume_lst)
-    wg.add_link(get_energies_task.outputs.energies, plot_energy_volume_curve_task.inputs.energy_lst)
+    wg.add_link(
+        get_volumes_task.outputs.volumes,
+        plot_energy_volume_curve_task.inputs.volume_lst,
+    )
+    wg.add_link(
+        get_energies_task.outputs.energies,
+        plot_energy_volume_curve_task.inputs.energy_lst,
+    )
 
     return wg

@@ -1,5 +1,7 @@
 def get_dict(**kwargs):
+    # NOTE: In WG, this will automatically be wrapped in a dict with the `result` key
     return {k: v for k, v in kwargs.items()}
+    # return {'dict': {k: v for k, v in kwargs.items()}}
 
 
 def get_list(**kwargs):
