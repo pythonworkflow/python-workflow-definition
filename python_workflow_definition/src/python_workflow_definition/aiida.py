@@ -117,19 +117,19 @@ def write_workflow_json(wg, file_name):
 
         i += 1
 
-    # for link in wgdata["links"]:
-    #     if (
-    #         wgdata["tasks"][link["from_node"]]["executor"]["callable_name"]
-    #         == "pickle_node"
-    #     ):
-    #         link["from_socket"] = None
-    #     link["source"] = node_name_mapping[link["from_node"]]
-    #     del link["from_node"]
-    #     link["target"] = node_name_mapping[link["to_node"]]
-    #     del link["to_node"]
-    #     link["sourceHandle"] = link.pop("from_socket")
-    #     link["targetHandle"] = link.pop("to_socket")
-    #     data["edges"].append(link)
+    for link in wgdata["links"]:
+        if (
+            wgdata["tasks"][link["from_node"]]["executor"]["callable_name"]
+            == "pickle_node"
+        ):
+            link["from_socket"] = None
+        link["source"] = node_name_mapping[link["from_node"]]
+        del link["from_node"]
+        link["target"] = node_name_mapping[link["to_node"]]
+        del link["to_node"]
+        link["sourceHandle"] = link.pop("from_socket")
+        link["targetHandle"] = link.pop("to_socket")
+        data["edges"].append(link)
 
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
@@ -179,6 +179,9 @@ def construct_wg_qe(
     plot_energy_volume_curve,
     strain_lst,
 ):
+
+    # NOTE: `get_dict` is `get_input_dict`, to compile the input values for the calc tasks
+    # NOTE: `add_link` must be from outputs to inputs
     wg = WorkGraph()
 
     get_bulk_structure_task = wg.add_task(
@@ -190,68 +193,32 @@ def construct_wg_qe(
     relax_task = wg.add_task(
         calculate_qe,
         name="mini",
-        # input_dict=wg.tasks.get_dict.outputs.result,
-        # working_directory=wg.tasks.relax_workdir.outputs.result,
         register_pickle_by_value=True,
     )
 
     generate_structures_task = wg.add_task(
         generate_structures,
         name="generate_structures",
-        # structure=wg.tasks.mini.outputs.structure,
-        # strain_lst=wg.tasks.strain_lst.outputs.result,
         register_pickle_by_value=True,
     )
 
     # here we add the structure outputs based on the number of strains
     del wg.tasks.generate_structures.outputs["result"]
 
-    qe_tasks = []
+    scf_qe_tasks = []
     for i, strain in enumerate(strain_lst):
 
         generate_structures_task.add_output("workgraph.any", f"s_{i}")
 
-        # Possible remove `get_dict_task` here to have it later
-        # get_dict_task = wg.add_task(
-        #     get_dict,
-        #     name=f"get_dict_{i}",
-        #     # calculation=wg.tasks.calculation_scf.outputs.result,
-        #     # structure=wg.tasks.generate_structures.outputs[f"s_{i}"],
-        #     # kpts=wg.tasks.kpts.outputs.result,
-        #     # pseudopotentials=wg.tasks.pseudopotentials.outputs.result,
-        #     # smearing=wg.tasks.smearing.outputs.result,
-        #     register_pickle_by_value=True,
-        # )
-
-        strain_dir = f"strain_{i}"
-
-        # strain_dir_task = wg.add_task(
-        #     task.pythonjob(outputs=[strain_dir])(pickle_node),
-        #     name=strain_dir,
-        #     value=strain_dir,
-        #     register_pickle_by_value=True,
-        # )
-        # del pickle_node.TaskCls
-
-        # import ipdb; ipdb.set_trace()
-        qe_task = wg.add_task(
+        scf_qe_task = wg.add_task(
             calculate_qe,
             name=f"qe_{i}",
-            # input_dict=get_dict_task.outputs.result,
-            # working_directory=strain_dir_task.outputs[strain_dir],
             register_pickle_by_value=True,
         )
-        qe_tasks.append(qe_task)
-
-        # collect energy and volume
-        # TODO: Maybe put this outside, in a separate for-loop to again try to fix the order
-        # wg.add_link(qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
-        # wg.add_link(qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
+        scf_qe_tasks.append(scf_qe_task)
 
     plot_energy_volume_curve_task = wg.add_task(
         plot_energy_volume_curve,
-        # volume_lst=wg.tasks.get_volumes.outputs.result,
-        # energy_lst=wg.tasks.get_energies.outputs.result,
         register_pickle_by_value=True,
     )
 
@@ -262,7 +229,9 @@ def construct_wg_qe(
     )
     del pickle_node.TaskCls
 
-    pickle_a_task = wg.add_task(task.pythonjob(outputs=["a"])(pickle_node), name="pickle_a", value=4.05)
+    pickle_a_task = wg.add_task(
+        task.pythonjob(outputs=["a"])(pickle_node), name="pickle_a", value=4.05
+    )
     del pickle_node.TaskCls
 
     pickle_cubic_task = wg.add_task(
@@ -277,34 +246,36 @@ def construct_wg_qe(
     )
     del pickle_node.TaskCls
 
-    # ? relax or SCF, or general?
-    get_dict_task = wg.add_task(
-        get_dict,
-        name="get_dict",
-        structure=wg.tasks.bulk.outputs.result,
-        # calculation=wg.tasks.calculation.outputs.result,
-        # kpts=wg.tasks.kpts.outputs.result,
-        # pseudopotentials=wg.tasks.pseudopotentials.outputs.result,
-        # smearing=wg.tasks.smearing.outputs.result,
+    # ? relax or SCF, or general? -> Should be relax
+    relax_get_dict_task = wg.add_task(
+        task.pythonjob(outputs=["dict"])(get_dict),
+        name="relax_get_dict",
         register_pickle_by_value=True,
     )
+    del get_dict.TaskCls
 
-    pp_task = wg.add_task(
-        task.pythonjob(pickle_node),
+    pickle_pp_task = wg.add_task(
+        task.pythonjob(outputs=["pp"])(pickle_node),
         name="pseudopotentials",
         value={"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"},
     )
     del pickle_node.TaskCls
 
-    kpts_task = wg.add_task(
+    pickle_kpts_task = wg.add_task(
         task.pythonjob(outputs=["kpts"])(pickle_node), name="kpts_task", value=[3, 3, 3]
     )
     del pickle_node.TaskCls
 
-    vc_relax_task = wg.add_task(task.pythonjob()(pickle_node), name="calculation", value="vc-relax")
+    pickle_calc_type_relax_task = wg.add_task(
+        task.pythonjob(outputs=["calc"])(pickle_node),
+        name="calc_type_relax",
+        value="vc-relax",
+    )
     del pickle_node.TaskCls
-    
-    smearing_task = wg.add_task(task.pythonjob()(pickle_node), name="smearing", value=0.02)
+
+    pickle_smearing_task = wg.add_task(
+        task.pythonjob(outputs=["smearing"])(pickle_node), name="smearing", value=0.02
+    )
     del pickle_node.TaskCls
 
     strain_lst_task = wg.add_task(
@@ -314,13 +285,13 @@ def construct_wg_qe(
     )
     del pickle_node.TaskCls
 
-    strain_dir_tasks = []
+    strain_dir_tasks, scf_get_dict_tasks = [], []
     for i, strain in enumerate(strain_lst):
 
         strain_dir = f"strain_{i}"
 
         strain_dir_task = wg.add_task(
-            task.pythonjob(outputs=[strain_dir])(pickle_node),
+            task.pythonjob()(pickle_node),
             name=strain_dir,
             value=strain_dir,
             register_pickle_by_value=True,
@@ -328,26 +299,21 @@ def construct_wg_qe(
         del pickle_node.TaskCls
         strain_dir_tasks.append(strain_dir_task)
 
-        # Possible remove `get_dict_task` here to have it later
-        get_dict_task = wg.add_task(
-            get_dict,
+        scf_get_dict_task = wg.add_task(
+            task.pythonjob(outputs=["dict"])(get_dict),
             name=f"get_dict_{i}",
-            # calculation=wg.tasks.calculation_scf.outputs.result,
-            # structure=wg.tasks.generate_structures.outputs[f"s_{i}"],
-            # kpts=wg.tasks.kpts.outputs.result,
-            # pseudopotentials=wg.tasks.pseudopotentials.outputs.result,
-            # smearing=wg.tasks.smearing.outputs.result,
             register_pickle_by_value=True,
         )
+        del get_dict.TaskCls
+        scf_get_dict_tasks.append(scf_get_dict_task)
 
         if i == 0:
-            scf_task = wg.add_task(task.pythonjob(pickle_node), name="calculation_scf", value="scf")
+            pickle_calc_type_scf_task = wg.add_task(
+                task.pythonjob(outputs=["calc"])(pickle_node),
+                name="calc_type_scf",
+                value="scf",
+            )
             del pickle_node.TaskCls
-
-        # collect energy and volume
-        # TODO: Maybe put this outside, in a separate for-loop to again try to fix the order
-        # wg.add_link(qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
-        # wg.add_link(qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
 
     get_energies_task = wg.add_task(
         task.pythonjob(outputs=["energies"])(get_list),
@@ -364,9 +330,55 @@ def construct_wg_qe(
     del get_list.TaskCls
 
     # Add remaining links
-    wg.add_link(get_bulk_structure_task.inputs.element, element=pickle_element_task.outputs.element)
-        # ,
-        # a=wg.tasks.pickle_a.outputs.a,
-        # cubic=wg.tasks.pickle_cubic.outputs.result,
+    wg.add_link(pickle_element_task.outputs.element, get_bulk_structure_task.inputs.element)
+    wg.add_link(pickle_a_task.outputs.a, get_bulk_structure_task.inputs.a)
+    wg.add_link(pickle_cubic_task.outputs.cubic, get_bulk_structure_task.inputs.cubic)
+
+    # `.set` rather than `.add_link`, as get_dict takes `**kwargs` as input
+    relax_get_dict_task.set(
+        {
+            "structure": get_bulk_structure_task.outputs.bulk_structure,
+            "calculation": pickle_calc_type_relax_task.outputs.calc,
+            "kpts": pickle_kpts_task.outputs.kpts,
+            "pseudopotential": pickle_pp_task.outputs.pp,
+            "smearing": pickle_smearing_task.outputs.smearing,
+        }
+    )
+
+    wg.add_link(relax_get_dict_task.outputs.dict, relax_task.inputs.input_dict)
+    wg.add_link(
+        pickle_relax_workdir_task.outputs.relax_workdir,
+        relax_task.inputs.working_directory,
+    )
+
+    wg.add_link(relax_task.outputs.structure, generate_structures_task.inputs.structure)
+    wg.add_link(strain_lst_task.outputs.strain_lst, generate_structures_task.inputs.strain_lst)
+
+    counter = 0
+    for scf_get_dict_task, scf_qe_task, strain_dir_task in list(
+        zip(scf_get_dict_tasks, scf_qe_tasks, strain_dir_tasks)
+    ):
+        # print(scf_get_dict_task, scf_qe_task, strain_dir_task)
+        scf_get_dict_task.set(
+            {
+                "structure": generate_structures_task.outputs[f"s_{i}"],
+                "calculation": pickle_calc_type_scf_task.outputs.calc,
+                "kpts": pickle_kpts_task.outputs.kpts,
+                "pseudopotential": pickle_pp_task.outputs.pp,
+                "smearing": pickle_smearing_task.outputs.smearing,
+            }
+        )
+
+        wg.add_link(scf_get_dict_task.outputs.dict, scf_qe_task.inputs.input_dict)
+        wg.add_link(strain_dir_task.outputs.result, scf_qe_task.inputs.working_directory)
+
+        # collect energy and volume
+        wg.add_link(scf_qe_task.outputs.energy, wg.tasks.get_energies.inputs.kwargs)
+        wg.add_link(scf_qe_task.outputs.volume, wg.tasks.get_volumes.inputs.kwargs)
+
+        counter += 1
+
+    wg.add_link(get_volumes_task.outputs.volumes, plot_energy_volume_curve_task.inputs.volume_lst)
+    wg.add_link(get_energies_task.outputs.energies, plot_energy_volume_curve_task.inputs.energy_lst)
 
     return wg
