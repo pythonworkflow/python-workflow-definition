@@ -23,7 +23,7 @@ from python_workflow_definition.aiida import pickle_node, construct_wg_qe
 
 load_profile()
 
-get_bulk_structure = task.pythonjob(outputs=["structure"])(_get_bulk_structure)
+get_bulk_structure = task.pythonjob()(_get_bulk_structure)
 generate_structures = task.pythonjob()(_generate_structures)
 calculate_qe = task.pythonjob(outputs=["energy", "volume", "structure"])(_calculate_qe)
 plot_energy_volume_curve = task.pythonjob()(_plot_energy_volume_curve)

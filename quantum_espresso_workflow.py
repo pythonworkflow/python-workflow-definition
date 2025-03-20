@@ -35,7 +35,7 @@ def write_input(input_dict, working_directory="."):
 def collect_output(working_directory="."):
     output = parse_pw(os.path.join(working_directory, "pwscf.xml"))
     return {
-        "structure": output["ase_structure"].todict(),
+        "structure": atoms_to_json_dict(output["ase_structure"]),
         "energy": output["energy"],
         "volume": output["ase_structure"].get_volume(),
     }
@@ -86,7 +86,7 @@ def get_bulk_structure(element, a, cubic):
         a=a,
         cubic=cubic,
     )
-    return {'structure': atoms_to_json_dict(atoms=ase_atoms)}
+    return atoms_to_json_dict(atoms=ase_atoms)
 
 
 def atoms_to_json_dict(atoms):

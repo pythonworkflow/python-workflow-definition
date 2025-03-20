@@ -14,11 +14,23 @@
     "11": true,
     "12": "mini",
     "13": "python_workflow_definition.shared.get_dict",
-    "14": { "Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF" },
-    "15": [1, 1, 1],
+    "14": {
+      "Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"
+    },
+    "15": [
+      3,
+      3,
+      3
+    ],
     "16": "vc-relax",
     "17": 0.02,
-    "18": [0.9, 0.95, 1.0, 1.05, 1.1],
+    "18": [
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1
+    ],
     "19": "strain_0",
     "20": "python_workflow_definition.shared.get_dict",
     "21": "scf",
@@ -35,353 +47,358 @@
   },
   "edges": [
     {
+      "target": 0,
+      "targetHandle": "element",
       "source": 9,
-      "target": 0,
-      "sourceHandle": null,
-      "targetHandle": "element"
+      "sourceHandle": null
     },
-    { "source": 10, "target": 0, "sourceHandle": null, "targetHandle": "a" },
     {
+      "target": 0,
+      "targetHandle": "a",
+      "source": 10,
+      "sourceHandle": null
+    },
+    {
+      "target": 0,
+      "targetHandle": "cubic",
       "source": 11,
-      "target": 0,
-      "sourceHandle": null,
-      "targetHandle": "cubic"
+      "sourceHandle": null
     },
     {
+      "target": 13,
+      "targetHandle": "structure",
       "source": 0,
-      "target": 13,
-      "sourceHandle": "structure",
-      "targetHandle": "structure"
+      "sourceHandle": null
     },
     {
+      "target": 13,
+      "targetHandle": "calculation",
       "source": 16,
-      "target": 13,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 13,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 13,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 13,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 13,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 13,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 13,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 1,
+      "targetHandle": "input_dict",
       "source": 13,
-      "target": 1,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 1,
+      "targetHandle": "working_directory",
       "source": 12,
-      "target": 1,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
+      "target": 2,
+      "targetHandle": "structure",
       "source": 1,
-      "target": 2,
-      "sourceHandle": "structure",
-      "targetHandle": "structure"
+      "sourceHandle": "structure"
     },
     {
+      "target": 2,
+      "targetHandle": "strain_lst",
       "source": 18,
-      "target": 2,
-      "sourceHandle": null,
-      "targetHandle": "strain_lst"
+      "sourceHandle": null
     },
     {
+      "target": 20,
+      "targetHandle": "structure",
       "source": 2,
-      "target": 20,
-      "sourceHandle": "s_0",
-      "targetHandle": "structure"
+      "sourceHandle": "s_0"
     },
     {
+      "target": 20,
+      "targetHandle": "calculation",
       "source": 21,
-      "target": 20,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 20,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 20,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 20,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 20,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 20,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 20,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 3,
+      "targetHandle": "input_dict",
       "source": 20,
-      "target": 3,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 3,
+      "targetHandle": "working_directory",
       "source": 19,
-      "target": 3,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
-      "source": 3,
-      "target": 30,
-      "sourceHandle": "energy",
-      "targetHandle": "kwargs"
-    },
-    {
-      "source": 3,
       "target": 31,
-      "sourceHandle": "volume",
-      "targetHandle": "kwargs"
+      "targetHandle": "0",
+      "source": 3,
+      "sourceHandle": "energy"
     },
     {
+      "target": 30,
+      "targetHandle": "0",
+      "source": 3,
+      "sourceHandle": "volume"
+    },
+    {
+      "target": 23,
+      "targetHandle": "structure",
       "source": 2,
-      "target": 23,
-      "sourceHandle": "s_1",
-      "targetHandle": "structure"
+      "sourceHandle": "s_1"
     },
     {
+      "target": 23,
+      "targetHandle": "calculation",
       "source": 21,
-      "target": 23,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 23,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 23,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 23,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 23,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 23,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 23,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 4,
+      "targetHandle": "input_dict",
       "source": 23,
-      "target": 4,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 4,
+      "targetHandle": "working_directory",
       "source": 22,
-      "target": 4,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
-      "source": 4,
-      "target": 30,
-      "sourceHandle": "energy",
-      "targetHandle": "kwargs"
-    },
-    {
-      "source": 4,
       "target": 31,
-      "sourceHandle": "volume",
-      "targetHandle": "kwargs"
+      "targetHandle": "1",
+      "source": 4,
+      "sourceHandle": "energy"
     },
     {
+      "target": 30,
+      "targetHandle": "1",
+      "source": 4,
+      "sourceHandle": "volume"
+    },
+    {
+      "target": 25,
+      "targetHandle": "structure",
       "source": 2,
-      "target": 25,
-      "sourceHandle": "s_2",
-      "targetHandle": "structure"
+      "sourceHandle": "s_2"
     },
     {
+      "target": 25,
+      "targetHandle": "calculation",
       "source": 21,
-      "target": 25,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 25,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 25,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 25,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 25,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 25,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 25,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 5,
+      "targetHandle": "input_dict",
       "source": 25,
-      "target": 5,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 5,
+      "targetHandle": "working_directory",
       "source": 24,
-      "target": 5,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
-      "source": 5,
-      "target": 30,
-      "sourceHandle": "energy",
-      "targetHandle": "kwargs"
-    },
-    {
-      "source": 5,
       "target": 31,
-      "sourceHandle": "volume",
-      "targetHandle": "kwargs"
+      "targetHandle": "2",
+      "source": 5,
+      "sourceHandle": "energy"
     },
     {
+      "target": 30,
+      "targetHandle": "2",
+      "source": 5,
+      "sourceHandle": "volume"
+    },
+    {
+      "target": 27,
+      "targetHandle": "structure",
       "source": 2,
-      "target": 27,
-      "sourceHandle": "s_3",
-      "targetHandle": "structure"
+      "sourceHandle": "s_3"
     },
     {
+      "target": 27,
+      "targetHandle": "calculation",
       "source": 21,
-      "target": 27,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 27,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 27,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 27,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 27,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 27,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 27,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 6,
+      "targetHandle": "input_dict",
       "source": 27,
-      "target": 6,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 6,
+      "targetHandle": "working_directory",
       "source": 26,
-      "target": 6,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
-      "source": 6,
-      "target": 30,
-      "sourceHandle": "energy",
-      "targetHandle": "kwargs"
-    },
-    {
-      "source": 6,
       "target": 31,
-      "sourceHandle": "volume",
-      "targetHandle": "kwargs"
+      "targetHandle": "3",
+      "source": 6,
+      "sourceHandle": "energy"
     },
     {
+      "target": 30,
+      "targetHandle": "3",
+      "source": 6,
+      "sourceHandle": "volume"
+    },
+    {
+      "target": 29,
+      "targetHandle": "structure",
       "source": 2,
-      "target": 29,
-      "sourceHandle": "s_4",
-      "targetHandle": "structure"
+      "sourceHandle": "s_4"
     },
     {
+      "target": 29,
+      "targetHandle": "calculation",
       "source": 21,
-      "target": 29,
-      "sourceHandle": null,
-      "targetHandle": "calculation"
+      "sourceHandle": null
     },
     {
+      "target": 29,
+      "targetHandle": "kpts",
       "source": 15,
-      "target": 29,
-      "sourceHandle": null,
-      "targetHandle": "kpts"
+      "sourceHandle": null
     },
     {
+      "target": 29,
+      "targetHandle": "pseudopotentials",
       "source": 14,
-      "target": 29,
-      "sourceHandle": null,
-      "targetHandle": "pseudopotentials"
+      "sourceHandle": null
     },
     {
+      "target": 29,
+      "targetHandle": "smearing",
       "source": 17,
-      "target": 29,
-      "sourceHandle": null,
-      "targetHandle": "smearing"
+      "sourceHandle": null
     },
     {
+      "target": 7,
+      "targetHandle": "input_dict",
       "source": 29,
-      "target": 7,
-      "sourceHandle": "result",
-      "targetHandle": "input_dict"
+      "sourceHandle": null
     },
     {
+      "target": 7,
+      "targetHandle": "working_directory",
       "source": 28,
-      "target": 7,
-      "sourceHandle": null,
-      "targetHandle": "working_directory"
+      "sourceHandle": null
     },
     {
-      "source": 7,
-      "target": 30,
-      "sourceHandle": "energy",
-      "targetHandle": "kwargs"
-    },
-    {
-      "source": 7,
       "target": 31,
-      "sourceHandle": "volume",
-      "targetHandle": "kwargs"
+      "targetHandle": "4",
+      "source": 7,
+      "sourceHandle": "energy"
     },
     {
-      "source": 31,
+      "target": 30,
+      "targetHandle": "4",
+      "source": 7,
+      "sourceHandle": "volume"
+    },
+    {
       "target": 8,
-      "sourceHandle": "volumes",
-      "targetHandle": "volume_lst"
-    },
-    {
+      "targetHandle": "volume_lst",
       "source": 30,
+      "sourceHandle": null
+    },
+    {
       "target": 8,
-      "sourceHandle": "energies",
-      "targetHandle": "energy_lst"
+      "targetHandle": "energy_lst",
+      "source": 31,
+      "sourceHandle": null
     }
   ]
 }

@@ -4,7 +4,7 @@ from aiida_workgraph import WorkGraph, task
 import json
 from aiida import orm
 
-
+@task.pythonjob()
 def pickle_node(value):
     """Handle data nodes"""
     return value
@@ -16,10 +16,8 @@ def load_workflow_json(filename):
 
     wg = WorkGraph()
     task_name_mapping = {}
-    # add tasks
-    name_counter = {}
 
-    for name, identifier in data["nodes"].items():
+    for id, identifier in data["nodes"].items():
         # if isinstance(identifier, str) and identifier in func_mapping:
         if isinstance(identifier, str) and "." in identifier:
             p, m = identifier.rsplit(".", 1)
@@ -28,24 +26,15 @@ def load_workflow_json(filename):
             func = task.pythonjob()(_func)
             # func = func_mapping[identifier]
             # I use the register_pickle_by_value, because the function is defined in a local file
-            try:
-                wg.add_task(func, register_pickle_by_value=True, name=m)
-            except ValueError:
-                if m in name_counter:
-                    name_counter[m] += 1
-                else:
-                    name_counter[m] = 0
-                name_ = f"{m}_{name_counter[m]}"
-
-                wg.add_task(func, register_pickle_by_value=True, name=name_)
+            wg.add_task(func, register_pickle_by_value=True)
 
             # Remove the default result output, because we will add the outputs later from the data in the link
             del wg.tasks[-1].outputs["result"]
         else:
             # data task
-            wg.add_task(pickle_node, value=identifier, name=name)
+            wg.add_task(pickle_node, value=identifier)
 
-        task_name_mapping[name] = wg.tasks[-1].name
+        task_name_mapping[id] = wg.tasks[-1].name
     # add links
     for link in data["edges"]:
         if link["sourceHandle"] is None:
@@ -82,26 +71,27 @@ def load_workflow_json(filename):
 
 
 def write_workflow_json(wg, file_name):
-    wgdata = wg.to_dict()
     data = {"nodes": {}, "edges": []}
     node_name_mapping = {}
     i = 0
-    for name, node in wgdata["tasks"].items():
-        node_name_mapping[name] = i
+    for node in wg.tasks:
+        executor = node.get_executor()
+        node_name_mapping[node.name] = i
 
-        callable_name = node["executor"]["callable_name"]
+        callable_name = executor["callable_name"]
 
         if callable_name == "pickle_node":
-            aiida_node = data["nodes"][i] = node["inputs"]["sockets"]["value"][
-                "property"
-            ]["value"]
+            input_value = data["nodes"][str(i)] = node.inputs.value.value
             try:
-                if isinstance(aiida_node, orm.List):
-                    data["nodes"][i] = aiida_node.get_list()
-                elif isinstance(aiida_node, orm.Dict):
-                    data["nodes"][i] = aiida_node.get_dict()
+                if isinstance(input_value, orm.Data):
+                    if isinstance(input_value, orm.List):
+                        data["nodes"][str(i)] = input_value.get_list()
+                    elif isinstance(input_value, orm.Dict):
+                        data["nodes"][str(i)] = input_value.get_dict()
+                    else:
+                        data["nodes"][str(i)] = input_value.value
                 else:
-                    data["nodes"][i] = aiida_node.value
+                    data["nodes"][str(i)] = input_value
             except:
                 import traceback
 
@@ -111,36 +101,33 @@ def write_workflow_json(wg, file_name):
                 # import ipdb; ipdb.set_trace()
 
         else:
-            callable_name = f"{node['executor']['module_path']}.{callable_name}"
+            callable_name = f"{executor['module_path']}.{callable_name}"
 
-            data["nodes"][i] = callable_name
+            data["nodes"][str(i)] = callable_name
 
         i += 1
 
-    for link in wgdata["links"]:
-        if (
-            wgdata["tasks"][link["from_node"]]["executor"]["callable_name"]
-            == "pickle_node"
-        ):
-            link["from_socket"] = None
-        link["source"] = node_name_mapping[link["from_node"]]
-        del link["from_node"]
-        link["target"] = node_name_mapping[link["to_node"]]
-        del link["to_node"]
-        link["sourceHandle"] = link.pop("from_socket")
-        link["targetHandle"] = link.pop("to_socket")
-        data["edges"].append(link)
+    for link in wg.links:
+        link_data = link.to_dict()
+        # if the from socket is the default result, we set it to None
+        if link_data["from_socket"] == "result":
+            link_data["from_socket"] = None
+        link_data["target"] = node_name_mapping[link_data.pop("to_node")]
+        link_data["targetHandle"] = link_data.pop("to_socket")
+        link_data["source"] = node_name_mapping[link_data.pop("from_node")]
+        link_data["sourceHandle"] = link_data.pop("from_socket")
+        data["edges"].append(link_data)
 
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
-        json.dump(data, f)
+        json.dump(data, f, indent=2)
 
     return data
 
 
 def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
-    helper_1 = task.pythonjob()(pickle_node)
-    helper_2 = task.pythonjob()(pickle_node)
+    helper_1 = pickle_node
+    helper_2 = pickle_node
 
     add_x_and_y = task.pythonjob(outputs=["x", "y", "z"])(add_x_and_y_func)
     add_x_and_y_and_z = task.pythonjob()(add_x_and_y_and_z_func)
@@ -225,28 +212,24 @@ def construct_wg_qe(
     )
 
     pickle_element_task = wg.add_task(
-        task.pythonjob(outputs=["element"])(pickle_node),
+        pickle_node,
         name="pickle_element",
         value="Al",
     )
-    del pickle_node.TaskCls
 
     pickle_a_task = wg.add_task(
-        task.pythonjob(outputs=["a"])(pickle_node), name="pickle_a", value=4.05
+        pickle_node, name="pickle_a", value=4.05
     )
-    del pickle_node.TaskCls
 
     pickle_cubic_task = wg.add_task(
-        task.pythonjob(outputs=["cubic"])(pickle_node), name="pickle_cubic", value=True
+        pickle_node, name="pickle_cubic", value=True
     )
-    del pickle_node.TaskCls
 
     pickle_relax_workdir_task = wg.add_task(
-        task.pythonjob(outputs=["relax_workdir"])(pickle_node),
+        pickle_node,
         name="pickle_relax_workdir",
         value="mini",
     )
-    del pickle_node.TaskCls
 
     # ? relax or SCF, or general? -> Should be relax
     relax_get_dict_task = wg.add_task(
@@ -257,118 +240,98 @@ def construct_wg_qe(
         name="relax_get_dict",
         register_pickle_by_value=True,
     )
-    del get_dict.TaskCls
 
     pickle_pp_task = wg.add_task(
-        task.pythonjob(outputs=["pp"])(pickle_node),
+        pickle_node,
         name="pseudopotentials",
         value={"Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"},
     )
-    del pickle_node.TaskCls
 
     pickle_kpts_task = wg.add_task(
-        task.pythonjob(outputs=["kpts"])(pickle_node), name="kpts_task", value=[1, 1, 1]  # FIXME: Back to [3, 3, 3]
+        pickle_node, name="kpts_task", value=[3, 3, 3]  # FIXME: Back to [3, 3, 3]
     )
-    del pickle_node.TaskCls
 
     pickle_calc_type_relax_task = wg.add_task(
-        task.pythonjob(outputs=["calc"])(pickle_node),
+        pickle_node,
         name="calc_type_relax",
         value="vc-relax",
     )
-    del pickle_node.TaskCls
 
     pickle_smearing_task = wg.add_task(
-        task.pythonjob(outputs=["smearing"])(pickle_node), name="smearing", value=0.02
+        pickle_node, name="smearing", value=0.02
     )
-    del pickle_node.TaskCls
 
     strain_lst_task = wg.add_task(
-        task.pythonjob(outputs=["strain_lst"])(pickle_node),
+        pickle_node,
         name="pickle_strain_lst",
         value=strain_lst,
     )
-    del pickle_node.TaskCls
 
     strain_dir_tasks, scf_get_dict_tasks = [], []
     for i, strain in enumerate(strain_lst):
         strain_dir = f"strain_{i}"
 
         strain_dir_task = wg.add_task(
-            task.pythonjob()(pickle_node),
+            pickle_node,
             name=f"pickle_{strain_dir}_dir",
             value=strain_dir,
             register_pickle_by_value=True,
         )
-        del pickle_node.TaskCls
         strain_dir_tasks.append(strain_dir_task)
 
         scf_get_dict_task = wg.add_task(
-            task.pythonjob(
-                # outputs=[
-                #     "dict"
-                #     # "structure",
-                #     # "calculation",
-                #     # "kpts",
-                #     # "pseudopotentials",
-                #     # "smearing",
-                # ]
-            )(get_dict),
+            task.pythonjob()(get_dict),
             name=f"get_dict_{i}",
             register_pickle_by_value=True,
         )
-        del get_dict.TaskCls
         scf_get_dict_tasks.append(scf_get_dict_task)
 
         if i == 0:
             pickle_calc_type_scf_task = wg.add_task(
-                task.pythonjob(outputs=["calc"])(pickle_node),
+                pickle_node,
                 name="calc_type_scf",
                 value="scf",
             )
-            del pickle_node.TaskCls
-
-    get_energies_task = wg.add_task(
-        task.pythonjob(outputs=["energies"])(get_list),
-        name="get_energies",
-        register_pickle_by_value=True,
-    )
-    del get_list.TaskCls
 
     get_volumes_task = wg.add_task(
-        task.pythonjob(outputs=["volumes"])(get_list),
+        task.pythonjob()(get_list),
         name="get_volumes",
         register_pickle_by_value=True,
     )
-    del get_list.TaskCls
+    
+    get_energies_task = wg.add_task(
+        task.pythonjob()(get_list),
+        name="get_energies",
+        register_pickle_by_value=True,
+    )
 
     # Add remaining links
     wg.add_link(
-        pickle_element_task.outputs.element, get_bulk_structure_task.inputs.element
+        pickle_element_task.outputs.result, get_bulk_structure_task.inputs.element
     )
-    wg.add_link(pickle_a_task.outputs.a, get_bulk_structure_task.inputs.a)
-    wg.add_link(pickle_cubic_task.outputs.cubic, get_bulk_structure_task.inputs.cubic)
+    wg.add_link(pickle_a_task.outputs.result, get_bulk_structure_task.inputs.a)
+    wg.add_link(pickle_cubic_task.outputs.result, get_bulk_structure_task.inputs.cubic)
 
     # `.set` rather than `.add_link`, as get_dict takes `**kwargs` as input
     relax_get_dict_task.set(
         {
-            "structure": get_bulk_structure_task.outputs.structure,
-            "calculation": pickle_calc_type_relax_task.outputs.calc,
-            "kpts": pickle_kpts_task.outputs.kpts,
-            "pseudopotentials": pickle_pp_task.outputs.pp,
-            "smearing": pickle_smearing_task.outputs.smearing,
+            "structure": get_bulk_structure_task.outputs.result,
+            "calculation": pickle_calc_type_relax_task.outputs.result,
+            "kpts": pickle_kpts_task.outputs.result,
+            "pseudopotentials": pickle_pp_task.outputs.result,
+            "smearing": pickle_smearing_task.outputs.result,
         }
     )
 
     wg.add_link(relax_get_dict_task.outputs.result, relax_task.inputs.input_dict)
     wg.add_link(
-        pickle_relax_workdir_task.outputs.relax_workdir,
+        pickle_relax_workdir_task.outputs.result,
         relax_task.inputs.working_directory,
     )
 
     wg.add_link(relax_task.outputs.structure, generate_structures_task.inputs.structure)
     wg.add_link(
-        strain_lst_task.outputs.strain_lst, generate_structures_task.inputs.strain_lst
+        strain_lst_task.outputs.result, generate_structures_task.inputs.strain_lst
     )
 
     for i, (scf_get_dict_task, scf_qe_task, strain_dir_task) in enumerate(
@@ -377,10 +340,10 @@ def construct_wg_qe(
         scf_get_dict_task.set(
             {
                 "structure": generate_structures_task.outputs[f"s_{i}"],
-                "calculation": pickle_calc_type_scf_task.outputs.calc,
-                "kpts": pickle_kpts_task.outputs.kpts,
-                "pseudopotentials": pickle_pp_task.outputs.pp,
-                "smearing": pickle_smearing_task.outputs.smearing,
+                "calculation": pickle_calc_type_scf_task.outputs.result,
+                "kpts": pickle_kpts_task.outputs.result,
+                "pseudopotentials": pickle_pp_task.outputs.result,
+                "smearing": pickle_smearing_task.outputs.result,
             }
         )
 
@@ -391,15 +354,17 @@ def construct_wg_qe(
         )
 
         # collect energy and volume
-        wg.add_link(scf_qe_task.outputs.energy, get_energies_task.inputs.kwargs)
-        wg.add_link(scf_qe_task.outputs.volume, get_volumes_task.inputs.kwargs)
+        # wg.add_link(scf_qe_task.outputs.energy, get_energies_task.inputs.kwargs)
+        get_energies_task.set({f"{i}": scf_qe_task.outputs.energy})
+        # wg.add_link(scf_qe_task.outputs.volume, get_volumes_task.inputs.kwargs)
+        get_volumes_task.set({f"{i}": scf_qe_task.outputs.volume})
 
     wg.add_link(
-        get_volumes_task.outputs.volumes,
+        get_volumes_task.outputs.result,
         plot_energy_volume_curve_task.inputs.volume_lst,
     )
     wg.add_link(
-        get_energies_task.outputs.energies,
+        get_energies_task.outputs.result,
         plot_energy_volume_curve_task.inputs.energy_lst,
     )
 

@@ -17,4 +17,4 @@ authors = [
   { name = "Julian Geiger", email = "julian.geiger@psi.ch" },
 ]
 license = { text = "MIT" }
-dependencies = ["jobflow", "pyiron_base"]
+dependencies = ["jobflow", "pyiron_base", "aiida-workgraph>=0.5.0a6"]
