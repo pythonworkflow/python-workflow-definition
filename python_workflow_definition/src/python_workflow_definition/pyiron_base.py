@@ -58,8 +58,6 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
             )
             for k, v in input_dict.items()
         }
-        # print(nodes_dict[key], source_handle_dict.get(key, []))
-        # print(kwargs)
         delayed_object_dict[key] = job(
             funct=nodes_dict[key],
             output_key_lst=source_handle_dict.get(key, []),
@@ -72,7 +70,7 @@ def get_dict(**kwargs):
 
 
 def get_list(**kwargs):
-    return {f"s_{i}": v for i, v in enumerate(kwargs["kwargs"].values())}
+    return list(kwargs["kwargs"].values())
 
 
 def _remove_server_obj(nodes_dict, edges_lst):
