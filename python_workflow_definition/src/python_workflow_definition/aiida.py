@@ -125,38 +125,6 @@ def write_workflow_json(wg, file_name):
     return data
 
 
-def construct_wg_simple(add_x_and_y_func, add_x_and_y_and_z_func) -> WorkGraph:
-    helper_1 = pickle_node
-    helper_2 = pickle_node
-
-    add_x_and_y = task.pythonjob(outputs=["x", "y", "z"])(add_x_and_y_func)
-    add_x_and_y_and_z = task.pythonjob()(add_x_and_y_and_z_func)
-
-    # TODO: Create inputs rather than tasks out of data nodes
-    wg = WorkGraph("wg-simple")
-
-    helper_task1 = wg.add_task(helper_1, name="x", value=1)
-
-    helper_task2 = wg.add_task(helper_2, name="y", value=2)
-
-    add_x_and_y_task = wg.add_task(
-        add_x_and_y,
-        name="add_x_and_y",
-        x=helper_task1.outputs.result,
-        y=helper_task2.outputs.result,
-    )
-
-    add_x_and_y_and_z_task = wg.add_task(
-        add_x_and_y_and_z,
-        name="add_x_and_y_and_z",
-        x=add_x_and_y_task.outputs.x,
-        y=add_x_and_y_task.outputs.y,
-        z=add_x_and_y_task.outputs.z,
-    )
-
-    return wg
-
-
 def construct_wg_qe(
     get_bulk_structure,
     calculate_qe,
