@@ -58,8 +58,6 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
             )
             for k, v in input_dict.items()
         }
-        # print(nodes_dict[key], source_handle_dict.get(key, []))
-        # print(kwargs)
         delayed_object_dict[key] = job(
             funct=nodes_dict[key],
             output_key_lst=source_handle_dict.get(key, []),
@@ -207,17 +205,9 @@ def load_workflow_json(project, file_name):
 def write_workflow_json(delayed_object, file_name="workflow.json"):
     nodes_dict, edges_lst = delayed_object.get_graph()
     nodes_dict, edges_lst = _remove_server_obj(nodes_dict=nodes_dict, edges_lst=edges_lst)
-
-    # import ipdb; ipdb.set_trace()
     delayed_object_updated_dict, match_dict = _get_unique_objects(nodes_dict=nodes_dict)
-
-    # import ipdb; ipdb.set_trace()
     connection_dict, lookup_dict = _get_connection_dict(delayed_object_updated_dict=delayed_object_updated_dict, match_dict=match_dict)
-
-    # import ipdb; ipdb.set_trace()
     nodes_new_dict = _get_nodes(connection_dict=connection_dict, delayed_object_updated_dict=delayed_object_updated_dict)
-
-    # import ipdb; ipdb.set_trace()
     edges_new_lst = _get_edges_dict(edges_lst=edges_lst, nodes_dict=nodes_dict, connection_dict=connection_dict, lookup_dict=lookup_dict)
 
     nodes_store_dict = {}
@@ -232,7 +222,5 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
         else:
             nodes_store_dict[k] = v
     
-    # import ipdb; ipdb.set_trace()
-
     with open(file_name, "w") as f:
         json.dump({"nodes": nodes_store_dict, "edges": edges_new_lst}, f)
