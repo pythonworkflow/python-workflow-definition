@@ -85,5 +85,5 @@ def ase_to_json(atoms):
 
 
 def json_to_ase(atoms_json):
-    structure_restore = StructureResourceAttributes.model_validate_json(atoms_json))
+    structure_restore = StructureResourceAttributes.model_validate_json(atoms_json)
     return get_ase_atoms(optimade_structure=StructureResource(id="ase", attributes=structure_restore))
