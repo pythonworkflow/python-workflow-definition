@@ -11,3 +11,4 @@ dependencies:
 - xmlschema=3.4.3
 - jobflow=0.1.19
 - pygraphviz=1.14
+- optimade=1.2.3
