@@ -10,8 +10,8 @@ def pickle_node(value):
     return value
 
 
-def load_workflow_json(filename):
-    with open(filename) as f:
+def load_workflow_json(file_name):
+    with open(file_name) as f:
         data = json.load(f)
 
     wg = WorkGraph()

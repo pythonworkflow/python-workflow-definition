@@ -181,11 +181,6 @@ pyiron_draw.png
 python_workflow_definition/src/python_workflow_definition/__pycache__/
 test/
 mini/
-.bak/
-workgraph_qe.json
-aiida-qe-construct.json
-aiida_to_jobflow_qe.html
-aiida_to_pyiron_base_qe.html
 evcurve.png
 strain_0/
 strain_1/
