@@ -2,7 +2,6 @@ channels:
 - conda-forge
 dependencies:
 - python=3.12
-- aiida-workgraph=0.4.10
 - pyiron_base=0.11.8
 - qe=7.2
 - qe-tools=2.0.0
@@ -12,3 +11,6 @@ dependencies:
 - jobflow=0.1.19
 - pygraphviz=1.14
 - optimade=1.2.3
+- pip
+- pip:
+  - aiida-workgraph>=0.5.0a6
