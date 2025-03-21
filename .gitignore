@@ -187,4 +187,16 @@ strain_1/
 strain_2/
 strain_3/
 strain_4/
+aiida_to_pyiron_base_qe.json
+pyiron_base_to_aiida_qe.json
+jobflow_to_pyiron_base_simple.json
+aiida_to_pyiron_base_simple.json
+jobflow_to_aiida_simple.json
+pyiron_base_to_jobflow_simple.json
+aiida_to_jobflow_simple.json
+jobflow_to_pyiron_base_qe.json
+jobflow_to_aiida_qe.json
+aiida_to_jobflow_qe.json
+pyiron_base_to_aiida_simple.json
+pyiron_base_to_jobflow_qe.json
 

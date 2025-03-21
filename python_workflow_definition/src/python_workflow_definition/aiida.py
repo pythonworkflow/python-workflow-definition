@@ -18,13 +18,11 @@ def load_workflow_json(file_name):
     task_name_mapping = {}
 
     for id, identifier in data["nodes"].items():
-        # if isinstance(identifier, str) and identifier in func_mapping:
         if isinstance(identifier, str) and "." in identifier:
             p, m = identifier.rsplit(".", 1)
             mod = import_module(p)
             _func = getattr(mod, m)
             func = task.pythonjob()(_func)
-            # func = func_mapping[identifier]
             # I use the register_pickle_by_value, because the function is defined in a local file
             wg.add_task(func, register_pickle_by_value=True)
 
@@ -44,9 +42,11 @@ def load_workflow_json(file_name):
             # because we are not define the outputs explicitly during the pythonjob creation
             # we add it here, and assume the output exit
             if link["sourceHandle"] not in from_task.outputs:
+            # if str(link["sourceHandle"]) not in from_task.outputs:
                 from_socket = from_task.add_output(
                     "workgraph.any",
                     name=link["sourceHandle"],
+                    # name=str(link["sourceHandle"]),
                     metadata={"is_function_output": True},
                 )
             else:
