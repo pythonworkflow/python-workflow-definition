@@ -25,11 +25,6 @@ jobs:
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name adis
-    # Add Upterm for SSH access
-    - name: Setup upterm session
-      uses: lhotari/action-upterm@v1
-      # This is optional - you can make it conditional:
-      if: ${{ failure() || github.event_name == 'workflow_dispatch' }}
     - name: Tests
       shell: bash -l {0}
       run: |
