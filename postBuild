@@ -1,2 +1,3 @@
 pip install -e adis_tools
 pip install -e python_workflow_definition
+verdi presto --profile-name adis
