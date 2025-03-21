@@ -154,7 +154,7 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
                         "target": target,
                         "targetHandle": target_handle,
                         "source": connection_dict[output_name],
-                        "sourceHandle": output._list_index,  # check for list index
+                        "sourceHandle": f"s_{output._list_index}",  # check for list index
                     })
                 else:
                     edges_dict_lst.append({
@@ -221,6 +221,6 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
             nodes_store_dict[k] = v.tolist()
         else:
             nodes_store_dict[k] = v
-    
+
     with open(file_name, "w") as f:
         json.dump({"nodes": nodes_store_dict, "edges": edges_new_lst}, f)
