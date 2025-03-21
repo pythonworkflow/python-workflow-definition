@@ -58,8 +58,6 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
             )
             for k, v in input_dict.items()
         }
-        # print(nodes_dict[key], source_handle_dict.get(key, []))
-        # print(kwargs)
         delayed_object_dict[key] = job(
             funct=nodes_dict[key],
             output_key_lst=source_handle_dict.get(key, []),
@@ -156,7 +154,7 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
                         "target": target,
                         "targetHandle": target_handle,
                         "source": connection_dict[output_name],
-                        "sourceHandle": output._list_index,  # check for list index
+                        "sourceHandle": f"s_{output._list_index}",  # check for list index
                     })
                 else:
                     edges_dict_lst.append({
