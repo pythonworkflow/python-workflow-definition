@@ -26,6 +26,11 @@ jobs:
         conda install -c conda-forge jupyter papermill
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         verdi presto --profile-name adis
+    # Add Upterm for SSH access
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+      # This is optional - you can make it conditional:
+      if: ${{ failure() || github.event_name == 'workflow_dispatch' }}
     - name: Tests
       shell: bash -l {0}
       run: |
