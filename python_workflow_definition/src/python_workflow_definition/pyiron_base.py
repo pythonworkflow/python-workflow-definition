@@ -72,7 +72,7 @@ def get_dict(**kwargs):
 
 
 def get_list(**kwargs):
-    return list(kwargs["kwargs"].values())
+    return {f"s_{i}": v for i, v in enumerate(kwargs["kwargs"].values())}
 
 
 def _remove_server_obj(nodes_dict, edges_lst):
@@ -156,7 +156,7 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
                         "target": target,
                         "targetHandle": target_handle,
                         "source": connection_dict[output_name],
-                        "sourceHandle": output._list_index,  # check for list index
+                        "sourceHandle": f"s_{output._list_index}",  # check for list index
                     })
                 else:
                     edges_dict_lst.append({
