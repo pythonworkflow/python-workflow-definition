@@ -31,7 +31,7 @@ def write_input(input_dict, working_directory="."):
 def collect_output(working_directory="."):
     output = parse_pw(os.path.join(working_directory, "pwscf.xml"))
     return {
-        "structure": output["ase_structure"].todict(),
+        "structure": atoms_to_json_dict(atoms=output["ase_structure"]),
         "energy": output["energy"],
         "volume": output["ase_structure"].get_volume(),
     }
