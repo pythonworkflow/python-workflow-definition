@@ -346,8 +346,6 @@ def construct_wg_qe(
                 "smearing": pickle_smearing_task.outputs.result,
             }
         )
-
-        # import ipdb; ipdb.set_trace()
         wg.add_link(scf_get_dict_task.outputs.result, scf_qe_task.inputs.input_dict)
         wg.add_link(
             strain_dir_task.outputs.result, scf_qe_task.inputs.working_directory
