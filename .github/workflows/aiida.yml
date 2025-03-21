@@ -34,6 +34,8 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
+        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        
         papermill universal_simple_to_aiida.ipynb universal_simple_to_aiida_out.ipynb -k "python3"
         papermill universal_qe_to_aiida.ipynb universal_qe_to_aiida_out.ipynb -k "python3"
 
