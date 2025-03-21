@@ -12,24 +12,20 @@ import numpy as np
 def write_input(input_dict, working_directory="."):
     filename = os.path.join(working_directory, "input.pwi")
     os.makedirs(working_directory, exist_ok=True)
-    try:
-        write(
-            filename=filename,
-            images=Atoms(**input_dict["structure"]),
-            Crystal=True,
-            kpts=input_dict["kpts"],
-            input_data={
-                "calculation": input_dict["calculation"],
-                "occupations": "smearing",
-                "degauss": input_dict["smearing"],
-            },
-            pseudopotentials=input_dict["pseudopotentials"],
-            tstress=True,
-            tprnfor=True,
-        )
-    except KeyError:
-        print('INPUT_DICT')
-        print(input_dict)
+    write(
+        filename=filename,
+        images=Atoms(**input_dict["structure"]),
+        Crystal=True,
+        kpts=input_dict["kpts"],
+        input_data={
+            "calculation": input_dict["calculation"],
+            "occupations": "smearing",
+            "degauss": input_dict["smearing"],
+        },
+        pseudopotentials=input_dict["pseudopotentials"],
+        tstress=True,
+        tprnfor=True,
+    )
 
 
 def collect_output(working_directory="."):
@@ -63,14 +59,6 @@ def generate_structures(structure, strain_lst):
         )
         structure_lst.append(structure_strain)
     return {f"s_{i}": atoms_to_json_dict(atoms=s) for i, s in enumerate(structure_lst)}
-
-
-def scale_structure(structure, strain):
-    structure_strain = Atoms(**structure)
-    structure_strain.set_cell(
-        structure_strain.cell * strain ** (1 / 3), scale_atoms=True
-    )
-    return structure_strain
 
 
 def plot_energy_volume_curve(volume_lst, energy_lst):
