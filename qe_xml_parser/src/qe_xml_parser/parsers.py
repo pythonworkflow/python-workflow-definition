@@ -6,7 +6,7 @@ from qe_tools import CONSTANTS
 from ase import Atoms
 from importlib.resources import files
 
-from qe_xml_parser.schemas import schemas
+from . import schemas
 
 
 def parse_pw(xml_file):
