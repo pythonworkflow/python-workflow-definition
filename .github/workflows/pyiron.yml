@@ -33,8 +33,5 @@ jobs:
         papermill universal_simple_to_pyiron_base.ipynb universal_simple_to_pyiron_base_out.ipynb -k "python3"
         papermill universal_qe_to_pyiron_base.ipynb universal_qe_to_pyiron_base_out.ipynb -k "python3"
 
-        papermill pyiron_base_to_jobflow_simple.ipynb pyiron_base_to_jobflow_simple_out.ipynb -k "python3"
-        papermill pyiron_base_to_jobflow_qe.ipynb pyiron_base_to_jobflow_qe_out.ipynb -k "python3"
-
-        papermill pyiron_base_to_aiida_simple.ipynb pyiron_base_to_aiida_simple_out.ipynb -k "python3"
-        papermill pyiron_base_to_aiida_qe.ipynb pyiron_base_to_aiida_qe_out.ipynb -k "python3"
+        papermill pyiron_base_simple.ipynb pyiron_base_simple_out.ipynb -k "python3"
+        papermill pyiron_base_qe.ipynb pyiron_base_qe_out.ipynb -k "python3"
