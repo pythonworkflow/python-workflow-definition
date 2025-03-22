@@ -60,17 +60,14 @@ The corresponding Jupyter notebooks demonstrate this functionality:
 
 | Example                                                                        | Explanation                                                                  | 
 |--------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [aiida_simple.ipynb](aiida_simple.ipynb)                                       | Define Workflow with aiida and execute it with jobflow and pyiron_base.      |
+| [jobflow_simple.ipynb](jobflow_simple.ipynb)                                   | Define Workflow with jobflow and execute it with aiida and pyiron_base.      |
+| [pyiron_base_simple.ipynb](pyiron_base_simple.ipynb)                           | Define Workflow with pyiron_base and execute it with aiida and jobflow.      |
 | [universal_simple_to_aiida.ipynb](universal_simple_to_aiida.ipynb)             | Execute workflow defined in the Python Workflow Definition with aiida.       |
 | [universal_simple_to_jobflow.ipynb](universal_simple_to_jobflow.ipynb)         | Execute workflow defined in the Python Workflow Definition with jobflow.     |
 | [universal_simple_to_pyiron_base.ipynb](universal_simple_to_pyiron_base.ipynb) | Execute workflow defined in the Python Workflow Definition with pyrion_base. |
 | [universal_simple_to_python.ipynb](universal_simple_to_python.ipynb)           | Execute workflow defined in the Python Workflow Definition with Python.      |
 | [universal_simple_to_executorlib.ipynb](universal_simple_to_executorlib.ipynb) | Execute workflow defined in the Python Workflow Definition with executorlib. |
-| [aiida_to_jobflow_simple.ipynb](aiida_to_jobflow_simple.ipynb)                 | Define Workflow with aiida and execute it with jobflow.                      |
-| [aiida_to_pyiron_base_simple.ipynb](aiida_to_pyiron_base_simple.ipynb)         | Define Workflow with aiida and execute it with pyiron_base.                  |
-| [jobflow_to_aiida_simple.ipynb](jobflow_to_aiida_simple.ipynb)                 | Define Workflow with jobflow and execute it with aiida.                      |
-| [jobflow_to_pyiron_base_simple.ipynb](jobflow_to_pyiron_base_simple.ipynb)     | Define Workflow with jobflow and execute it with pyiron_base.                |
-| [pyiron_base_to_aiida_simple.ipynb](pyiron_base_to_aiida_simple.ipynb)         | Define Workflow with pyiron_base and execute it with aiida.                  |
-| [pyiron_base_to_jobflow_simple.ipynb](pyiron_base_to_jobflow_simple.ipynb)     | Define Workflow with pyiron_base and execute it with jobflow.                |
 
 ### Quantum Espresso Workflow
 The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the 
@@ -81,14 +78,11 @@ initial structure is relaxed, afterwards it is strained and the total energy is 
 
 | Example                                                                | Explanation                                                                  | 
 |------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [aiida_qe.ipynb](aiida_qe.ipynb)                                       | Define Workflow with aiida and execute it with jobflow and pyiron_base.      |
+| [jobflow_qe.ipynb](jobflow_qe.ipynb)                                   | Define Workflow with jobflow and execute it with aiida and pyiron_base.      |
+| [pyiron_base_qe.ipynb](pyiron_base_qe.ipynb)                           | Define Workflow with pyiron_base and execute it with aiida and jobflow.      |
 | [universal_qe_to_aiida.ipynb](universal_qe_to_aiida.ipynb)             | Execute workflow defined in the Python Workflow Definition with aiida.       |
 | [universal_qe_to_jobflow.ipynb](universal_qe_to_jobflow.ipynb)         | Execute workflow defined in the Python Workflow Definition with jobflow.     |
 | [universal_qe_to_pyiron_base.ipynb](universal_qe_to_pyiron_base.ipynb) | Execute workflow defined in the Python Workflow Definition with pyrion_base. |
 | [universal_qe_to_python.ipynb](universal_qe_to_python.ipynb)           | Execute workflow defined in the Python Workflow Definition with Python.      |
 | [universal_qe_to_executorlib.ipynb](universal_qe_to_executorlib.ipynb) | Execute workflow defined in the Python Workflow Definition with executorlib. |
-| [aiida_to_jobflow_qe.ipynb](aiida_to_jobflow_qe.ipynb)                 | Define Workflow with aiida and execute it with jobflow.                      |
-| [aiida_to_pyiron_base_qe.ipynb](aiida_to_pyiron_base_qe.ipynb)         | Define Workflow with aiida and execute it with pyiron_base.                  |
-| [jobflow_to_aiida_qe.ipynb](jobflow_to_aiida_qe.ipynb)                 | Define Workflow with jobflow and execute it with aiida.                      |
-| [jobflow_to_pyiron_base_qe.ipynb](jobflow_to_pyiron_base_qe.ipynb)     | Define Workflow with jobflow and execute it with pyiron_base.                |
-| [pyiron_base_to_aiida_qe.ipynb](pyiron_base_to_aiida_qe.ipynb)         | Define Workflow with pyiron_base and execute it with aiida.                  |
-| [pyiron_base_to_jobflow_qe.ipynb](pyiron_base_to_jobflow_qe.ipynb)     | Define Workflow with pyiron_base and execute it with jobflow.                |
