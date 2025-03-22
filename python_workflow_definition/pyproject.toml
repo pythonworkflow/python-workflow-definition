@@ -9,12 +9,9 @@ description = "Python Workflow Definition for the Ab initio Description of Iron 
 authors = [
   { name = "Jan Janssen", email = "janssen@mpie.de" },
   { name = "Janine George", email = "janine.geogre@bam.de" },
+  { name = "Julian Geiger", email = "julian.geiger@psi.ch" },
   { name = "Marnik Bercx", email = "marnik.bercx@psi.ch" },
   { name = "Christina Ertural", email = "christina.ertural@bam.de" },
-  { name = "Joerg Schaarschmidt", email = "joerg.schaarschmidt@kit.edu" },
-  { name = "Sam Dareska" },
-  { name = "Leopold Talirz", email = "leopold.talirz@gmail.com" },
-  { name = "Julian Geiger", email = "julian.geiger@psi.ch" },
 ]
 license = { text = "MIT" }
-dependencies = ["jobflow", "pyiron_base", "aiida-workgraph>=0.5.0a6"]
+dependencies = ["jobflow", "pyiron_base", "aiida-workgraph"]
