@@ -2,12 +2,10 @@ import json
 import os
 import subprocess
 
-from ase.atoms import Atoms
 from ase.build import bulk
 from ase.io import write
-from adis_tools.parsers import parse_pw
+from qe_xml_parser.parsers import parse_pw
 import matplotlib.pyplot as plt
-import numpy as np
 from optimade.adapters.structures.ase import from_ase_atoms, get_ase_atoms
 from optimade.models.structures import StructureResourceAttributes, StructureResource
 

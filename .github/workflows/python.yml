@@ -21,7 +21,7 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
-        pip install -e adis_tools
+        pip install -e qe_xml_parser
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
