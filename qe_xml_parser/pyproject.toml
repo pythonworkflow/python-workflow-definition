@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qe_xml_parser"
+version = "0.0.1"
+description = "Quantum Espresso xml output parser"
+authors = [
+  { name = "Marnik Bercx", email = "marnik.bercx@psi.ch" },
+]
+license = { text = "MIT" }
+dependencies = ["numpy", "xmlschema", "qe_tools", "ase"]
