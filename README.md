@@ -42,15 +42,15 @@ JSON file:
     "5": 2
   },
   "edges": [
-    {"target": 0, "targetHandle": "x", "source": 1, "sourceHandle": "x"},
-    {"target": 1, "targetHandle": "x", "source": 4, "sourceHandle": null},
-    {"target": 1, "targetHandle": "y", "source": 5, "sourceHandle": null},
-    {"target": 0, "targetHandle": "y", "source": 2, "sourceHandle": "y"},
-    {"target": 2, "targetHandle": "x", "source": 4, "sourceHandle": null},
-    {"target": 2, "targetHandle": "y", "source": 5, "sourceHandle": null},
-    {"target": 0, "targetHandle": "z", "source": 3, "sourceHandle": "z"},
-    {"target": 3, "targetHandle": "x", "source": 4, "sourceHandle": null},
-    {"target": 3, "targetHandle": "y", "source": 5, "sourceHandle": null}
+    {"tn": 0, "th": "x", "sn": 1, "sh": "x"},
+    {"tn": 1, "th": "x", "sn": 4, "sh": null},
+    {"tn": 1, "th": "y", "sn": 5, "sh": null},
+    {"tn": 0, "th": "y", "sn": 2, "sh": "y"},
+    {"tn": 2, "th": "x", "sn": 4, "sh": null},
+    {"tn": 2, "th": "y", "sn": 5, "sh": null},
+    {"tn": 0, "th": "z", "sn": 3, "sh": "z"},
+    {"tn": 3, "th": "x", "sn": 4, "sh": null},
+    {"tn": 3, "th": "y", "sn": 5, "sh": null}
   ]
 }
 ```

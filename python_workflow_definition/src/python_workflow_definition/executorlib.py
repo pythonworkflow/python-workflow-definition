@@ -12,7 +12,7 @@ def get_item(obj, key):
 
 
 def _get_value(result_dict, nodes_new_dict, link_dict, exe):
-    source, source_handle = link_dict["source"], link_dict["sourceHandle"]
+    source, source_handle = link_dict["sn"], link_dict["sh"]
     if source in result_dict.keys():
         result = result_dict[source]
     elif source in nodes_new_dict.keys():

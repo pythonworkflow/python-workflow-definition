@@ -6,10 +6,10 @@
     "3": 2
   }, 
   "edges": [
-    {"target": 0, "targetHandle": "x", "source": 2, "sourceHandle": null}, 
-    {"target": 0, "targetHandle": "y", "source": 3, "sourceHandle": null}, 
-    {"target": 1, "targetHandle": "x", "source": 0, "sourceHandle": "x"}, 
-    {"target": 1, "targetHandle": "y", "source": 0, "sourceHandle": "y"}, 
-    {"target": 1, "targetHandle": "z", "source": 0, "sourceHandle": "z"}
+    {"tn": 0, "th": "x", "sn": 2, "sh": null},
+    {"tn": 0, "th": "y", "sn": 3, "sh": null},
+    {"tn": 1, "th": "x", "sn": 0, "sh": "x"},
+    {"tn": 1, "th": "y", "sn": 0, "sh": "y"},
+    {"tn": 1, "th": "z", "sn": 0, "sh": "z"}
   ]
 }
