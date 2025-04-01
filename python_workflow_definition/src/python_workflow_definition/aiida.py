@@ -101,10 +101,12 @@ def write_workflow_json(wg, file_name):
                         raw_value = input.value.get_list()
                     elif isinstance(input.value, orm.Dict):
                         raw_value = input.value.get_dict()
+                        # unknow reason, there is a key "node_type" in the dict
+                        raw_value.pop("node_type", None)
                     else:
                         raw_value = input.value.value
-                    input_node_name = str(i)
-                    data["nodes"][input_node_name] = raw_value
+                    data["nodes"][str(i)] = raw_value
+                    input_node_name = i
                     data_node_name_mapping[input.value.uuid] = input_node_name
                     i += 1
                 else:
@@ -115,7 +117,6 @@ def write_workflow_json(wg, file_name):
                     "sn": input_node_name,
                     "sh": None
                 })
-
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
         json.dump(data, f, indent=2)
