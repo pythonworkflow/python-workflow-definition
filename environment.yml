@@ -11,4 +11,6 @@ dependencies:
 - jobflow=0.1.19
 - pygraphviz=1.14
 - optimade=1.2.3
-- aiida-workgraph=0.5.0
+- pip
+- pip:
+  - aiida-workgraph==0.5.1
