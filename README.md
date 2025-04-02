@@ -54,7 +54,14 @@ JSON file:
   ]
 }
 ```
-As the workflow does not require any additional resources, the `environment.yml` file is not required. 
+The abbreviations in the definition of the edges are:
+* `tn` - target node 
+* `th` - target handle - for a node with multiple input parameters the target handle specifies which input parameter to use.
+* `sn` - source node 
+* `sh` - source handle - for a node with multiple output parameters the source handle specifies which output parameter to use.
+
+As the workflow does not require any additional resources, as it is only using built-in functionality of the Python standard 
+library.
 
 The corresponding Jupyter notebooks demonstrate this functionality:
 
