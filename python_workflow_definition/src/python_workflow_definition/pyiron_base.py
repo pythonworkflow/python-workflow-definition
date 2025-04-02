@@ -39,11 +39,12 @@ def _group_edges(edges_lst):
 
 
 def _get_source(nodes_dict, delayed_object_dict, source, sourceHandle):
-    if source in delayed_object_dict.keys():
+    if source in delayed_object_dict.keys() and sourceHandle is not None:
         return delayed_object_dict[source].__getattr__("output").__getattr__(sourceHandle)
+    elif source in delayed_object_dict.keys():
+        return delayed_object_dict[source]
     else:
         return nodes_dict[source]
-
 
 def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_project):
     delayed_object_dict = {}
