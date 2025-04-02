@@ -33,8 +33,8 @@ def convert_to_xdmf(gmsh_output_file : str) -> str:
         universal_newlines=True,
     ).split("\n")
     return {
-        "xdmf": os.path.abspath(os.path.join(stage_name, meshio_output_file_name)),
-        "h5": os.path.join(os.path.abspath(stage_name), "square.h5"),
+        "xdmf_file": os.path.abspath(os.path.join(stage_name, meshio_output_file_name)),
+        "h5_file": os.path.join(os.path.abspath(stage_name), "square.h5"),
     }
 
 
@@ -58,8 +58,8 @@ def poisson(meshio_output_xdmf: str, meshio_output_h5: str) -> dict:
     ).split("\n")
     return {
         "numdofs": _poisson_collect_output(numdofs_file=os.path.join(stage_name, poisson_output_numdofs_file_name)),
-        "poisson_output_pvd_file": os.path.abspath(os.path.join(stage_name, poisson_output_pvd_file_name)),
-        "poisson_output_vtu_file": os.path.abspath(os.path.join(stage_name, "poisson000000.vtu")),
+        "pvd_file": os.path.abspath(os.path.join(stage_name, poisson_output_pvd_file_name)),
+        "vtu_file": os.path.abspath(os.path.join(stage_name, "poisson000000.vtu")),
     }
 
 
