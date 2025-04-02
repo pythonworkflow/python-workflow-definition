@@ -1,4 +1,4 @@
-name: pyiron
+name: simple
 
 on:
   push:
@@ -21,13 +21,13 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install -e qe_xml_parser
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
     - name: Tests
       shell: bash -l {0}
       run: |
-        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        papermill aiida_simple.ipynb aiida_simple_out.ipynb -k "python3"
+        papermill jobflow_simple.ipynb jobflow_simple_out.ipynb -k "python3"
         papermill pyiron_base_simple.ipynb pyiron_base_simple_out.ipynb -k "python3"
-        papermill pyiron_base_qe.ipynb pyiron_base_qe_out.ipynb -k "python3"
+        papermill universal_workflow_simple.ipynb universal_workflow_simple_out.ipynb -k "python3"

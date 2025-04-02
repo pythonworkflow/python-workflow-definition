@@ -2,15 +2,9 @@ channels:
 - conda-forge
 dependencies:
 - python=3.12
-- pyiron_base=0.11.8
-- qe=7.2
-- qe-tools=2.0.0
-- ase=3.24.0
-- matplotlib=3.10.1
-- xmlschema=3.4.3
 - jobflow=0.1.19
+- pyiron_base=0.11.8
 - pygraphviz=1.14
-- optimade=1.2.3
 - pip
 - pip:
   - aiida-workgraph==0.5.1
