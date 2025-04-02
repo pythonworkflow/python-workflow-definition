@@ -33,6 +33,7 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
-        papermill pyiron_base_nfdi.ipynb pyiron_base_nfdi_out.ipynb -k "python3"
+        papermill aiida_nfdi.ipynb aiida_nfdi_out.ipynb -k "python3"
         papermill jobflow_nfdi.ipynb jobflow_nfdi_out.ipynb -k "python3"
+        papermill pyiron_base_nfdi.ipynb pyiron_base_nfdi_out.ipynb -k "python3"
         papermill universal_workflow_nfdi.ipynb universal_workflow_nfdi_out.ipynb -k "python3"
