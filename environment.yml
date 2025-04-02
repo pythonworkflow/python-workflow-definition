@@ -13,4 +13,4 @@ dependencies:
 - optimade=1.2.3
 - pip
 - pip:
-  - aiida-workgraph=0.5.1
+  - aiida-workgraph==0.5.1
