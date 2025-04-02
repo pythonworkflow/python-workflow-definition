@@ -123,7 +123,7 @@ def _poisson_collect_output(numdofs_file: str) -> int:
 
 
 def _copy_file(stage_name, source_file):
-    input_file = os.path.join(os.path.abspath(stage_name), source_file)
+    input_file = os.path.join(os.path.abspath(stage_name), os.path.basename(source_file))
     if input_file != source_file:
         shutil.copyfile(source_file, input_file)
 
