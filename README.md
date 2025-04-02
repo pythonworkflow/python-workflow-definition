@@ -78,3 +78,27 @@ initial structure is relaxed, afterward it is strained and the total energy is c
 | [jobflow_qe.ipynb](jobflow_qe.ipynb)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
 | [pyiron_base_qe.ipynb](pyiron_base_qe.ipynb)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
 | [universal_workflow_qe.ipynb](universal_workflow_qe.ipynb) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
+
+### NFDI4Ing Scientific Workflow Requirements
+To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark developed as part of [NFDI4Ing](https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements)
+is implemented for all three simulation codes based on a shared workflow definition. 
+* [nfdi_ing_workflow.py](nfdi_ing_workflow.py) Python functions 
+* [workflow_nfdi.json](workflow_nfdi.json) Workflow definition in the Python Workflow Definition.
+
+Additional source files provided with the workflow benchmark:
+* [source/envs/preprocessing.yaml](source/envs/preprocessing.yaml) Conda environment for preprocessing
+* [source/envs/processing.yaml](source/envs/processing.yaml) Conda environment for processing
+* [source/envs/postprocessing.yaml](source/envs/postprocessing.yaml) Conda environment for postprocessing
+* [source/macros.tex.template](source/macros.tex.template) LaTeX module template 
+* [source/paper.tex](source/paper.tex) LaTeX paper template 
+* [source/poisson.py](source/poisson.py) Poisson Python script 
+* [source/postprocessing.py](source/postprocessing.py) Postprocessing Python script
+* [source/prepare_paper_macros.py](source/prepare_paper_macros.py) LaTeX preprocessing Python script
+* [source/unit_square.geo](source/unit_square.geo) Input structure 
+
+| Example                                                        | Explanation                                                                                                               | 
+|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [aiida_nfdi.ipynb](aiida_nfdi.ipynb)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
+| [jobflow_nfdi.ipynb](jobflow_nfdi.ipynb)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
+| [pyiron_base_nfdi.ipynb](pyiron_base_nfdi.ipynb)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
+| [universal_workflow_nfdi.ipynb](universal_workflow_nfdi.ipynb) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
