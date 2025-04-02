@@ -70,7 +70,7 @@ The second workflow example is the calculation of an energy volume curve with Qu
 initial structure is relaxed, afterward it is strained and the total energy is calculated. 
 * [quantum_espresso_workflow.py](quantum_espresso_workflow.py) Python functions 
 * [workflow_qe.json](workflow_qe.json) Workflow definition in the Python Workflow Definition.
-* [environment.yml](environment.yml) Conda environment
+* [environment_qe.yml](environment_qe.yml) Conda environment
 
 | Example                                                    | Explanation                                                                                                               | 
 |------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
