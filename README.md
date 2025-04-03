@@ -1,4 +1,5 @@
 # Python Workflow Definition
+[![Pipeline](https://github.com/pyiron-dev/python-workflow-definition/actions/workflows/pipeline.yml/badge.svg)](https://github.com/pyiron-dev/python-workflow-definition/actions/workflows/pipeline.yml)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/HEAD)
 
 ## Definition
