@@ -1,0 +1,713 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="7985pt" height="620pt" viewBox="0.00 0.00 7985.15 620.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 616)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-616 7981.15,-616 7981.15,4 -4,4"/>
+<!-- create_function_job_8ceb3031e9d0fd46bd383df696f06138 -->
+<g id="node1" class="node">
+<title>create_function_job_8ceb3031e9d0fd46bd383df696f06138</title>
+<ellipse fill="none" stroke="black" cx="3989.6" cy="-18" rx="482.62" ry="18"/>
+<text text-anchor="middle" x="3989.6" y="-13.32" font-family="Times,serif" font-size="14.00">create_function_job=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a88810&gt;</text>
+</g>
+<!-- volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="node2" class="node">
+<title>volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<ellipse fill="none" stroke="black" cx="3545.6" cy="-90" rx="436.32" ry="18"/>
+<text text-anchor="middle" x="3545.6" y="-85.33" font-family="Times,serif" font-size="14.00">volume_lst=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6f690&gt;</text>
+</g>
+<!-- volume_lst_105e463ce9fc4dadfb68786635ea6c9f&#45;&gt;create_function_job_8ceb3031e9d0fd46bd383df696f06138 -->
+<g id="edge1" class="edge">
+<title>volume_lst_105e463ce9fc4dadfb68786635ea6c9f-&gt;create_function_job_8ceb3031e9d0fd46bd383df696f06138</title>
+<path fill="none" stroke="black" d="M3652.8,-72.1C3718.55,-61.73 3802.85,-48.44 3870.66,-37.75"/>
+<polygon fill="black" stroke="black" points="3871,-41.24 3880.33,-36.23 3869.91,-34.33 3871,-41.24"/>
+</g>
+<!-- 0_c67ca853ba2351e69f89f037ea41b0b9 -->
+<g id="node3" class="node">
+<title>0_c67ca853ba2351e69f89f037ea41b0b9</title>
+<ellipse fill="none" stroke="black" cx="1992.6" cy="-162" rx="391.08" ry="18"/>
+<text text-anchor="middle" x="1992.6" y="-157.32" font-family="Times,serif" font-size="14.00">0=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6e950&gt;</text>
+</g>
+<!-- 0_c67ca853ba2351e69f89f037ea41b0b9&#45;&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="edge2" class="edge">
+<title>0_c67ca853ba2351e69f89f037ea41b0b9-&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<path fill="none" stroke="black" d="M2264.89,-148.73C2539.81,-136.34 2963.28,-117.25 3247.18,-104.45"/>
+<polygon fill="black" stroke="black" points="3247.13,-107.96 3256.97,-104.01 3246.82,-100.96 3247.13,-107.96"/>
+</g>
+<!-- input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="node4" class="node">
+<title>input_dict_b79b9897515efc8480fbae676047ff18</title>
+<ellipse fill="none" stroke="black" cx="2756.6" cy="-234" rx="433.16" ry="18"/>
+<text text-anchor="middle" x="2756.6" y="-229.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f843f990&gt;</text>
+</g>
+<!-- input_dict_b79b9897515efc8480fbae676047ff18&#45;&gt;0_c67ca853ba2351e69f89f037ea41b0b9 -->
+<g id="edge3" class="edge">
+<title>input_dict_b79b9897515efc8480fbae676047ff18-&gt;0_c67ca853ba2351e69f89f037ea41b0b9</title>
+<path fill="none" stroke="black" d="M2582.76,-217.07C2460.73,-205.89 2297.9,-190.97 2174.19,-179.64"/>
+<polygon fill="black" stroke="black" points="2174.88,-176.19 2164.6,-178.76 2174.24,-183.16 2174.88,-176.19"/>
+</g>
+<!-- 0_38914fa97ea86fd0f2a736e0906d8d46 -->
+<g id="node5" class="node">
+<title>0_38914fa97ea86fd0f2a736e0906d8d46</title>
+<ellipse fill="none" stroke="black" cx="2793.6" cy="-162" rx="392.13" ry="18"/>
+<text text-anchor="middle" x="2793.6" y="-157.32" font-family="Times,serif" font-size="14.00">0=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55fb6b3490&gt;</text>
+</g>
+<!-- input_dict_b79b9897515efc8480fbae676047ff18&#45;&gt;0_38914fa97ea86fd0f2a736e0906d8d46 -->
+<g id="edge4" class="edge">
+<title>input_dict_b79b9897515efc8480fbae676047ff18-&gt;0_38914fa97ea86fd0f2a736e0906d8d46</title>
+<path fill="none" stroke="black" d="M2765.75,-215.7C2769.82,-207.98 2774.72,-198.71 2779.27,-190.11"/>
+<polygon fill="black" stroke="black" points="2782.27,-191.92 2783.85,-181.44 2776.09,-188.65 2782.27,-191.92"/>
+</g>
+<!-- energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="node41" class="node">
+<title>energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<ellipse fill="none" stroke="black" cx="4434.6" cy="-90" rx="434.74" ry="18"/>
+<text text-anchor="middle" x="4434.6" y="-85.33" font-family="Times,serif" font-size="14.00">energy_lst=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6f390&gt;</text>
+</g>
+<!-- 0_38914fa97ea86fd0f2a736e0906d8d46&#45;&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="edge73" class="edge">
+<title>0_38914fa97ea86fd0f2a736e0906d8d46-&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<path fill="none" stroke="black" d="M3073.83,-149.05C3367.03,-136.54 3825.92,-116.96 4128.45,-104.06"/>
+<polygon fill="black" stroke="black" points="4128.24,-107.57 4138.09,-103.65 4127.95,-100.58 4128.24,-107.57"/>
+</g>
+<!-- structure_d7ca004e3708134e7a300a68f4025259 -->
+<g id="node6" class="node">
+<title>structure_d7ca004e3708134e7a300a68f4025259</title>
+<ellipse fill="none" stroke="black" cx="3259.6" cy="-306" rx="431.59" ry="18"/>
+<text text-anchor="middle" x="3259.6" y="-301.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a7a610&gt;</text>
+</g>
+<!-- structure_d7ca004e3708134e7a300a68f4025259&#45;&gt;input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="edge5" class="edge">
+<title>structure_d7ca004e3708134e7a300a68f4025259-&gt;input_dict_b79b9897515efc8480fbae676047ff18</title>
+<path fill="none" stroke="black" d="M3139.44,-288.28C3063.68,-277.74 2965.83,-264.12 2888.01,-253.29"/>
+<polygon fill="black" stroke="black" points="2888.57,-249.83 2878.18,-251.92 2887.6,-256.76 2888.57,-249.83"/>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1 -->
+<g id="node7" class="node">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1</title>
+<ellipse fill="none" stroke="black" cx="4999.6" cy="-378" rx="432.11" ry="18"/>
+<text text-anchor="middle" x="4999.6" y="-373.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a842d0&gt;</text>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1&#45;&gt;structure_d7ca004e3708134e7a300a68f4025259 -->
+<g id="edge6" class="edge">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1-&gt;structure_d7ca004e3708134e7a300a68f4025259</title>
+<path fill="none" stroke="black" d="M4696.52,-364.81C4381.98,-352.15 3892.33,-332.45 3573.75,-319.64"/>
+<polygon fill="black" stroke="black" points="3574.14,-316.15 3564,-319.25 3573.86,-323.15 3574.14,-316.15"/>
+</g>
+<!-- structure_512e4d45120ddba0cc1f8ad006094ae3 -->
+<g id="node8" class="node">
+<title>structure_512e4d45120ddba0cc1f8ad006094ae3</title>
+<ellipse fill="none" stroke="black" cx="5217.6" cy="-306" rx="432.11" ry="18"/>
+<text text-anchor="middle" x="5217.6" y="-301.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a7b090&gt;</text>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1&#45;&gt;structure_512e4d45120ddba0cc1f8ad006094ae3 -->
+<g id="edge7" class="edge">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1-&gt;structure_512e4d45120ddba0cc1f8ad006094ae3</title>
+<path fill="none" stroke="black" d="M5053.49,-359.7C5083.49,-350.06 5121.05,-338 5152.67,-327.85"/>
+<polygon fill="black" stroke="black" points="5153.69,-331.2 5162.14,-324.81 5151.55,-324.53 5153.69,-331.2"/>
+</g>
+<!-- structure_e32b45d06adef4e6c12b7b39f96b32c5 -->
+<g id="node9" class="node">
+<title>structure_e32b45d06adef4e6c12b7b39f96b32c5</title>
+<ellipse fill="none" stroke="black" cx="4141.6" cy="-306" rx="432.11" ry="18"/>
+<text text-anchor="middle" x="4141.6" y="-301.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a7b350&gt;</text>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1&#45;&gt;structure_e32b45d06adef4e6c12b7b39f96b32c5 -->
+<g id="edge8" class="edge">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1-&gt;structure_e32b45d06adef4e6c12b7b39f96b32c5</title>
+<path fill="none" stroke="black" d="M4808.65,-361.42C4670.67,-350.16 4484.61,-334.98 4344.05,-323.52"/>
+<polygon fill="black" stroke="black" points="4344.49,-320.04 4334.24,-322.72 4343.92,-327.02 4344.49,-320.04"/>
+</g>
+<!-- structure_5a33de3b4baeba31cb9059f2ebde7093 -->
+<g id="node10" class="node">
+<title>structure_5a33de3b4baeba31cb9059f2ebde7093</title>
+<ellipse fill="none" stroke="black" cx="2378.6" cy="-306" rx="431.06" ry="18"/>
+<text text-anchor="middle" x="2378.6" y="-301.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a7bc90&gt;</text>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1&#45;&gt;structure_5a33de3b4baeba31cb9059f2ebde7093 -->
+<g id="edge9" class="edge">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1-&gt;structure_5a33de3b4baeba31cb9059f2ebde7093</title>
+<path fill="none" stroke="black" d="M4641.89,-367.62C4544.48,-365.1 4438.99,-362.41 4341.6,-360 3664.73,-343.26 3495.35,-345.07 2818.6,-324 2777.39,-322.72 2734.02,-321.22 2691.22,-319.66"/>
+<polygon fill="black" stroke="black" points="2691.4,-316.16 2681.28,-319.29 2691.14,-323.16 2691.4,-316.16"/>
+</g>
+<!-- structure_e166ec187b983faaf9f6c4a8f4f9d6c1 -->
+<g id="node11" class="node">
+<title>structure_e166ec187b983faaf9f6c4a8f4f9d6c1</title>
+<ellipse fill="none" stroke="black" cx="6099.6" cy="-306" rx="432.11" ry="18"/>
+<text text-anchor="middle" x="6099.6" y="-301.32" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a848d0&gt;</text>
+</g>
+<!-- structure_04c4f17a3d0cb1d2763d446a6995cdc1&#45;&gt;structure_e166ec187b983faaf9f6c4a8f4f9d6c1 -->
+<g id="edge10" class="edge">
+<title>structure_04c4f17a3d0cb1d2763d446a6995cdc1-&gt;structure_e166ec187b983faaf9f6c4a8f4f9d6c1</title>
+<path fill="none" stroke="black" d="M5229.86,-362.35C5413.97,-350.63 5671.31,-334.25 5858.27,-322.36"/>
+<polygon fill="black" stroke="black" points="5858.37,-325.86 5868.13,-321.73 5857.93,-318.87 5858.37,-325.86"/>
+</g>
+<!-- input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="node19" class="node">
+<title>input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<ellipse fill="none" stroke="black" cx="5260.6" cy="-234" rx="435.27" ry="18"/>
+<text text-anchor="middle" x="5260.6" y="-229.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a78110&gt;</text>
+</g>
+<!-- structure_512e4d45120ddba0cc1f8ad006094ae3&#45;&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="edge51" class="edge">
+<title>structure_512e4d45120ddba0cc1f8ad006094ae3-&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<path fill="none" stroke="black" d="M5228.23,-287.7C5233.02,-279.9 5238.79,-270.51 5244.12,-261.83"/>
+<polygon fill="black" stroke="black" points="5247.05,-263.75 5249.3,-253.39 5241.09,-260.08 5247.05,-263.75"/>
+</g>
+<!-- input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="node20" class="node">
+<title>input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<ellipse fill="none" stroke="black" cx="4196.6" cy="-234" rx="435.27" ry="18"/>
+<text text-anchor="middle" x="4196.6" y="-229.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a79690&gt;</text>
+</g>
+<!-- structure_e32b45d06adef4e6c12b7b39f96b32c5&#45;&gt;input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="edge57" class="edge">
+<title>structure_e32b45d06adef4e6c12b7b39f96b32c5-&gt;input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<path fill="none" stroke="black" d="M4155.2,-287.7C4161.52,-279.64 4169.18,-269.89 4176.19,-260.98"/>
+<polygon fill="black" stroke="black" points="4178.8,-263.32 4182.23,-253.29 4173.3,-259 4178.8,-263.32"/>
+</g>
+<!-- input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="node21" class="node">
+<title>input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<ellipse fill="none" stroke="black" cx="1230.6" cy="-234" rx="435.27" ry="18"/>
+<text text-anchor="middle" x="1230.6" y="-229.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a793d0&gt;</text>
+</g>
+<!-- structure_5a33de3b4baeba31cb9059f2ebde7093&#45;&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="edge63" class="edge">
+<title>structure_5a33de3b4baeba31cb9059f2ebde7093-&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<path fill="none" stroke="black" d="M2141.78,-290.56C1948.43,-278.77 1676,-262.16 1479.46,-250.17"/>
+<polygon fill="black" stroke="black" points="1479.81,-246.69 1469.61,-249.57 1479.38,-253.68 1479.81,-246.69"/>
+</g>
+<!-- input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="node22" class="node">
+<title>input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<ellipse fill="none" stroke="black" cx="6787.6" cy="-234" rx="434.22" ry="18"/>
+<text text-anchor="middle" x="6787.6" y="-229.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a79cd0&gt;</text>
+</g>
+<!-- structure_e166ec187b983faaf9f6c4a8f4f9d6c1&#45;&gt;input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="edge69" class="edge">
+<title>structure_e166ec187b983faaf9f6c4a8f4f9d6c1-&gt;input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<path fill="none" stroke="black" d="M6258.74,-288.81C6366.08,-277.89 6507.6,-263.49 6617.22,-252.33"/>
+<polygon fill="black" stroke="black" points="6617.3,-255.85 6626.9,-251.35 6616.59,-248.88 6617.3,-255.85"/>
+</g>
+<!-- input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="node12" class="node">
+<title>input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<ellipse fill="none" stroke="black" cx="6229.6" cy="-450" rx="435.27" ry="18"/>
+<text text-anchor="middle" x="6229.6" y="-445.32" font-family="Times,serif" font-size="14.00">input_dict=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a84dd0&gt;</text>
+</g>
+<!-- input_dict_1aae906a29f4a48f3eddf8e6b8ad45da&#45;&gt;structure_04c4f17a3d0cb1d2763d446a6995cdc1 -->
+<g id="edge11" class="edge">
+<title>input_dict_1aae906a29f4a48f3eddf8e6b8ad45da-&gt;structure_04c4f17a3d0cb1d2763d446a6995cdc1</title>
+<path fill="none" stroke="black" d="M5980.69,-434.83C5770.96,-422.9 5471.91,-405.88 5259.21,-393.77"/>
+<polygon fill="black" stroke="black" points="5259.57,-390.29 5249.39,-393.22 5259.17,-397.28 5259.57,-390.29"/>
+</g>
+<!-- structure_f4511b90f1d10b2338ab6a9d2263a4f7 -->
+<g id="node13" class="node">
+<title>structure_f4511b90f1d10b2338ab6a9d2263a4f7</title>
+<ellipse fill="none" stroke="black" cx="5675.6" cy="-522" rx="432.64" ry="18"/>
+<text text-anchor="middle" x="5675.6" y="-517.33" font-family="Times,serif" font-size="14.00">structure=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55fb438790&gt;</text>
+</g>
+<!-- structure_f4511b90f1d10b2338ab6a9d2263a4f7&#45;&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="edge12" class="edge">
+<title>structure_f4511b90f1d10b2338ab6a9d2263a4f7-&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<path fill="none" stroke="black" d="M5806.89,-504.41C5891.19,-493.76 6000.65,-479.93 6087.07,-469.01"/>
+<polygon fill="black" stroke="black" points="6087.31,-472.51 6096.79,-467.78 6086.43,-465.56 6087.31,-472.51"/>
+</g>
+<!-- element_467734216d9bd2497ffd28d5cd6daba0 -->
+<g id="node14" class="node">
+<title>element_467734216d9bd2497ffd28d5cd6daba0</title>
+<ellipse fill="none" stroke="black" cx="5539.6" cy="-594" rx="70.15" ry="18"/>
+<text text-anchor="middle" x="5539.6" y="-589.33" font-family="Times,serif" font-size="14.00">element=Al</text>
+</g>
+<!-- element_467734216d9bd2497ffd28d5cd6daba0&#45;&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7 -->
+<g id="edge13" class="edge">
+<title>element_467734216d9bd2497ffd28d5cd6daba0-&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7</title>
+<path fill="none" stroke="black" d="M5569.78,-577.46C5588.13,-568.02 5611.85,-555.81 5632.19,-545.34"/>
+<polygon fill="black" stroke="black" points="5633.53,-548.59 5640.82,-540.9 5630.32,-542.37 5633.53,-548.59"/>
+</g>
+<!-- a_aea0574e321c6f75f923c059730e9537 -->
+<g id="node15" class="node">
+<title>a_aea0574e321c6f75f923c059730e9537</title>
+<ellipse fill="none" stroke="black" cx="5675.6" cy="-594" rx="47.53" ry="18"/>
+<text text-anchor="middle" x="5675.6" y="-589.33" font-family="Times,serif" font-size="14.00">a=4.05</text>
+</g>
+<!-- a_aea0574e321c6f75f923c059730e9537&#45;&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7 -->
+<g id="edge14" class="edge">
+<title>a_aea0574e321c6f75f923c059730e9537-&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7</title>
+<path fill="none" stroke="black" d="M5675.6,-575.7C5675.6,-568.41 5675.6,-559.73 5675.6,-551.54"/>
+<polygon fill="black" stroke="black" points="5679.1,-551.62 5675.6,-541.62 5672.1,-551.62 5679.1,-551.62"/>
+</g>
+<!-- cubic_bad787c53fa02a5559fe570238fdb23a -->
+<g id="node16" class="node">
+<title>cubic_bad787c53fa02a5559fe570238fdb23a</title>
+<ellipse fill="none" stroke="black" cx="5810.6" cy="-594" rx="69.1" ry="18"/>
+<text text-anchor="middle" x="5810.6" y="-589.33" font-family="Times,serif" font-size="14.00">cubic=True</text>
+</g>
+<!-- cubic_bad787c53fa02a5559fe570238fdb23a&#45;&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7 -->
+<g id="edge15" class="edge">
+<title>cubic_bad787c53fa02a5559fe570238fdb23a-&gt;structure_f4511b90f1d10b2338ab6a9d2263a4f7</title>
+<path fill="none" stroke="black" d="M5780.64,-577.46C5762.52,-568.07 5739.1,-555.92 5718.97,-545.49"/>
+<polygon fill="black" stroke="black" points="5720.63,-542.4 5710.14,-540.91 5717.4,-548.62 5720.63,-542.4"/>
+</g>
+<!-- calculation_77b75a01e65d83962d14fa8a882d6c34 -->
+<g id="node17" class="node">
+<title>calculation_77b75a01e65d83962d14fa8a882d6c34</title>
+<ellipse fill="none" stroke="black" cx="6239.6" cy="-522" rx="113.29" ry="18"/>
+<text text-anchor="middle" x="6239.6" y="-517.33" font-family="Times,serif" font-size="14.00">calculation=vc-relax</text>
+</g>
+<!-- calculation_77b75a01e65d83962d14fa8a882d6c34&#45;&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="edge16" class="edge">
+<title>calculation_77b75a01e65d83962d14fa8a882d6c34-&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<path fill="none" stroke="black" d="M6237.13,-503.7C6236.08,-496.32 6234.82,-487.52 6233.64,-479.25"/>
+<polygon fill="black" stroke="black" points="6237.14,-479.01 6232.26,-469.6 6230.21,-480 6237.14,-479.01"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa -->
+<g id="node18" class="node">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa</title>
+<ellipse fill="none" stroke="black" cx="4344.6" cy="-522" rx="80.14" ry="18"/>
+<text text-anchor="middle" x="4344.6" y="-517.33" font-family="Times,serif" font-size="14.00">kpts=[3, 3, 3]</text>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="edge17" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_b79b9897515efc8480fbae676047ff18</title>
+<path fill="none" stroke="black" d="M4264.16,-520.8C3939.23,-519.71 2722.69,-512.67 2340.6,-468 2122.34,-442.48 1978.85,-513.5 1867.6,-324 1859.5,-310.2 1856.63,-299.65 1867.6,-288 1877.85,-277.12 2200.36,-260.03 2453.98,-248.22"/>
+<polygon fill="black" stroke="black" points="2453.91,-251.72 2463.73,-247.76 2453.58,-244.73 2453.91,-251.72"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="edge18" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<path fill="none" stroke="black" d="M4423.21,-518.12C4639.66,-510.2 5262.68,-487.36 5780.6,-468 5821.12,-466.49 5863.7,-464.88 5905.82,-463.3"/>
+<polygon fill="black" stroke="black" points="5905.73,-466.8 5915.59,-462.93 5905.47,-459.81 5905.73,-466.8"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="edge19" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<path fill="none" stroke="black" d="M4424.32,-519.45C4691.58,-514.04 5545.79,-494.8 5666.6,-468 5707.05,-459.03 5712.44,-442.18 5752.6,-432 5907.61,-392.7 5951.87,-415.38 6110.6,-396 6333.9,-368.74 6464.28,-494 6611.6,-324 6622.08,-311.91 6622.69,-299.53 6611.6,-288 6611.05,-287.42 5981.23,-262.92 5581.84,-247.43"/>
+<polygon fill="black" stroke="black" points="5582.03,-243.94 5571.9,-247.05 5581.75,-250.93 5582.03,-243.94"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="edge20" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<path fill="none" stroke="black" d="M4264.19,-520.72C3863.96,-518.49 2099.64,-498.76 1938.6,-324 1927.76,-312.23 1927.4,-299.43 1938.6,-288 1973.88,-252.01 3702.22,-253.46 3752.6,-252 3794.81,-250.77 3839.26,-249.29 3883.07,-247.73"/>
+<polygon fill="black" stroke="black" points="3883.12,-251.23 3892.99,-247.37 3882.87,-244.23 3883.12,-251.23"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="edge21" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<path fill="none" stroke="black" d="M4264.3,-520.55C3875.98,-518.18 2202.3,-505.85 1972.6,-468 1835.75,-445.45 1440.68,-309.03 1289.97,-256.03"/>
+<polygon fill="black" stroke="black" points="1291.57,-252.89 1280.98,-252.87 1289.25,-259.49 1291.57,-252.89"/>
+</g>
+<!-- kpts_e961a9390797b0f6f8887a402ea3e9aa&#45;&gt;input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="edge22" class="edge">
+<title>kpts_e961a9390797b0f6f8887a402ea3e9aa-&gt;input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<path fill="none" stroke="black" d="M4424.28,-519.4C4711.6,-513.47 5680.87,-491.76 5742.6,-468 5765.86,-459.05 5762.35,-440.98 5785.6,-432 5879.17,-395.87 6600.93,-446.48 6687.6,-396 6737.98,-366.66 6766.52,-300.82 6779.32,-263.05"/>
+<polygon fill="black" stroke="black" points="6782.59,-264.33 6782.33,-253.74 6775.93,-262.18 6782.59,-264.33"/>
+</g>
+<!-- 1_5f04a7c65b988a18c77d5ae8cc16ae29 -->
+<g id="node29" class="node">
+<title>1_5f04a7c65b988a18c77d5ae8cc16ae29</title>
+<ellipse fill="none" stroke="black" cx="5186.6" cy="-162" rx="390.55" ry="18"/>
+<text text-anchor="middle" x="5186.6" y="-157.32" font-family="Times,serif" font-size="14.00">1=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6c850&gt;</text>
+</g>
+<!-- input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4&#45;&gt;1_5f04a7c65b988a18c77d5ae8cc16ae29 -->
+<g id="edge49" class="edge">
+<title>input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4-&gt;1_5f04a7c65b988a18c77d5ae8cc16ae29</title>
+<path fill="none" stroke="black" d="M5242.31,-215.7C5233.5,-207.37 5222.78,-197.22 5213.1,-188.07"/>
+<polygon fill="black" stroke="black" points="5215.71,-185.72 5206.04,-181.39 5210.9,-190.8 5215.71,-185.72"/>
+</g>
+<!-- 1_849b669eabd7fbb18fabf046a1615dc9 -->
+<g id="node30" class="node">
+<title>1_849b669eabd7fbb18fabf046a1615dc9</title>
+<ellipse fill="none" stroke="black" cx="5987.6" cy="-162" rx="392.13" ry="18"/>
+<text text-anchor="middle" x="5987.6" y="-157.32" font-family="Times,serif" font-size="14.00">1=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f8510250&gt;</text>
+</g>
+<!-- input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4&#45;&gt;1_849b669eabd7fbb18fabf046a1615dc9 -->
+<g id="edge50" class="edge">
+<title>input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4-&gt;1_849b669eabd7fbb18fabf046a1615dc9</title>
+<path fill="none" stroke="black" d="M5427.39,-216.94C5542.52,-205.85 5695.33,-191.14 5812.27,-179.88"/>
+<polygon fill="black" stroke="black" points="5812.34,-183.39 5821.96,-178.95 5811.67,-176.42 5812.34,-183.39"/>
+</g>
+<!-- 2_71845adb6150d68b3fbf57e3ca4908cf -->
+<g id="node32" class="node">
+<title>2_71845adb6150d68b3fbf57e3ca4908cf</title>
+<ellipse fill="none" stroke="black" cx="3592.6" cy="-162" rx="388.97" ry="18"/>
+<text text-anchor="middle" x="3592.6" y="-157.32" font-family="Times,serif" font-size="14.00">2=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6f710&gt;</text>
+</g>
+<!-- input_dict_028b50f8a655d5559b3b9530a319816d&#45;&gt;2_71845adb6150d68b3fbf57e3ca4908cf -->
+<g id="edge55" class="edge">
+<title>input_dict_028b50f8a655d5559b3b9530a319816d-&gt;2_71845adb6150d68b3fbf57e3ca4908cf</title>
+<path fill="none" stroke="black" d="M4054.61,-216.54C3961.19,-205.72 3839.04,-191.56 3743.81,-180.52"/>
+<polygon fill="black" stroke="black" points="3744.47,-177.08 3734.13,-179.4 3743.66,-184.03 3744.47,-177.08"/>
+</g>
+<!-- 2_421cb9cfc0e7fe91df40b043a069b4cb -->
+<g id="node33" class="node">
+<title>2_421cb9cfc0e7fe91df40b043a069b4cb</title>
+<ellipse fill="none" stroke="black" cx="4388.6" cy="-162" rx="388.97" ry="18"/>
+<text text-anchor="middle" x="4388.6" y="-157.32" font-family="Times,serif" font-size="14.00">2=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6f910&gt;</text>
+</g>
+<!-- input_dict_028b50f8a655d5559b3b9530a319816d&#45;&gt;2_421cb9cfc0e7fe91df40b043a069b4cb -->
+<g id="edge56" class="edge">
+<title>input_dict_028b50f8a655d5559b3b9530a319816d-&gt;2_421cb9cfc0e7fe91df40b043a069b4cb</title>
+<path fill="none" stroke="black" d="M4244.06,-215.7C4270.14,-206.19 4302.7,-194.32 4330.31,-184.25"/>
+<polygon fill="black" stroke="black" points="4331.4,-187.58 4339.6,-180.87 4329.01,-181 4331.4,-187.58"/>
+</g>
+<!-- 3_6adfa852c86d5f38b6bd784c1fef94b3 -->
+<g id="node35" class="node">
+<title>3_6adfa852c86d5f38b6bd784c1fef94b3</title>
+<ellipse fill="none" stroke="black" cx="391.6" cy="-162" rx="391.6" ry="18"/>
+<text text-anchor="middle" x="391.6" y="-157.32" font-family="Times,serif" font-size="14.00">3=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6d6d0&gt;</text>
+</g>
+<!-- input_dict_6b0354c0ae3f2aec5766bb7b6511e13d&#45;&gt;3_6adfa852c86d5f38b6bd784c1fef94b3 -->
+<g id="edge61" class="edge">
+<title>input_dict_6b0354c0ae3f2aec5766bb7b6511e13d-&gt;3_6adfa852c86d5f38b6bd784c1fef94b3</title>
+<path fill="none" stroke="black" d="M1042.57,-217.31C906.9,-205.99 724.19,-190.75 586.88,-179.29"/>
+<polygon fill="black" stroke="black" points="587.17,-175.8 576.91,-178.46 586.59,-182.78 587.17,-175.8"/>
+</g>
+<!-- 3_e4b6baaf825e550ca7b8eec4b80d1c20 -->
+<g id="node36" class="node">
+<title>3_e4b6baaf825e550ca7b8eec4b80d1c20</title>
+<ellipse fill="none" stroke="black" cx="1192.6" cy="-162" rx="391.08" ry="18"/>
+<text text-anchor="middle" x="1192.6" y="-157.32" font-family="Times,serif" font-size="14.00">3=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6e7d0&gt;</text>
+</g>
+<!-- input_dict_6b0354c0ae3f2aec5766bb7b6511e13d&#45;&gt;3_e4b6baaf825e550ca7b8eec4b80d1c20 -->
+<g id="edge62" class="edge">
+<title>input_dict_6b0354c0ae3f2aec5766bb7b6511e13d-&gt;3_e4b6baaf825e550ca7b8eec4b80d1c20</title>
+<path fill="none" stroke="black" d="M1221.21,-215.7C1217.02,-207.98 1211.99,-198.71 1207.32,-190.11"/>
+<polygon fill="black" stroke="black" points="1210.46,-188.55 1202.61,-181.43 1204.3,-191.89 1210.46,-188.55"/>
+</g>
+<!-- 4_87d9553d8556fcd3992214b39494e075 -->
+<g id="node38" class="node">
+<title>4_87d9553d8556fcd3992214b39494e075</title>
+<ellipse fill="none" stroke="black" cx="6787.6" cy="-162" rx="390.02" ry="18"/>
+<text text-anchor="middle" x="6787.6" y="-157.32" font-family="Times,serif" font-size="14.00">4=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6ca90&gt;</text>
+</g>
+<!-- input_dict_ca5e34b9c72317406762f3747541a3e4&#45;&gt;4_87d9553d8556fcd3992214b39494e075 -->
+<g id="edge67" class="edge">
+<title>input_dict_ca5e34b9c72317406762f3747541a3e4-&gt;4_87d9553d8556fcd3992214b39494e075</title>
+<path fill="none" stroke="black" d="M6787.6,-215.7C6787.6,-208.41 6787.6,-199.73 6787.6,-191.54"/>
+<polygon fill="black" stroke="black" points="6791.1,-191.62 6787.6,-181.62 6784.1,-191.62 6791.1,-191.62"/>
+</g>
+<!-- 4_6febd2215a686d37f0246e36e9a33336 -->
+<g id="node39" class="node">
+<title>4_6febd2215a686d37f0246e36e9a33336</title>
+<ellipse fill="none" stroke="black" cx="7586.6" cy="-162" rx="390.55" ry="18"/>
+<text text-anchor="middle" x="7586.6" y="-157.32" font-family="Times,serif" font-size="14.00">4=&lt;pyiron_base.project.delayed.DelayedObject object at 0x7f55f7a6cdd0&gt;</text>
+</g>
+<!-- input_dict_ca5e34b9c72317406762f3747541a3e4&#45;&gt;4_6febd2215a686d37f0246e36e9a33336 -->
+<g id="edge68" class="edge">
+<title>input_dict_ca5e34b9c72317406762f3747541a3e4-&gt;4_6febd2215a686d37f0246e36e9a33336</title>
+<path fill="none" stroke="black" d="M6967.91,-217.2C7096.26,-205.96 7268.34,-190.88 7398.44,-179.49"/>
+<polygon fill="black" stroke="black" points="7398.54,-182.99 7408.19,-178.63 7397.93,-176.02 7398.54,-182.99"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10 -->
+<g id="node23" class="node">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10</title>
+<ellipse fill="none" stroke="black" cx="6682.6" cy="-522" rx="291.64" ry="18"/>
+<text text-anchor="middle" x="6682.6" y="-517.33" font-family="Times,serif" font-size="14.00">pseudopotentials={'Al': 'Al.pbe-n-kjpaw_psl.1.0.0.UPF'}</text>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="edge23" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_b79b9897515efc8480fbae676047ff18</title>
+<path fill="none" stroke="black" d="M6474.14,-509.08C6436.68,-507.19 6397.99,-505.4 6361.6,-504 5693.46,-478.32 5525.79,-492.47 4857.6,-468 4533.09,-456.11 2162.49,-559.21 1938.6,-324 1927.57,-312.41 1927.66,-299.67 1938.6,-288 1947.93,-278.05 2239.42,-261.01 2471.79,-248.94"/>
+<polygon fill="black" stroke="black" points="2471.85,-252.44 2481.65,-248.43 2471.48,-245.45 2471.85,-252.44"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="edge24" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<path fill="none" stroke="black" d="M6577.54,-504.76C6509.56,-494.26 6420.86,-480.55 6350.03,-469.61"/>
+<polygon fill="black" stroke="black" points="6350.74,-466.18 6340.32,-468.11 6349.67,-473.1 6350.74,-466.18"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="edge25" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<path fill="none" stroke="black" d="M6692.56,-503.98C6697.87,-493.89 6703.87,-480.64 6706.6,-468 6709.98,-452.36 6710.49,-447.52 6706.6,-432 6688.96,-361.6 6691.12,-326.5 6629.6,-288 6628.91,-287.57 5987.72,-262.89 5583.21,-247.37"/>
+<polygon fill="black" stroke="black" points="5583.54,-243.88 5573.42,-246.99 5583.28,-250.87 5583.54,-243.88"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="edge26" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<path fill="none" stroke="black" d="M6684,-503.78C6684.81,-485.22 6684.06,-455.22 6673.6,-432 6637.82,-352.57 6620.04,-323.76 6540.6,-288 6453.25,-248.68 4912.37,-254.31 4816.6,-252 4732.9,-249.98 4642.84,-247.62 4558.01,-245.31"/>
+<polygon fill="black" stroke="black" points="4558.22,-241.81 4548.13,-245.04 4558.03,-248.81 4558.22,-241.81"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="edge27" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<path fill="none" stroke="black" d="M6478.03,-508.82C6439.37,-506.9 6399.25,-505.17 6361.6,-504 5916.69,-490.23 2798.42,-513.27 2355.6,-468 2149.86,-446.97 1539.23,-307.12 1314.68,-254.75"/>
+<polygon fill="black" stroke="black" points="1315.65,-251.38 1305.12,-252.52 1314.06,-258.2 1315.65,-251.38"/>
+</g>
+<!-- pseudopotentials_453cdcc0d627a851e196cd899d956d10&#45;&gt;input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="edge28" class="edge">
+<title>pseudopotentials_453cdcc0d627a851e196cd899d956d10-&gt;input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<path fill="none" stroke="black" d="M6709.48,-503.74C6721.85,-494.52 6735.71,-482.15 6744.6,-468 6785.17,-403.41 6789.53,-310.14 6788.85,-263.63"/>
+<polygon fill="black" stroke="black" points="6792.35,-263.76 6788.6,-253.85 6785.35,-263.93 6792.35,-263.76"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9 -->
+<g id="node24" class="node">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9</title>
+<ellipse fill="none" stroke="black" cx="2558.6" cy="-522" rx="88.56" ry="18"/>
+<text text-anchor="middle" x="2558.6" y="-517.33" font-family="Times,serif" font-size="14.00">smearing=0.02</text>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="edge29" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_b79b9897515efc8480fbae676047ff18</title>
+<path fill="none" stroke="black" d="M2469.76,-521.83C2270.53,-522.75 1801.7,-519.37 1753.6,-468 1742.67,-456.32 1751.54,-447.87 1753.6,-432 1762.12,-366.36 1740.29,-329.82 1791.6,-288 1804.42,-277.55 2167.59,-259.87 2444.63,-247.82"/>
+<polygon fill="black" stroke="black" points="2444.75,-251.32 2454.59,-247.39 2444.45,-244.33 2444.75,-251.32"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da -->
+<g id="edge30" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_1aae906a29f4a48f3eddf8e6b8ad45da</title>
+<path fill="none" stroke="black" d="M2646.93,-520.12C3021.44,-516.27 4515.33,-499.63 5742.6,-468 5794.81,-466.65 5850.16,-464.97 5904.1,-463.19"/>
+<polygon fill="black" stroke="black" points="5904.19,-466.69 5914.07,-462.85 5903.96,-459.69 5904.19,-466.69"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="edge31" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<path fill="none" stroke="black" d="M2647.08,-520.26C3041.35,-516.8 4640.75,-500.98 5141.6,-468 5574,-439.53 5679.32,-402.08 6110.6,-360 6158.32,-355.34 6508.14,-359.29 6540.6,-324 6551.43,-312.22 6551.68,-299.55 6540.6,-288 6538.53,-285.84 5958.03,-262.52 5579.6,-247.55"/>
+<polygon fill="black" stroke="black" points="5579.82,-244.05 5569.69,-247.15 5579.55,-251.05 5579.82,-244.05"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="edge32" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<path fill="none" stroke="black" d="M2471.53,-518.35C2317.77,-512.92 2010.73,-498.38 1972.6,-468 1907.93,-416.48 1867.71,-347.04 1925.6,-288 1961.14,-251.76 3701.86,-253.47 3752.6,-252 3794.81,-250.78 3839.26,-249.3 3883.07,-247.73"/>
+<polygon fill="black" stroke="black" points="3883.12,-251.23 3892.99,-247.38 3882.87,-244.24 3883.12,-251.23"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="edge33" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<path fill="none" stroke="black" d="M2470.62,-519.27C2289.19,-515.06 1879.16,-501.98 1743.6,-468 1555.74,-420.9 1351.61,-307.29 1268.75,-258.21"/>
+<polygon fill="black" stroke="black" points="1270.7,-255.31 1260.32,-253.19 1267.12,-261.32 1270.7,-255.31"/>
+</g>
+<!-- smearing_64a632a7e5bfbb7d0c6face9b82082a9&#45;&gt;input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="edge34" class="edge">
+<title>smearing_64a632a7e5bfbb7d0c6face9b82082a9-&gt;input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<path fill="none" stroke="black" d="M2647.13,-520.43C3060.53,-517.58 4803.79,-503.63 5347.6,-468 5419.12,-463.31 6561.4,-346.03 6629.6,-324 6675.83,-309.07 6723.73,-279.8 6754.49,-258.91"/>
+<polygon fill="black" stroke="black" points="6756.37,-261.87 6762.61,-253.31 6752.39,-256.11 6756.37,-261.87"/>
+</g>
+<!-- working_directory_a17ade9a563d8dcadb655fb2e1c743a7 -->
+<g id="node25" class="node">
+<title>working_directory_a17ade9a563d8dcadb655fb2e1c743a7</title>
+<ellipse fill="none" stroke="black" cx="4999.6" cy="-450" rx="132.76" ry="18"/>
+<text text-anchor="middle" x="4999.6" y="-445.32" font-family="Times,serif" font-size="14.00">working_directory=mini</text>
+</g>
+<!-- working_directory_a17ade9a563d8dcadb655fb2e1c743a7&#45;&gt;structure_04c4f17a3d0cb1d2763d446a6995cdc1 -->
+<g id="edge35" class="edge">
+<title>working_directory_a17ade9a563d8dcadb655fb2e1c743a7-&gt;structure_04c4f17a3d0cb1d2763d446a6995cdc1</title>
+<path fill="none" stroke="black" d="M4999.6,-431.7C4999.6,-424.41 4999.6,-415.73 4999.6,-407.54"/>
+<polygon fill="black" stroke="black" points="5003.1,-407.62 4999.6,-397.62 4996.1,-407.62 5003.1,-407.62"/>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781 -->
+<g id="node26" class="node">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781</title>
+<ellipse fill="none" stroke="black" cx="4141.6" cy="-378" rx="190.63" ry="18"/>
+<text text-anchor="middle" x="4141.6" y="-373.32" font-family="Times,serif" font-size="14.00">strain_lst=[0.9, 0.95, 1.0, 1.05, 1.1]</text>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781&#45;&gt;structure_d7ca004e3708134e7a300a68f4025259 -->
+<g id="edge36" class="edge">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781-&gt;structure_d7ca004e3708134e7a300a68f4025259</title>
+<path fill="none" stroke="black" d="M3999.4,-365.71C3854.96,-354.25 3629.78,-336.38 3465.78,-323.36"/>
+<polygon fill="black" stroke="black" points="3466.32,-319.9 3456.08,-322.59 3465.77,-326.87 3466.32,-319.9"/>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781&#45;&gt;structure_512e4d45120ddba0cc1f8ad006094ae3 -->
+<g id="edge37" class="edge">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781-&gt;structure_512e4d45120ddba0cc1f8ad006094ae3</title>
+<path fill="none" stroke="black" d="M4295.19,-367.01C4473.87,-355.38 4770.95,-336.06 4979.58,-322.48"/>
+<polygon fill="black" stroke="black" points="4979.74,-325.98 4989.49,-321.84 4979.29,-319 4979.74,-325.98"/>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781&#45;&gt;structure_e32b45d06adef4e6c12b7b39f96b32c5 -->
+<g id="edge38" class="edge">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781-&gt;structure_e32b45d06adef4e6c12b7b39f96b32c5</title>
+<path fill="none" stroke="black" d="M4141.6,-359.7C4141.6,-352.41 4141.6,-343.73 4141.6,-335.54"/>
+<polygon fill="black" stroke="black" points="4145.1,-335.62 4141.6,-325.62 4138.1,-335.62 4145.1,-335.62"/>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781&#45;&gt;structure_5a33de3b4baeba31cb9059f2ebde7093 -->
+<g id="edge39" class="edge">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781-&gt;structure_5a33de3b4baeba31cb9059f2ebde7093</title>
+<path fill="none" stroke="black" d="M3968.94,-370.14C3673.57,-358.42 3067.16,-334.34 2694.41,-319.54"/>
+<polygon fill="black" stroke="black" points="2694.82,-316.05 2684.68,-319.15 2694.54,-323.05 2694.82,-316.05"/>
+</g>
+<!-- strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781&#45;&gt;structure_e166ec187b983faaf9f6c4a8f4f9d6c1 -->
+<g id="edge40" class="edge">
+<title>strain_lst_2d8c38dac8f1aeeeecfa3c0b1cc8a781-&gt;structure_e166ec187b983faaf9f6c4a8f4f9d6c1</title>
+<path fill="none" stroke="black" d="M4312.52,-369.72C4387.95,-366.59 4477.69,-362.97 4558.6,-360 5047.42,-342.04 5169.76,-341.42 5658.6,-324 5698.41,-322.58 5740.23,-321.04 5781.61,-319.48"/>
+<polygon fill="black" stroke="black" points="5781.61,-322.98 5791.47,-319.11 5781.34,-315.99 5781.61,-322.98"/>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83 -->
+<g id="node27" class="node">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83</title>
+<ellipse fill="none" stroke="black" cx="4679.6" cy="-306" rx="88.04" ry="18"/>
+<text text-anchor="middle" x="4679.6" y="-301.32" font-family="Times,serif" font-size="14.00">calculation=scf</text>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83&#45;&gt;input_dict_b79b9897515efc8480fbae676047ff18 -->
+<g id="edge41" class="edge">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83-&gt;input_dict_b79b9897515efc8480fbae676047ff18</title>
+<path fill="none" stroke="black" d="M4617.69,-292.78C4606.07,-290.87 4594,-289.16 4582.6,-288 4511.83,-280.81 3643.27,-257.66 3129.99,-244.46"/>
+<polygon fill="black" stroke="black" points="3130.29,-240.97 3120.2,-244.21 3130.11,-247.96 3130.29,-240.97"/>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83&#45;&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4 -->
+<g id="edge42" class="edge">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83-&gt;input_dict_56a57a93dc2c1f00ccd1b44d38dfe7d4</title>
+<path fill="none" stroke="black" d="M4743.42,-293.21C4754.47,-291.35 4765.85,-289.53 4776.6,-288 4876.12,-273.85 4987.62,-261.41 5078.49,-252.14"/>
+<polygon fill="black" stroke="black" points="5078.65,-255.64 5088.24,-251.15 5077.94,-248.68 5078.65,-255.64"/>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83&#45;&gt;input_dict_028b50f8a655d5559b3b9530a319816d -->
+<g id="edge43" class="edge">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83-&gt;input_dict_028b50f8a655d5559b3b9530a319816d</title>
+<path fill="none" stroke="black" d="M4615.22,-293.37C4604.34,-291.51 4593.16,-289.65 4582.6,-288 4501.71,-275.36 4411.02,-262.83 4337.89,-253.12"/>
+<polygon fill="black" stroke="black" points="4338.64,-249.69 4328.27,-251.85 4337.72,-256.63 4338.64,-249.69"/>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83&#45;&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d -->
+<g id="edge44" class="edge">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83-&gt;input_dict_6b0354c0ae3f2aec5766bb7b6511e13d</title>
+<path fill="none" stroke="black" d="M4618.23,-292.71C4606.45,-290.78 4594.18,-289.08 4582.6,-288 3939.12,-228.02 2320.67,-268.36 1674.6,-252 1631.15,-250.9 1585.31,-249.46 1540.25,-247.88"/>
+<polygon fill="black" stroke="black" points="1540.44,-244.39 1530.32,-247.53 1540.19,-251.38 1540.44,-244.39"/>
+</g>
+<!-- calculation_bc91e0ce7227762f507f47b85f2f0a83&#45;&gt;input_dict_ca5e34b9c72317406762f3747541a3e4 -->
+<g id="edge45" class="edge">
+<title>calculation_bc91e0ce7227762f507f47b85f2f0a83-&gt;input_dict_ca5e34b9c72317406762f3747541a3e4</title>
+<path fill="none" stroke="black" d="M4741.25,-292.76C4752.94,-290.85 4765.12,-289.13 4776.6,-288 5123.46,-253.82 5996.23,-262.68 6344.6,-252 6386.18,-250.73 6429.94,-249.23 6473.12,-247.67"/>
+<polygon fill="black" stroke="black" points="6473,-251.17 6482.87,-247.31 6472.75,-244.18 6473,-251.17"/>
+</g>
+<!-- working_directory_2e9abb255f1a31f7d29b4451ad422add -->
+<g id="node28" class="node">
+<title>working_directory_2e9abb255f1a31f7d29b4451ad422add</title>
+<ellipse fill="none" stroke="black" cx="2154.6" cy="-234" rx="151.17" ry="18"/>
+<text text-anchor="middle" x="2154.6" y="-229.32" font-family="Times,serif" font-size="14.00">working_directory=strain_0</text>
+</g>
+<!-- working_directory_2e9abb255f1a31f7d29b4451ad422add&#45;&gt;0_c67ca853ba2351e69f89f037ea41b0b9 -->
+<g id="edge46" class="edge">
+<title>working_directory_2e9abb255f1a31f7d29b4451ad422add-&gt;0_c67ca853ba2351e69f89f037ea41b0b9</title>
+<path fill="none" stroke="black" d="M2115.8,-216.23C2094.04,-206.83 2066.65,-195 2043.23,-184.88"/>
+<polygon fill="black" stroke="black" points="2044.74,-181.72 2034.17,-180.96 2041.96,-188.14 2044.74,-181.72"/>
+</g>
+<!-- working_directory_2e9abb255f1a31f7d29b4451ad422add&#45;&gt;0_38914fa97ea86fd0f2a736e0906d8d46 -->
+<g id="edge47" class="edge">
+<title>working_directory_2e9abb255f1a31f7d29b4451ad422add-&gt;0_38914fa97ea86fd0f2a736e0906d8d46</title>
+<path fill="none" stroke="black" d="M2263,-221.13C2365,-209.95 2518.96,-193.09 2634.81,-180.4"/>
+<polygon fill="black" stroke="black" points="2635.19,-183.87 2644.74,-179.31 2634.42,-176.92 2635.19,-183.87"/>
+</g>
+<!-- 1_5f04a7c65b988a18c77d5ae8cc16ae29&#45;&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="edge48" class="edge">
+<title>1_5f04a7c65b988a18c77d5ae8cc16ae29-&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<path fill="none" stroke="black" d="M4907.3,-149.09C4614.37,-136.59 4155.32,-117.01 3852.46,-104.09"/>
+<polygon fill="black" stroke="black" points="3852.95,-100.61 3842.81,-103.68 3852.66,-107.6 3852.95,-100.61"/>
+</g>
+<!-- 1_849b669eabd7fbb18fabf046a1615dc9&#45;&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="edge74" class="edge">
+<title>1_849b669eabd7fbb18fabf046a1615dc9-&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<path fill="none" stroke="black" d="M5714.87,-148.71C5439.78,-136.31 5016.27,-117.22 4732.52,-104.43"/>
+<polygon fill="black" stroke="black" points="4732.88,-100.94 4722.73,-103.99 4732.57,-107.93 4732.88,-100.94"/>
+</g>
+<!-- working_directory_5423d2cc67129a6d0383af6f347df5bd -->
+<g id="node31" class="node">
+<title>working_directory_5423d2cc67129a6d0383af6f347df5bd</title>
+<ellipse fill="none" stroke="black" cx="5864.6" cy="-234" rx="151.17" ry="18"/>
+<text text-anchor="middle" x="5864.6" y="-229.32" font-family="Times,serif" font-size="14.00">working_directory=strain_1</text>
+</g>
+<!-- working_directory_5423d2cc67129a6d0383af6f347df5bd&#45;&gt;1_5f04a7c65b988a18c77d5ae8cc16ae29 -->
+<g id="edge52" class="edge">
+<title>working_directory_5423d2cc67129a6d0383af6f347df5bd-&gt;1_5f04a7c65b988a18c77d5ae8cc16ae29</title>
+<path fill="none" stroke="black" d="M5754.87,-221.28C5738.03,-219.5 5720.85,-217.69 5704.6,-216 5587.93,-203.83 5456.45,-190.38 5355.15,-180.08"/>
+<polygon fill="black" stroke="black" points="5355.69,-176.62 5345.39,-179.09 5354.98,-183.58 5355.69,-176.62"/>
+</g>
+<!-- working_directory_5423d2cc67129a6d0383af6f347df5bd&#45;&gt;1_849b669eabd7fbb18fabf046a1615dc9 -->
+<g id="edge53" class="edge">
+<title>working_directory_5423d2cc67129a6d0383af6f347df5bd-&gt;1_849b669eabd7fbb18fabf046a1615dc9</title>
+<path fill="none" stroke="black" d="M5894.69,-215.88C5910.5,-206.88 5930.11,-195.72 5947.22,-185.98"/>
+<polygon fill="black" stroke="black" points="5948.69,-189.17 5955.65,-181.18 5945.23,-183.09 5948.69,-189.17"/>
+</g>
+<!-- 2_71845adb6150d68b3fbf57e3ca4908cf&#45;&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="edge54" class="edge">
+<title>2_71845adb6150d68b3fbf57e3ca4908cf-&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<path fill="none" stroke="black" d="M3580.98,-143.7C3575.69,-135.81 3569.31,-126.3 3563.43,-117.55"/>
+<polygon fill="black" stroke="black" points="3566.41,-115.71 3557.93,-109.36 3560.6,-119.61 3566.41,-115.71"/>
+</g>
+<!-- 2_421cb9cfc0e7fe91df40b043a069b4cb&#45;&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="edge75" class="edge">
+<title>2_421cb9cfc0e7fe91df40b043a069b4cb-&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<path fill="none" stroke="black" d="M4399.97,-143.7C4405.15,-135.81 4411.4,-126.3 4417.16,-117.55"/>
+<polygon fill="black" stroke="black" points="4419.96,-119.65 4422.53,-109.37 4414.11,-115.8 4419.96,-119.65"/>
+</g>
+<!-- working_directory_cc646e064ddfc4b2811aba3d86d27992 -->
+<g id="node34" class="node">
+<title>working_directory_cc646e064ddfc4b2811aba3d86d27992</title>
+<ellipse fill="none" stroke="black" cx="3592.6" cy="-234" rx="151.17" ry="18"/>
+<text text-anchor="middle" x="3592.6" y="-229.32" font-family="Times,serif" font-size="14.00">working_directory=strain_2</text>
+</g>
+<!-- working_directory_cc646e064ddfc4b2811aba3d86d27992&#45;&gt;2_71845adb6150d68b3fbf57e3ca4908cf -->
+<g id="edge58" class="edge">
+<title>working_directory_cc646e064ddfc4b2811aba3d86d27992-&gt;2_71845adb6150d68b3fbf57e3ca4908cf</title>
+<path fill="none" stroke="black" d="M3592.6,-215.7C3592.6,-208.41 3592.6,-199.73 3592.6,-191.54"/>
+<polygon fill="black" stroke="black" points="3596.1,-191.62 3592.6,-181.62 3589.1,-191.62 3596.1,-191.62"/>
+</g>
+<!-- working_directory_cc646e064ddfc4b2811aba3d86d27992&#45;&gt;2_421cb9cfc0e7fe91df40b043a069b4cb -->
+<g id="edge59" class="edge">
+<title>working_directory_cc646e064ddfc4b2811aba3d86d27992-&gt;2_421cb9cfc0e7fe91df40b043a069b4cb</title>
+<path fill="none" stroke="black" d="M3701.01,-221.14C3718.26,-219.36 3735.92,-217.58 3752.6,-216 3896.48,-202.36 4058.86,-188.86 4183.52,-178.9"/>
+<polygon fill="black" stroke="black" points="4183.51,-182.41 4193.2,-178.13 4182.95,-175.44 4183.51,-182.41"/>
+</g>
+<!-- 3_6adfa852c86d5f38b6bd784c1fef94b3&#45;&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="edge60" class="edge">
+<title>3_6adfa852c86d5f38b6bd784c1fef94b3-&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<path fill="none" stroke="black" d="M662.82,-148.65C706.22,-146.92 750.64,-145.29 792.6,-144 1616.78,-118.6 2580.14,-103.37 3120.96,-96.13"/>
+<polygon fill="black" stroke="black" points="3121,-99.63 3130.95,-96 3120.91,-92.63 3121,-99.63"/>
+</g>
+<!-- 3_e4b6baaf825e550ca7b8eec4b80d1c20&#45;&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="edge76" class="edge">
+<title>3_e4b6baaf825e550ca7b8eec4b80d1c20-&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<path fill="none" stroke="black" d="M1461.52,-148.56C1505.32,-146.82 1550.22,-145.22 1592.6,-144 2658.06,-113.37 2925.08,-136.39 3990.6,-108 4033.7,-106.85 4079.14,-105.39 4123.85,-103.82"/>
+<polygon fill="black" stroke="black" points="4123.81,-107.32 4133.68,-103.47 4123.57,-100.33 4123.81,-107.32"/>
+</g>
+<!-- working_directory_e27768d53df6cd8dc245c52054ecf31f -->
+<g id="node37" class="node">
+<title>working_directory_e27768d53df6cd8dc245c52054ecf31f</title>
+<ellipse fill="none" stroke="black" cx="1834.6" cy="-234" rx="151.17" ry="18"/>
+<text text-anchor="middle" x="1834.6" y="-229.32" font-family="Times,serif" font-size="14.00">working_directory=strain_3</text>
+</g>
+<!-- working_directory_e27768d53df6cd8dc245c52054ecf31f&#45;&gt;3_6adfa852c86d5f38b6bd784c1fef94b3 -->
+<g id="edge64" class="edge">
+<title>working_directory_e27768d53df6cd8dc245c52054ecf31f-&gt;3_6adfa852c86d5f38b6bd784c1fef94b3</title>
+<path fill="none" stroke="black" d="M1728.83,-220.78C1710.76,-218.97 1692.15,-217.29 1674.6,-216 1283.33,-187.26 1184.59,-196.31 792.6,-180 757.19,-178.53 720.02,-176.97 683.19,-175.42"/>
+<polygon fill="black" stroke="black" points="683.42,-171.92 673.28,-175 683.13,-178.92 683.42,-171.92"/>
+</g>
+<!-- working_directory_e27768d53df6cd8dc245c52054ecf31f&#45;&gt;3_e4b6baaf825e550ca7b8eec4b80d1c20 -->
+<g id="edge65" class="edge">
+<title>working_directory_e27768d53df6cd8dc245c52054ecf31f-&gt;3_e4b6baaf825e550ca7b8eec4b80d1c20</title>
+<path fill="none" stroke="black" d="M1725.69,-221.13C1623.02,-209.93 1467.96,-193.02 1351.49,-180.32"/>
+<polygon fill="black" stroke="black" points="1352.17,-176.88 1341.85,-179.27 1351.41,-183.84 1352.17,-176.88"/>
+</g>
+<!-- 4_87d9553d8556fcd3992214b39494e075&#45;&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f -->
+<g id="edge66" class="edge">
+<title>4_87d9553d8556fcd3992214b39494e075-&gt;volume_lst_105e463ce9fc4dadfb68786635ea6c9f</title>
+<path fill="none" stroke="black" d="M6519.36,-148.56C6475.66,-146.82 6430.88,-145.22 6388.6,-144 5323.15,-113.31 5056.12,-136.35 3990.6,-108 3947.5,-106.85 3902.05,-105.4 3857.33,-103.83"/>
+<polygon fill="black" stroke="black" points="3857.61,-100.33 3847.49,-103.48 3857.36,-107.33 3857.61,-100.33"/>
+</g>
+<!-- 4_6febd2215a686d37f0246e36e9a33336&#45;&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4 -->
+<g id="edge77" class="edge">
+<title>4_6febd2215a686d37f0246e36e9a33336-&gt;energy_lst_1e7a3d9fd1e11762af4b962d83b084c4</title>
+<path fill="none" stroke="black" d="M7316.06,-148.65C7272.77,-146.92 7228.46,-145.29 7186.6,-144 6362.13,-118.54 5398.33,-103.32 4857.92,-96.1"/>
+<polygon fill="black" stroke="black" points="4857.98,-92.6 4847.94,-95.97 4857.89,-99.6 4857.98,-92.6"/>
+</g>
+<!-- working_directory_72bba39b22d2b7ce154d37c7e8c658b7 -->
+<g id="node40" class="node">
+<title>working_directory_72bba39b22d2b7ce154d37c7e8c658b7</title>
+<ellipse fill="none" stroke="black" cx="6184.6" cy="-234" rx="151.17" ry="18"/>
+<text text-anchor="middle" x="6184.6" y="-229.32" font-family="Times,serif" font-size="14.00">working_directory=strain_4</text>
+</g>
+<!-- working_directory_72bba39b22d2b7ce154d37c7e8c658b7&#45;&gt;4_87d9553d8556fcd3992214b39494e075 -->
+<g id="edge70" class="edge">
+<title>working_directory_72bba39b22d2b7ce154d37c7e8c658b7-&gt;4_87d9553d8556fcd3992214b39494e075</title>
+<path fill="none" stroke="black" d="M6289.98,-220.77C6385.76,-209.65 6528.19,-193.11 6636.16,-180.58"/>
+<polygon fill="black" stroke="black" points="6636.45,-184.07 6645.98,-179.44 6635.65,-177.12 6636.45,-184.07"/>
+</g>
+<!-- working_directory_72bba39b22d2b7ce154d37c7e8c658b7&#45;&gt;4_6febd2215a686d37f0246e36e9a33336 -->
+<g id="edge71" class="edge">
+<title>working_directory_72bba39b22d2b7ce154d37c7e8c658b7-&gt;4_6febd2215a686d37f0246e36e9a33336</title>
+<path fill="none" stroke="black" d="M6290.38,-220.81C6308.45,-219 6327.05,-217.31 6344.6,-216 6347.55,-215.78 6929.31,-190.99 7295.47,-175.4"/>
+<polygon fill="black" stroke="black" points="7295.43,-178.9 7305.27,-174.98 7295.13,-171.91 7295.43,-178.9"/>
+</g>
+<!-- energy_lst_1e7a3d9fd1e11762af4b962d83b084c4&#45;&gt;create_function_job_8ceb3031e9d0fd46bd383df696f06138 -->
+<g id="edge72" class="edge">
+<title>energy_lst_1e7a3d9fd1e11762af4b962d83b084c4-&gt;create_function_job_8ceb3031e9d0fd46bd383df696f06138</title>
+<path fill="none" stroke="black" d="M4327.16,-72.1C4261.26,-61.73 4176.77,-48.44 4108.81,-37.75"/>
+<polygon fill="black" stroke="black" points="4109.54,-34.32 4099.12,-36.23 4108.45,-41.24 4109.54,-34.32"/>
+</g>
+</g>
+</svg>

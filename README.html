@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Workflow Definition &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Definition" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="simple.html">Simple Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida_simple.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow_simple.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base_simple.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida_qe.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow_qe.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base_qe.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida_nfdi.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow_nfdi.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base_nfdi.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Workflow Definition</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example">Simple Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nfdi4ing-scientific-workflow-requirements">NFDI4Ing Scientific Workflow Requirements</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-workflow-definition">
+<h1>Python Workflow Definition<a class="headerlink" href="#python-workflow-definition" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://github.com/pyiron-dev/python-workflow-definition/actions/workflows/pipeline.yml"><img alt="Pipeline" src="https://github.com/pyiron-dev/python-workflow-definition/actions/workflows/pipeline.yml/badge.svg" /></a>
+<a class="reference external" href="https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
+<p>In the Python Workflow Definition (PWD) each node represents a Python function, with the edges defining the connection
+between input and output of the different Python functions.</p>
+</section>
+<section id="format">
+<h2>Format<a class="headerlink" href="#format" title="Link to this heading">#</a></h2>
+<p>Each workflow consists of three files, a Python module which defines the individual Pythons, a JSON file which defines
+the connections between the different Python functions and a conda environment file to define the software dependencies.
+The files are not intended to be human readable, but rather interact as a machine readable exchange format between the
+different workflow engines to enable interoperability.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<section id="simple-example">
+<h3>Simple Example<a class="headerlink" href="#simple-example" title="Link to this heading">#</a></h3>
+<p>As a first example we define two Python functions which add multiple inputs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_x_and_y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_x_and_y_and_z</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+    <span class="k">return</span> <span class="n">w</span>
+</pre></div>
+</div>
+<p>These two Python functions are combined in the following example workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">add_x_and_y</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">add_x_and_y_and_z</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the workflow representation of these Python functions the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/2733b71b8b860a0550ebcfb326aabf3a/simple_workflow.py"><span class="xref download myst">simple_workflow.py</span></a>
+Python module. The connection of the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/ccde96f4155d5d9b945f1f0b662ed925/workflow_simple.json"><span class="xref download myst">workflow_simple.json</span></a>
+JSON file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y_and_z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="s2">&quot;z&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;th&quot;</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;sn&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The abbreviations in the definition of the edges are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tn</span></code> - target node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">th</span></code> - target handle - for a node with multiple input parameters the target handle specifies which input parameter to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sn</span></code> - source node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sh</span></code> - source handle - for a node with multiple output parameters the source handle specifies which output parameter to use.</p></li>
+</ul>
+<p>As the workflow does not require any additional resources, as it is only using built-in functionality of the Python standard
+library.</p>
+<p>The corresponding Jupyter notebooks demonstrate this functionality:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="aiida_simple.html"><span class="std std-doc">aiida_simple.ipynb</span></a></p></td>
+<td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jobflow_simple.html"><span class="std std-doc">jobflow_simple.ipynb</span></a></p></td>
+<td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyiron_base_simple.html"><span class="std std-doc">pyiron_base_simple.ipynb</span></a></p></td>
+<td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="universal_workflow_simple.html"><span class="std std-doc">universal_workflow_simple.ipynb</span></a></p></td>
+<td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="quantum-espresso-workflow">
+<h3>Quantum Espresso Workflow<a class="headerlink" href="#quantum-espresso-workflow" title="Link to this heading">#</a></h3>
+<p>The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the
+initial structure is relaxed, afterward it is strained and the total energy is calculated.</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/a7264696a1cb39eff4d20169ae2c8b01/quantum_espresso_workflow.py"><span class="xref download myst">quantum_espresso_workflow.py</span></a> Python functions</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/4e50b332423ddf7c6ac6a8f369748242/workflow_qe.json"><span class="xref download myst">workflow_qe.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/236a3f7d8b0b8b7046fe52f5b24e2f3a/environment_qe.yml"><span class="xref download myst">environment_qe.yml</span></a> Conda environment</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="aiida_qe.html"><span class="std std-doc">aiida_qe.ipynb</span></a></p></td>
+<td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jobflow_qe.html"><span class="std std-doc">jobflow_qe.ipynb</span></a></p></td>
+<td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyiron_base_qe.html"><span class="std std-doc">pyiron_base_qe.ipynb</span></a></p></td>
+<td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="universal_workflow_qe.html"><span class="std std-doc">universal_workflow_qe.ipynb</span></a></p></td>
+<td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="nfdi4ing-scientific-workflow-requirements">
+<h3>NFDI4Ing Scientific Workflow Requirements<a class="headerlink" href="#nfdi4ing-scientific-workflow-requirements" title="Link to this heading">#</a></h3>
+<p>To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark developed as part of <a class="reference external" href="https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements">NFDI4Ing</a>
+is implemented for all three simulation codes based on a shared workflow definition.</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/9b33cb965729263c315b9517407c13c5/nfdi_ing_workflow.py"><span class="xref download myst">nfdi_ing_workflow.py</span></a> Python functions</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/99eb77c77821cee4b1c6b4acc6b55ea7/workflow_nfdi.json"><span class="xref download myst">workflow_nfdi.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
+</ul>
+<p>Additional source files provided with the workflow benchmark:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/4ff352d789da8f614eef033f89f6e617/preprocessing.yaml"><span class="xref download myst">source/envs/preprocessing.yaml</span></a> Conda environment for preprocessing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/7ce8b93e79c1ee48a655ac7e627b9960/processing.yaml"><span class="xref download myst">source/envs/processing.yaml</span></a> Conda environment for processing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/b38b5718bfe9395cdcb7374b3a935e24/postprocessing.yaml"><span class="xref download myst">source/envs/postprocessing.yaml</span></a> Conda environment for postprocessing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/0e02e07d859c81f2c61d7ccfd9eb429a/macros.tex.template"><span class="xref download myst">source/macros.tex.template</span></a> LaTeX module template</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/b8785b7ed7173a4aaec2e39f99a9245e/paper.tex"><span class="xref download myst">source/paper.tex</span></a> LaTeX paper template</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/a5735e3474ded79139738adc04a114b5/poisson.py"><span class="xref download myst">source/poisson.py</span></a> Poisson Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/10bc4abf7c38577d6f29c14e69dc9484/postprocessing.py"><span class="xref download myst">source/postprocessing.py</span></a> Postprocessing Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/f86f3d7e625c419e8b464ba265abfbe5/prepare_paper_macros.py"><span class="xref download myst">source/prepare_paper_macros.py</span></a> LaTeX preprocessing Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/871bf11770153207ad73692d0ed16f79/unit_square.geo"><span class="xref download myst">source/unit_square.geo</span></a> Input structure</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="aiida_nfdi.html"><span class="std std-doc">aiida_nfdi.ipynb</span></a></p></td>
+<td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jobflow_nfdi.html"><span class="std std-doc">jobflow_nfdi.ipynb</span></a></p></td>
+<td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyiron_base_nfdi.html"><span class="std std-doc">pyiron_base_nfdi.ipynb</span></a></p></td>
+<td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="universal_workflow_nfdi.html"><span class="std std-doc">universal_workflow_nfdi.ipynb</span></a></p></td>
+<td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Definition</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example">Simple Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nfdi4ing-scientific-workflow-requirements">NFDI4Ing Scientific Workflow Requirements</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

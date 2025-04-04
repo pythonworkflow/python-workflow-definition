@@ -1,0 +1,24 @@
+{
+  "nodes": {
+    "0": "nfdi_ing_workflow.generate_mesh",
+    "1": "nfdi_ing_workflow.convert_to_xdmf",
+    "2": "nfdi_ing_workflow.poisson",
+    "3": "nfdi_ing_workflow.plot_over_line",
+    "4": "nfdi_ing_workflow.substitute_macros",
+    "5": "nfdi_ing_workflow.compile_paper",
+    "6": 2.0
+  },
+  "edges": [
+    {"tn": 0, "th": "domain_size", "sn": 6, "sh": null},
+    {"tn": 1, "th": "gmsh_output_file", "sn": 0, "sh": null},
+    {"tn": 2, "th": "meshio_output_xdmf", "sn": 1, "sh": "xdmf_file"},
+    {"tn": 2, "th": "meshio_output_h5", "sn": 1, "sh": "h5_file"},
+    {"tn": 3, "th": "poisson_output_pvd_file", "sn": 2, "sh": "pvd_file"},
+    {"tn": 3, "th": "poisson_output_vtu_file", "sn": 2, "sh": "vtu_file"},
+    {"tn": 4, "th": "pvbatch_output_file", "sn": 3, "sh": null},
+    {"tn": 4, "th": "ndofs", "sn": 2, "sh": "numdofs"},
+    {"tn": 4, "th": "domain_size", "sn": 6, "sh": null},
+    {"tn": 5, "th": "macros_tex", "sn": 4, "sh": null},
+    {"tn": 5, "th": "plot_file", "sn": 3, "sh": null}
+  ]
+}

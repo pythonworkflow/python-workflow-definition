@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2906pt" height="476pt" viewBox="0.00 0.00 2906.48 476.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 472)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-472 2902.48,-472 2902.48,4 -4,4"/>
+<!-- create_function_job_ad78d751885eaefc2605f3dceb2cb1aa -->
+<g id="node1" class="node">
+<title>create_function_job_ad78d751885eaefc2605f3dceb2cb1aa</title>
+<ellipse fill="none" stroke="black" cx="1529.03" cy="-18" rx="482.09" ry="18"/>
+<text text-anchor="middle" x="1529.03" y="-13.32" font-family="Times,serif" font-size="14.00">create_function_job=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df51fc4260&gt;</text>
+</g>
+<!-- macros_tex_76816516c28d282cb376f4d1af23a98d -->
+<g id="node2" class="node">
+<title>macros_tex_76816516c28d282cb376f4d1af23a98d</title>
+<ellipse fill="none" stroke="black" cx="1991.03" cy="-90" rx="441.58" ry="18"/>
+<text text-anchor="middle" x="1991.03" y="-85.33" font-family="Times,serif" font-size="14.00">macros_tex=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee900&gt;</text>
+</g>
+<!-- macros_tex_76816516c28d282cb376f4d1af23a98d&#45;&gt;create_function_job_ad78d751885eaefc2605f3dceb2cb1aa -->
+<g id="edge1" class="edge">
+<title>macros_tex_76816516c28d282cb376f4d1af23a98d-&gt;create_function_job_ad78d751885eaefc2605f3dceb2cb1aa</title>
+<path fill="none" stroke="black" d="M1879.49,-72.1C1810.93,-61.71 1722.99,-48.39 1652.36,-37.69"/>
+<polygon fill="black" stroke="black" points="1653.09,-34.26 1642.68,-36.22 1652.04,-41.18 1653.09,-34.26"/>
+</g>
+<!-- pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="node3" class="node">
+<title>pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<ellipse fill="none" stroke="black" cx="1630.03" cy="-162" rx="482.62" ry="18"/>
+<text text-anchor="middle" x="1630.03" y="-157.32" font-family="Times,serif" font-size="14.00">pvbatch_output_file=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee540&gt;</text>
+</g>
+<!-- pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644&#45;&gt;macros_tex_76816516c28d282cb376f4d1af23a98d -->
+<g id="edge2" class="edge">
+<title>pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644-&gt;macros_tex_76816516c28d282cb376f4d1af23a98d</title>
+<path fill="none" stroke="black" d="M1718.34,-143.88C1770.87,-133.69 1837.65,-120.74 1891.97,-110.21"/>
+<polygon fill="black" stroke="black" points="1892.37,-113.7 1901.52,-108.36 1891.04,-106.82 1892.37,-113.7"/>
+</g>
+<!-- poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2 -->
+<g id="node4" class="node">
+<title>poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2</title>
+<ellipse fill="none" stroke="black" cx="1524.03" cy="-234" rx="503.66" ry="18"/>
+<text text-anchor="middle" x="1524.03" y="-229.32" font-family="Times,serif" font-size="14.00">poisson_output_pvd_file=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee210&gt;</text>
+</g>
+<!-- poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2&#45;&gt;pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="edge3" class="edge">
+<title>poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2-&gt;pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<path fill="none" stroke="black" d="M1550.23,-215.7C1563.48,-206.95 1579.77,-196.19 1594.16,-186.69"/>
+<polygon fill="black" stroke="black" points="1596.08,-189.61 1602.5,-181.18 1592.23,-183.77 1596.08,-189.61"/>
+</g>
+<!-- plot_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="node5" class="node">
+<title>plot_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<ellipse fill="none" stroke="black" cx="705.03" cy="-162" rx="424.22" ry="18"/>
+<text text-anchor="middle" x="705.03" y="-157.32" font-family="Times,serif" font-size="14.00">plot_file=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee540&gt;</text>
+</g>
+<!-- poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2&#45;&gt;plot_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="edge4" class="edge">
+<title>poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2-&gt;plot_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<path fill="none" stroke="black" d="M1335.11,-216.85C1204.63,-205.7 1031.57,-190.91 899.84,-179.65"/>
+<polygon fill="black" stroke="black" points="900.19,-176.17 889.93,-178.8 899.6,-183.14 900.19,-176.17"/>
+</g>
+<!-- plot_file_0a1a8a5db5a6aedba38e6ab3d334b644&#45;&gt;create_function_job_ad78d751885eaefc2605f3dceb2cb1aa -->
+<g id="edge18" class="edge">
+<title>plot_file_0a1a8a5db5a6aedba38e6ab3d334b644-&gt;create_function_job_ad78d751885eaefc2605f3dceb2cb1aa</title>
+<path fill="none" stroke="black" d="M803.61,-144.01C958.43,-117.33 1257.55,-65.78 1419.11,-37.94"/>
+<polygon fill="black" stroke="black" points="1419.27,-41.47 1428.53,-36.32 1418.08,-34.57 1419.27,-41.47"/>
+</g>
+<!-- meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a -->
+<g id="node6" class="node">
+<title>meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a</title>
+<ellipse fill="none" stroke="black" cx="1412.03" cy="-306" rx="487.88" ry="18"/>
+<text text-anchor="middle" x="1412.03" y="-301.32" font-family="Times,serif" font-size="14.00">meshio_output_xdmf=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7eddc0&gt;</text>
+</g>
+<!-- meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a&#45;&gt;poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2 -->
+<g id="edge5" class="edge">
+<title>meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a-&gt;poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2</title>
+<path fill="none" stroke="black" d="M1439.72,-287.7C1453.85,-278.86 1471.25,-267.99 1486.57,-258.41"/>
+<polygon fill="black" stroke="black" points="1488.37,-261.42 1494.99,-253.15 1484.66,-255.48 1488.37,-261.42"/>
+</g>
+<!-- poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93 -->
+<g id="node7" class="node">
+<title>poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93</title>
+<ellipse fill="none" stroke="black" cx="501.03" cy="-234" rx="501.03" ry="18"/>
+<text text-anchor="middle" x="501.03" y="-229.32" font-family="Times,serif" font-size="14.00">poisson_output_vtu_file=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee1e0&gt;</text>
+</g>
+<!-- meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a&#45;&gt;poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93 -->
+<g id="edge6" class="edge">
+<title>meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a-&gt;poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93</title>
+<path fill="none" stroke="black" d="M1206.73,-289.23C1061.36,-278.06 866.7,-263.1 718.65,-251.72"/>
+<polygon fill="black" stroke="black" points="718.92,-248.23 708.68,-250.96 718.38,-255.21 718.92,-248.23"/>
+</g>
+<!-- ndofs_c8554a1b671d87672c81c508324bd11c -->
+<g id="node8" class="node">
+<title>ndofs_c8554a1b671d87672c81c508324bd11c</title>
+<ellipse fill="none" stroke="black" cx="2458.03" cy="-234" rx="412.12" ry="18"/>
+<text text-anchor="middle" x="2458.03" y="-229.32" font-family="Times,serif" font-size="14.00">ndofs=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7ee5d0&gt;</text>
+</g>
+<!-- meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a&#45;&gt;ndofs_c8554a1b671d87672c81c508324bd11c -->
+<g id="edge7" class="edge">
+<title>meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a-&gt;ndofs_c8554a1b671d87672c81c508324bd11c</title>
+<path fill="none" stroke="black" d="M1640.93,-289.68C1814.93,-278.04 2053.28,-262.09 2227.65,-250.42"/>
+<polygon fill="black" stroke="black" points="2227.78,-253.92 2237.53,-249.76 2227.32,-246.93 2227.78,-253.92"/>
+</g>
+<!-- poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93&#45;&gt;pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="edge15" class="edge">
+<title>poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93-&gt;pvbatch_output_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<path fill="none" stroke="black" d="M745.31,-217.85C931.8,-206.29 1187.97,-190.41 1376.67,-178.71"/>
+<polygon fill="black" stroke="black" points="1376.87,-182.2 1386.64,-178.09 1376.44,-175.22 1376.87,-182.2"/>
+</g>
+<!-- poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93&#45;&gt;plot_file_0a1a8a5db5a6aedba38e6ab3d334b644 -->
+<g id="edge16" class="edge">
+<title>poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93-&gt;plot_file_0a1a8a5db5a6aedba38e6ab3d334b644</title>
+<path fill="none" stroke="black" d="M551.72,-215.61C579.68,-206.01 614.59,-194.04 644.03,-183.93"/>
+<polygon fill="black" stroke="black" points="644.85,-187.35 653.17,-180.79 642.58,-180.73 644.85,-187.35"/>
+</g>
+<!-- ndofs_c8554a1b671d87672c81c508324bd11c&#45;&gt;macros_tex_76816516c28d282cb376f4d1af23a98d -->
+<g id="edge17" class="edge">
+<title>ndofs_c8554a1b671d87672c81c508324bd11c-&gt;macros_tex_76816516c28d282cb376f4d1af23a98d</title>
+<path fill="none" stroke="black" d="M2401.24,-215.73C2314.93,-189.49 2151.05,-139.66 2058.7,-111.57"/>
+<polygon fill="black" stroke="black" points="2059.83,-108.26 2049.25,-108.7 2057.8,-114.96 2059.83,-108.26"/>
+</g>
+<!-- gmsh_output_file_78213b177bb355e1585daee03d735c19 -->
+<g id="node9" class="node">
+<title>gmsh_output_file_78213b177bb355e1585daee03d735c19</title>
+<ellipse fill="none" stroke="black" cx="2394.03" cy="-378" rx="470.52" ry="18"/>
+<text text-anchor="middle" x="2394.03" y="-373.32" font-family="Times,serif" font-size="14.00">gmsh_output_file=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7edb50&gt;</text>
+</g>
+<!-- gmsh_output_file_78213b177bb355e1585daee03d735c19&#45;&gt;meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a -->
+<g id="edge8" class="edge">
+<title>gmsh_output_file_78213b177bb355e1585daee03d735c19-&gt;meshio_output_xdmf_434a8c4d1345685ee8fc0b7e00e32d0a</title>
+<path fill="none" stroke="black" d="M2177.62,-361.57C2018.62,-350.24 1803,-334.87 1641.1,-323.33"/>
+<polygon fill="black" stroke="black" points="1641.76,-319.87 1631.54,-322.65 1641.26,-326.85 1641.76,-319.87"/>
+</g>
+<!-- meshio_output_h5_efac48e79bcba581ea1c6da5811cd281 -->
+<g id="node10" class="node">
+<title>meshio_output_h5_efac48e79bcba581ea1c6da5811cd281</title>
+<ellipse fill="none" stroke="black" cx="2394.03" cy="-306" rx="476.3" ry="18"/>
+<text text-anchor="middle" x="2394.03" y="-301.32" font-family="Times,serif" font-size="14.00">meshio_output_h5=&lt;pyiron_base.project.delayed.DelayedObject object at 0x72df4f7edd90&gt;</text>
+</g>
+<!-- gmsh_output_file_78213b177bb355e1585daee03d735c19&#45;&gt;meshio_output_h5_efac48e79bcba581ea1c6da5811cd281 -->
+<g id="edge9" class="edge">
+<title>gmsh_output_file_78213b177bb355e1585daee03d735c19-&gt;meshio_output_h5_efac48e79bcba581ea1c6da5811cd281</title>
+<path fill="none" stroke="black" d="M2394.03,-359.7C2394.03,-352.41 2394.03,-343.73 2394.03,-335.54"/>
+<polygon fill="black" stroke="black" points="2397.53,-335.62 2394.03,-325.62 2390.53,-335.62 2397.53,-335.62"/>
+</g>
+<!-- meshio_output_h5_efac48e79bcba581ea1c6da5811cd281&#45;&gt;poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2 -->
+<g id="edge12" class="edge">
+<title>meshio_output_h5_efac48e79bcba581ea1c6da5811cd281-&gt;poisson_output_pvd_file_b5205a1ffc6dca69db1460c486a2a2e2</title>
+<path fill="none" stroke="black" d="M2197.16,-289.16C2059.17,-278.06 1874.96,-263.24 1734.14,-251.9"/>
+<polygon fill="black" stroke="black" points="1734.55,-248.43 1724.3,-251.11 1733.99,-255.4 1734.55,-248.43"/>
+</g>
+<!-- meshio_output_h5_efac48e79bcba581ea1c6da5811cd281&#45;&gt;poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93 -->
+<g id="edge13" class="edge">
+<title>meshio_output_h5_efac48e79bcba581ea1c6da5811cd281-&gt;poisson_output_vtu_file_483d18e47061d6eead9dec38f84a4d93</title>
+<path fill="none" stroke="black" d="M2062.13,-292.73C1723.13,-280.19 1198.83,-260.8 852.8,-248.01"/>
+<polygon fill="black" stroke="black" points="852.97,-244.51 842.85,-247.64 852.71,-251.51 852.97,-244.51"/>
+</g>
+<!-- meshio_output_h5_efac48e79bcba581ea1c6da5811cd281&#45;&gt;ndofs_c8554a1b671d87672c81c508324bd11c -->
+<g id="edge14" class="edge">
+<title>meshio_output_h5_efac48e79bcba581ea1c6da5811cd281-&gt;ndofs_c8554a1b671d87672c81c508324bd11c</title>
+<path fill="none" stroke="black" d="M2409.85,-287.7C2417.37,-279.47 2426.5,-269.48 2434.79,-260.42"/>
+<polygon fill="black" stroke="black" points="2437.21,-262.96 2441.37,-253.22 2432.04,-258.24 2437.21,-262.96"/>
+</g>
+<!-- domain_size_f12a7f1986b9dd058dfc666dbe230b20 -->
+<g id="node11" class="node">
+<title>domain_size_f12a7f1986b9dd058dfc666dbe230b20</title>
+<ellipse fill="none" stroke="black" cx="2646.03" cy="-450" rx="96.45" ry="18"/>
+<text text-anchor="middle" x="2646.03" y="-445.32" font-family="Times,serif" font-size="14.00">domain_size=2.0</text>
+</g>
+<!-- domain_size_f12a7f1986b9dd058dfc666dbe230b20&#45;&gt;macros_tex_76816516c28d282cb376f4d1af23a98d -->
+<g id="edge10" class="edge">
+<title>domain_size_f12a7f1986b9dd058dfc666dbe230b20-&gt;macros_tex_76816516c28d282cb376f4d1af23a98d</title>
+<path fill="none" stroke="black" d="M2725.21,-439.34C2782.26,-430.8 2852.8,-416.5 2874.03,-396 2903.5,-367.54 2898.03,-347.97 2898.03,-307 2898.03,-307 2898.03,-307 2898.03,-233 2898.03,-166.34 2510.64,-126.16 2242.21,-106.32"/>
+<polygon fill="black" stroke="black" points="2242.85,-102.86 2232.63,-105.62 2242.34,-109.84 2242.85,-102.86"/>
+</g>
+<!-- domain_size_f12a7f1986b9dd058dfc666dbe230b20&#45;&gt;gmsh_output_file_78213b177bb355e1585daee03d735c19 -->
+<g id="edge11" class="edge">
+<title>domain_size_f12a7f1986b9dd058dfc666dbe230b20-&gt;gmsh_output_file_78213b177bb355e1585daee03d735c19</title>
+<path fill="none" stroke="black" d="M2593.82,-434.5C2557.24,-424.33 2507.85,-410.62 2467.33,-399.36"/>
+<polygon fill="black" stroke="black" points="2468.45,-396.04 2457.88,-396.74 2466.58,-402.78 2468.45,-396.04"/>
+</g>
+</g>
+</svg>
