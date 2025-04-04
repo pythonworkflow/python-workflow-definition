@@ -1,0 +1,20 @@
+format: jb-book
+root: README
+chapters:
+- file: intro.md
+- file: simple.md
+  sections:
+    - file: aiida_simple.ipynb
+    - file: jobflow_simple.ipynb
+    - file: pyiron_base_simple.ipynb
+- file: evcurve.md
+  sections:
+    - file: aiida_qe.ipynb
+    - file: jobflow_qe.ipynb
+    - file: pyiron_base_qe.ipynb
+- file: nfdi.md
+  sections:
+    - file: aiida_nfdi.ipynb
+    - file: jobflow_nfdi.ipynb
+    - file: pyiron_base_nfdi.ipynb
+- file: conclusion.md

@@ -90,3 +90,23 @@ jobs:
         papermill jobflow_simple.ipynb jobflow_simple_out.ipynb -k "python3"
         papermill pyiron_base_simple.ipynb pyiron_base_simple_out.ipynb -k "python3"
         papermill universal_workflow_simple.ipynb universal_workflow_simple_out.ipynb -k "python3"
+
+  book:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: "3.12"
+          environment-file: book/environment.yml
+          auto-activate-base: false
+      - name: Install Jupyterbook
+        shell: bash -l {0}
+        run: |
+          cp book/_config.yml .
+          cp book/_toc.yml .
+          cp book/*.md .
+          jupyter-book build . --path-output public
+      - run: mv public/_build/html public_html
+      - run: touch public_html/.nojekyll
