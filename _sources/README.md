@@ -17,17 +17,15 @@ different workflow engines to enable interoperability.
 As a first example we define two Python functions which add multiple inputs: 
 ```python
 def add_x_and_y(x, y):
-    z = x + y
-    return x, y, z
-
-def add_x_and_y_and_z(x, y, z):
-    w = x + y + z
-    return w
+    return x + y
+    
+def get_prod_and_div(x: float, y: float) -> dict:
+    return {"prod": x * y, "div": x / y}
 ```
 These two Python functions are combined in the following example workflow:
 ```python
-x, y, z = add_x_and_y(x=1, y=2)
-w = add_x_and_y_and_z(x=x, y=y, z=z)
+tmp_dict = get_prod_and_div(x=1, y=2)
+result = add_x_and_y(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
 For the workflow representation of these Python functions the Python functions are stored in the [simple_workflow.py](simple_workflow.py)
 Python module. The connection of the Python functions are stored in the [workflow_simple.json](workflow_simple.json) 
@@ -35,23 +33,16 @@ JSON file:
 ```
 {
   "nodes": [
-    {"id": 0, "function": "simple_workflow.add_x_and_y_and_z"},
+    {"id": 0, "function": "simple_workflow.get_prod_and_div"},
     {"id": 1, "function": "simple_workflow.add_x_and_y"},
-    {"id": 2, "function": "simple_workflow.add_x_and_y"},
-    {"id": 3, "function": "simple_workflow.add_x_and_y"},
-    {"id": 4, "value": 1},
-    {"id": 5, "value": 2}
+    {"id": 2, "value": 1},
+    {"id": 3, "value": 2}
   ],
   "edges": [
-    {"target": 0, "targetPort": "x", "source": 1, "sourcePort": "x"},
-    {"target": 1, "targetPort": "x", "source": 4, "sourcePort": null},
-    {"target": 1, "targetPort": "y", "source": 5, "sourcePort": null},
-    {"target": 0, "targetPort": "y", "source": 2, "sourcePort": "y"},
-    {"target": 2, "targetPort": "x", "source": 4, "sourcePort": null},
-    {"target": 2, "targetPort": "y", "source": 5, "sourcePort": null},
-    {"target": 0, "targetPort": "z", "source": 3, "sourcePort": "z"},
-    {"target": 3, "targetPort": "x", "source": 4, "sourcePort": null},
-    {"target": 3, "targetPort": "y", "source": 5, "sourcePort": null}
+    {"target": 0, "targetPort": "x", "source": 2, "sourcePort": null},
+    {"target": 0, "targetPort": "y", "source": 3, "sourcePort": null},
+    {"target": 1, "targetPort": "x", "source": 0, "sourcePort": "prod"},
+    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"}
   ]
 }
 ```

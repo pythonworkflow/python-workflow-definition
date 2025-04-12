@@ -1,8 +1,7 @@
+def get_prod_and_div(x, y):
+    return {"prod": x * y, "div": x / y}
+
+
 def add_x_and_y(x, y):
-    z = x + y
-    return {"x": x, "y": y, "z": z}
-
-
-def add_x_and_y_and_z(x, y, z):
-    w = x + y + z
+    w = x + y
     return w
