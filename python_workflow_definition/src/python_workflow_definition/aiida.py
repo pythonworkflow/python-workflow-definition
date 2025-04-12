@@ -5,6 +5,7 @@ from aiida_pythonjob.data.serializer import general_serializer
 import json
 from aiida import orm
 
+from python_workflow_definition.shared import convert_nodes_list_to_dict
 
 
 def load_workflow_json(file_name):
@@ -14,7 +15,7 @@ def load_workflow_json(file_name):
     wg = WorkGraph()
     task_name_mapping = {}
 
-    for id, identifier in data["nodes"].items():
+    for id, identifier in convert_nodes_list_to_dict(nodes_list=data["nodes"]).items():
         if isinstance(identifier, str) and "." in identifier:
             p, m = identifier.rsplit(".", 1)
             mod = import_module(p)
@@ -66,7 +67,7 @@ def load_workflow_json(file_name):
 
 def write_workflow_json(wg, file_name):
     from aiida_workgraph.socket import TaskSocketNamespace
-    data = {"nodes": {}, "edges": []}
+    data = {"nodes": [], "edges": []}
     node_name_mapping = {}
     data_node_name_mapping = {}
     i = 0
@@ -76,7 +77,7 @@ def write_workflow_json(wg, file_name):
 
         callable_name = executor["callable_name"]
         callable_name = f"{executor['module_path']}.{callable_name}"
-        data["nodes"][str(i)] = callable_name
+        data["nodes"].append({"id": i, "value": callable_name})
         i += 1
 
     for link in wg.links:
@@ -105,7 +106,7 @@ def write_workflow_json(wg, file_name):
                         raw_value.pop("node_type", None)
                     else:
                         raw_value = input.value.value
-                    data["nodes"][str(i)] = raw_value
+                    data["nodes"].append({"id": i, "value": raw_value})
                     input_node_name = i
                     data_node_name_mapping[input.value.uuid] = input_node_name
                     i += 1

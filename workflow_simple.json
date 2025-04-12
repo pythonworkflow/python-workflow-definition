@@ -1,10 +1,10 @@
 {
-  "nodes": {
-    "0": "simple_workflow.add_x_and_y", 
-    "1": "simple_workflow.add_x_and_y_and_z", 
-    "2": 1, 
-    "3": 2
-  }, 
+  "nodes": [
+    {"id": 0, "value": "simple_workflow.add_x_and_y"},
+    {"id": 1, "value": "simple_workflow.add_x_and_y_and_z"},
+    {"id": 2, "value": 1},
+    {"id": 3, "value": 2}
+  ],
   "edges": [
     {"tn": 0, "th": "x", "sn": 2, "sh": null},
     {"tn": 0, "th": "y", "sn": 3, "sh": null},

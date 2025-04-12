@@ -3,7 +3,7 @@ from importlib import import_module
 from inspect import isfunction
 
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles
+from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles, convert_nodes_list_to_dict
 
 
 def resort_total_lst(total_lst, nodes_dict):
@@ -55,7 +55,7 @@ def load_workflow_json(file_name):
 
     edges_new_lst = content["edges"]
     nodes_new_dict = {}
-    for k, v in content["nodes"].items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             mod = import_module(p)

@@ -23,3 +23,10 @@ def get_source_handles(edges_lst):
         k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
         for k, v in source_handle_dict.items()
     }
+
+
+def convert_nodes_list_to_dict(nodes_list):
+    return {
+        str(el["id"]): el["value"]
+        for el in sorted(nodes_list, key=lambda d: d["id"])
+    }
