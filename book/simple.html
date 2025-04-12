@@ -365,14 +365,14 @@ document.write(`
 Python module. The connection of the Python functions are stored in the <a class="reference internal" href="#workflow_simple.json"><span class="xref myst">workflow_simple.json</span></a>
 JSON file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y_and_z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="p">},</span>
+  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y_and_z&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;simple_workflow.add_x_and_y&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+  <span class="p">],</span>
   <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
