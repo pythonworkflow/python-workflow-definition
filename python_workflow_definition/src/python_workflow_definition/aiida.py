@@ -1,10 +1,11 @@
 from importlib import import_module
-import traceback
-from aiida_workgraph import WorkGraph, task
-from aiida_pythonjob.data.serializer import general_serializer
 import json
-from aiida import orm
+import traceback
 
+from aiida import orm
+from aiida_pythonjob.data.serializer import general_serializer
+from aiida_workgraph import WorkGraph, task
+from aiida_workgraph.socket import TaskSocketNamespace
 
 
 def load_workflow_json(file_name):
@@ -65,7 +66,6 @@ def load_workflow_json(file_name):
 
 
 def write_workflow_json(wg, file_name):
-    from aiida_workgraph.socket import TaskSocketNamespace
     data = {"nodes": {}, "edges": []}
     node_name_mapping = {}
     data_node_name_mapping = {}
