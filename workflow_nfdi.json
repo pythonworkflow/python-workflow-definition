@@ -1,13 +1,13 @@
 {
-  "nodes": {
-    "0": "nfdi_ing_workflow.generate_mesh",
-    "1": "nfdi_ing_workflow.convert_to_xdmf",
-    "2": "nfdi_ing_workflow.poisson",
-    "3": "nfdi_ing_workflow.plot_over_line",
-    "4": "nfdi_ing_workflow.substitute_macros",
-    "5": "nfdi_ing_workflow.compile_paper",
-    "6": 2.0
-  },
+  "nodes": [
+    {"id": 0, "value": "nfdi_ing_workflow.generate_mesh"},
+    {"id": 1, "value": "nfdi_ing_workflow.convert_to_xdmf"},
+    {"id": 2, "value": "nfdi_ing_workflow.poisson"},
+    {"id": 3, "value": "nfdi_ing_workflow.plot_over_line"},
+    {"id": 4, "value": "nfdi_ing_workflow.substitute_macros"},
+    {"id": 5, "value": "nfdi_ing_workflow.compile_paper"},
+    {"id": 6, "value": 2.0}
+  ],
   "edges": [
     {"tn": 0, "th": "domain_size", "sn": 6, "sh": null},
     {"tn": 1, "th": "gmsh_output_file", "sn": 0, "sh": null},
