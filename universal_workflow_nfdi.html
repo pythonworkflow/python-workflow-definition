@@ -407,6 +407,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/bceb4e497fb2ca5591d27448a46603f464fab4e925dbf879a42d91fd6cd53dd5.svg" src="_images/bceb4e497fb2ca5591d27448a46603f464fab4e925dbf879a42d91fd6cd53dd5.svg" />
+</div>
 </div>
 </section>
 <section id="aiida">
@@ -421,7 +424,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;c08748df7ab74ec08c14e5f16cebc987&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;9da6a68ed2b14ffb920b92aa0a616339&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -441,7 +444,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c1671fb385e3469ea269044a47160225", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "bf4300375ee04d28a25cfc523c7b3771"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -450,23 +453,20 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>03/24/2025 12:15:40 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|continue_workgraph]: tasks ready to run: pickle_node3,pickle_node4
-03/24/2025 12:15:49 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|on_wait]: Process status: Waiting for child processes: 1076, 1083
-03/24/2025 12:16:27 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|update_task_state]: Task: pickle_node3, type: PYTHONJOB, finished.
-03/24/2025 12:16:28 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|update_task_state]: Task: pickle_node4, type: PYTHONJOB, finished.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>invalid state
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>03/24/2025 12:16:29 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|continue_workgraph]: tasks ready to run: add_x_and_y1
-03/24/2025 12:16:35 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|on_wait]: Process status: Waiting for child processes: 1098
-03/24/2025 12:16:58 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|update_task_state]: Task: add_x_and_y1, type: PYTHONJOB, finished.
-03/24/2025 12:16:59 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|continue_workgraph]: tasks ready to run: add_x_and_y_and_z2
-03/24/2025 12:17:04 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|on_wait]: Process status: Waiting for child processes: 1111
-03/24/2025 12:17:23 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|update_task_state]: Task: add_x_and_y_and_z2, type: PYTHONJOB, finished.
-03/24/2025 12:17:25 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-03/24/2025 12:17:25 PM &lt;259264&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1069|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/12/2025 11:36:26 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_mesh1
+04/12/2025 11:36:30 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: generate_mesh1, type: PyFunction, finished.
+04/12/2025 11:36:30 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: convert_to_xdmf2
+04/12/2025 11:36:34 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: convert_to_xdmf2, type: PyFunction, finished.
+04/12/2025 11:36:34 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: poisson3
+04/12/2025 11:36:40 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: poisson3, type: PyFunction, finished.
+04/12/2025 11:36:40 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_over_line4
+04/12/2025 11:36:45 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: plot_over_line4, type: PyFunction, finished.
+04/12/2025 11:36:45 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: substitute_macros5
+04/12/2025 11:36:48 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: substitute_macros5, type: PyFunction, finished.
+04/12/2025 11:36:48 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: compile_paper6
+04/12/2025 11:36:54 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|update_task_state]: Task: compile_paper6, type: PyFunction, finished.
+04/12/2025 11:36:54 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+04/12/2025 11:36:55 AM &lt;5813&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [96|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 </div>
@@ -503,7 +503,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/postprocessing/paper.pdf&#39;
 </pre></div>
 </div>
 </div>
@@ -518,9 +518,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/jan/mambaforge/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   &quot;cipher&quot;: algorithms.TripleDES,
-/home/jan/mambaforge/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   &quot;class&quot;: algorithms.TripleDES,
 </pre></div>
 </div>
@@ -548,16 +548,28 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-03-24 12:17:31,659 INFO Started executing jobs locally
-2025-03-24 12:17:33,059 INFO Starting job - add_x_and_y (a8004d81-a7b8-41f1-a673-17b4d6e90ebf)
-2025-03-24 12:17:33,061 INFO Finished job - add_x_and_y (a8004d81-a7b8-41f1-a673-17b4d6e90ebf)
-2025-03-24 12:17:33,062 INFO Starting job - add_x_and_y_and_z (26ddcedb-34b3-4b09-883d-311b2689d870)
-2025-03-24 12:17:33,066 INFO Finished job - add_x_and_y_and_z (26ddcedb-34b3-4b09-883d-311b2689d870)
-2025-03-24 12:17:33,070 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-12 11:37:24,699 INFO Started executing jobs locally
+2025-04-12 11:37:24,909 INFO Starting job - generate_mesh (e49c3ef7-293f-4056-8e1d-ed987845c1d2)
+2025-04-12 11:37:27,427 INFO Finished job - generate_mesh (e49c3ef7-293f-4056-8e1d-ed987845c1d2)
+2025-04-12 11:37:27,429 INFO Starting job - convert_to_xdmf (38394736-3ae0-4e20-9896-2257c3c509e5)
+2025-04-12 11:37:30,083 INFO Finished job - convert_to_xdmf (38394736-3ae0-4e20-9896-2257c3c509e5)
+2025-04-12 11:37:30,084 INFO Starting job - poisson (1f372075-3e92-4307-9f7e-40eed034a1bd)
+2025-04-12 11:37:34,914 INFO Finished job - poisson (1f372075-3e92-4307-9f7e-40eed034a1bd)
+2025-04-12 11:37:34,915 INFO Starting job - plot_over_line (d912b64e-3d95-46cb-87ba-a9243fce854d)
+2025-04-12 11:37:38,549 INFO Finished job - plot_over_line (d912b64e-3d95-46cb-87ba-a9243fce854d)
+2025-04-12 11:37:38,551 INFO Starting job - substitute_macros (aaca9788-f092-439f-b83f-e4f565446723)
+2025-04-12 11:37:40,346 INFO Finished job - substitute_macros (aaca9788-f092-439f-b83f-e4f565446723)
+2025-04-12 11:37:40,348 INFO Starting job - compile_paper (e10f1f8c-218e-4cef-9ae9-9e6f06c9f658)
+2025-04-12 11:37:46,320 INFO Finished job - compile_paper (e10f1f8c-218e-4cef-9ae9-9e6f06c9f658)
+2025-04-12 11:37:46,325 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a8004d81-a7b8-41f1-a673-17b4d6e90ebf&#39;: {1: Response(output={&#39;x&#39;: 1, &#39;y&#39;: 2, &#39;z&#39;: 3}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2025/2025-03-22-compare-workflows&#39;))},
- &#39;26ddcedb-34b3-4b09-883d-311b2689d870&#39;: {1: Response(output=6, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2025/2025-03-22-compare-workflows&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;e49c3ef7-293f-4056-8e1d-ed987845c1d2&#39;: {1: Response(output=&#39;/home/jovyan/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;38394736-3ae0-4e20-9896-2257c3c509e5&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jovyan/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jovyan/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;1f372075-3e92-4307-9f7e-40eed034a1bd&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jovyan/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jovyan/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;d912b64e-3d95-46cb-87ba-a9243fce854d&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;aaca9788-f092-439f-b83f-e4f565446723&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;e10f1f8c-218e-4cef-9ae9-9e6f06c9f658&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
 </pre></div>
 </div>
 </div>
@@ -587,7 +599,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c62706b413eb44a391d2a24366c8ef82", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7692a4252507481dad2eb36bd782383d"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,7 +609,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/63d7913f56c369d853b364a0cd274e8a9b7472596fb1b6d2c4e87336a1ce4073.svg" src="_images/63d7913f56c369d853b364a0cd274e8a9b7472596fb1b6d2c4e87336a1ce4073.svg" />
+<img alt="_images/b9914709f67d934ceee8d7e690419cb0268fecc096e54071f3d41bd29d277f8a.svg" src="_images/b9914709f67d934ceee8d7e690419cb0268fecc096e54071f3d41bd29d277f8a.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -607,11 +619,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job add_x_and_y_68901482a2c5221cc845f828aabebd27 was saved and received the ID: 8
-The job add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d was saved and received the ID: 9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_0b48cf5155cd6802c17d20bb58104132 was saved and received the ID: 1
+The job convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43 was saved and received the ID: 2
+The job poisson_a0224b23ceb2119d105a5d98ef37f93e was saved and received the ID: 3
+The job plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b was saved and received the ID: 4
+The job substitute_macros_874fc185ecec04b4cb9537c58b7efb7b was saved and received the ID: 5
+The job compile_paper_3cee534ffe692833d37faf1fd2170cb6 was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/postprocessing/paper.pdf&#39;
 </pre></div>
 </div>
 </div>
@@ -661,17 +677,17 @@ The job add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d was saved and receive
   <tbody>
     <tr>
       <th>0</th>
-      <td>8</td>
+      <td>1</td>
       <td>finished</td>
       <td>None</td>
-      <td>add_x_and_y_68901482a2c5221cc845f828aabebd27</td>
-      <td>/add_x_and_y_68901482a2c5221cc845f828aabebd27</td>
+      <td>generate_mesh_0b48cf5155cd6802c17d20bb58104132</td>
+      <td>/generate_mesh_0b48cf5155cd6802c17d20bb58104132</td>
       <td>None</td>
-      <td>/home/jan/notebooks/2025/2025-03-22-compare-workflows/test/</td>
-      <td>2025-03-24 12:17:37.412001</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:37:47.484698</td>
       <td>None</td>
       <td>None</td>
-      <td>pyiron@p200300e77f488c66bae2561c878c14a2.dip0.t-ipconnect.de#1</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
       <td>PythonFunctionContainerJob</td>
       <td>0.4</td>
       <td>None</td>
@@ -679,17 +695,89 @@ The job add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d was saved and receive
     </tr>
     <tr>
       <th>1</th>
-      <td>9</td>
+      <td>2</td>
       <td>finished</td>
       <td>None</td>
-      <td>add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d</td>
-      <td>/add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d</td>
+      <td>convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43</td>
+      <td>/convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43</td>
       <td>None</td>
-      <td>/home/jan/notebooks/2025/2025-03-22-compare-workflows/test/</td>
-      <td>2025-03-24 12:17:39.161717</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:37:50.298635</td>
       <td>None</td>
       <td>None</td>
-      <td>pyiron@p200300e77f488c66bae2561c878c14a2.dip0.t-ipconnect.de#1</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
+      <td>PythonFunctionContainerJob</td>
+      <td>0.4</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>finished</td>
+      <td>None</td>
+      <td>poisson_a0224b23ceb2119d105a5d98ef37f93e</td>
+      <td>/poisson_a0224b23ceb2119d105a5d98ef37f93e</td>
+      <td>None</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:37:53.385644</td>
+      <td>None</td>
+      <td>None</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
+      <td>PythonFunctionContainerJob</td>
+      <td>0.4</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>finished</td>
+      <td>None</td>
+      <td>plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b</td>
+      <td>/plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b</td>
+      <td>None</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:37:58.722025</td>
+      <td>None</td>
+      <td>None</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
+      <td>PythonFunctionContainerJob</td>
+      <td>0.4</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>finished</td>
+      <td>None</td>
+      <td>substitute_macros_874fc185ecec04b4cb9537c58b7efb7b</td>
+      <td>/substitute_macros_874fc185ecec04b4cb9537c58b7efb7b</td>
+      <td>None</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:38:02.952659</td>
+      <td>None</td>
+      <td>None</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
+      <td>PythonFunctionContainerJob</td>
+      <td>0.4</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>finished</td>
+      <td>None</td>
+      <td>compile_paper_3cee534ffe692833d37faf1fd2170cb6</td>
+      <td>/compile_paper_3cee534ffe692833d37faf1fd2170cb6</td>
+      <td>None</td>
+      <td>/home/jovyan/test/</td>
+      <td>2025-04-12 11:38:04.909139</td>
+      <td>None</td>
+      <td>None</td>
+      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-a8grxfsa#1</td>
       <td>PythonFunctionContainerJob</td>
       <td>0.4</td>
       <td>None</td>
@@ -716,7 +804,7 @@ The job add_x_and_y_and_z_b671e81aaa4670d81d7eee509650af8d was saved and receive
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/postprocessing/paper.pdf&#39;
 </pre></div>
 </div>
 </div>
