@@ -6,7 +6,17 @@ import numpy as np
 from pyiron_base import job
 from pyiron_base.project.delayed import DelayedObject
 
-from python_workflow_definition.shared import get_kwargs, get_source_handles, convert_nodes_list_to_dict
+from python_workflow_definition.shared import (
+    get_kwargs,
+    get_source_handles,
+    convert_nodes_list_to_dict,
+    NODES_LABEL,
+    EDGES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+)
 
 
 def _resort_total_lst(total_lst, nodes_dict):
@@ -16,7 +26,7 @@ def _resort_total_lst(total_lst, nodes_dict):
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
-                source_lst = [sd["source"] for sd in connect.values()]
+                source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
@@ -24,15 +34,15 @@ def _resort_total_lst(total_lst, nodes_dict):
 
 
 def _group_edges(edges_lst):
-    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["target"], reverse=True)
+    edges_sorted_lst = sorted(edges_lst, key=lambda x: x[TARGET_LABEL], reverse=True)
     total_lst, tmp_lst = [], []
-    target_id = edges_sorted_lst[0]["target"]
+    target_id = edges_sorted_lst[0][TARGET_LABEL]
     for ed in edges_sorted_lst:
-        if target_id == ed["target"]:
+        if target_id == ed[TARGET_LABEL]:
             tmp_lst.append(ed)
         else:
             total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
-            target_id = ed["target"]
+            target_id = ed[TARGET_LABEL]
             tmp_lst = [ed]
     total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
     return total_lst
@@ -54,8 +64,8 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
             k: _get_source(
                 nodes_dict=nodes_dict,
                 delayed_object_dict=delayed_object_dict,
-                source=v["source"],
-                sourceHandle=v["sourcePort"],
+                source=v[SOURCE_LABEL],
+                sourceHandle=v[SOURCE_PORT_LABEL],
             )
             for k, v in input_dict.items()
         }
@@ -152,24 +162,24 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
             if isinstance(output, DelayedObject):
                 if output._list_index is not None:
                     edges_dict_lst.append({
-                        "target": target,
-                        "targetPort": target_handle,
-                        "source": connection_dict[output_name],
-                        "sourcePort": f"s_{output._list_index}",  # check for list index
+                        TARGET_LABEL: target,
+                        TARGET_PORT_LABEL: target_handle,
+                        SOURCE_LABEL: connection_dict[output_name],
+                        SOURCE_PORT_LABEL: f"s_{output._list_index}",  # check for list index
                     })
                 else:
                     edges_dict_lst.append({
-                        "target": target,
-                        "targetPort": target_handle,
-                        "source": connection_dict[output_name],
-                        "sourcePort": output._output_key,  # check for list index
+                        TARGET_LABEL: target,
+                        TARGET_PORT_LABEL: target_handle,
+                        SOURCE_LABEL: connection_dict[output_name],
+                        SOURCE_PORT_LABEL: output._output_key,  # check for list index
                     })
             else:
                 edges_dict_lst.append({
-                    "target": target,
-                    "targetPort": target_handle,
-                    "source": connection_dict[output_name],
-                    "sourcePort": None,
+                    TARGET_LABEL: target,
+                    TARGET_PORT_LABEL: target_handle,
+                    SOURCE_LABEL: connection_dict[output_name],
+                    SOURCE_PORT_LABEL: None,
                 })
             existing_connection_lst.append(connection_name)
     return edges_dict_lst
@@ -179,9 +189,9 @@ def load_workflow_json(project, file_name):
     with open(file_name, "r") as f:
         content = json.load(f)
 
-    edges_new_lst = content["edges"]
+    edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
-    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             if p == "python_workflow_definition.shared":
@@ -224,4 +234,4 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
             nodes_store_lst.append({"id": k, "value": v})
 
     with open(file_name, "w") as f:
-        json.dump({"nodes": nodes_store_lst, "edges": edges_new_lst}, f)
+        json.dump({NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_new_lst}, f)
