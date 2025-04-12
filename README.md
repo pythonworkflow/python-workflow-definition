@@ -35,10 +35,10 @@ JSON file:
 ```
 {
   "nodes": [
-    {"id": 0, "value": "simple_workflow.add_x_and_y_and_z"},
-    {"id": 1, "value": "simple_workflow.add_x_and_y"},
-    {"id": 2, "value": "simple_workflow.add_x_and_y"},
-    {"id": 3, "value": "simple_workflow.add_x_and_y"},
+    {"id": 0, "function": "simple_workflow.add_x_and_y_and_z"},
+    {"id": 1, "function": "simple_workflow.add_x_and_y"},
+    {"id": 2, "function": "simple_workflow.add_x_and_y"},
+    {"id": 3, "function": "simple_workflow.add_x_and_y"},
     {"id": 4, "value": 1},
     {"id": 5, "value": 2}
   ],
