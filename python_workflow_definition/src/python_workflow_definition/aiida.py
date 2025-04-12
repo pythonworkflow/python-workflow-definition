@@ -31,32 +31,32 @@ def load_workflow_json(file_name):
 
     # add links
     for link in data["edges"]:
-        to_task = task_name_mapping[str(link["tn"])]
+        to_task = task_name_mapping[str(link["target"])]
         # if the input is not exit, it means we pass the data into to the kwargs
         # in this case, we add the input socket
-        if link["th"] not in to_task.inputs:
-            to_socket = to_task.add_input( "workgraph.any", name=link["th"])
+        if link["targetPort"] not in to_task.inputs:
+            to_socket = to_task.add_input( "workgraph.any", name=link["targetPort"])
         else:
-            to_socket = to_task.inputs[link["th"]]            
-        from_task = task_name_mapping[str(link["sn"])]
+            to_socket = to_task.inputs[link["targetPort"]]            
+        from_task = task_name_mapping[str(link["source"])]
         if isinstance(from_task, orm.Data):
             to_socket.value = from_task
         else:
             try:
-                if link["sh"] is None:
-                    link["sh"] = "result"
+                if link["sourcePort"] is None:
+                    link["sourcePort"] = "result"
                 # because we are not define the outputs explicitly during the pythonjob creation
                 # we add it here, and assume the output exit
-                if link["sh"] not in from_task.outputs:
-                # if str(link["sh"]) not in from_task.outputs:
+                if link["sourcePort"] not in from_task.outputs:
+                # if str(link["sourcePort"]) not in from_task.outputs:
                     from_socket = from_task.add_output(
                         "workgraph.any",
-                        name=link["sh"],
-                        # name=str(link["sh"]),
+                        name=link["sourcePort"],
+                        # name=str(link["sourcePort"]),
                         metadata={"is_function_output": True},
                     )
                 else:
-                    from_socket = from_task.outputs[link["sh"]]
+                    from_socket = from_task.outputs[link["sourcePort"]]
 
                 wg.add_link(from_socket, to_socket)
             except Exception as e:
@@ -84,10 +84,10 @@ def write_workflow_json(wg, file_name):
         # if the from socket is the default result, we set it to None
         if link_data["from_socket"] == "result":
             link_data["from_socket"] = None
-        link_data["tn"] = node_name_mapping[link_data.pop("to_node")]
-        link_data["th"] = link_data.pop("to_socket")
-        link_data["sn"] = node_name_mapping[link_data.pop("from_node")]
-        link_data["sh"] = link_data.pop("from_socket")
+        link_data["target"] = node_name_mapping[link_data.pop("to_node")]
+        link_data["targetPort"] = link_data.pop("to_socket")
+        link_data["source"] = node_name_mapping[link_data.pop("from_node")]
+        link_data["sourcePort"] = link_data.pop("from_socket")
         data["edges"].append(link_data)
     
     for node in wg.tasks:
@@ -112,10 +112,10 @@ def write_workflow_json(wg, file_name):
                 else:
                     input_node_name = data_node_name_mapping[input.value.uuid]
                 data["edges"].append({
-                    "tn": node_name_mapping[node.name],
-                    "th": input._name,
-                    "sn": input_node_name,
-                    "sh": None
+                    "target": node_name_mapping[node.name],
+                    "targetPort": input._name,
+                    "source": input_node_name,
+                    "sourcePort": None
                 })
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)

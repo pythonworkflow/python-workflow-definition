@@ -28,23 +28,23 @@ JSON file:
     "5": 2
   },
   "edges": [
-    {"tn": 0, "th": "x", "sn": 1, "sh": "x"},
-    {"tn": 1, "th": "x", "sn": 4, "sh": null},
-    {"tn": 1, "th": "y", "sn": 5, "sh": null},
-    {"tn": 0, "th": "y", "sn": 2, "sh": "y"},
-    {"tn": 2, "th": "x", "sn": 4, "sh": null},
-    {"tn": 2, "th": "y", "sn": 5, "sh": null},
-    {"tn": 0, "th": "z", "sn": 3, "sh": "z"},
-    {"tn": 3, "th": "x", "sn": 4, "sh": null},
-    {"tn": 3, "th": "y", "sn": 5, "sh": null}
+    {"target": 0, "targetPort": "x", "source": 1, "sourcePort": "x"},
+    {"target": 1, "targetPort": "x", "source": 4, "sourcePort": null},
+    {"target": 1, "targetPort": "y", "source": 5, "sourcePort": null},
+    {"target": 0, "targetPort": "y", "source": 2, "sourcePort": "y"},
+    {"target": 2, "targetPort": "x", "source": 4, "sourcePort": null},
+    {"target": 2, "targetPort": "y", "source": 5, "sourcePort": null},
+    {"target": 0, "targetPort": "z", "source": 3, "sourcePort": "z"},
+    {"target": 3, "targetPort": "x", "source": 4, "sourcePort": null},
+    {"target": 3, "targetPort": "y", "source": 5, "sourcePort": null}
   ]
 }
 ```
 The abbreviations in the definition of the edges are:
-* `tn` - target node 
-* `th` - target handle - for a node with multiple input parameters the target handle specifies which input parameter to use.
-* `sn` - source node 
-* `sh` - source handle - for a node with multiple output parameters the source handle specifies which output parameter to use.
+* `target` - target node 
+* `targetPort` - target port - for a node with multiple input parameters the target port specifies which input parameter to use.
+* `source` - source node 
+* `sourcePort` - source port - for a node with multiple output parameters the source port specifies which output parameter to use.
 
 As the workflow does not require any additional resources, as it is only using built-in functionality of the Python standard 
 library.
