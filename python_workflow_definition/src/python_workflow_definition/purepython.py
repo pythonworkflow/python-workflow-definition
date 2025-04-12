@@ -3,7 +3,19 @@ from importlib import import_module
 from inspect import isfunction
 
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles, convert_nodes_list_to_dict
+from python_workflow_definition.shared import (
+    get_dict,
+    get_list,
+    get_kwargs,
+    get_source_handles,
+    convert_nodes_list_to_dict,
+    NODES_LABEL,
+    EDGES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+)
 
 
 def resort_total_lst(total_lst, nodes_dict):
@@ -13,7 +25,7 @@ def resort_total_lst(total_lst, nodes_dict):
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
-                source_lst = [sd["source"] for sd in connect.values()]
+                source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
@@ -21,22 +33,22 @@ def resort_total_lst(total_lst, nodes_dict):
 
 
 def group_edges(edges_lst):
-    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["target"], reverse=True)
+    edges_sorted_lst = sorted(edges_lst, key=lambda x: x[TARGET_LABEL], reverse=True)
     total_lst, tmp_lst = [], []
-    target_id = edges_sorted_lst[0]["target"]
+    target_id = edges_sorted_lst[0][TARGET_LABEL]
     for ed in edges_sorted_lst:
-        if target_id == ed["target"]:
+        if target_id == ed[TARGET_LABEL]:
             tmp_lst.append(ed)
         else:
             total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
-            target_id = ed["target"]
+            target_id = ed[TARGET_LABEL]
             tmp_lst = [ed]
     total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
     return total_lst
 
 
 def _get_value(result_dict, nodes_new_dict, link_dict):
-    source, source_handle = link_dict["source"], link_dict["sourcePort"]
+    source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
     if source in result_dict.keys():
         result = result_dict[source]
     elif source in nodes_new_dict.keys():
@@ -53,9 +65,9 @@ def load_workflow_json(file_name):
     with open(file_name, "r") as f:
         content = json.load(f)
 
-    edges_new_lst = content["edges"]
+    edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
-    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             mod = import_module(p)
