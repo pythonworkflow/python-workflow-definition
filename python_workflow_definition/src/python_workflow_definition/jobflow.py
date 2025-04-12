@@ -26,27 +26,27 @@ def _get_nodes_dict(function_dict):
 
 def _get_edge_from_dict(target, key, value_dict, nodes_mapping_dict):
     if len(value_dict['attributes']) == 1:
-        return {'tn': target, 'th': key, "sn": nodes_mapping_dict[value_dict['uuid']], 'sh': value_dict['attributes'][0][1]}
+        return {"target": target, "targetPort": key, "source": nodes_mapping_dict[value_dict["uuid"]], "sourcePort": value_dict["attributes"][0][1]}
     else:
-        return {'tn': target, 'th': key, "sn": nodes_mapping_dict[value_dict['uuid']], 'sh': None}
+        return {"target": target, "targetPort": key, "source": nodes_mapping_dict[value_dict["uuid"]], "sourcePort": None}
 
 
 def _get_edges_and_extend_nodes(flow_dict, nodes_mapping_dict, nodes_dict):
     edges_lst = []
-    for job in flow_dict['jobs']:
-        for k, v in job['function_kwargs'].items():
-            if isinstance(v, dict) and '@module' in v and '@class' in v and '@version' in v:
+    for job in flow_dict["jobs"]:
+        for k, v in job["function_kwargs"].items():
+            if isinstance(v, dict) and "@module" in v and "@class" in v and "@version" in v:
                 edges_lst.append(_get_edge_from_dict(
                     target=nodes_mapping_dict[job["uuid"]],
                     key=k,
                     value_dict=v,
                     nodes_mapping_dict=nodes_mapping_dict,
                 ))
-            elif isinstance(v, dict) and any([isinstance(el, dict) and '@module' in el and '@class' in el and '@version' in el for el in v.values()]):
+            elif isinstance(v, dict) and any([isinstance(el, dict) and "@module" in el and "@class" in el and "@version" in el for el in v.values()]):
                 node_dict_index = len(nodes_dict)
                 nodes_dict[node_dict_index] = get_dict
                 for kt, vt in v.items():
-                    if isinstance(vt, dict) and '@module' in vt and '@class' in vt and '@version' in vt:
+                    if isinstance(vt, dict) and "@module" in vt and "@class" in vt and "@version" in vt:
                         edges_lst.append(_get_edge_from_dict(
                             target=node_dict_index,
                             key=kt,
@@ -59,13 +59,13 @@ def _get_edges_and_extend_nodes(flow_dict, nodes_mapping_dict, nodes_dict):
                             nodes_dict[node_index] = vt
                         else:
                             node_index = {str(tv): tk for tk, tv in nodes_dict.items()}[str(vt)]
-                        edges_lst.append({'tn': node_dict_index, 'th': kt, "sn": node_index, 'sh': None})
-                edges_lst.append({'tn': nodes_mapping_dict[job["uuid"]], 'th': k, "sn": node_dict_index, 'sh': None})
-            elif isinstance(v, list) and any([isinstance(el, dict) and '@module' in el and '@class' in el and '@version' in el for el in v]):
+                        edges_lst.append({"target": node_dict_index, "targetPort": kt, "source": node_index, "sourcePort": None})
+                edges_lst.append({"target": nodes_mapping_dict[job["uuid"]], "targetPort": k, "source": node_dict_index, "sourcePort": None})
+            elif isinstance(v, list) and any([isinstance(el, dict) and "@module" in el and "@class" in el and "@version" in el for el in v]):
                 node_list_index = len(nodes_dict)
                 nodes_dict[node_list_index] = get_list
                 for kt, vt in enumerate(v):
-                    if isinstance(vt, dict) and '@module' in vt and '@class' in vt and '@version' in vt:
+                    if isinstance(vt, dict) and "@module" in vt and "@class" in vt and "@version" in vt:
                         edges_lst.append(_get_edge_from_dict(
                             target=node_list_index,
                             key=str(kt),
@@ -78,15 +78,15 @@ def _get_edges_and_extend_nodes(flow_dict, nodes_mapping_dict, nodes_dict):
                             nodes_dict[node_index] = vt
                         else:
                             node_index = {str(tv): tk for tk, tv in nodes_dict.items()}[str(vt)]
-                        edges_lst.append({'tn': node_list_index, 'th': kt, "sn": node_index, 'sh': None})
-                edges_lst.append({'tn': nodes_mapping_dict[job["uuid"]], 'th': k, "sn": node_list_index, 'sh': None})
+                        edges_lst.append({"target": node_list_index, "targetPort": kt, "source": node_index, "sourcePort": None})
+                edges_lst.append({"target": nodes_mapping_dict[job["uuid"]], "targetPort": k, "source": node_list_index, "sourcePort": None})
             else:
                 if v not in nodes_dict.values():
                     node_index = len(nodes_dict)
                     nodes_dict[node_index] = v
                 else:
                     node_index = {tv: tk for tk, tv in nodes_dict.items()}[v]
-                edges_lst.append({'tn': nodes_mapping_dict[job["uuid"]], 'th': k, "sn": node_index, 'sh': None})
+                edges_lst.append({"target": nodes_mapping_dict[job["uuid"]], "targetPort": k, "source": node_index, "sourcePort": None})
     return edges_lst, nodes_dict
 
 
@@ -99,7 +99,7 @@ def _resort_total_lst(total_dict, nodes_dict):
         for ind in sorted(total_dict.keys()):
             connect = total_dict[ind]
             if ind not in ordered_lst:
-                source_lst = [sd["sn"] for sd in connect.values()]
+                source_lst = [sd["source"] for sd in connect.values()]
                 if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
                     ordered_lst.append(ind)
                     total_new_dict[ind] = connect
@@ -109,11 +109,11 @@ def _resort_total_lst(total_dict, nodes_dict):
 def _group_edges(edges_lst):
     total_dict = {}
     for ed_major in edges_lst:
-        target_id = ed_major["tn"]
+        target_id = ed_major["target"]
         tmp_lst = []
         if target_id not in total_dict.keys():
             for ed in edges_lst:
-                if target_id == ed["tn"]:
+                if target_id == ed["target"]:
                     tmp_lst.append(ed)
             total_dict[target_id] = get_kwargs(lst=tmp_lst)
     return total_dict
@@ -139,8 +139,8 @@ def _get_workflow(nodes_dict, input_dict, total_dict, source_handles_dict):
             else:
                 fn = job(method=v)
             kwargs = {
-                kw: input_dict[vw['sn']] if vw['sn'] in input_dict else get_attr_helper(
-                    obj=memory_dict[vw['sn']], source_handle=vw['sh'])
+                kw: input_dict[vw["source"]] if vw["source"] in input_dict else get_attr_helper(
+                    obj=memory_dict[vw["source"]], source_handle=vw["sourcePort"])
                 for kw, vw in total_dict[k].items()
             }
             memory_dict[k] = fn(**kwargs)
@@ -160,15 +160,15 @@ def load_workflow_json(file_name):
 
     edges_new_lst = []
     for edge in content["edges"]:
-        if edge['sh'] is None:
+        if edge["sourcePort"] is None:
             edges_new_lst.append(edge)
         else:
             edges_new_lst.append(
                 {
-                    'tn': edge['tn'],
-                    'th': edge['th'],
-                    'sn': edge['sn'],
-                    'sh': str(edge['sh']),
+                    "target": edge["target"],
+                    "targetPort": edge["targetPort"],
+                    "source": edge["source"],
+                    "sourcePort": str(edge["sourcePort"]),
                 }
             )
 

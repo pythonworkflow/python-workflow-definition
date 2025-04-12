@@ -6,10 +6,10 @@
     {"id": 3, "value": 2}
   ],
   "edges": [
-    {"tn": 0, "th": "x", "sn": 2, "sh": null},
-    {"tn": 0, "th": "y", "sn": 3, "sh": null},
-    {"tn": 1, "th": "x", "sn": 0, "sh": "x"},
-    {"tn": 1, "th": "y", "sn": 0, "sh": "y"},
-    {"tn": 1, "th": "z", "sn": 0, "sh": "z"}
+    {"target": 0, "targetPort": "x", "source": 2, "sourcePort": null},
+    {"target": 0, "targetPort": "y", "source": 3, "sourcePort": null},
+    {"target": 1, "targetPort": "x", "source": 0, "sourcePort": "x"},
+    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "y"},
+    {"target": 1, "targetPort": "z", "source": 0, "sourcePort": "z"}
   ]
 }

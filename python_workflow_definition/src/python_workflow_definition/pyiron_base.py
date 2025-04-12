@@ -16,7 +16,7 @@ def _resort_total_lst(total_lst, nodes_dict):
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
-                source_lst = [sd["sn"] for sd in connect.values()]
+                source_lst = [sd["source"] for sd in connect.values()]
                 if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
@@ -24,15 +24,15 @@ def _resort_total_lst(total_lst, nodes_dict):
 
 
 def _group_edges(edges_lst):
-    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["tn"], reverse=True)
+    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["target"], reverse=True)
     total_lst, tmp_lst = [], []
-    target_id = edges_sorted_lst[0]["tn"]
+    target_id = edges_sorted_lst[0]["target"]
     for ed in edges_sorted_lst:
-        if target_id == ed["tn"]:
+        if target_id == ed["target"]:
             tmp_lst.append(ed)
         else:
             total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
-            target_id = ed["tn"]
+            target_id = ed["target"]
             tmp_lst = [ed]
     total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
     return total_lst
@@ -54,8 +54,8 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
             k: _get_source(
                 nodes_dict=nodes_dict,
                 delayed_object_dict=delayed_object_dict,
-                source=v["sn"],
-                sourceHandle=v["sh"],
+                source=v["source"],
+                sourceHandle=v["sourcePort"],
             )
             for k, v in input_dict.items()
         }
@@ -152,24 +152,24 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
             if isinstance(output, DelayedObject):
                 if output._list_index is not None:
                     edges_dict_lst.append({
-                        "tn": target,
-                        "th": target_handle,
-                        "sn": connection_dict[output_name],
-                        "sh": f"s_{output._list_index}",  # check for list index
+                        "target": target,
+                        "targetPort": target_handle,
+                        "source": connection_dict[output_name],
+                        "sourcePort": f"s_{output._list_index}",  # check for list index
                     })
                 else:
                     edges_dict_lst.append({
-                        "tn": target,
-                        "th": target_handle,
-                        "sn": connection_dict[output_name],
-                        "sh": output._output_key,  # check for list index
+                        "target": target,
+                        "targetPort": target_handle,
+                        "source": connection_dict[output_name],
+                        "sourcePort": output._output_key,  # check for list index
                     })
             else:
                 edges_dict_lst.append({
-                    "tn": target,
-                    "th": target_handle,
-                    "sn": connection_dict[output_name],
-                    "sh": None,
+                    "target": target,
+                    "targetPort": target_handle,
+                    "source": connection_dict[output_name],
+                    "sourcePort": None,
                 })
             existing_connection_lst.append(connection_name)
     return edges_dict_lst

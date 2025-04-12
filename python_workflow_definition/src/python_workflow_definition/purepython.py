@@ -13,7 +13,7 @@ def resort_total_lst(total_lst, nodes_dict):
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
-                source_lst = [sd["sn"] for sd in connect.values()]
+                source_lst = [sd["source"] for sd in connect.values()]
                 if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
@@ -21,22 +21,22 @@ def resort_total_lst(total_lst, nodes_dict):
 
 
 def group_edges(edges_lst):
-    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["tn"], reverse=True)
+    edges_sorted_lst = sorted(edges_lst, key=lambda x: x["target"], reverse=True)
     total_lst, tmp_lst = [], []
-    target_id = edges_sorted_lst[0]["tn"]
+    target_id = edges_sorted_lst[0]["target"]
     for ed in edges_sorted_lst:
-        if target_id == ed["tn"]:
+        if target_id == ed["target"]:
             tmp_lst.append(ed)
         else:
             total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
-            target_id = ed["tn"]
+            target_id = ed["target"]
             tmp_lst = [ed]
     total_lst.append((target_id, get_kwargs(lst=tmp_lst)))
     return total_lst
 
 
 def _get_value(result_dict, nodes_new_dict, link_dict):
-    source, source_handle = link_dict["sn"], link_dict["sh"]
+    source, source_handle = link_dict["source"], link_dict["sourcePort"]
     if source in result_dict.keys():
         result = result_dict[source]
     elif source in nodes_new_dict.keys():

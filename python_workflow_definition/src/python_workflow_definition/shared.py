@@ -9,16 +9,16 @@ def get_list(**kwargs):
 
 
 def get_kwargs(lst):
-    return {t["th"]: {"sn": t["sn"], "sh": t["sh"]} for t in lst}
+    return {t["targetPort"]: {"source": t["source"], "sourcePort": t["sourcePort"]} for t in lst}
 
 
 def get_source_handles(edges_lst):
     source_handle_dict = {}
     for ed in edges_lst:
-        if ed["sn"] not in source_handle_dict.keys():
-            source_handle_dict[ed["sn"]] = [ed["sh"]]
+        if ed["source"] not in source_handle_dict.keys():
+            source_handle_dict[ed["source"]] = [ed["sourcePort"]]
         else:
-            source_handle_dict[ed["sn"]].append(ed["sh"])
+            source_handle_dict[ed["source"]].append(ed["sourcePort"])
     return {
         k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
         for k, v in source_handle_dict.items()
