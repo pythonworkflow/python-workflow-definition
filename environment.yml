@@ -7,3 +7,4 @@ dependencies:
 - pygraphviz=1.14
 - aiida-workgraph=0.5.1
 - conda_subprocess =0.0.6
+- networkx=3.4.2
