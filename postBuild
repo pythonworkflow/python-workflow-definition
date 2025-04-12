@@ -1,7 +1,7 @@
-pip install -e qe_xml_parser
-pip install -e python_workflow_definition
-verdi presto --profile-name pwd
 conda env create -n preprocessing -f source/envs/preprocessing.yaml -y
 conda env create -n processing -f source/envs/processing.yaml -y
 conda env create -n postprocessing -f source/envs/postprocessing.yaml -y
 conda env update --name base --file environment_qe.yml
+pip install -e qe_xml_parser
+pip install -e python_workflow_definition
+verdi presto --profile-name pwd
