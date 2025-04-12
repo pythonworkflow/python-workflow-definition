@@ -9,16 +9,16 @@
     "6": 2.0
   },
   "edges": [
-    {"tn": 0, "th": "domain_size", "sn": 6, "sh": null},
-    {"tn": 1, "th": "gmsh_output_file", "sn": 0, "sh": null},
-    {"tn": 2, "th": "meshio_output_xdmf", "sn": 1, "sh": "xdmf_file"},
-    {"tn": 2, "th": "meshio_output_h5", "sn": 1, "sh": "h5_file"},
-    {"tn": 3, "th": "poisson_output_pvd_file", "sn": 2, "sh": "pvd_file"},
-    {"tn": 3, "th": "poisson_output_vtu_file", "sn": 2, "sh": "vtu_file"},
-    {"tn": 4, "th": "pvbatch_output_file", "sn": 3, "sh": null},
-    {"tn": 4, "th": "ndofs", "sn": 2, "sh": "numdofs"},
-    {"tn": 4, "th": "domain_size", "sn": 6, "sh": null},
-    {"tn": 5, "th": "macros_tex", "sn": 4, "sh": null},
-    {"tn": 5, "th": "plot_file", "sn": 3, "sh": null}
+    {"target": 0, "targetPort": "domain_size", "source": 6, "sourcePort": null},
+    {"target": 1, "targetPort": "gmsh_output_file", "source": 0, "sourcePort": null},
+    {"target": 2, "targetPort": "meshio_output_xdmf", "source": 1, "sourcePort": "xdmf_file"},
+    {"target": 2, "targetPort": "meshio_output_h5", "source": 1, "sourcePort": "h5_file"},
+    {"target": 3, "targetPort": "poisson_output_pvd_file", "source": 2, "sourcePort": "pvd_file"},
+    {"target": 3, "targetPort": "poisson_output_vtu_file", "source": 2, "sourcePort": "vtu_file"},
+    {"target": 4, "targetPort": "pvbatch_output_file", "source": 3, "sourcePort": null},
+    {"target": 4, "targetPort": "ndofs", "source": 2, "sourcePort": "numdofs"},
+    {"target": 4, "targetPort": "domain_size", "source": 6, "sourcePort": null},
+    {"target": 5, "targetPort": "macros_tex", "source": 4, "sourcePort": null},
+    {"target": 5, "targetPort": "plot_file", "source": 3, "sourcePort": null}
   ]
 }
