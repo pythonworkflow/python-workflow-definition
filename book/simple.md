@@ -41,10 +41,10 @@ JSON file:
 }
 ```
 The abbreviations in the definition of the edges are:
-* `tn` - target node 
-* `th` - target handle - for a node with multiple input parameters the target handle specifies which input parameter to use.
-* `sn` - source node 
-* `sh` - source handle - for a node with multiple output parameters the source handle specifies which output parameter to use.
+* `target` - target node 
+* `targetPort` - target port - for a node with multiple input parameters the target port specifies which input parameter to use.
+* `source` - source node 
+* `sourcePort` - source port - for a node with multiple output parameters the source port specifies which output parameter to use.
 
 As the workflow does not require any additional resources, as it is only using built-in functionality of the Python standard 
 library.
