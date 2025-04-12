@@ -34,14 +34,14 @@ Python module. The connection of the Python functions are stored in the [workflo
 JSON file:
 ```
 {
-  "nodes": {
-    "0": "simple_workflow.add_x_and_y_and_z",
-    "1": "simple_workflow.add_x_and_y",
-    "2": "simple_workflow.add_x_and_y",
-    "3": "simple_workflow.add_x_and_y",
-    "4": 1,
-    "5": 2
-  },
+  "nodes": [
+    {"id": 0, "value": "simple_workflow.add_x_and_y_and_z"},
+    {"id": 1, "value": "simple_workflow.add_x_and_y"},
+    {"id": 2, "value": "simple_workflow.add_x_and_y"},
+    {"id": 3, "value": "simple_workflow.add_x_and_y"},
+    {"id": 4, "value": 1},
+    {"id": 5, "value": 2}
+  ],
   "edges": [
     {"target": 0, "targetPort": "x", "source": 1, "sourcePort": "x"},
     {"target": 1, "targetPort": "x", "source": 4, "sourcePort": null},
