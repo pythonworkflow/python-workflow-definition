@@ -217,7 +217,7 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
             mod = v.__module__
             if mod == "python_workflow_definition.pyiron_base":
                 mod = "python_workflow_definition.shared"
-            nodes_store_lst.append({"id": k, "value": mod + "." + v.__name__})
+            nodes_store_lst.append({"id": k, "function": mod + "." + v.__name__})
         elif isinstance(v, np.ndarray):
             nodes_store_lst.append({"id": k, "value": v.tolist()})
         else:

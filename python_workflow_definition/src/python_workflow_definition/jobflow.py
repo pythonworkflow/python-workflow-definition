@@ -207,7 +207,7 @@ def write_workflow_json(flow, file_name="workflow.json"):
     nodes_store_lst = []
     for k, v in nodes_dict.items():
         if isfunction(v):
-            nodes_store_lst.append({"id": k, "value": v.__module__ + "." + v.__name__})
+            nodes_store_lst.append({"id": k, "function": v.__module__ + "." + v.__name__})
         elif isinstance(v, np.ndarray):
             nodes_store_lst.append({"id": k, "value": v.tolist()})
         else:

@@ -78,7 +78,7 @@ def write_workflow_json(wg, file_name):
 
         callable_name = executor["callable_name"]
         callable_name = f"{executor['module_path']}.{callable_name}"
-        data["nodes"].append({"id": i, "value": callable_name})
+        data["nodes"].append({"id": i, "function": callable_name})
         i += 1
 
     for link in wg.links:
