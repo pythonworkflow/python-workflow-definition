@@ -5,7 +5,7 @@ from inspect import isfunction
 import numpy as np
 from jobflow import job, Flow
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles
+from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles, convert_nodes_list_to_dict
 
 
 def _get_function_dict(flow):
@@ -173,7 +173,7 @@ def load_workflow_json(file_name):
             )
 
     nodes_new_dict = {}
-    for k, v in content["nodes"].items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             mod = import_module(p)
@@ -204,14 +204,14 @@ def write_workflow_json(flow, file_name="workflow.json"):
         nodes_dict=nodes_dict,
     )
 
-    nodes_store_dict = {}
+    nodes_store_lst = []
     for k, v in nodes_dict.items():
         if isfunction(v):
-            nodes_store_dict[k] = v.__module__ + "." + v.__name__
+            nodes_store_lst.append({"id": k, "function": v.__module__ + "." + v.__name__})
         elif isinstance(v, np.ndarray):
-            nodes_store_dict[k] = v.tolist()
+            nodes_store_lst.append({"id": k, "value": v.tolist()})
         else:
-            nodes_store_dict[k] = v
+            nodes_store_lst.append({"id": k, "value": v})
 
     with open(file_name, "w") as f:
-        json.dump({"nodes": nodes_store_dict, "edges": edges_lst}, f)
+        json.dump({"nodes": nodes_store_lst, "edges": edges_lst}, f)

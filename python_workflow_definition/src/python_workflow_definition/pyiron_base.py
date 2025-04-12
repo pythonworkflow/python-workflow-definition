@@ -6,7 +6,7 @@ import numpy as np
 from pyiron_base import job
 from pyiron_base.project.delayed import DelayedObject
 
-from python_workflow_definition.shared import get_kwargs, get_source_handles
+from python_workflow_definition.shared import get_kwargs, get_source_handles, convert_nodes_list_to_dict
 
 
 def _resort_total_lst(total_lst, nodes_dict):
@@ -181,7 +181,7 @@ def load_workflow_json(project, file_name):
 
     edges_new_lst = content["edges"]
     nodes_new_dict = {}
-    for k, v in content["nodes"].items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             if p == "python_workflow_definition.shared":
@@ -211,17 +211,17 @@ def write_workflow_json(delayed_object, file_name="workflow.json"):
     nodes_new_dict = _get_nodes(connection_dict=connection_dict, delayed_object_updated_dict=delayed_object_updated_dict)
     edges_new_lst = _get_edges_dict(edges_lst=edges_lst, nodes_dict=nodes_dict, connection_dict=connection_dict, lookup_dict=lookup_dict)
 
-    nodes_store_dict = {}
+    nodes_store_lst = []
     for k, v in nodes_new_dict.items():
         if isfunction(v):
             mod = v.__module__
             if mod == "python_workflow_definition.pyiron_base":
                 mod = "python_workflow_definition.shared"
-            nodes_store_dict[k] = mod + "." + v.__name__
+            nodes_store_lst.append({"id": k, "function": mod + "." + v.__name__})
         elif isinstance(v, np.ndarray):
-            nodes_store_dict[k] = v.tolist()
+            nodes_store_lst.append({"id": k, "value": v.tolist()})
         else:
-            nodes_store_dict[k] = v
+            nodes_store_lst.append({"id": k, "value": v})
 
     with open(file_name, "w") as f:
-        json.dump({"nodes": nodes_store_dict, "edges": edges_new_lst}, f)
+        json.dump({"nodes": nodes_store_lst, "edges": edges_new_lst}, f)
