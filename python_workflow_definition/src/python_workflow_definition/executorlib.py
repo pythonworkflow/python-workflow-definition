@@ -3,7 +3,17 @@ from importlib import import_module
 from inspect import isfunction
 
 
-from python_workflow_definition.shared import get_dict, get_list, get_kwargs, get_source_handles, convert_nodes_list_to_dict
+from python_workflow_definition.shared import (
+    get_dict,
+    get_list,
+    get_kwargs,
+    get_source_handles,
+    convert_nodes_list_to_dict,
+    NODES_LABEL,
+    EDGES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+)
 from python_workflow_definition.purepython import resort_total_lst, group_edges
 
 
@@ -12,7 +22,7 @@ def get_item(obj, key):
 
 
 def _get_value(result_dict, nodes_new_dict, link_dict, exe):
-    source, source_handle = link_dict["source"], link_dict["sourcePort"]
+    source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
     if source in result_dict.keys():
         result = result_dict[source]
     elif source in nodes_new_dict.keys():
@@ -29,10 +39,10 @@ def load_workflow_json(file_name, exe):
     with open(file_name, "r") as f:
         content = json.load(f)
 
-    edges_new_lst = content["edges"]
+    edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
 
-    for k, v in convert_nodes_list_to_dict(nodes_list=content["nodes"]).items():
+    for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
             p, m = v.rsplit('.', 1)
             mod = import_module(p)
