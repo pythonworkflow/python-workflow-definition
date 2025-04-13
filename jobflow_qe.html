@@ -684,8 +684,8 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
-<span class="n">delayed_object</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -695,7 +695,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
