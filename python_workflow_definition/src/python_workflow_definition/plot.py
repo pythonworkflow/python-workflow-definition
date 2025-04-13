@@ -35,7 +35,7 @@ def plot(file_name):
             if v[SOURCE_PORT_LABEL] is None:
                 edge_label_dict[v[SOURCE_LABEL]].append(k)
             else:
-                edge_label_dict[v[SOURCE_LABEL]].append(k + "=" + v[SOURCE_PORT_LABEL])
+                edge_label_dict[v[SOURCE_LABEL]].append(k + "=result[" + v[SOURCE_PORT_LABEL] + "]")
         for k, v in edge_label_dict.items():
             graph.add_edge(str(k), str(target_node), label=", ".join(v))
 
