@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="376pt" height="223pt" viewBox="0.00 0.00 375.58 222.50">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="401pt" height="223pt" viewBox="0.00 0.00 401.04 222.50">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 218.5)">
-<polygon fill="white" stroke="none" points="-4,4 -4,-218.5 371.58,-218.5 371.58,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-218.5 397.04,-218.5 397.04,4 -4,4"/>
 <!-- 0 -->
 <g id="node1" class="node">
 <title>0</title>
@@ -18,7 +18,7 @@
 <title>0-&gt;1</title>
 <path fill="none" stroke="black" d="M183.79,-89.01C183.79,-77.18 183.79,-61.2 183.79,-47.5"/>
 <polygon fill="black" stroke="black" points="187.29,-47.72 183.79,-37.72 180.29,-47.72 187.29,-47.72"/>
-<text text-anchor="middle" x="235.91" y="-57.95" font-family="Times,serif" font-size="14.00">prod=x, div=y</text>
+<text text-anchor="middle" x="288.41" y="-57.95" font-family="Times,serif" font-size="14.00">x=result[prod], y=result[div]</text>
 </g>
 <!-- 2 -->
 <g id="node3" class="node">
