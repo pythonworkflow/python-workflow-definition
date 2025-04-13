@@ -25,7 +25,9 @@ def load_workflow_json(file_name):
     wg = WorkGraph()
     task_name_mapping = {}
 
-    for id, identifier in convert_nodes_list_to_dict(nodes_list=data[NODES_LABEL]).items():
+    for id, identifier in convert_nodes_list_to_dict(
+        nodes_list=data[NODES_LABEL]
+    ).items():
         if isinstance(identifier, str) and "." in identifier:
             p, m = identifier.rsplit(".", 1)
             mod = import_module(p)
@@ -45,7 +47,7 @@ def load_workflow_json(file_name):
         # if the input is not exit, it means we pass the data into to the kwargs
         # in this case, we add the input socket
         if link[TARGET_PORT_LABEL] not in to_task.inputs:
-            to_socket = to_task.add_input( "workgraph.any", name=link[TARGET_PORT_LABEL])
+            to_socket = to_task.add_input("workgraph.any", name=link[TARGET_PORT_LABEL])
         else:
             to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
         from_task = task_name_mapping[str(link[SOURCE_LABEL])]
@@ -58,7 +60,7 @@ def load_workflow_json(file_name):
                 # because we are not define the outputs explicitly during the pythonjob creation
                 # we add it here, and assume the output exit
                 if link[SOURCE_PORT_LABEL] not in from_task.outputs:
-                # if str(link["sourcePort"]) not in from_task.outputs:
+                    # if str(link["sourcePort"]) not in from_task.outputs:
                     from_socket = from_task.add_output(
                         "workgraph.any",
                         name=link[SOURCE_PORT_LABEL],
@@ -99,7 +101,7 @@ def write_workflow_json(wg, file_name):
         link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
         link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
         data[EDGES_LABEL].append(link_data)
-    
+
     for node in wg.tasks:
         for input in node.inputs:
             # assume namespace is not used as input
@@ -121,12 +123,14 @@ def write_workflow_json(wg, file_name):
                     i += 1
                 else:
                     input_node_name = data_node_name_mapping[input.value.uuid]
-                data[EDGES_LABEL].append({
-                    TARGET_LABEL: node_name_mapping[node.name],
-                    TARGET_PORT_LABEL: input._name,
-                    SOURCE_LABEL: input_node_name,
-                    SOURCE_PORT_LABEL: None
-                })
+                data[EDGES_LABEL].append(
+                    {
+                        TARGET_LABEL: node_name_mapping[node.name],
+                        TARGET_PORT_LABEL: input._name,
+                        SOURCE_LABEL: input_node_name,
+                        SOURCE_PORT_LABEL: None,
+                    }
+                )
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
         json.dump(data, f, indent=2)

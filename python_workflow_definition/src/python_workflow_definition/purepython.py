@@ -20,13 +20,17 @@ from python_workflow_definition.shared import (
 
 def resort_total_lst(total_lst, nodes_dict):
     nodes_with_dep_lst = list(sorted([v[0] for v in total_lst]))
-    nodes_without_dep_lst = [k for k in nodes_dict.keys() if k not in nodes_with_dep_lst]
+    nodes_without_dep_lst = [
+        k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
+    ]
     ordered_lst, total_new_lst = [], []
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
-                if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
+                if all(
+                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                ):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
     return total_new_lst
@@ -69,7 +73,7 @@ def load_workflow_json(file_name):
     nodes_new_dict = {}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
-            p, m = v.rsplit('.', 1)
+            p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
         else:
@@ -84,7 +88,9 @@ def load_workflow_json(file_name):
         node = nodes_new_dict[lst[0]]
         if isfunction(node):
             kwargs = {
-                k: _get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v)
+                k: _get_value(
+                    result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v
+                )
                 for k, v in lst[1].items()
             }
             result_dict[lst[0]] = node(**kwargs)
