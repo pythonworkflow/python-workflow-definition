@@ -241,7 +241,7 @@ def load_workflow_json(project, file_name):
         source_handle_dict=source_handle_dict,
         pyiron_project=project,
     )
-    return delayed_object_dict[list(delayed_object_dict.keys())[-1]]
+    return list(delayed_object_dict.values())
 
 
 def write_workflow_json(delayed_object, file_name="workflow.json"):
