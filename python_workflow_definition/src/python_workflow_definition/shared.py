@@ -20,8 +20,9 @@ def get_kwargs(lst):
     return {
         t[TARGET_PORT_LABEL]: {
             SOURCE_LABEL: t[SOURCE_LABEL],
-            SOURCE_PORT_LABEL: t[SOURCE_PORT_LABEL]
-        } for t in lst
+            SOURCE_PORT_LABEL: t[SOURCE_PORT_LABEL],
+        }
+        for t in lst
     }
 
 

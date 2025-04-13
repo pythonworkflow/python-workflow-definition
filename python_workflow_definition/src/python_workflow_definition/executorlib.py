@@ -44,7 +44,7 @@ def load_workflow_json(file_name, exe):
 
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
-            p, m = v.rsplit('.', 1)
+            p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
         else:
@@ -59,7 +59,12 @@ def load_workflow_json(file_name, exe):
         node = nodes_new_dict[lst[0]]
         if isfunction(node):
             kwargs = {
-                k: _get_value(result_dict=result_dict, nodes_new_dict=nodes_new_dict, link_dict=v, exe=exe)
+                k: _get_value(
+                    result_dict=result_dict,
+                    nodes_new_dict=nodes_new_dict,
+                    link_dict=v,
+                    exe=exe,
+                )
                 for k, v in lst[1].items()
             }
             result_dict[lst[0]] = exe.submit(node, **kwargs)

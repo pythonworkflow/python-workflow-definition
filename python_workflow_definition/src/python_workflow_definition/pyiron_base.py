@@ -21,13 +21,17 @@ from python_workflow_definition.shared import (
 
 def _resort_total_lst(total_lst, nodes_dict):
     nodes_with_dep_lst = list(sorted([v[0] for v in total_lst]))
-    nodes_without_dep_lst = [k for k in nodes_dict.keys() if k not in nodes_with_dep_lst]
+    nodes_without_dep_lst = [
+        k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
+    ]
     ordered_lst, total_new_lst = [], []
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
-                if all([s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]):
+                if all(
+                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                ):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
     return total_new_lst
@@ -50,11 +54,14 @@ def _group_edges(edges_lst):
 
 def _get_source(nodes_dict, delayed_object_dict, source, sourceHandle):
     if source in delayed_object_dict.keys() and sourceHandle is not None:
-        return delayed_object_dict[source].__getattr__("output").__getattr__(sourceHandle)
+        return (
+            delayed_object_dict[source].__getattr__("output").__getattr__(sourceHandle)
+        )
     elif source in delayed_object_dict.keys():
         return delayed_object_dict[source]
     else:
         return nodes_dict[source]
+
 
 def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_project):
     delayed_object_dict = {}
@@ -108,8 +115,13 @@ def _get_unique_objects(nodes_dict):
             delayed_object_dict[k] = DelayedObject(function=get_list)
             delayed_object_dict[k]._input = {i: el for i, el in enumerate(v)}
             delayed_object_dict[k]._python_function = get_list
-        elif isinstance(v, dict) and any([isinstance(el, DelayedObject) for el in v.values()]):
-            delayed_object_dict[k] = DelayedObject(function=get_dict, **v,)
+        elif isinstance(v, dict) and any(
+            [isinstance(el, DelayedObject) for el in v.values()]
+        ):
+            delayed_object_dict[k] = DelayedObject(
+                function=get_dict,
+                **v,
+            )
             delayed_object_dict[k]._python_function = get_dict
             delayed_object_dict[k]._input = v
     unique_lst = []
@@ -117,7 +129,11 @@ def _get_unique_objects(nodes_dict):
     for dobj in delayed_object_dict.keys():
         match = False
         for obj in unique_lst:
-            if delayed_object_updated_dict[obj]._python_function == delayed_object_dict[dobj]._python_function and delayed_object_dict[dobj]._input == delayed_object_dict[obj]._input:
+            if (
+                delayed_object_updated_dict[obj]._python_function
+                == delayed_object_dict[dobj]._python_function
+                and delayed_object_dict[dobj]._input == delayed_object_dict[obj]._input
+            ):
                 delayed_object_updated_dict[obj] = delayed_object_dict[obj]
                 match_dict[dobj] = obj
                 match = True
@@ -127,7 +143,16 @@ def _get_unique_objects(nodes_dict):
             delayed_object_updated_dict[dobj] = delayed_object_dict[dobj]
     update_dict = {}
     for k, v in nodes_dict.items():
-        if not (isinstance(v, DelayedObject) or (isinstance(v, list) and any([isinstance(el, DelayedObject) for el in v])) or (isinstance(v, dict) and any([isinstance(el, DelayedObject) for el in v.values()]))):
+        if not (
+            isinstance(v, DelayedObject)
+            or (
+                isinstance(v, list) and any([isinstance(el, DelayedObject) for el in v])
+            )
+            or (
+                isinstance(v, dict)
+                and any([isinstance(el, DelayedObject) for el in v.values()])
+            )
+        ):
             update_dict[k] = v
     delayed_object_updated_dict.update(update_dict)
     return delayed_object_updated_dict, match_dict
@@ -161,26 +186,32 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
             output = nodes_dict[output_name]
             if isinstance(output, DelayedObject):
                 if output._list_index is not None:
-                    edges_dict_lst.append({
-                        TARGET_LABEL: target,
-                        TARGET_PORT_LABEL: target_handle,
-                        SOURCE_LABEL: connection_dict[output_name],
-                        SOURCE_PORT_LABEL: f"s_{output._list_index}",  # check for list index
-                    })
+                    edges_dict_lst.append(
+                        {
+                            TARGET_LABEL: target,
+                            TARGET_PORT_LABEL: target_handle,
+                            SOURCE_LABEL: connection_dict[output_name],
+                            SOURCE_PORT_LABEL: f"s_{output._list_index}",  # check for list index
+                        }
+                    )
                 else:
-                    edges_dict_lst.append({
+                    edges_dict_lst.append(
+                        {
+                            TARGET_LABEL: target,
+                            TARGET_PORT_LABEL: target_handle,
+                            SOURCE_LABEL: connection_dict[output_name],
+                            SOURCE_PORT_LABEL: output._output_key,  # check for list index
+                        }
+                    )
+            else:
+                edges_dict_lst.append(
+                    {
                         TARGET_LABEL: target,
                         TARGET_PORT_LABEL: target_handle,
                         SOURCE_LABEL: connection_dict[output_name],
-                        SOURCE_PORT_LABEL: output._output_key,  # check for list index
-                    })
-            else:
-                edges_dict_lst.append({
-                    TARGET_LABEL: target,
-                    TARGET_PORT_LABEL: target_handle,
-                    SOURCE_LABEL: connection_dict[output_name],
-                    SOURCE_PORT_LABEL: None,
-                })
+                        SOURCE_PORT_LABEL: None,
+                    }
+                )
             existing_connection_lst.append(connection_name)
     return edges_dict_lst
 
@@ -193,7 +224,7 @@ def load_workflow_json(project, file_name):
     nodes_new_dict = {}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
-            p, m = v.rsplit('.', 1)
+            p, m = v.rsplit(".", 1)
             if p == "python_workflow_definition.shared":
                 p = "python_workflow_definition.pyiron_base"
             mod = import_module(p)
@@ -215,11 +246,23 @@ def load_workflow_json(project, file_name):
 
 def write_workflow_json(delayed_object, file_name="workflow.json"):
     nodes_dict, edges_lst = delayed_object.get_graph()
-    nodes_dict, edges_lst = _remove_server_obj(nodes_dict=nodes_dict, edges_lst=edges_lst)
+    nodes_dict, edges_lst = _remove_server_obj(
+        nodes_dict=nodes_dict, edges_lst=edges_lst
+    )
     delayed_object_updated_dict, match_dict = _get_unique_objects(nodes_dict=nodes_dict)
-    connection_dict, lookup_dict = _get_connection_dict(delayed_object_updated_dict=delayed_object_updated_dict, match_dict=match_dict)
-    nodes_new_dict = _get_nodes(connection_dict=connection_dict, delayed_object_updated_dict=delayed_object_updated_dict)
-    edges_new_lst = _get_edges_dict(edges_lst=edges_lst, nodes_dict=nodes_dict, connection_dict=connection_dict, lookup_dict=lookup_dict)
+    connection_dict, lookup_dict = _get_connection_dict(
+        delayed_object_updated_dict=delayed_object_updated_dict, match_dict=match_dict
+    )
+    nodes_new_dict = _get_nodes(
+        connection_dict=connection_dict,
+        delayed_object_updated_dict=delayed_object_updated_dict,
+    )
+    edges_new_lst = _get_edges_dict(
+        edges_lst=edges_lst,
+        nodes_dict=nodes_dict,
+        connection_dict=connection_dict,
+        lookup_dict=lookup_dict,
+    )
 
     nodes_store_lst = []
     for k, v in nodes_new_dict.items():
