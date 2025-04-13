@@ -3,7 +3,7 @@ channels:
 dependencies:
 - python=3.12
 - jobflow=0.1.19
-- pyiron_base=0.11.8
+- pyiron_base=0.11.10
 - pygraphviz=1.14
 - aiida-workgraph=0.5.1
 - conda_subprocess =0.0.6
