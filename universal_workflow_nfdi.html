@@ -579,13 +579,6 @@ document.write(`
 <h2>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
 </pre></div>
 </div>
@@ -593,17 +586,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-<span class="n">pr</span><span class="o">.</span><span class="n">remove_jobs</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">silently</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "e4591fff56c14d12b9c26bd094df0a9f"}</script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_nfdi.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_nfdi.json&quot;</span><span class="p">)</span>
 <span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -631,161 +614,6 @@ The job compile_paper_3cee534ffe692833d37faf1fd2170cb6 was saved and received th
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span><span class="o">.</span><span class="n">job_table</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>status</th>
-      <th>chemicalformula</th>
-      <th>job</th>
-      <th>subjob</th>
-      <th>projectpath</th>
-      <th>project</th>
-      <th>timestart</th>
-      <th>timestop</th>
-      <th>totalcputime</th>
-      <th>computer</th>
-      <th>hamilton</th>
-      <th>hamversion</th>
-      <th>parentid</th>
-      <th>masterid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>generate_mesh_0b48cf5155cd6802c17d20bb58104132</td>
-      <td>/generate_mesh_0b48cf5155cd6802c17d20bb58104132</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:06.270304</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43</td>
-      <td>/convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:07.725818</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>poisson_a0224b23ceb2119d105a5d98ef37f93e</td>
-      <td>/poisson_a0224b23ceb2119d105a5d98ef37f93e</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:09.188673</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b</td>
-      <td>/plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:12.008854</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>substitute_macros_874fc185ecec04b4cb9537c58b7efb7b</td>
-      <td>/substitute_macros_874fc185ecec04b4cb9537c58b7efb7b</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:13.518433</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>compile_paper_3cee534ffe692833d37faf1fd2170cb6</td>
-      <td>/compile_paper_3cee534ffe692833d37faf1fd2170cb6</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 06:55:14.438081</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="python">

@@ -559,13 +559,6 @@ document.write(`
 <h2>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
 </pre></div>
 </div>
@@ -573,17 +566,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-<span class="n">pr</span><span class="o">.</span><span class="n">remove_jobs</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">silently</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f86d15b608244799abdfa8d9f8bcd8cc"}</script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_simple.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_simple.json&quot;</span><span class="p">)</span>
 <span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -607,89 +590,6 @@ The job add_x_and_y_82c0f2025c97ddd328aaebe50fb30c48 was saved and received the 
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span><span class="o">.</span><span class="n">job_table</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>status</th>
-      <th>chemicalformula</th>
-      <th>job</th>
-      <th>subjob</th>
-      <th>projectpath</th>
-      <th>project</th>
-      <th>timestart</th>
-      <th>timestop</th>
-      <th>totalcputime</th>
-      <th>computer</th>
-      <th>hamilton</th>
-      <th>hamversion</th>
-      <th>parentid</th>
-      <th>masterid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>get_prod_and_div_5e64acfa88dc01309cd4ba60143865e3</td>
-      <td>/get_prod_and_div_5e64acfa88dc01309cd4ba60143865e3</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 07:08:46.958268</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>finished</td>
-      <td>None</td>
-      <td>add_x_and_y_82c0f2025c97ddd328aaebe50fb30c48</td>
-      <td>/add_x_and_y_82c0f2025c97ddd328aaebe50fb30c48</td>
-      <td>None</td>
-      <td>/home/jovyan/test/</td>
-      <td>2025-04-13 07:08:47.080709</td>
-      <td>None</td>
-      <td>None</td>
-      <td>pyiron@jupyter-pyiron-dev-pyth-flow-definition-cmhhpfb1#1</td>
-      <td>PythonFunctionContainerJob</td>
-      <td>0.4</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="python">

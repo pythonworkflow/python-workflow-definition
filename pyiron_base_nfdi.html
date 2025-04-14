@@ -408,7 +408,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span><span class="p">,</span> <span class="n">job</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
 </pre></div>
@@ -429,16 +429,6 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-<span class="n">pr</span><span class="o">.</span><span class="n">remove_jobs</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">silently</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ff6d4bafbd7c4f0f9ac5a1bef732e8a9"}</script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain_size</span> <span class="o">=</span> <span class="mf">2.0</span>
 </pre></div>
 </div>
@@ -448,7 +438,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gmsh_output_file</span> <span class="o">=</span> <span class="n">generate_mesh</span><span class="p">(</span>
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -458,7 +447,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshio_output_dict</span> <span class="o">=</span> <span class="n">convert_to_xdmf</span><span class="p">(</span>
     <span class="n">gmsh_output_file</span><span class="o">=</span><span class="n">gmsh_output_file</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -469,7 +457,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span>
     <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">xdmf_file</span><span class="p">,</span> 
     <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">h5_file</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -480,7 +467,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">plot_over_line</span><span class="p">(</span>
     <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">pvd_file</span><span class="p">,</span> 
     <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">vtu_file</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -492,7 +478,6 @@ document.write(`
     <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="p">,</span> 
     <span class="n">ndofs</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">numdofs</span><span class="p">,</span> 
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -503,7 +488,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paper_output</span> <span class="o">=</span> <span class="n">compile_paper</span><span class="p">(</span>
     <span class="n">macros_tex</span><span class="o">=</span><span class="n">macros_tex_file</span><span class="p">,</span> 
     <span class="n">plot_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="p">,</span>
-    <span class="n">pyiron_project</span><span class="o">=</span><span class="n">pr</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
