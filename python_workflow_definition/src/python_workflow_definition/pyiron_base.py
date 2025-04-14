@@ -3,7 +3,7 @@ from inspect import isfunction
 import json
 
 import numpy as np
-from pyiron_base import job
+from pyiron_base import job, Project
 from pyiron_base.project.delayed import DelayedObject
 
 from python_workflow_definition.shared import (
@@ -216,7 +216,10 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
     return edges_dict_lst
 
 
-def load_workflow_json(project, file_name):
+def load_workflow_json(file_name, project=None):
+    if project is None:
+        project = Project(".")
+
     with open(file_name, "r") as f:
         content = json.load(f)
 
