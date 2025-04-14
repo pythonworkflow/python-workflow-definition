@@ -218,7 +218,7 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
 
 def load_workflow_json(file_name, project=None):
     if project is None:
-        project = Project()
+        project = Project(".")
 
     with open(file_name, "r") as f:
         content = json.load(f)
