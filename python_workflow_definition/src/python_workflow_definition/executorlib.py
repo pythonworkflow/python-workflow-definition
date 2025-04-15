@@ -1,6 +1,7 @@
-import json
+from concurrent.futures import Executor
 from importlib import import_module
 from inspect import isfunction
+import json
 
 
 from python_workflow_definition.shared import (
@@ -21,7 +22,7 @@ def get_item(obj, key):
     return obj[key]
 
 
-def _get_value(result_dict, nodes_new_dict, link_dict, exe):
+def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict, exe: Executor):
     source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
     if source in result_dict.keys():
         result = result_dict[source]
@@ -35,7 +36,7 @@ def _get_value(result_dict, nodes_new_dict, link_dict, exe):
         return exe.submit(fn=get_item, obj=result, key=source_handle)
 
 
-def load_workflow_json(file_name, exe):
+def load_workflow_json(file_name: str, exe: Executor):
     with open(file_name, "r") as f:
         content = json.load(f)
 

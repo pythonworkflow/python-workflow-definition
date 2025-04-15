@@ -1,6 +1,7 @@
 from importlib import import_module
 from inspect import isfunction
 import json
+from typing import Optional
 
 import numpy as np
 from pyiron_base import job, Project
@@ -19,7 +20,7 @@ from python_workflow_definition.shared import (
 )
 
 
-def _resort_total_lst(total_lst, nodes_dict):
+def _resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
     nodes_with_dep_lst = list(sorted([v[0] for v in total_lst]))
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
@@ -37,7 +38,7 @@ def _resort_total_lst(total_lst, nodes_dict):
     return total_new_lst
 
 
-def _group_edges(edges_lst):
+def _group_edges(edges_lst: list) -> list:
     edges_sorted_lst = sorted(edges_lst, key=lambda x: x[TARGET_LABEL], reverse=True)
     total_lst, tmp_lst = [], []
     target_id = edges_sorted_lst[0][TARGET_LABEL]
@@ -52,10 +53,10 @@ def _group_edges(edges_lst):
     return total_lst
 
 
-def _get_source(nodes_dict, delayed_object_dict, source, sourceHandle):
-    if source in delayed_object_dict.keys() and sourceHandle is not None:
+def _get_source(nodes_dict: dict, delayed_object_dict: dict, source: str, source_handle: str):
+    if source in delayed_object_dict.keys() and source_handle is not None:
         return (
-            delayed_object_dict[source].__getattr__("output").__getattr__(sourceHandle)
+            delayed_object_dict[source].__getattr__("output").__getattr__(source_handle)
         )
     elif source in delayed_object_dict.keys():
         return delayed_object_dict[source]
@@ -63,7 +64,7 @@ def _get_source(nodes_dict, delayed_object_dict, source, sourceHandle):
         return nodes_dict[source]
 
 
-def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_project):
+def _get_delayed_object_dict(total_lst: list, nodes_dict: dict, source_handle_dict: dict, pyiron_project: Project) -> dict:
     delayed_object_dict = {}
     for item in total_lst:
         key, input_dict = item
@@ -72,7 +73,7 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
                 nodes_dict=nodes_dict,
                 delayed_object_dict=delayed_object_dict,
                 source=v[SOURCE_LABEL],
-                sourceHandle=v[SOURCE_PORT_LABEL],
+                source_handle=v[SOURCE_PORT_LABEL],
             )
             for k, v in input_dict.items()
         }
@@ -83,15 +84,15 @@ def _get_delayed_object_dict(total_lst, nodes_dict, source_handle_dict, pyiron_p
     return delayed_object_dict
 
 
-def get_dict(**kwargs):
+def get_dict(**kwargs) -> dict:
     return {k: v for k, v in kwargs["kwargs"].items()}
 
 
-def get_list(**kwargs):
+def get_list(**kwargs) -> list:
     return list(kwargs["kwargs"].values())
 
 
-def _remove_server_obj(nodes_dict, edges_lst):
+def _remove_server_obj(nodes_dict: dict, edges_lst: list):
     server_lst = [k for k in nodes_dict.keys() if k.startswith("server_obj_")]
     for s in server_lst:
         del nodes_dict[s]
@@ -99,14 +100,14 @@ def _remove_server_obj(nodes_dict, edges_lst):
     return nodes_dict, edges_lst
 
 
-def _get_nodes(connection_dict, delayed_object_updated_dict):
+def _get_nodes(connection_dict: dict, delayed_object_updated_dict: dict):
     return {
         connection_dict[k]: v._python_function if isinstance(v, DelayedObject) else v
         for k, v in delayed_object_updated_dict.items()
     }
 
 
-def _get_unique_objects(nodes_dict):
+def _get_unique_objects(nodes_dict: dict):
     delayed_object_dict = {}
     for k, v in nodes_dict.items():
         if isinstance(v, DelayedObject):
@@ -158,7 +159,7 @@ def _get_unique_objects(nodes_dict):
     return delayed_object_updated_dict, match_dict
 
 
-def _get_connection_dict(delayed_object_updated_dict, match_dict):
+def _get_connection_dict(delayed_object_updated_dict: dict, match_dict: dict):
     new_obj_dict = {}
     connection_dict = {}
     lookup_dict = {}
@@ -174,7 +175,7 @@ def _get_connection_dict(delayed_object_updated_dict, match_dict):
     return connection_dict, lookup_dict
 
 
-def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
+def _get_edges_dict(edges_lst: list, nodes_dict: dict, connection_dict: dict, lookup_dict: dict):
     edges_dict_lst = []
     existing_connection_lst = []
     for ep in edges_lst:
@@ -216,7 +217,7 @@ def _get_edges_dict(edges_lst, nodes_dict, connection_dict, lookup_dict):
     return edges_dict_lst
 
 
-def load_workflow_json(file_name, project=None):
+def load_workflow_json(file_name: str, project: Optional[Project]=None):
     if project is None:
         project = Project(".")
 
@@ -247,7 +248,7 @@ def load_workflow_json(file_name, project=None):
     return list(delayed_object_dict.values())
 
 
-def write_workflow_json(delayed_object, file_name="workflow.json"):
+def write_workflow_json(delayed_object: DelayedObject, file_name: str="workflow.json"):
     nodes_dict, edges_lst = delayed_object.get_graph()
     nodes_dict, edges_lst = _remove_server_obj(
         nodes_dict=nodes_dict, edges_lst=edges_lst
