@@ -6,17 +6,17 @@ TARGET_LABEL = "target"
 TARGET_PORT_LABEL = "targetPort"
 
 
-def get_dict(**kwargs):
+def get_dict(**kwargs) -> dict:
     # NOTE: In WG, this will automatically be wrapped in a dict with the `result` key
     return {k: v for k, v in kwargs.items()}
     # return {'dict': {k: v for k, v in kwargs.items()}}
 
 
-def get_list(**kwargs):
+def get_list(**kwargs) -> list:
     return list(kwargs.values())
 
 
-def get_kwargs(lst):
+def get_kwargs(lst: list) -> dict:
     return {
         t[TARGET_PORT_LABEL]: {
             SOURCE_LABEL: t[SOURCE_LABEL],
@@ -26,7 +26,7 @@ def get_kwargs(lst):
     }
 
 
-def get_source_handles(edges_lst):
+def get_source_handles(edges_lst: list) -> dict:
     source_handle_dict = {}
     for ed in edges_lst:
         if ed[SOURCE_LABEL] not in source_handle_dict.keys():
@@ -38,7 +38,7 @@ def get_source_handles(edges_lst):
     }
 
 
-def convert_nodes_list_to_dict(nodes_list):
+def convert_nodes_list_to_dict(nodes_list: list) -> dict:
     return {
         str(el["id"]): el["value"] if "value" in el else el["function"]
         for el in sorted(nodes_list, key=lambda d: d["id"])

@@ -15,7 +15,7 @@ from python_workflow_definition.shared import (
 )
 
 
-def plot(file_name):
+def plot(file_name: str):
     with open(file_name, "r") as f:
         content = json.load(f)
 

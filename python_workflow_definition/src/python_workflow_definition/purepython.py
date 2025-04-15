@@ -18,7 +18,7 @@ from python_workflow_definition.shared import (
 )
 
 
-def resort_total_lst(total_lst, nodes_dict):
+def resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
     nodes_with_dep_lst = list(sorted([v[0] for v in total_lst]))
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
@@ -36,7 +36,7 @@ def resort_total_lst(total_lst, nodes_dict):
     return total_new_lst
 
 
-def group_edges(edges_lst):
+def group_edges(edges_lst: list) -> list:
     edges_sorted_lst = sorted(edges_lst, key=lambda x: x[TARGET_LABEL], reverse=True)
     total_lst, tmp_lst = [], []
     target_id = edges_sorted_lst[0][TARGET_LABEL]
@@ -51,7 +51,7 @@ def group_edges(edges_lst):
     return total_lst
 
 
-def _get_value(result_dict, nodes_new_dict, link_dict):
+def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict):
     source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
     if source in result_dict.keys():
         result = result_dict[source]
@@ -65,7 +65,7 @@ def _get_value(result_dict, nodes_new_dict, link_dict):
         return result[source_handle]
 
 
-def load_workflow_json(file_name):
+def load_workflow_json(file_name: str):
     with open(file_name, "r") as f:
         content = json.load(f)
 

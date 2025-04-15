@@ -18,7 +18,7 @@ from python_workflow_definition.shared import (
 )
 
 
-def load_workflow_json(file_name):
+def load_workflow_json(file_name: str) -> WorkGraph:
     with open(file_name) as f:
         data = json.load(f)
 
@@ -77,7 +77,7 @@ def load_workflow_json(file_name):
     return wg
 
 
-def write_workflow_json(wg, file_name):
+def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
     data = {NODES_LABEL: [], EDGES_LABEL: []}
     node_name_mapping = {}
     data_node_name_mapping = {}

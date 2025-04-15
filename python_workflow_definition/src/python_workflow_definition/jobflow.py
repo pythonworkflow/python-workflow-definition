@@ -20,11 +20,11 @@ from python_workflow_definition.shared import (
 )
 
 
-def _get_function_dict(flow):
+def _get_function_dict(flow: Flow):
     return {job.uuid: job.function for job in flow.jobs}
 
 
-def _get_nodes_dict(function_dict):
+def _get_nodes_dict(function_dict: dict):
     nodes_dict, nodes_mapping_dict = {}, {}
     for i, [k, v] in enumerate(function_dict.items()):
         nodes_dict[i] = v
@@ -33,7 +33,7 @@ def _get_nodes_dict(function_dict):
     return nodes_dict, nodes_mapping_dict
 
 
-def _get_edge_from_dict(target, key, value_dict, nodes_mapping_dict):
+def _get_edge_from_dict(target: str, key: str, value_dict: dict, nodes_mapping_dict: dict) -> dict:
     if len(value_dict["attributes"]) == 1:
         return {
             TARGET_LABEL: target,
@@ -50,7 +50,7 @@ def _get_edge_from_dict(target, key, value_dict, nodes_mapping_dict):
         }
 
 
-def _get_edges_and_extend_nodes(flow_dict, nodes_mapping_dict, nodes_dict):
+def _get_edges_and_extend_nodes(flow_dict: dict, nodes_mapping_dict: dict, nodes_dict: dict):
     edges_lst = []
     for job in flow_dict["jobs"]:
         for k, v in job["function_kwargs"].items():
@@ -185,7 +185,7 @@ def _get_edges_and_extend_nodes(flow_dict, nodes_mapping_dict, nodes_dict):
     return edges_lst, nodes_dict
 
 
-def _resort_total_lst(total_dict, nodes_dict):
+def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
     nodes_with_dep_lst = list(sorted(total_dict.keys()))
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
@@ -205,7 +205,7 @@ def _resort_total_lst(total_dict, nodes_dict):
     return total_new_dict
 
 
-def _group_edges(edges_lst):
+def _group_edges(edges_lst: list) -> dict:
     total_dict = {}
     for ed_major in edges_lst:
         target_id = ed_major[TARGET_LABEL]
@@ -218,11 +218,11 @@ def _group_edges(edges_lst):
     return total_dict
 
 
-def _get_input_dict(nodes_dict):
+def _get_input_dict(nodes_dict: dict) -> dict:
     return {k: v for k, v in nodes_dict.items() if not isfunction(v)}
 
 
-def _get_workflow(nodes_dict, input_dict, total_dict, source_handles_dict):
+def _get_workflow(nodes_dict: dict, input_dict: dict, total_dict: dict, source_handles_dict: dict) -> list:
     def get_attr_helper(obj, source_handle):
         if source_handle is None:
             return getattr(obj, "output")
@@ -262,7 +262,7 @@ def _get_item_from_tuple(input_obj, index, index_lst):
         return list(input_obj)[index_lst.index(index)]
 
 
-def load_workflow_json(file_name):
+def load_workflow_json(file_name: str) -> Flow:
     with open(file_name, "r") as f:
         content = json.load(f)
 
@@ -302,7 +302,7 @@ def load_workflow_json(file_name):
     return Flow(task_lst)
 
 
-def write_workflow_json(flow, file_name="workflow.json"):
+def write_workflow_json(flow: Flow, file_name: str = "workflow.json"):
     flow_dict = flow.as_dict()
     function_dict = _get_function_dict(flow=flow)
     nodes_dict, nodes_mapping_dict = _get_nodes_dict(function_dict=function_dict)
