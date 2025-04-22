@@ -408,7 +408,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">simple_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">add_x_and_y</span> <span class="k">as</span> <span class="n">_add_x_and_y</span><span class="p">,</span> 
+    <span class="n">get_sum</span> <span class="k">as</span> <span class="n">_get_sum</span><span class="p">,</span>
     <span class="n">get_prod_and_div</span> <span class="k">as</span> <span class="n">_get_prod_and_div</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -424,7 +424,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_x_and_y</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_add_x_and_y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_sum</span><span class="p">)</span>
 <span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">,</span> <span class="n">output_key_lst</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -439,7 +439,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">add_x_and_y</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">div</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">get_sum</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">div</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
