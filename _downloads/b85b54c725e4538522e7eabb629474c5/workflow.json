@@ -1,0 +1,14 @@
+{
+  "nodes": [
+    {"id": 0, "function": "workflow.get_prod_and_div"},
+    {"id": 1, "function": "workflow.get_sum"},
+    {"id": 2, "value": 1},
+    {"id": 3, "value": 2}
+  ],
+  "edges": [
+    {"target": 0, "targetPort": "x", "source": 2, "sourcePort": null},
+    {"target": 0, "targetPort": "y", "source": 3, "sourcePort": null},
+    {"target": 1, "targetPort": "x", "source": 0, "sourcePort": "prod"},
+    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"}
+  ]
+}
