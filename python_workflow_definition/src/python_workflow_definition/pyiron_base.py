@@ -53,7 +53,9 @@ def _group_edges(edges_lst: list) -> list:
     return total_lst
 
 
-def _get_source(nodes_dict: dict, delayed_object_dict: dict, source: str, source_handle: str):
+def _get_source(
+    nodes_dict: dict, delayed_object_dict: dict, source: str, source_handle: str
+):
     if source in delayed_object_dict.keys() and source_handle is not None:
         return (
             delayed_object_dict[source].__getattr__("output").__getattr__(source_handle)
@@ -64,7 +66,9 @@ def _get_source(nodes_dict: dict, delayed_object_dict: dict, source: str, source
         return nodes_dict[source]
 
 
-def _get_delayed_object_dict(total_lst: list, nodes_dict: dict, source_handle_dict: dict, pyiron_project: Project) -> dict:
+def _get_delayed_object_dict(
+    total_lst: list, nodes_dict: dict, source_handle_dict: dict, pyiron_project: Project
+) -> dict:
     delayed_object_dict = {}
     for item in total_lst:
         key, input_dict = item
@@ -175,7 +179,9 @@ def _get_connection_dict(delayed_object_updated_dict: dict, match_dict: dict):
     return connection_dict, lookup_dict
 
 
-def _get_edges_dict(edges_lst: list, nodes_dict: dict, connection_dict: dict, lookup_dict: dict):
+def _get_edges_dict(
+    edges_lst: list, nodes_dict: dict, connection_dict: dict, lookup_dict: dict
+):
     edges_dict_lst = []
     existing_connection_lst = []
     for ep in edges_lst:
@@ -217,7 +223,7 @@ def _get_edges_dict(edges_lst: list, nodes_dict: dict, connection_dict: dict, lo
     return edges_dict_lst
 
 
-def load_workflow_json(file_name: str, project: Optional[Project]=None):
+def load_workflow_json(file_name: str, project: Optional[Project] = None):
     if project is None:
         project = Project(".")
 
@@ -248,7 +254,9 @@ def load_workflow_json(file_name: str, project: Optional[Project]=None):
     return list(delayed_object_dict.values())
 
 
-def write_workflow_json(delayed_object: DelayedObject, file_name: str="workflow.json"):
+def write_workflow_json(
+    delayed_object: DelayedObject, file_name: str = "workflow.json"
+):
     nodes_dict, edges_lst = delayed_object.get_graph()
     nodes_dict, edges_lst = _remove_server_obj(
         nodes_dict=nodes_dict, edges_lst=edges_lst
