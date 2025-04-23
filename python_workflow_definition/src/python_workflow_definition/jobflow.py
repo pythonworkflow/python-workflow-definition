@@ -33,7 +33,9 @@ def _get_nodes_dict(function_dict: dict):
     return nodes_dict, nodes_mapping_dict
 
 
-def _get_edge_from_dict(target: str, key: str, value_dict: dict, nodes_mapping_dict: dict) -> dict:
+def _get_edge_from_dict(
+    target: str, key: str, value_dict: dict, nodes_mapping_dict: dict
+) -> dict:
     if len(value_dict["attributes"]) == 1:
         return {
             TARGET_LABEL: target,
@@ -50,7 +52,9 @@ def _get_edge_from_dict(target: str, key: str, value_dict: dict, nodes_mapping_d
         }
 
 
-def _get_edges_and_extend_nodes(flow_dict: dict, nodes_mapping_dict: dict, nodes_dict: dict):
+def _get_edges_and_extend_nodes(
+    flow_dict: dict, nodes_mapping_dict: dict, nodes_dict: dict
+):
     edges_lst = []
     for job in flow_dict["jobs"]:
         for k, v in job["function_kwargs"].items():
@@ -222,7 +226,9 @@ def _get_input_dict(nodes_dict: dict) -> dict:
     return {k: v for k, v in nodes_dict.items() if not isfunction(v)}
 
 
-def _get_workflow(nodes_dict: dict, input_dict: dict, total_dict: dict, source_handles_dict: dict) -> list:
+def _get_workflow(
+    nodes_dict: dict, input_dict: dict, total_dict: dict, source_handles_dict: dict
+) -> list:
     def get_attr_helper(obj, source_handle):
         if source_handle is None:
             return getattr(obj, "output")

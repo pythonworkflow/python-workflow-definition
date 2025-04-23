@@ -6,6 +6,19 @@ on:
   pull_request:
 
 jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: psf/black@stable
+      with:
+        options: "--check --diff"
+        src: ./python_workflow_definition/src/python_workflow_definition
+    - uses: psf/black@stable
+      with:
+        options: "--check --diff"
+        src: ./qe_xml_parser/src/qe_xml_parser
+
   nfdi4ing:
     runs-on: ubuntu-22.04
     steps:
