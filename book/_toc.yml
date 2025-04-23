@@ -4,17 +4,17 @@ chapters:
 - file: intro.md
 - file: arithmetic.md
   sections:
-    - file: aiida_arithmetic.ipynb
-    - file: jobflow_arithmetic.ipynb
-    - file: pyiron_base_arithmetic.ipynb
+    - file: example_workflows/arithmetic/aiida_arithmetic.ipynb
+    - file: example_workflows/arithmetic/jobflow_arithmetic.ipynb
+    - file: example_workflows/arithmetic/pyiron_base_arithmetic.ipynb
 - file: evcurve.md
   sections:
-    - file: aiida_qe.ipynb
-    - file: jobflow_qe.ipynb
-    - file: pyiron_base_qe.ipynb
+    - file: example_workflows/quantum_espresso/aiida_qe.ipynb
+    - file: example_workflows/quantum_espresso/jobflow_qe.ipynb
+    - file: example_workflows/quantum_espresso/pyiron_base_qe.ipynb
 - file: nfdi.md
   sections:
-    - file: aiida_nfdi.ipynb
-    - file: jobflow_nfdi.ipynb
-    - file: pyiron_base_nfdi.ipynb
+    - file: example_workflows/nfdi/aiida_nfdi.ipynb
+    - file: example_workflows/nfdi/jobflow_nfdi.ipynb
+    - file: example_workflows/nfdi/pyiron_base_nfdi.ipynb
 - file: conclusion.md
