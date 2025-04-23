@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pyiron_base_simple';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyiron_base_arithmetic';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Energy Volume Curve" href="evcurve.html" />
-    <link rel="prev" title="jobflow" href="jobflow_simple.html" />
+    <link rel="prev" title="jobflow" href="jobflow_arithmetic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,9 +175,9 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Definition</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="simple.html">Simple Workflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="aiida_simple.html">Aiida</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jobflow_simple.html">jobflow</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="arithmetic.html">Arithmetic Workflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aiida_arithmetic.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow_arithmetic.html">jobflow</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyiron</a></li>
 </ul>
 </details></li>
@@ -248,7 +248,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/master?urlpath=lab/tree/pyiron_base_simple.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/master?urlpath=lab/tree/pyiron_base_arithmetic.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="_sources/pyiron_base_simple.ipynb" target="_blank"
+      <li><a href="_sources/pyiron_base_arithmetic.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -407,7 +407,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">simple_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">arithmetic_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_sum</span> <span class="k">as</span> <span class="n">_get_sum</span><span class="p">,</span>
     <span class="n">get_prod_and_div</span> <span class="k">as</span> <span class="n">_get_prod_and_div</span><span class="p">,</span>
 <span class="p">)</span>
@@ -417,7 +417,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_base_simple.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_arithmetic.json&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -602,7 +602,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="jobflow_simple.html"
+       href="jobflow_arithmetic.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">

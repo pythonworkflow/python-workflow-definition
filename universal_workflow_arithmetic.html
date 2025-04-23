@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Aiida &#8212; Python Workflow Definition</title>
+    <title>Load Simple Workflow &#8212; Python Workflow Definition</title>
   
   
   
@@ -57,11 +57,9 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'aiida_simple';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'universal_workflow_arithmetic';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="jobflow" href="jobflow_simple.html" />
-    <link rel="prev" title="Simple Workflow" href="simple.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -173,12 +173,12 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Definition</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="simple.html">Simple Workflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Aiida</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jobflow_simple.html">jobflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyiron_base_simple.html">pyiron</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida_arithmetic.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow_arithmetic.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base_arithmetic.html">pyiron</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -248,7 +248,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/master?urlpath=lab/tree/aiida_simple.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pyiron-dev/python-workflow-definition/master?urlpath=lab/tree/universal_workflow_arithmetic.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="_sources/aiida_simple.ipynb" target="_blank"
+      <li><a href="_sources/universal_workflow_arithmetic.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Aiida</h1>
+    <h1>Load Simple Workflow</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,9 +373,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-aiida">Define workflow with aiida</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot">Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aiida">Aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
             </nav>
         </div>
@@ -387,146 +390,122 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="aiida">
-<h1>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h1>
-<section id="define-workflow-with-aiida">
-<h2>Define workflow with aiida<a class="headerlink" href="#define-workflow-with-aiida" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="load-simple-workflow">
+<h1>Load Simple Workflow<a class="headerlink" href="#load-simple-workflow" title="Link to this heading">#</a></h1>
+<section id="plot">
+<h2>Plot<a class="headerlink" href="#plot" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">&#39;workflow_arithmetic.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/836acf77a565400fd4d0647f15a622d3bd393034654bdd03880954060bfd8f53.svg" src="_images/836acf77a565400fd4d0647f15a622d3bd393034654bdd03880954060bfd8f53.svg" />
+</div>
+</div>
+</section>
+<section id="aiida">
+<h2>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">aiida_workgraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkGraph</span><span class="p">,</span> <span class="n">task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span>
 <span class="n">load_profile</span><span class="p">()</span>
-
-<span class="n">workflow_json_filename</span> <span class="o">=</span>  <span class="s2">&quot;aiida_simple.json&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">simple_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_sum</span> <span class="k">as</span> <span class="n">_get_sum</span><span class="p">,</span>
-    <span class="n">get_prod_and_div</span> <span class="k">as</span> <span class="n">_get_prod_and_div</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">WorkGraph</span><span class="p">(</span><span class="s2">&quot;wg-simple&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_prod_and_div_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
-    <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">])(</span><span class="n">_get_prod_and_div</span><span class="p">),</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_prod_and_div&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
-    <span class="n">_get_sum</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_sum&quot;</span><span class="p">,</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">get_prod_and_div_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">get_prod_and_div_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">div</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">wg</span><span class="o">=</span><span class="n">wg</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: [{&#39;id&#39;: 0, &#39;function&#39;: &#39;simple_workflow.get_prod_and_div&#39;},
-  {&#39;id&#39;: 1, &#39;function&#39;: &#39;simple_workflow.add_x_and_y&#39;},
-  {&#39;id&#39;: 2, &#39;value&#39;: 1.0},
-  {&#39;id&#39;: 3, &#39;value&#39;: 2.0}],
- &#39;edges&#39;: [{&#39;target&#39;: 1, &#39;targetPort&#39;: &#39;x&#39;, &#39;source&#39;: 0, &#39;sourcePort&#39;: &#39;prod&#39;},
-  {&#39;target&#39;: 1, &#39;targetPort&#39;: &#39;y&#39;, &#39;source&#39;: 0, &#39;sourcePort&#39;: &#39;div&#39;},
-  {&#39;target&#39;: 0, &#39;targetPort&#39;: &#39;x&#39;, &#39;source&#39;: 2, &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 0, &#39;targetPort&#39;: &#39;y&#39;, &#39;source&#39;: 3, &#39;sourcePort&#39;: None}]}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;91b600f4af5f477facd703b8cfc12911&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="o">{</span>workflow_json_filename<span class="o">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workgraph</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">&#39;workflow_arithmetic.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Create inputs rather than tasks out of data nodes</span>
+<span class="n">workgraph</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-  &quot;nodes&quot;: [
-    {
-      &quot;id&quot;: 0,
-      &quot;function&quot;: &quot;simple_workflow.get_prod_and_div&quot;
-    },
-    {
-      &quot;id&quot;: 1,
-      &quot;function&quot;: &quot;simple_workflow.add_x_and_y&quot;
-    },
-    {
-      &quot;id&quot;: 2,
-      &quot;value&quot;: 1.0
-    },
-    {
-      &quot;id&quot;: 3,
-      &quot;value&quot;: 2.0
-    }
-  ],
-  &quot;edges&quot;: [
-    {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 0,
-      &quot;sourcePort&quot;: &quot;prod&quot;
-    },
-    {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;y&quot;,
-      &quot;source&quot;: 0,
-      &quot;sourcePort&quot;: &quot;div&quot;
-    },
-    {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: null
-    },
-    {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;y&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: null
-    }
-  ]
-}
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "af711ad9152d45ec9583cb1242010930"}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workgraph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/13/2025 07:08:44 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div1
+04/13/2025 07:08:44 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|update_task_state]: Task: get_prod_and_div1, type: PyFunction, finished.
+04/13/2025 07:08:44 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|continue_workgraph]: tasks ready to run: add_x_and_y2
+04/13/2025 07:08:44 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|update_task_state]: Task: add_x_and_y2, type: PyFunction, finished.
+04/13/2025 07:08:44 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+04/13/2025 07:08:45 AM &lt;5059&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [125|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="load-workflow-with-jobflow">
-<h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<section id="executorlib">
+<h2>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleNodeExecutor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_arithmetic.json&quot;</span><span class="p">,</span> <span class="n">exe</span><span class="o">=</span><span class="n">exe</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="jobflow">
+<h2>Jobflow<a class="headerlink" href="#jobflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
 </pre></div>
 </div>
 </div>
@@ -541,14 +520,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_arithmetic.json&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -561,23 +540,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-12 11:26:37,686 INFO Started executing jobs locally
-2025-04-12 11:26:38,283 INFO Starting job - get_prod_and_div (0860fd19-fa89-4edb-8b50-af48785706d6)
-2025-04-12 11:26:38,288 INFO Finished job - get_prod_and_div (0860fd19-fa89-4edb-8b50-af48785706d6)
-2025-04-12 11:26:38,289 INFO Starting job - add_x_and_y (0d599e5c-6d2e-40ba-aad0-2408ce95b333)
-2025-04-12 11:26:38,292 INFO Finished job - add_x_and_y (0d599e5c-6d2e-40ba-aad0-2408ce95b333)
-2025-04-12 11:26:38,293 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-13 07:08:46,344 INFO Started executing jobs locally
+2025-04-13 07:08:46,424 INFO Starting job - get_prod_and_div (b2add5f8-6b52-4f8a-9bca-8d71164d6cdf)
+2025-04-13 07:08:46,426 INFO Finished job - get_prod_and_div (b2add5f8-6b52-4f8a-9bca-8d71164d6cdf)
+2025-04-13 07:08:46,427 INFO Starting job - add_x_and_y (df6686df-0034-4449-a180-bf0d8179c1f4)
+2025-04-13 07:08:46,428 INFO Finished job - add_x_and_y (df6686df-0034-4449-a180-bf0d8179c1f4)
+2025-04-13 07:08:46,428 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;0860fd19-fa89-4edb-8b50-af48785706d6&#39;: {1: Response(output={&#39;prod&#39;: 2.0, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;0d599e5c-6d2e-40ba-aad0-2408ce95b333&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;b2add5f8-6b52-4f8a-9bca-8d71164d6cdf&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;df6686df-0034-4449-a180-bf0d8179c1f4&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="load-workflow-with-pyiron-base">
-<h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<section id="pyiron">
+<h2>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -587,13 +566,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_arithmetic.json&quot;</span><span class="p">)</span>
 <span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/625678532c99296c1a135459d9de9f8af95c6f30fffd4784e89abd2aa0fb12be.svg" src="_images/625678532c99296c1a135459d9de9f8af95c6f30fffd4784e89abd2aa0fb12be.svg" />
+<img alt="_images/9a8ad3f7cabd83210a92436fc997254ce4651f5c6b0321703f866b0a78d6ed19.svg" src="_images/9a8ad3f7cabd83210a92436fc997254ce4651f5c6b0321703f866b0a78d6ed19.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -603,10 +582,32 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_412196b9b2424d235e901638ba928e67 was saved and received the ID: 1
-The job add_x_and_y_588bd492d8124e9ea68ef6b2990744db was saved and received the ID: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_5e64acfa88dc01309cd4ba60143865e3 was saved and received the ID: 1
+The job add_x_and_y_82c0f2025c97ddd328aaebe50fb30c48 was saved and received the ID: 2
 </pre></div>
 </div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.purepython</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow_arithmetic.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
 </pre></div>
 </div>
@@ -645,24 +646,6 @@ The job add_x_and_y_588bd492d8124e9ea68ef6b2990744db was saved and received the 
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="simple.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Simple Workflow</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="jobflow_simple.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">jobflow</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -679,9 +662,12 @@ The job add_x_and_y_588bd492d8124e9ea68ef6b2990744db was saved and received the 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-aiida">Define workflow with aiida</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot">Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aiida">Aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
   </nav></div>
 

@@ -1,4 +1,4 @@
-# Simple Workflow
+# Arithmetic Workflow
 As a first example we define two Python functions which add multiple inputs: 
 ```python
 def get_sum(x, y):
@@ -12,14 +12,14 @@ These two Python functions are combined in the following example workflow:
 tmp_dict = get_prod_and_div(x=1, y=2)
 result = get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
-For the workflow representation of these Python functions the Python functions are stored in the [simple_workflow.py](simple_workflow.py)
-Python module. The connection of the Python functions are stored in the [workflow_simple.json](workflow_simple.json) 
+For the workflow representation of these Python functions the Python functions are stored in the [arithmetic_workflow.py](arithmetic_workflow.py)
+Python module. The connection of the Python functions are stored in the [workflow_arithmetic.json](workflow_arithmetic.json) 
 JSON file:
 ```
 {
   "nodes": [
-    {"id": 0, "function": "simple_workflow.get_prod_and_div"},
-    {"id": 1, "function": "simple_workflow.get_sum"},
+    {"id": 0, "function": "arithmetic_workflow.get_prod_and_div"},
+    {"id": 1, "function": "arithmetic_workflow.get_sum"},
     {"id": 2, "value": 1},
     {"id": 3, "value": 2}
   ],
