@@ -17,7 +17,7 @@ jobs:
     - uses: psf/black@stable
       with:
         options: "--check --diff"
-        src: ./qe_xml_parser/src/qe_xml_parser
+        src: ./example_workflows/quantum_espresso/qe_xml_parser/src/qe_xml_parser
 
   nfdi4ing:
     runs-on: ubuntu-22.04
@@ -27,7 +27,7 @@ jobs:
       with:
         auto-update-conda: true
         python-version: "3.12"
-        environment-file: environment.yml
+        environment-file: binder/environment.yml
         auto-activate-base: false
     - name: Installation and setup
       shell: bash -l {0}
@@ -35,20 +35,21 @@ jobs:
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
-        sudo apt-get install -y $(cat apt.txt)
+        sudo apt-get install -y $(cat binder/apt.txt)
     - name: Create Additional Conda Environments
       shell: bash -l {0}
       run: |
-        conda env create -n preprocessing -f source/envs/preprocessing.yaml -y
-        conda env create -n processing -f source/envs/processing.yaml -y
-        conda env create -n postprocessing -f source/envs/postprocessing.yaml -y
+        conda env create -n preprocessing -f example_workflows/nfdi/source/envs/preprocessing.yaml -y
+        conda env create -n processing -f example_workflows/nfdi/source/envs/processing.yaml -y
+        conda env create -n postprocessing -f example_workflows/nfdi/source/envs/postprocessing.yaml -y
     - name: Tests
       shell: bash -l {0}
       run: |
-        papermill aiida_nfdi.ipynb aiida_nfdi_out.ipynb -k "python3"
-        papermill jobflow_nfdi.ipynb jobflow_nfdi_out.ipynb -k "python3"
-        papermill pyiron_base_nfdi.ipynb pyiron_base_nfdi_out.ipynb -k "python3"
-        papermill universal_workflow_nfdi.ipynb universal_workflow_nfdi_out.ipynb -k "python3"
+        cd example_workflows/nfdi/
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   quantumespresso:
     runs-on: ubuntu-latest
@@ -56,17 +57,17 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup environment
       shell: bash -l {0}
-      run: tail --lines=+4 environment_qe.yml >> environment.yml
+      run: tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
     - uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
         python-version: "3.12"
-        environment-file: environment.yml
+        environment-file: binder/environment.yml
         auto-activate-base: false
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install -e qe_xml_parser
+        pip install -e example_workflows/quantum_espresso/qe_xml_parser
         pip install -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
@@ -74,10 +75,12 @@ jobs:
       shell: bash -l {0}
       run: |
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
-        papermill aiida_qe.ipynb aiida_qe_out.ipynb -k "python3"
-        papermill jobflow_qe.ipynb jobflow_qe_out.ipynb -k "python3"
-        papermill pyiron_base_qe.ipynb pyiron_base_qe_out.ipynb -k "python3"
-        papermill universal_workflow_qe.ipynb universal_workflow_qe_out.ipynb -k "python3"
+        cp -r example_workflows/quantum_espresso/espresso .
+        cd example_workflows/quantum_espresso
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   arithmetic:
     runs-on: ubuntu-latest
@@ -87,7 +90,7 @@ jobs:
       with:
         auto-update-conda: true
         python-version: "3.12"
-        environment-file: environment.yml
+        environment-file: binder/environment.yml
         auto-activate-base: false
     - name: Installation and setup
       shell: bash -l {0}
@@ -98,10 +101,11 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
-        papermill aiida_arithmetic.ipynb aiida_arithmetic_out.ipynb -k "python3"
-        papermill jobflow_arithmetic.ipynb jobflow_arithmetic_out.ipynb -k "python3"
-        papermill pyiron_base_arithmetic.ipynb pyiron_base_arithmetic_out.ipynb -k "python3"
-        papermill universal_workflow_arithmetic.ipynb universal_workflow_arithmetic_out.ipynb -k "python3"
+        cd example_workflows/arithmetic
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   book:
     runs-on: ubuntu-latest
