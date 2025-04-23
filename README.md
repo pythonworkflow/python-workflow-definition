@@ -27,8 +27,8 @@ These two Python functions are combined in the following example workflow:
 tmp_dict = get_prod_and_div(x=1, y=2)
 result = get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
-For the workflow representation of these Python functions the Python functions are stored in the [simple_workflow.py](simple_workflow.py)
-Python module. The connection of the Python functions are stored in the [workflow_simple.json](workflow_simple.json) 
+For the workflow representation of these Python functions the Python functions are stored in the [arithmetic_workflow.py](arithmetic_workflow.py)
+Python module. The connection of the Python functions are stored in the [workflow_arithmetic.json](workflow_arithmetic.json) 
 JSON file:
 ```
 {
@@ -57,12 +57,12 @@ library.
 
 The corresponding Jupyter notebooks demonstrate this functionality:
 
-| Example                                                            | Explanation                                                                                                               | 
-|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [aiida_simple.ipynb](aiida_simple.ipynb)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
-| [jobflow_simple.ipynb](jobflow_simple.ipynb)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
-| [pyiron_base_simple.ipynb](pyiron_base_simple.ipynb)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
-| [universal_workflow_simple.ipynb](universal_workflow_simple.ipynb) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
+| Example                                                                    | Explanation                                                                                                               | 
+|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [aiida_arithmetic.ipynb](aiida_arithmetic.ipynb)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
+| [jobflow_arithmetic.ipynb](jobflow_arithmetic.ipynb)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
+| [pyiron_base_arithmetic.ipynb](pyiron_base_arithmetic.ipynb)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
+| [universal_workflow_arithmetic.ipynb](universal_workflow_arithmetic.ipynb) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
 
 ### Quantum Espresso Workflow
 The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the 

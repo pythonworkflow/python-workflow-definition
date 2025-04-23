@@ -2,11 +2,11 @@ format: jb-book
 root: README
 chapters:
 - file: intro.md
-- file: simple.md
+- file: arithmetic.md
   sections:
-    - file: aiida_simple.ipynb
-    - file: jobflow_simple.ipynb
-    - file: pyiron_base_simple.ipynb
+    - file: aiida_arithmetic.ipynb
+    - file: jobflow_arithmetic.ipynb
+    - file: pyiron_base_arithmetic.ipynb
 - file: evcurve.md
   sections:
     - file: aiida_qe.ipynb
