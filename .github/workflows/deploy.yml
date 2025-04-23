@@ -22,8 +22,8 @@ jobs:
         cp documentation/_toc.yml .
         cp documentation/*.md . 
         jupyter-book build . --path-output public
-    - run: mv public/_build/html public_html
-    - run: touch public_html/.nojekyll
+        mv public/_build/html public_html
+        touch public_html/.nojekyll
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
