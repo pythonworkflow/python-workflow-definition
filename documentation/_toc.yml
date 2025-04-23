@@ -1,4 +1,4 @@
-format: jb-book
+format: jb-documentation
 root: README
 chapters:
 - file: intro.md
