@@ -44,7 +44,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup environment
       shell: bash -l {0}
-      run: tail --lines=+4 environment_qe.yml >> environment.yml
+      run: tail --lines=+4 example_workflows/quantum_espresso/environment_qe.yml >> environment.yml
     - uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
