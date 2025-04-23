@@ -395,8 +395,8 @@ different workflow engines to enable interoperability.</p>
 <span class="n">result</span> <span class="o">=</span> <span class="n">get_sum</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tmp_dict</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">tmp_dict</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>For the workflow representation of these Python functions the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/d4b6ab1210e71ac0cfa700589f3eda0c/workflow.py"><span class="xref download myst">arithmetic_workflow.py</span></a>
-Python module. The connection of the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/b85b54c725e4538522e7eabb629474c5/workflow.json"><span class="xref download myst">workflow_arithmetic.json</span></a>
+<p>For the workflow representation of these Python functions the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/d4b6ab1210e71ac0cfa700589f3eda0c/workflow.py"><span class="xref download myst">example_workflows/arithmetic/workflow.py</span></a>
+Python module. The connection of the Python functions are stored in the <a class="reference download internal" download="" href="_downloads/b85b54c725e4538522e7eabb629474c5/workflow.json"><span class="xref download myst">example_workflows/arithmetic/workflow.json</span></a>
 JSON file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -431,16 +431,16 @@ library.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/arithmetic/aiida.html"><span class="std std-doc">aiida_arithmetic.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/arithmetic/aiida.html"><span class="std std-doc">example_workflows/arithmetic/aiida.ipynb</span></a></p></td>
 <td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/arithmetic/jobflow.html"><span class="std std-doc">jobflow_arithmetic.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/arithmetic/jobflow.html"><span class="std std-doc">example_workflows/arithmetic/jobflow.ipynb</span></a></p></td>
 <td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/arithmetic/pyiron_base.html"><span class="std std-doc">pyiron_base_arithmetic.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/arithmetic/pyiron_base.html"><span class="std std-doc">example_workflows/arithmetic/pyiron_base.ipynb</span></a></p></td>
 <td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/arithmetic/universal_workflow.html"><span class="std std-doc">universal_workflow_arithmetic.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/arithmetic/universal_workflow.html"><span class="std std-doc">example_workflows/arithmetic/universal_workflow.ipynb</span></a></p></td>
 <td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
 </tr>
 </tbody>
@@ -452,9 +452,9 @@ library.</p>
 <p>The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the
 initial structure is relaxed, afterward it is strained and the total energy is calculated.</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/0d09bdc32538ec374fdfcc8b206a84a1/workflow.py"><span class="xref download myst">quantum_espresso_workflow.py</span></a> Python functions</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/074c18a527b229dcf1aceecb3ceb2862/workflow.json"><span class="xref download myst">workflow_qe.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/d87a46985e2e587030c68d49ffa4528b/environment.yml"><span class="xref download myst">environment_qe.yml</span></a> Conda environment</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/0d09bdc32538ec374fdfcc8b206a84a1/workflow.py"><span class="xref download myst">example_workflows/quantum_espresso/workflow.py</span></a> Python functions</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/074c18a527b229dcf1aceecb3ceb2862/workflow.json"><span class="xref download myst">example_workflows/quantum_espresso/workflow.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/d87a46985e2e587030c68d49ffa4528b/environment.yml"><span class="xref download myst">example_workflows/quantum_espresso/environment.yml</span></a> Conda environment</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -463,16 +463,16 @@ initial structure is relaxed, afterward it is strained and the total energy is c
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/aiida.html"><span class="std std-doc">aiida_qe.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/aiida.html"><span class="std std-doc">example_workflows/quantum_espresso/aiida.ipynb</span></a></p></td>
 <td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/jobflow.html"><span class="std std-doc">jobflow_qe.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/jobflow.html"><span class="std std-doc">example_workflows/quantum_espresso/jobflow.ipynb</span></a></p></td>
 <td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/pyiron_base.html"><span class="std std-doc">pyiron_base_qe.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/pyiron_base.html"><span class="std std-doc">example_workflows/quantum_espresso/pyiron_base.ipynb</span></a></p></td>
 <td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/universal_workflow.html"><span class="std std-doc">universal_workflow_qe.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/quantum_espresso/universal_workflow.html"><span class="std std-doc">example_workflows/quantum_espresso/universal_workflow.ipynb</span></a></p></td>
 <td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
 </tr>
 </tbody>
@@ -484,20 +484,20 @@ initial structure is relaxed, afterward it is strained and the total energy is c
 <p>To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark developed as part of <a class="reference external" href="https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements">NFDI4Ing</a>
 is implemented for all three simulation codes based on a shared workflow definition.</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/7849111caddeecc1f84b6e10d30bdd5e/workflow.py"><span class="xref download myst">nfdi_ing_workflow.py</span></a> Python functions</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/4fce43a14fb0221048f87bf1c5f7507a/workflow.json"><span class="xref download myst">workflow_nfdi.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/7849111caddeecc1f84b6e10d30bdd5e/workflow.py"><span class="xref download myst">example_workflows/nfdi/workflow.py</span></a> Python functions</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/4fce43a14fb0221048f87bf1c5f7507a/workflow.json"><span class="xref download myst">example_workflows/nfdi/workflow.json</span></a> Workflow definition in the Python Workflow Definition.</p></li>
 </ul>
 <p>Additional source files provided with the workflow benchmark:</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/2b431daa5d8516cd4586feb00ce63187/preprocessing.yaml"><span class="xref download myst">source/envs/preprocessing.yaml</span></a> Conda environment for preprocessing</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/b2eedcb0ddeefda5c51d1584979258ad/processing.yaml"><span class="xref download myst">source/envs/processing.yaml</span></a> Conda environment for processing</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/cdf93d425e6df529ed97c8b502821274/postprocessing.yaml"><span class="xref download myst">source/envs/postprocessing.yaml</span></a> Conda environment for postprocessing</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/f2b741fba3a65a1b1eecdff88867e31c/macros.tex.template"><span class="xref download myst">source/macros.tex.template</span></a> LaTeX module template</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/331c5bde05983f9e76ce2cf65cfde073/paper.tex"><span class="xref download myst">source/paper.tex</span></a> LaTeX paper template</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/56e68093fdf308cb11075a58fe57fb60/poisson.py"><span class="xref download myst">source/poisson.py</span></a> Poisson Python script</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/4437283df7255c07a78686ad14ce4902/postprocessing.py"><span class="xref download myst">source/postprocessing.py</span></a> Postprocessing Python script</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/c16ba0969d10490ef2a46641272562b4/prepare_paper_macros.py"><span class="xref download myst">source/prepare_paper_macros.py</span></a> LaTeX preprocessing Python script</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/cdcd3d8b8608feb76c8d22665a4ae8ae/unit_square.geo"><span class="xref download myst">source/unit_square.geo</span></a> Input structure</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/2b431daa5d8516cd4586feb00ce63187/preprocessing.yaml"><span class="xref download myst">example_workflows/nfdi/source/envs/preprocessing.yaml</span></a> Conda environment for preprocessing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/b2eedcb0ddeefda5c51d1584979258ad/processing.yaml"><span class="xref download myst">example_workflows/nfdi/source/envs/processing.yaml</span></a> Conda environment for processing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/cdf93d425e6df529ed97c8b502821274/postprocessing.yaml"><span class="xref download myst">example_workflows/nfdi/source/envs/postprocessing.yaml</span></a> Conda environment for postprocessing</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/f2b741fba3a65a1b1eecdff88867e31c/macros.tex.template"><span class="xref download myst">example_workflows/nfdi/source/macros.tex.template</span></a> LaTeX module template</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/331c5bde05983f9e76ce2cf65cfde073/paper.tex"><span class="xref download myst">example_workflows/nfdi/source/paper.tex</span></a> LaTeX paper template</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/56e68093fdf308cb11075a58fe57fb60/poisson.py"><span class="xref download myst">example_workflows/nfdi/source/poisson.py</span></a> Poisson Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/4437283df7255c07a78686ad14ce4902/postprocessing.py"><span class="xref download myst">example_workflows/nfdi/source/postprocessing.py</span></a> Postprocessing Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/c16ba0969d10490ef2a46641272562b4/prepare_paper_macros.py"><span class="xref download myst">example_workflows/nfdi/source/prepare_paper_macros.py</span></a> LaTeX preprocessing Python script</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/cdcd3d8b8608feb76c8d22665a4ae8ae/unit_square.geo"><span class="xref download myst">example_workflows/nfdi/source/unit_square.geo</span></a> Input structure</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -506,16 +506,16 @@ is implemented for all three simulation codes based on a shared workflow definit
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/nfdi/aiida.html"><span class="std std-doc">aiida_nfdi.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/nfdi/aiida.html"><span class="std std-doc">example_workflows/nfdi/aiida.ipynb</span></a></p></td>
 <td><p>Define Workflow with aiida and execute it with jobflow and pyiron_base.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/nfdi/jobflow.html"><span class="std std-doc">jobflow_nfdi.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/nfdi/jobflow.html"><span class="std std-doc">example_workflows/nfdi/jobflow.ipynb</span></a></p></td>
 <td><p>Define Workflow with jobflow and execute it with aiida and pyiron_base.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/nfdi/pyiron_base.html"><span class="std std-doc">pyiron_base_nfdi.ipynb</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="example_workflows/nfdi/pyiron_base.html"><span class="std std-doc">example_workflows/nfdi/pyiron_base.ipynb</span></a></p></td>
 <td><p>Define Workflow with pyiron_base and execute it with aiida and jobflow.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/nfdi/universal_workflow.html"><span class="std std-doc">universal_workflow_nfdi.ipynb</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="example_workflows/nfdi/universal_workflow.html"><span class="std std-doc">example_workflows/nfdi/universal_workflow.ipynb</span></a></p></td>
 <td><p>Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python.</p></td>
 </tr>
 </tbody>

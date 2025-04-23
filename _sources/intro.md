@@ -17,5 +17,5 @@ Currently supported workflow engines:
 ## Example Workflows
 Three workflows are implemented:
 * Simple workflow coupling two python functions
-* Calculation of an energy volume curve with quantum espresso
+* Calculation of an [energy volume curve with quantum espresso](https://materialdigital.github.io/ADIS2023/)
 * File based workflow benchmark from [NFDI4Ing](https://www.inggrid.org/article/id/3726/)

@@ -359,13 +359,13 @@ document.write(`
 <span class="n">result</span> <span class="o">=</span> <span class="n">get_sum</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tmp_dict</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">tmp_dict</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>For the workflow representation of these Python functions the Python functions are stored in the <a class="reference internal" href="#example_workflows/arithmetic/arithmetic_workflow.py"><span class="xref myst">arithmetic_workflow.py</span></a>
-Python module. The connection of the Python functions are stored in the <a class="reference internal" href="#example_workflows/arithmetic/workflow_arithmetic.json"><span class="xref myst">workflow_arithmetic.json</span></a>
+<p>For the workflow representation of these Python functions the Python functions are stored in the <a class="reference internal" href="#example_workflows/arithmetic/workflow.py"><span class="xref myst">workflow.py</span></a>
+Python module. The connection of the Python functions are stored in the <a class="reference internal" href="#example_workflows/arithmetic/workflow.json"><span class="xref myst">workflow.json</span></a>
 JSON file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;arithmetic_workflow.get_prod_and_div&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;arithmetic_workflow.get_sum&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.get_prod_and_div&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.get_sum&quot;</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
   <span class="p">],</span>
