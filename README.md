@@ -27,7 +27,7 @@ These two Python functions are combined in the following example workflow:
 tmp_dict = get_prod_and_div(x=1, y=2)
 result = get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
-For the workflow representation of these Python functions the Python functions are stored in the [arithmetic_workflow.py](example_workflows/arithmetic/arithmetic_workflow.py)
+For the workflow representation of these Python functions the Python functions are stored in the [arithmetic_workflow.py](example_workflows/arithmetic/workflow.py)
 Python module. The connection of the Python functions are stored in the [workflow_arithmetic.json](example_workflows/arithmetic/workflow.json) 
 JSON file:
 ```
@@ -67,7 +67,7 @@ The corresponding Jupyter notebooks demonstrate this functionality:
 ### Quantum Espresso Workflow
 The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the 
 initial structure is relaxed, afterward it is strained and the total energy is calculated. 
-* [quantum_espresso_workflow.py](example_workflows/quantum_espresso/quantum_espresso_workflow.py) Python functions 
+* [quantum_espresso_workflow.py](example_workflows/quantum_espresso/workflow.py) Python functions 
 * [workflow_qe.json](example_workflows/quantum_espresso/workflow.json) Workflow definition in the Python Workflow Definition.
 * [environment_qe.yml](example_workflows/quantum_espresso/environment.yml) Conda environment
 
@@ -81,7 +81,7 @@ initial structure is relaxed, afterward it is strained and the total energy is c
 ### NFDI4Ing Scientific Workflow Requirements
 To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark developed as part of [NFDI4Ing](https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements)
 is implemented for all three simulation codes based on a shared workflow definition. 
-* [nfdi_ing_workflow.py](example_workflows/nfdi/nfdi_ing_workflow.py) Python functions 
+* [nfdi_ing_workflow.py](example_workflows/nfdi/workflow.py) Python functions 
 * [workflow_nfdi.json](example_workflows/nfdi/workflow.json) Workflow definition in the Python Workflow Definition.
 
 Additional source files provided with the workflow benchmark:

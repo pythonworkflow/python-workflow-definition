@@ -1,11 +1,11 @@
 {
   "nodes": [
-    {"id": 0, "function": "nfdi_ing_workflow.generate_mesh"},
-    {"id": 1, "function": "nfdi_ing_workflow.convert_to_xdmf"},
-    {"id": 2, "function": "nfdi_ing_workflow.poisson"},
-    {"id": 3, "function": "nfdi_ing_workflow.plot_over_line"},
-    {"id": 4, "function": "nfdi_ing_workflow.substitute_macros"},
-    {"id": 5, "function": "nfdi_ing_workflow.compile_paper"},
+    {"id": 0, "function": "workflow.generate_mesh"},
+    {"id": 1, "function": "workflow.convert_to_xdmf"},
+    {"id": 2, "function": "workflow.poisson"},
+    {"id": 3, "function": "workflow.plot_over_line"},
+    {"id": 4, "function": "workflow.substitute_macros"},
+    {"id": 5, "function": "workflow.compile_paper"},
     {"id": 6, "value": 2.0}
   ],
   "edges": [
