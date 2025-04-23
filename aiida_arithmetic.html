@@ -452,8 +452,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: [{&#39;id&#39;: 0, &#39;function&#39;: &#39;simple_workflow.get_prod_and_div&#39;},
-  {&#39;id&#39;: 1, &#39;function&#39;: &#39;simple_workflow.add_x_and_y&#39;},
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: [{&#39;id&#39;: 0, &#39;function&#39;: &#39;arithmetic_workflow.get_prod_and_div&#39;},
+  {&#39;id&#39;: 1, &#39;function&#39;: &#39;arithmetic_workflow.get_sum&#39;},
   {&#39;id&#39;: 2, &#39;value&#39;: 1.0},
   {&#39;id&#39;: 3, &#39;value&#39;: 2.0}],
  &#39;edges&#39;: [{&#39;target&#39;: 1, &#39;targetPort&#39;: &#39;x&#39;, &#39;source&#39;: 0, &#39;sourcePort&#39;: &#39;prod&#39;},
@@ -475,11 +475,11 @@ document.write(`
   &quot;nodes&quot;: [
     {
       &quot;id&quot;: 0,
-      &quot;function&quot;: &quot;simple_workflow.get_prod_and_div&quot;
+      &quot;function&quot;: &quot;arithmetic_workflow.get_prod_and_div&quot;
     },
     {
       &quot;id&quot;: 1,
-      &quot;function&quot;: &quot;simple_workflow.add_x_and_y&quot;
+      &quot;function&quot;: &quot;arithmetic_workflow.get_sum&quot;
     },
     {
       &quot;id&quot;: 2,
@@ -561,16 +561,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-12 11:26:37,686 INFO Started executing jobs locally
-2025-04-12 11:26:38,283 INFO Starting job - get_prod_and_div (0860fd19-fa89-4edb-8b50-af48785706d6)
-2025-04-12 11:26:38,288 INFO Finished job - get_prod_and_div (0860fd19-fa89-4edb-8b50-af48785706d6)
-2025-04-12 11:26:38,289 INFO Starting job - add_x_and_y (0d599e5c-6d2e-40ba-aad0-2408ce95b333)
-2025-04-12 11:26:38,292 INFO Finished job - add_x_and_y (0d599e5c-6d2e-40ba-aad0-2408ce95b333)
-2025-04-12 11:26:38,293 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:27:52,129 INFO Started executing jobs locally
+2025-04-23 09:27:52,561 INFO Starting job - get_prod_and_div (6eae194f-04a4-4c7c-b0d9-baf624bac375)
+2025-04-23 09:27:52,564 INFO Finished job - get_prod_and_div (6eae194f-04a4-4c7c-b0d9-baf624bac375)
+2025-04-23 09:27:52,564 INFO Starting job - get_sum (21fda98d-7701-45c7-a30a-816e9a91ab75)
+2025-04-23 09:27:52,566 INFO Finished job - get_sum (21fda98d-7701-45c7-a30a-816e9a91ab75)
+2025-04-23 09:27:52,566 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;0860fd19-fa89-4edb-8b50-af48785706d6&#39;: {1: Response(output={&#39;prod&#39;: 2.0, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;0d599e5c-6d2e-40ba-aad0-2408ce95b333&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;6eae194f-04a4-4c7c-b0d9-baf624bac375&#39;: {1: Response(output={&#39;prod&#39;: 2.0, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;21fda98d-7701-45c7-a30a-816e9a91ab75&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
 </pre></div>
 </div>
 </div>
@@ -593,7 +593,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/625678532c99296c1a135459d9de9f8af95c6f30fffd4784e89abd2aa0fb12be.svg" src="_images/625678532c99296c1a135459d9de9f8af95c6f30fffd4784e89abd2aa0fb12be.svg" />
+<img alt="_images/4beb6d2bf32e1df99f54253c520b1d914f3099c261471c2961d7d2a56f4c72fc.svg" src="_images/4beb6d2bf32e1df99f54253c520b1d914f3099c261471c2961d7d2a56f4c72fc.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -603,8 +603,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_412196b9b2424d235e901638ba928e67 was saved and received the ID: 1
-The job add_x_and_y_588bd492d8124e9ea68ef6b2990744db was saved and received the ID: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_7c19c6233dddb02781fc331f609558a1 was saved and received the ID: 1
+The job get_sum_92b8e0a2d45fff6b04940562a8d7d8f7 was saved and received the ID: 2
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5

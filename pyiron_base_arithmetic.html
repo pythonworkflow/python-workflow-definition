@@ -458,7 +458,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;simple_workflow.add_x_and_y&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;simple_workflow.get_prod_and_div&quot;}, {&quot;id&quot;: 2, &quot;value&quot;: 1}, {&quot;id&quot;: 3, &quot;value&quot;: 2}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;prod&quot;}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;div&quot;}]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;arithmetic_workflow.get_sum&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;arithmetic_workflow.get_prod_and_div&quot;}, {&quot;id&quot;: 2, &quot;value&quot;: 1}, {&quot;id&quot;: 3, &quot;value&quot;: 2}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;prod&quot;}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;div&quot;}]}
 </pre></div>
 </div>
 </div>
@@ -475,7 +475,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;9da6a68ed2b14ffb920b92aa0a616339&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;5b8a8d98b3014876a9eed7d85a954e5e&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -495,7 +495,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "e429e6d025e44146b69e330b4888358f"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "cb6aafce370b43bb9904c64f03c93cc0"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -504,12 +504,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/12/2025 11:28:38 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div2
-04/12/2025 11:28:39 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|update_task_state]: Task: get_prod_and_div2, type: PyFunction, finished.
-04/12/2025 11:28:39 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|continue_workgraph]: tasks ready to run: add_x_and_y1
-04/12/2025 11:28:40 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|update_task_state]: Task: add_x_and_y1, type: PyFunction, finished.
-04/12/2025 11:28:40 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/12/2025 11:28:40 AM &lt;641&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [15|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/23/2025 09:45:47 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div2
+04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_prod_and_div2, type: PyFunction, finished.
+04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum1
+04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_sum1, type: PyFunction, finished.
+04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 </div>
@@ -554,16 +554,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-12 11:28:41,600 INFO Started executing jobs locally
-2025-04-12 11:28:42,179 INFO Starting job - get_prod_and_div (a00c2b77-12e1-4ec7-9919-99f65db51848)
-2025-04-12 11:28:42,184 INFO Finished job - get_prod_and_div (a00c2b77-12e1-4ec7-9919-99f65db51848)
-2025-04-12 11:28:42,186 INFO Starting job - add_x_and_y (5e71d195-b5a0-4eda-9279-0587f97ad019)
-2025-04-12 11:28:42,190 INFO Finished job - add_x_and_y (5e71d195-b5a0-4eda-9279-0587f97ad019)
-2025-04-12 11:28:42,191 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:45:49,174 INFO Started executing jobs locally
+2025-04-23 09:45:49,540 INFO Starting job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
+2025-04-23 09:45:49,543 INFO Finished job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
+2025-04-23 09:45:49,544 INFO Starting job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
+2025-04-23 09:45:49,546 INFO Finished job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
+2025-04-23 09:45:49,546 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a00c2b77-12e1-4ec7-9919-99f65db51848&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;5e71d195-b5a0-4eda-9279-0587f97ad019&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;77d76447-21f8-4ad8-b2b5-bef7263ef5b9&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
+ &#39;e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
 </pre></div>
 </div>
 </div>
