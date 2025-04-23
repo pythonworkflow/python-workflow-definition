@@ -1,7 +1,7 @@
 {
   "nodes": [
-    {"id": 0, "function": "simple_workflow.get_prod_and_div"},
-    {"id": 1, "function": "simple_workflow.get_sum"},
+    {"id": 0, "function": "arithmetic_workflow.get_prod_and_div"},
+    {"id": 1, "function": "arithmetic_workflow.get_sum"},
     {"id": 2, "value": 1},
     {"id": 3, "value": 2}
   ],
