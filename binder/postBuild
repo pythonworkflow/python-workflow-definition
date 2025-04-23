@@ -1,7 +1,7 @@
 conda env create -n preprocessing -f example_workflows/nfdi/source/envs/preprocessing.yaml -y
 conda env create -n processing -f example_workflows/nfdi/source/envs/processing.yaml -y
 conda env create -n postprocessing -f example_workflows/nfdi/source/envs/postprocessing.yaml -y
-conda env update --name base --file example_workflows/quantum_espresso/environment_qe.yml
+conda env update --name base --file example_workflows/quantum_espresso/environment.yml
 pip install -e example_workflows/quantum_espresso/qe_xml_parser
 pip install -e python_workflow_definition
 verdi presto --profile-name pwd

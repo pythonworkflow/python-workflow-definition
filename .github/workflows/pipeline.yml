@@ -46,10 +46,10 @@ jobs:
       shell: bash -l {0}
       run: |
         cd example_workflows/nfdi/
-        papermill aiida_nfdi.ipynb aiida_nfdi_out.ipynb -k "python3"
-        papermill jobflow_nfdi.ipynb jobflow_nfdi_out.ipynb -k "python3"
-        papermill pyiron_base_nfdi.ipynb pyiron_base_nfdi_out.ipynb -k "python3"
-        papermill universal_workflow_nfdi.ipynb universal_workflow_nfdi_out.ipynb -k "python3"
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   quantumespresso:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup environment
       shell: bash -l {0}
-      run: tail --lines=+4 example_workflows/quantum_espresso/environment_qe.yml >> binder/environment.yml
+      run: tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
     - uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
@@ -77,10 +77,10 @@ jobs:
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         cp -r example_workflows/quantum_espresso/espresso .
         cd example_workflows/quantum_espresso
-        papermill aiida_qe.ipynb aiida_qe_out.ipynb -k "python3"
-        papermill jobflow_qe.ipynb jobflow_qe_out.ipynb -k "python3"
-        papermill pyiron_base_qe.ipynb pyiron_base_qe_out.ipynb -k "python3"
-        papermill universal_workflow_qe.ipynb universal_workflow_qe_out.ipynb -k "python3"
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   arithmetic:
     runs-on: ubuntu-latest
@@ -102,10 +102,10 @@ jobs:
       shell: bash -l {0}
       run: |
         cd example_workflows/arithmetic
-        papermill aiida_arithmetic.ipynb aiida_arithmetic_out.ipynb -k "python3"
-        papermill jobflow_arithmetic.ipynb jobflow_arithmetic_out.ipynb -k "python3"
-        papermill pyiron_base_arithmetic.ipynb pyiron_base_arithmetic_out.ipynb -k "python3"
-        papermill universal_workflow_arithmetic.ipynb universal_workflow_arithmetic_out.ipynb -k "python3"
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   book:
     runs-on: ubuntu-latest
