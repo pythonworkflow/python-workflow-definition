@@ -398,10 +398,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span><span class="p">,</span> <span class="n">Flow</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;jobflow&#39;
 </pre></div>
 </div>
 </div>
@@ -433,7 +435,20 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_sum</span><span class="p">)</span>
-<span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">])</span>
+<span class="c1"># Note: one could also transfer the outputs to the datastore as well: get_prod_and_div = job(_get_prod_and_div, data=[&quot;prod&quot;, &quot;div&quot;])</span>
+<span class="c1"># On the way from the general definition to the jobflow definition, we do this automatically to avoid overflow databases.</span>
+<span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_sum</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_sum</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">])</span>
+
+<span class="ne">NameError</span>: name &#39;job&#39; is not defined
 </pre></div>
 </div>
 </div>

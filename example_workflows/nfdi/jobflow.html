@@ -426,8 +426,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_mesh</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_generate_mesh</span><span class="p">)</span>
-<span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_convert_to_xdmf</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;xdmf_file&quot;</span><span class="p">,</span> <span class="s2">&quot;h5_file&quot;</span><span class="p">])</span>
-<span class="n">poisson</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_poisson</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;numdofs&quot;</span><span class="p">,</span> <span class="s2">&quot;pvd_file&quot;</span><span class="p">,</span> <span class="s2">&quot;vtu_file&quot;</span><span class="p">])</span>
+<span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_convert_to_xdmf</span><span class="p">)</span>
+<span class="n">poisson</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_poisson</span><span class="p">)</span>
 <span class="n">plot_over_line</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_plot_over_line</span><span class="p">)</span>
 <span class="n">substitute_macros</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_substitute_macros</span><span class="p">)</span>
 <span class="n">compile_paper</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_compile_paper</span><span class="p">)</span>

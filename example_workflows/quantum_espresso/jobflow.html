@@ -441,8 +441,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_calculate_qe</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">])</span>
-<span class="n">generate_structures</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_generate_structures</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_calculate_qe</span><span class="p">)</span>
+<span class="n">generate_structures</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_generate_structures</span><span class="p">)</span>
 <span class="n">plot_energy_volume_curve</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_plot_energy_volume_curve</span><span class="p">)</span>
 <span class="n">get_bulk_structure</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_bulk_structure</span><span class="p">)</span>
 </pre></div>
