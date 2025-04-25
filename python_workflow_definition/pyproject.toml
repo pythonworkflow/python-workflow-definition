@@ -14,7 +14,7 @@ authors = [
   { name = "Marnik Bercx", email = "marnik.bercx@psi.ch" },
   { name = "Christina Ertural", email = "christina.ertural@bam.de" },
 ]
-license = { file = "LICENSE" }
+license = { file = "../LICENSE" }
 dependencies = [
   "aiida-workgraph>=0.5.1,<=0.5.2",
   "numpy>=1.21,<2",
