@@ -23,14 +23,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - name: Setup Mambaforge
       uses: conda-incubator/setup-miniconda@v3
       with:
-        auto-update-conda: true
         python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
         environment-file: binder/environment.yml
-        auto-activate-base: false
-        conda-remove-defaults: true
     - name: Pip check
       shell: bash -l {0}
       run: |
@@ -41,13 +42,14 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        auto-update-conda: true
         python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
         environment-file: binder/environment.yml
-        auto-activate-base: false
-        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -76,14 +78,15 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup environment
       shell: bash -l {0}
-      run: tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
+      run: |
+        echo -e "channels:\n  - conda-forge\n" > .condarc
+        tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        auto-update-conda: true
         python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
         environment-file: binder/environment.yml
-        auto-activate-base: false
-        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -106,13 +109,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        auto-update-conda: true
         python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
         environment-file: binder/environment.yml
-        auto-activate-base: false
-        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -131,20 +135,21 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: conda-incubator/setup-miniconda@v3
-        with:
-          auto-update-conda: true
-          python-version: "3.12"
-          environment-file: documentation/environment.yml
-          auto-activate-base: false
-          conda-remove-defaults: true
-      - name: Install Jupyterbook
-        shell: bash -l {0}
-        run: |
-          cp documentation/_config.yml .
-          cp documentation/_toc.yml .
-          cp documentation/*.md .
-          jupyter-book build . --path-output public
-          mv public/_build/html public_html
-          touch public_html/.nojekyll
+    - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: documentation/environment.yml
+    - name: Install Jupyterbook
+      shell: bash -l {0}
+      run: |
+        cp documentation/_config.yml .
+        cp documentation/_toc.yml .
+        cp documentation/*.md .
+        jupyter-book build . --path-output public
+        mv public/_build/html public_html
+        touch public_html/.nojekyll
