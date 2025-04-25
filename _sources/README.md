@@ -12,6 +12,16 @@ the connections between the different Python functions and a conda environment f
 The files are not intended to be human readable, but rather interact as a machine readable exchange format between the 
 different workflow engines to enable interoperability. 
 
+## Installation
+The Python Workflow Definition can either be installed via pypi or via conda. For the [pypi installation](https://pypi.org/project/python-workflow-definition/) use:
+```
+pip install python-workflow-definition
+```
+For the conda installation via the [conda-forge community channel](https://anaconda.org/conda-forge/python-workflow-definition) use: 
+```
+conda install conda-forge::python-workflow-definition
+```
+
 ## Examples
 ### Simple Example 
 As a first example we define two Python functions which add multiple inputs: 
