@@ -5,7 +5,7 @@ execute:
   execute_notebooks           : off
 
 repository:
-    url                       : https://github.com/pyiron-dev/python-workflow-definition
+    url                       : https://github.com/pythonworkflow/python-workflow-definition
     path_to_book              : ""
 
 launch_buttons:
