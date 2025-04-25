@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "python_workflow_definition"
 version = "0.0.1"
-description = "Python Workflow Definition for the Ab initio Description of Iron and Steel (ADIS2023): Digitalization and Workflows workshop"
+description = "Python Workflow Definition - workflow interoperability for aiida, jobflow and pyiron"
 authors = [
   { name = "Jan Janssen", email = "janssen@mpie.de" },
   { name = "Janine George", email = "janine.geogre@bam.de" },
