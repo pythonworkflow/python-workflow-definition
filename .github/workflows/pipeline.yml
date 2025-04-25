@@ -30,6 +30,7 @@ jobs:
         python-version: "3.12"
         environment-file: binder/environment.yml
         auto-activate-base: false
+        conda-remove-defaults: true
     - name: Pip check
       shell: bash -l {0}
       run: |
@@ -46,6 +47,7 @@ jobs:
         python-version: "3.12"
         environment-file: binder/environment.yml
         auto-activate-base: false
+        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -81,6 +83,7 @@ jobs:
         python-version: "3.12"
         environment-file: binder/environment.yml
         auto-activate-base: false
+        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -109,6 +112,7 @@ jobs:
         python-version: "3.12"
         environment-file: binder/environment.yml
         auto-activate-base: false
+        conda-remove-defaults: true
     - name: Installation and setup
       shell: bash -l {0}
       run: |
@@ -134,6 +138,7 @@ jobs:
           python-version: "3.12"
           environment-file: documentation/environment.yml
           auto-activate-base: false
+          conda-remove-defaults: true
       - name: Install Jupyterbook
         shell: bash -l {0}
         run: |

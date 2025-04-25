@@ -22,6 +22,7 @@ jobs:
         python-version: "3.12"
         environment-file: binder/environment.yml
         auto-activate-base: false
+        conda-remove-defaults: true
     - name: Build
       shell: bash -l {0}
       run: |
