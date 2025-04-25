@@ -33,7 +33,7 @@ jobs:
     - name: Pip check
       shell: bash -l {0}
       run: |
-        pip install -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e python_workflow_definition
         pip check
 
   nfdi4ing:
@@ -49,7 +49,7 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
         sudo apt-get install -y $(cat binder/apt.txt)
@@ -84,8 +84,8 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install -e example_workflows/quantum_espresso/qe_xml_parser
-        pip install -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e example_workflows/quantum_espresso/qe_xml_parser
+        pip install --no-deps --no-build-isolation -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
     - name: Tests
@@ -112,7 +112,7 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e python_workflow_definition
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
     - name: Tests
