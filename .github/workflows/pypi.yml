@@ -1,0 +1,33 @@
+name: Pypi
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  release:
+    if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/python_workflow_definition
+    permissions:
+      id-token: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: "3.12"
+        environment-file: binder/environment.yml
+        auto-activate-base: false
+    - name: Build
+      shell: bash -l {0}
+      run: |
+        cd python_workflow_definition
+        hatch build
+    - name: Publish distribution 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: python_workflow_definition/
