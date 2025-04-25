@@ -5,13 +5,26 @@ build-backend = "hatchling.build"
 [project]
 name = "python_workflow_definition"
 version = "0.0.1"
-description = "Python Workflow Definition for the Ab initio Description of Iron and Steel (ADIS2023): Digitalization and Workflows workshop"
+description = "Python Workflow Definition - workflow interoperability for aiida, jobflow and pyiron"
 authors = [
   { name = "Jan Janssen", email = "janssen@mpie.de" },
   { name = "Janine George", email = "janine.geogre@bam.de" },
   { name = "Julian Geiger", email = "julian.geiger@psi.ch" },
+  { name = "Xing Wang", email = "xing.wang@psi.ch" },
   { name = "Marnik Bercx", email = "marnik.bercx@psi.ch" },
   { name = "Christina Ertural", email = "christina.ertural@bam.de" },
 ]
-license = { text = "MIT" }
-dependencies = ["jobflow", "pyiron_base", "aiida-workgraph"]
+license = { file = "../LICENSE" }
+dependencies = [
+  "aiida-workgraph>=0.5.1,<=0.5.2",
+  "numpy>=1.21,<2",
+  "jobflow>=0.1.18,<=0.1.19",
+  "pyiron_base>=0.11.10,<=0.11.11",
+]
+
+[project.optional-dependencies]
+plot = [
+    "pygraphviz>=1.10,<=1.14",
+    "networkx>=2.8.8,<=3.4.2",
+    "ipython>=7.33.0,<=9.0.2",
+]
