@@ -40,6 +40,5 @@ def get_source_handles(edges_lst: list) -> dict:
 
 def convert_nodes_list_to_dict(nodes_list: list) -> dict:
     return {
-        str(el["id"]): el["value"] if "value" in el else el["function"]
-        for el in sorted(nodes_list, key=lambda d: d["id"])
+        str(el["id"]): el["value"] for el in sorted(nodes_list, key=lambda d: d["id"])
     }

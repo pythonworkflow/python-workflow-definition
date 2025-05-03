@@ -322,12 +322,12 @@ def write_workflow_json(flow: Flow, file_name: str = "workflow.json"):
     for k, v in nodes_dict.items():
         if isfunction(v):
             nodes_store_lst.append(
-                {"id": k, "function": v.__module__ + "." + v.__name__}
+                {"id": k, "type": "function", "value": v.__module__ + "." + v.__name__}
             )
         elif isinstance(v, np.ndarray):
-            nodes_store_lst.append({"id": k, "value": v.tolist()})
+            nodes_store_lst.append({"id": k, "type": "input", "value": v.tolist()})
         else:
-            nodes_store_lst.append({"id": k, "value": v})
+            nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
     with open(file_name, "w") as f:
         json.dump({NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_lst}, f)
