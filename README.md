@@ -111,4 +111,3 @@ Additional source files provided with the workflow benchmark:
 | [example_workflows/nfdi/jobflow.ipynb](example_workflows/nfdi/jobflow.ipynb)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
 | [example_workflows/nfdi/pyiron_base.ipynb](example_workflows/nfdi/pyiron_base.ipynb)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
 | [example_workflows/nfdi/universal_workflow.ipynb](example_workflows/nfdi/universal_workflow.ipynb) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
- 
