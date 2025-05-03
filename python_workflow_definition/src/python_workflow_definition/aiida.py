@@ -117,7 +117,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         raw_value.pop("node_type", None)
                     else:
                         raw_value = input.value.value
-                    data[NODES_LABEL].append({"id": i, "type": "input", "value": raw_value})
+                    data[NODES_LABEL].append(
+                        {"id": i, "type": "input", "value": raw_value}
+                    )
                     input_node_name = i
                     data_node_name_mapping[input.value.uuid] = input_node_name
                     i += 1
