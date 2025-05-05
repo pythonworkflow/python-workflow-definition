@@ -161,14 +161,18 @@ class AiidaPwdConverter:
             f"Processing {len(self.workflow_model.nodes)} nodes from model."
         )
         for node in self.workflow_model.nodes:
-            node_info = f"node {node.id} (name: {getattr(node, 'name', 'N/A')}, type: {node.type})"
+            if not isinstance(node, PwdFunctionNode):
+                node_info = f"node {node.id} (name: {getattr(node, 'name')}, type: {node.type})"
+            else:
+                node_info = f"node {node.id} (name: {getattr(node, 'value')}, type: {node.type})"
             self.logger.debug(f"Processing {node_info}.")
+
             if isinstance(node, PwdFunctionNode):
                 try:
                     p, m = node.value.rsplit(".", 1)
                     mod = import_module(p)
                     func = getattr(mod, m)
-                    task_name = node.name if node.name else f"{m}_{node.id}"
+                    task_name = f"{m}_{node.id}"
                     self.logger.debug(
                         f"Adding task '{task_name}' for function '{node.value}' from {node_info}."
                     )
@@ -384,6 +388,8 @@ class AiidaPwdConverter:
             f"Assigned {len(self.wg.group_inputs)} group inputs and {len(self.wg.group_outputs)} group outputs."
         )
         self.logger.info("Finished model to WorkGraph conversion.")
+        import ipdb; ipdb.set_trace()
+        pass
 
     def _w2m_create_function_nodes(self):
         self.logger.debug(f"Processing {len(self.wg.tasks)} tasks.")

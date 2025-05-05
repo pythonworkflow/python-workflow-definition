@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar
-from pydantic import BaseModel, Field, field_validator, computed_field, field_serializer
+from pydantic import BaseModel, Field, field_validator, field_serializer
+from pydantic import ValidationError
 import json
 import logging
 
@@ -57,21 +58,6 @@ class PwdFunctionNode(PwdBaseNode):
             raise ValueError(msg)
         return v
 
-    @computed_field
-    def name(self) -> str:
-        """Dynamically computes the function name from the 'value' field."""
-        try:
-            return self.value.rsplit(".", 1)[-1]
-        except IndexError:
-            msg = f"Could not extract function name from invalid FunctionNode value: '{self.value}' (ID: {self.id}). Check validation."
-            raise ValueError(msg)
-        except Exception as e:
-            logger.error(
-                f"Unexpected error computing name for FunctionNode value: '{self.value}' (ID: {self.id}): {e}",
-                exc_info=True,
-            )
-            raise
-
 
 # Discriminated Union for Nodes
 PwdNode = Annotated[
@@ -127,7 +113,6 @@ class PwdWorkflow(BaseModel):
         self,
         *,
         indent: Optional[int] = 2,
-        exclude_computed_function_names: bool = True,
         **kwargs,
     ) -> str:
         """
@@ -143,29 +128,12 @@ class PwdWorkflow(BaseModel):
         Returns:
             JSON string representation of the workflow.
         """
-        logger.info(
-            f"Dumping workflow model to JSON string (indent={indent}, exclude_func_names={exclude_computed_function_names})..."
-        )
 
         # Dump the model to a dictionary first, using mode='json' for compatible types
         # Pass any extra kwargs (like custom 'exclude' rules for other fields)
         workflow_dict = self.model_dump(mode="json", **kwargs)
 
-        # --- Post-process the dictionary to exclude function names if requested ---
-        if exclude_computed_function_names and "nodes" in workflow_dict:
-            nodes_list = workflow_dict.get("nodes", [])
-            for i, node_dict in enumerate(nodes_list):
-                # Check type and presence of name before deleting
-                if (
-                    isinstance(node_dict, dict)
-                    and node_dict.get("type") == "function"
-                    and "name" in node_dict
-                ):
-                    # Create a new dict without the 'name' key for immutability or modify in place
-                    # Modifying in place is usually fine here
-                    del nodes_list[i]["name"]
-
-        # Dump the potentially modified dictionary to a JSON string
+        # Dump the dictionary to a JSON string
         try:
             json_string = json.dumps(workflow_dict, indent=indent)
             logger.info("Successfully dumped workflow model to JSON string.")
@@ -181,7 +149,6 @@ class PwdWorkflow(BaseModel):
         file_name: Union[str, Path],
         *,
         indent: Optional[int] = 2,
-        exclude_computed_function_names: bool = True,
         **kwargs,
     ) -> None:
         """
@@ -198,7 +165,6 @@ class PwdWorkflow(BaseModel):
         # Pass kwargs to dump_json, which passes them to model_dump
         json_string = self.dump_json(
             indent=indent,
-            exclude_computed_function_names=exclude_computed_function_names,
             **kwargs,
         )
         try:
