@@ -13,6 +13,7 @@ from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
     update_node_names,
     remove_result,
+    set_result_node,
     NODES_LABEL,
     EDGES_LABEL,
     SOURCE_LABEL,
@@ -294,9 +295,9 @@ def write_workflow_json(
 
     with open(file_name, "w") as f:
         json.dump(
-            update_node_names(
+            set_result_node(workflow_dict=update_node_names(
                 workflow_dict={NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_new_lst}
-            ),
+            )),
             f,
             indent=2,
         )

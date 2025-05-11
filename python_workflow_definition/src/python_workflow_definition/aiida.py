@@ -11,6 +11,7 @@ from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
     update_node_names,
     remove_result,
+    set_result_node,
     NODES_LABEL,
     EDGES_LABEL,
     SOURCE_LABEL,
@@ -137,6 +138,6 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                 )
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
-        json.dump(update_node_names(workflow_dict=data), f, indent=2)
+        json.dump(set_result_node(workflow_dict=update_node_names(workflow_dict=data)), f, indent=2)
 
     return data
