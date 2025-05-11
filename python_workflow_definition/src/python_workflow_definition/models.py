@@ -210,7 +210,7 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             logger.info(
                 "Successfully loaded and validated workflow model from JSON data."
             )
-            return dict(instance)
+            return {k: [dict(el) for el in v] for k, v in dict(instance).items()}
         except ValidationError:  # Catch validation errors specifically
             logger.error("Workflow model validation failed.", exc_info=True)
             raise
