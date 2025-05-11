@@ -39,7 +39,10 @@ def plot(file_name: str):
                     k + "=result[" + v[SOURCE_PORT_LABEL] + "]"
                 )
         for k, v in edge_label_dict.items():
-            graph.add_edge(str(k), str(target_node), label=", ".join(v))
+            if len(v) == 1 and v[0] is not None:
+                graph.add_edge(str(k), str(target_node), label=", ".join(v))
+            else:
+                graph.add_edge(str(k), str(target_node))
 
     svg = nx.nx_agraph.to_agraph(graph).draw(prog="dot", format="svg")
     display(SVG(svg))
