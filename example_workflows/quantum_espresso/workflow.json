@@ -32,7 +32,7 @@
     {"id": 29, "type": "function", "value": "python_workflow_definition.shared.get_dict"},
     {"id": 30, "type": "function", "value": "python_workflow_definition.shared.get_list"},
     {"id": 31, "type": "function", "value": "python_workflow_definition.shared.get_list"},
-    {"id": 4, "type": "output", "name": "result"}
+    {"id": 32, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "element", "source": 9, "sourcePort": null},
