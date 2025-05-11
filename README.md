@@ -34,8 +34,9 @@ def get_prod_and_div(x: float, y: float) -> dict:
 ```
 These two Python functions are combined in the following example workflow:
 ```python
-tmp_dict = get_prod_and_div(x=1, y=2)
-result = get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
+def combined_workflow(x=1, y=2):
+    tmp_dict = get_prod_and_div(x=x, y=y)
+    return get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
 For the workflow representation of these Python functions the Python functions are stored in the [example_workflows/arithmetic/workflow.py](example_workflows/arithmetic/workflow.py)
 Python module. The connection of the Python functions are stored in the [example_workflows/arithmetic/workflow.json](example_workflows/arithmetic/workflow.json) 
@@ -43,16 +44,18 @@ JSON file:
 ```
 {
   "nodes": [
-    {"id": 0, "function": "simple_workflow.get_prod_and_div"},
-    {"id": 1, "function": "simple_workflow.get_sum"},
-    {"id": 2, "value": 1},
-    {"id": 3, "value": 2}
+    {"id": 0, "type": "function", "value": "workflow.get_prod_and_div"},
+    {"id": 1, "type": "function", "value": "workflow.get_sum"},
+    {"id": 2, "type": "input", "value": 1, "name": "x"},
+    {"id": 3, "type": "input", "value": 2, "name": "y"},
+    {"id": 4, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "x", "source": 2, "sourcePort": null},
     {"target": 0, "targetPort": "y", "source": 3, "sourcePort": null},
     {"target": 1, "targetPort": "x", "source": 0, "sourcePort": "prod"},
-    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"}
+    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"},
+    {"target": 4, "targetPort": null, "source": 1, "sourcePort": null}
   ]
 }
 ```
