@@ -50,7 +50,15 @@ def update_node_names(content: dict) -> dict:
     node_names_final_dict = {}
     input_nodes = [n for n in content[NODES_LABEL] if n["type"] == "input"]
     node_names_dict = {
-        n["id"]: list(set([e[TARGET_PORT_LABEL] for e in content[EDGES_LABEL] if e[SOURCE_LABEL] == n["id"]]))[0]
+        n["id"]: list(
+            set(
+                [
+                    e[TARGET_PORT_LABEL]
+                    for e in content[EDGES_LABEL]
+                    if e[SOURCE_LABEL] == n["id"]
+                ]
+            )
+        )[0]
         for n in input_nodes
     }
 
