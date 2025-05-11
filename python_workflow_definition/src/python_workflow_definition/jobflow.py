@@ -272,7 +272,11 @@ def _get_item_from_tuple(input_obj, index, index_lst):
 
 
 def load_workflow_json(file_name: str) -> Flow:
-    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    content = remove_result(
+        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
+            file_name=file_name
+        )
+    )
 
     edges_new_lst = []
     for edge in content[EDGES_LABEL]:

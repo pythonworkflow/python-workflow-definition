@@ -22,7 +22,11 @@ from python_workflow_definition.shared import (
 
 
 def load_workflow_json(file_name: str) -> WorkGraph:
-    data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    data = remove_result(
+        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
+            file_name=file_name
+        )
+    )
 
     wg = WorkGraph()
     task_name_mapping = {}

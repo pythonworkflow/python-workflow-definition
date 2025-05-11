@@ -67,7 +67,11 @@ def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict):
 
 
 def load_workflow_json(file_name: str):
-    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    content = remove_result(
+        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
+            file_name=file_name
+        )
+    )
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
