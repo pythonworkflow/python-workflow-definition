@@ -16,10 +16,11 @@ authors = [
 ]
 license = { file = "../LICENSE" }
 dependencies = [
-  "aiida-workgraph>=0.5.1,<=0.5.2",
-  "numpy>=1.21,<2",
-  "jobflow>=0.1.18,<=0.1.19",
-  "pyiron_base>=0.11.10,<=0.11.11",
+    "aiida-workgraph>=0.5.1,<=0.5.2",
+    "numpy>=1.21,<2",
+    "jobflow>=0.1.18,<=0.1.19",
+    "pyiron_base>=0.11.10,<=0.11.11",
+    "pydantic>=2.7.0,<=2.11.4",
 ]
 
 [project.optional-dependencies]

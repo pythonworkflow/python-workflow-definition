@@ -1,12 +1,12 @@
 from importlib import import_module
 from inspect import isfunction
-import json
 from typing import Optional
 
 import numpy as np
 from pyiron_base import job, Project
 from pyiron_base.project.delayed import DelayedObject
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     get_kwargs,
     get_source_handles,
@@ -230,8 +230,7 @@ def load_workflow_json(file_name: str, project: Optional[Project] = None):
     if project is None:
         project = Project(".")
 
-    with open(file_name, "r") as f:
-        content = remove_result(workflow_dict=json.load(f))
+    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
@@ -293,16 +292,11 @@ def write_workflow_json(
         else:
             nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
-    with open(file_name, "w") as f:
-        json.dump(
-            set_result_node(
+    PythonWorkflowDefinitionWorkflow(**set_result_node(
                 workflow_dict=update_node_names(
                     workflow_dict={
                         NODES_LABEL: nodes_store_lst,
                         EDGES_LABEL: edges_new_lst,
                     }
                 )
-            ),
-            f,
-            indent=2,
-        )
+            )).dump_json_file(file_name=file_name, indent=2)

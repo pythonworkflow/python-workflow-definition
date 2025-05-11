@@ -4,6 +4,7 @@ from IPython.display import SVG, display
 import networkx as nx
 
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.purepython import group_edges
 from python_workflow_definition.shared import (
     get_kwargs,
@@ -16,8 +17,7 @@ from python_workflow_definition.shared import (
 
 
 def plot(file_name: str):
-    with open(file_name, "r") as f:
-        content = json.load(f)
+    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
 
     graph = nx.DiGraph()
     node_dict = convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL])

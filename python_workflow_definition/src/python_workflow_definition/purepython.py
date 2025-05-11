@@ -1,8 +1,8 @@
-import json
 from importlib import import_module
 from inspect import isfunction
 
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     get_dict,
     get_list,
@@ -67,8 +67,7 @@ def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict):
 
 
 def load_workflow_json(file_name: str):
-    with open(file_name, "r") as f:
-        content = remove_result(workflow_dict=json.load(f))
+    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}

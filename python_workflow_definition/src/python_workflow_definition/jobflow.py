@@ -1,10 +1,10 @@
-import json
 from importlib import import_module
 from inspect import isfunction
 
 import numpy as np
 from jobflow import job, Flow
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     get_dict,
     get_list,
@@ -272,8 +272,7 @@ def _get_item_from_tuple(input_obj, index, index_lst):
 
 
 def load_workflow_json(file_name: str) -> Flow:
-    with open(file_name, "r") as f:
-        content = remove_result(workflow_dict=json.load(f))
+    content = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
 
     edges_new_lst = []
     for edge in content[EDGES_LABEL]:
@@ -332,13 +331,11 @@ def write_workflow_json(flow: Flow, file_name: str = "workflow.json"):
         else:
             nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
-    with open(file_name, "w") as f:
-        json.dump(
-            set_result_node(
-                workflow_dict=update_node_names(
-                    workflow_dict={NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_lst}
-                )
-            ),
-            f,
-            indent=2,
+    PythonWorkflowDefinitionWorkflow(**set_result_node(
+        workflow_dict=update_node_names(
+            workflow_dict={
+                NODES_LABEL: nodes_store_lst,
+                EDGES_LABEL: edges_lst,
+            }
         )
+    )).dump_json_file(file_name=file_name, indent=2)

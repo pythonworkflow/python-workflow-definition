@@ -1,5 +1,4 @@
 from importlib import import_module
-import json
 import traceback
 
 from aiida import orm
@@ -7,6 +6,7 @@ from aiida_pythonjob.data.serializer import general_serializer
 from aiida_workgraph import WorkGraph, task
 from aiida_workgraph.socket import TaskSocketNamespace
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
     update_node_names,
@@ -22,8 +22,7 @@ from python_workflow_definition.shared import (
 
 
 def load_workflow_json(file_name: str) -> WorkGraph:
-    with open(file_name) as f:
-        data = remove_result(workflow_dict=json.load(f))
+    data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
 
     wg = WorkGraph()
     task_name_mapping = {}
@@ -136,12 +135,8 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         SOURCE_PORT_LABEL: None,
                     }
                 )
-    with open(file_name, "w") as f:
-        # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
-        json.dump(
-            set_result_node(workflow_dict=update_node_names(workflow_dict=data)),
-            f,
-            indent=2,
+    PythonWorkflowDefinitionWorkflow(**set_result_node(
+        workflow_dict=update_node_names(
+            workflow_dict=data
         )
-
-    return data
+    )).dump_json_file(file_name=file_name, indent=2)
