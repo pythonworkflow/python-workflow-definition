@@ -295,9 +295,14 @@ def write_workflow_json(
 
     with open(file_name, "w") as f:
         json.dump(
-            set_result_node(workflow_dict=update_node_names(
-                workflow_dict={NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_new_lst}
-            )),
+            set_result_node(
+                workflow_dict=update_node_names(
+                    workflow_dict={
+                        NODES_LABEL: nodes_store_lst,
+                        EDGES_LABEL: edges_new_lst,
+                    }
+                )
+            ),
             f,
             indent=2,
         )
