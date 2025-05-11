@@ -135,8 +135,6 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         SOURCE_PORT_LABEL: None,
                     }
                 )
-    PythonWorkflowDefinitionWorkflow(**set_result_node(
-        workflow_dict=update_node_names(
-            workflow_dict=data
-        )
-    )).dump_json_file(file_name=file_name, indent=2)
+    PythonWorkflowDefinitionWorkflow(
+        **set_result_node(workflow_dict=update_node_names(workflow_dict=data))
+    ).dump_json_file(file_name=file_name, indent=2)

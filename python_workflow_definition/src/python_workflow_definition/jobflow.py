@@ -331,11 +331,13 @@ def write_workflow_json(flow: Flow, file_name: str = "workflow.json"):
         else:
             nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
-    PythonWorkflowDefinitionWorkflow(**set_result_node(
-        workflow_dict=update_node_names(
-            workflow_dict={
-                NODES_LABEL: nodes_store_lst,
-                EDGES_LABEL: edges_lst,
-            }
+    PythonWorkflowDefinitionWorkflow(
+        **set_result_node(
+            workflow_dict=update_node_names(
+                workflow_dict={
+                    NODES_LABEL: nodes_store_lst,
+                    EDGES_LABEL: edges_lst,
+                }
+            )
         )
-    )).dump_json_file(file_name=file_name, indent=2)
+    ).dump_json_file(file_name=file_name, indent=2)
