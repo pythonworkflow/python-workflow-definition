@@ -188,7 +188,7 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             raise
 
     @classmethod
-    def load_json_str(cls: Type[T], json_data: Union[str, bytes]) -> T:
+    def load_json_str(cls: Type[T], json_data: Union[str, bytes]) -> dict:
         """
         Loads and validates workflow data from a JSON string or bytes.
 
@@ -210,7 +210,7 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             logger.info(
                 "Successfully loaded and validated workflow model from JSON data."
             )
-            return instance
+            return instance.model_dump()
         except ValidationError:  # Catch validation errors specifically
             logger.error("Workflow model validation failed.", exc_info=True)
             raise
@@ -224,7 +224,7 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             raise
 
     @classmethod
-    def load_json_file(cls: Type[T], file_name: Union[str, Path]) -> T:
+    def load_json_file(cls: Type[T], file_name: Union[str, Path]) -> dict:
         """
         Loads and validates workflow data from a JSON file.
 
