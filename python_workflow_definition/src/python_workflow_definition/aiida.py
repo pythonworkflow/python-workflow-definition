@@ -137,6 +137,6 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                 )
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
-        json.dump(update_node_names(content=data), f, indent=2)
+        json.dump(update_node_names(workflow_dict=data), f, indent=2)
 
     return data
