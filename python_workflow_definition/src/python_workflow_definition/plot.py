@@ -1,5 +1,3 @@
-import json
-
 from IPython.display import SVG, display
 import networkx as nx
 
