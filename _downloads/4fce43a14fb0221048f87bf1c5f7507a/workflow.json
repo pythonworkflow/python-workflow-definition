@@ -6,7 +6,7 @@
     {"id": 3, "type":  "function", "value": "workflow.plot_over_line"},
     {"id": 4, "type": "function", "value": "workflow.substitute_macros"},
     {"id": 5, "type": "function", "value": "workflow.compile_paper"},
-    {"id": 6, "type": "input", "value": 2.0}
+    {"id": 6, "type": "input", "value": 2.0, "name": "domain_size"}
   ],
   "edges": [
     {"target": 0, "targetPort": "domain_size", "source": 6, "sourcePort": null},
