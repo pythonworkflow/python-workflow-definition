@@ -1,3 +1,5 @@
+from collections import Counter
+
 NODES_LABEL = "nodes"
 EDGES_LABEL = "edges"
 SOURCE_LABEL = "source"
@@ -42,3 +44,34 @@ def convert_nodes_list_to_dict(nodes_list: list) -> dict:
     return {
         str(el["id"]): el["value"] for el in sorted(nodes_list, key=lambda d: d["id"])
     }
+
+
+def update_node_names(content: dict) -> dict:
+    node_names_final_dict = {}
+    input_nodes = [n for n in content[NODES_LABEL] if n["type"] == "input"]
+    node_names_dict = {
+        n["id"]: list(
+            set(
+                [
+                    e[TARGET_PORT_LABEL]
+                    for e in content[EDGES_LABEL]
+                    if e[SOURCE_LABEL] == n["id"]
+                ]
+            )
+        )[0]
+        for n in input_nodes
+    }
+
+    counter_dict = Counter(node_names_dict.values())
+    node_names_useage_dict = {k: -1 for k in counter_dict.keys()}
+    for k, v in node_names_dict.items():
+        node_names_useage_dict[v] += 1
+        if counter_dict[v] > 1:
+            node_names_final_dict[k] = v + "_" + str(node_names_useage_dict[v])
+        else:
+            node_names_final_dict[k] = v
+
+    for n in content[NODES_LABEL]:
+        if n["type"] == "input":
+            n["name"] = node_names_final_dict[n["id"]]
+    return content

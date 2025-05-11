@@ -11,6 +11,7 @@ from python_workflow_definition.shared import (
     get_kwargs,
     get_source_handles,
     convert_nodes_list_to_dict,
+    update_node_names,
     NODES_LABEL,
     EDGES_LABEL,
     SOURCE_LABEL,
@@ -291,4 +292,10 @@ def write_workflow_json(
             nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
     with open(file_name, "w") as f:
-        json.dump({NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_new_lst}, f)
+        json.dump(
+            update_node_names(
+                content={NODES_LABEL: nodes_store_lst, EDGES_LABEL: edges_new_lst}
+            ),
+            f,
+            indent=2,
+        )
