@@ -10,6 +10,8 @@ from aiida_workgraph.socket import TaskSocketNamespace
 from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
     update_node_names,
+    remove_result,
+    set_result_node,
     NODES_LABEL,
     EDGES_LABEL,
     SOURCE_LABEL,
@@ -21,7 +23,7 @@ from python_workflow_definition.shared import (
 
 def load_workflow_json(file_name: str) -> WorkGraph:
     with open(file_name) as f:
-        data = json.load(f)
+        data = remove_result(workflow_dict=json.load(f))
 
     wg = WorkGraph()
     task_name_mapping = {}
@@ -136,6 +138,10 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                 )
     with open(file_name, "w") as f:
         # json.dump({"nodes": data[], "edges": edges_new_lst}, f)
-        json.dump(update_node_names(content=data), f, indent=2)
+        json.dump(
+            set_result_node(workflow_dict=update_node_names(workflow_dict=data)),
+            f,
+            indent=2,
+        )
 
     return data

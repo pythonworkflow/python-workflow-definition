@@ -31,7 +31,8 @@
     {"id": 28, "type": "input", "value": "strain_4", "name": "working_directory_5"},
     {"id": 29, "type": "function", "value": "python_workflow_definition.shared.get_dict"},
     {"id": 30, "type": "function", "value": "python_workflow_definition.shared.get_list"},
-    {"id": 31, "type": "function", "value": "python_workflow_definition.shared.get_list"}
+    {"id": 31, "type": "function", "value": "python_workflow_definition.shared.get_list"},
+    {"id": 32, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "element", "source": 9, "sourcePort": null},
@@ -92,6 +93,7 @@
     {"target": 31, "targetPort": "2", "source": 5, "sourcePort": "energy"},
     {"target": 31, "targetPort": "3", "source": 6, "sourcePort": "energy"},
     {"target": 31, "targetPort": "4", "source": 7, "sourcePort": "energy"},
-    {"target": 8, "targetPort": "energy_lst", "source": 31, "sourcePort": null}
+    {"target": 8, "targetPort": "energy_lst", "source": 31, "sourcePort": null},
+    {"target": 32, "targetPort": null, "source": 8, "sourcePort": null}
   ]
 }
