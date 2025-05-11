@@ -6,7 +6,8 @@
     {"id": 3, "type":  "function", "value": "workflow.plot_over_line"},
     {"id": 4, "type": "function", "value": "workflow.substitute_macros"},
     {"id": 5, "type": "function", "value": "workflow.compile_paper"},
-    {"id": 6, "type": "input", "value": 2.0, "name": "domain_size"}
+    {"id": 6, "type": "input", "value": 2.0, "name": "domain_size"},
+    {"id": 7, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "domain_size", "source": 6, "sourcePort": null},
@@ -19,6 +20,7 @@
     {"target": 4, "targetPort": "ndofs", "source": 2, "sourcePort": "numdofs"},
     {"target": 4, "targetPort": "domain_size", "source": 6, "sourcePort": null},
     {"target": 5, "targetPort": "macros_tex", "source": 4, "sourcePort": null},
-    {"target": 5, "targetPort": "plot_file", "source": 3, "sourcePort": null}
+    {"target": 5, "targetPort": "plot_file", "source": 3, "sourcePort": null},
+    {"target": 7, "targetPort": null, "source": 5, "sourcePort": null}
   ]
 }

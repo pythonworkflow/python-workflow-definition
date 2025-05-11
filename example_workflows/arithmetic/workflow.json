@@ -3,12 +3,14 @@
     {"id": 0, "type": "function", "value": "workflow.get_prod_and_div"},
     {"id": 1, "type": "function", "value": "workflow.get_sum"},
     {"id": 2, "type": "input", "value": 1, "name": "x"},
-    {"id": 3, "type": "input", "value": 2, "name": "y"}
+    {"id": 3, "type": "input", "value": 2, "name": "y"},
+    {"id": 4, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "x", "source": 2, "sourcePort": null},
     {"target": 0, "targetPort": "y", "source": 3, "sourcePort": null},
     {"target": 1, "targetPort": "x", "source": 0, "sourcePort": "prod"},
-    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"}
+    {"target": 1, "targetPort": "y", "source": 0, "sourcePort": "div"},
+    {"target": 4, "targetPort": null, "source": 1, "sourcePort": null}
   ]
 }

@@ -12,6 +12,7 @@ from python_workflow_definition.shared import (
     get_source_handles,
     convert_nodes_list_to_dict,
     update_node_names,
+    remove_result,
     NODES_LABEL,
     EDGES_LABEL,
     SOURCE_LABEL,
@@ -229,7 +230,7 @@ def load_workflow_json(file_name: str, project: Optional[Project] = None):
         project = Project(".")
 
     with open(file_name, "r") as f:
-        content = json.load(f)
+        content = remove_result(workflow_dict=json.load(f))
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}

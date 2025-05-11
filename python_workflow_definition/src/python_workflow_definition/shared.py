@@ -46,15 +46,15 @@ def convert_nodes_list_to_dict(nodes_list: list) -> dict:
     }
 
 
-def update_node_names(content: dict) -> dict:
+def update_node_names(workflow_dict: dict) -> dict:
     node_names_final_dict = {}
-    input_nodes = [n for n in content[NODES_LABEL] if n["type"] == "input"]
+    input_nodes = [n for n in workflow_dict[NODES_LABEL] if n["type"] == "input"]
     node_names_dict = {
         n["id"]: list(
             set(
                 [
                     e[TARGET_PORT_LABEL]
-                    for e in content[EDGES_LABEL]
+                    for e in workflow_dict[EDGES_LABEL]
                     if e[SOURCE_LABEL] == n["id"]
                 ]
             )
@@ -71,7 +71,44 @@ def update_node_names(content: dict) -> dict:
         else:
             node_names_final_dict[k] = v
 
-    for n in content[NODES_LABEL]:
+    for n in workflow_dict[NODES_LABEL]:
         if n["type"] == "input":
             n["name"] = node_names_final_dict[n["id"]]
-    return content
+    return workflow_dict
+
+
+def set_result_node(workflow_dict):
+    node_id_lst = [n["id"] for n in workflow_dict[NODES_LABEL]]
+    source_lst = list(set([e[SOURCE_LABEL] for e in workflow_dict[EDGES_LABEL]]))
+
+    end_node_lst = []
+    for ni in node_id_lst:
+        if ni not in source_lst:
+            end_node_lst.append(ni)
+
+    node_id = len(workflow_dict[NODES_LABEL])
+    workflow_dict[NODES_LABEL].append(
+        {"id": node_id, "type": "output", "name": "result"}
+    )
+    workflow_dict[EDGES_LABEL].append(
+        {
+            TARGET_LABEL: node_id,
+            TARGET_PORT_LABEL: None,
+            SOURCE_LABEL: end_node_lst[0],
+            SOURCE_PORT_LABEL: None,
+        }
+    )
+
+    return workflow_dict
+
+
+def remove_result(workflow_dict):
+    node_output_id = [
+        n["id"] for n in workflow_dict[NODES_LABEL] if n["type"] == "output"
+    ][0]
+    return {
+        NODES_LABEL: [n for n in workflow_dict[NODES_LABEL] if n["type"] != "output"],
+        EDGES_LABEL: [
+            e for e in workflow_dict[EDGES_LABEL] if e[TARGET_LABEL] != node_output_id
+        ],
+    }
