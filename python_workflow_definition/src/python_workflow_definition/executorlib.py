@@ -1,9 +1,9 @@
 from concurrent.futures import Executor
 from importlib import import_module
 from inspect import isfunction
-import json
 
 
+from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     get_dict,
     get_list,
@@ -38,8 +38,11 @@ def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict, exe: Ex
 
 
 def load_workflow_json(file_name: str, exe: Executor):
-    with open(file_name, "r") as f:
-        content = remove_result(workflow_dict=json.load(f))
+    content = remove_result(
+        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
+            file_name=file_name
+        )
+    )
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
