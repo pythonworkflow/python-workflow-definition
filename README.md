@@ -41,7 +41,7 @@ def combined_workflow(x=1, y=2):
 For the workflow representation of these Python functions the Python functions are stored in the [example_workflows/arithmetic/workflow.py](example_workflows/arithmetic/workflow.py)
 Python module. The connection of the Python functions are stored in the [example_workflows/arithmetic/workflow.json](example_workflows/arithmetic/workflow.json) 
 JSON file:
-```
+```JSON
 {
   "nodes": [
     {"id": 0, "type": "function", "value": "workflow.get_prod_and_div"},
