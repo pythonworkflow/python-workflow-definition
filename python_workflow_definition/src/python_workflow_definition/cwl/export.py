@@ -98,7 +98,11 @@ def _write_function_cwl(workflow):
                 },
                 "workflowfile": {
                     "type": "File",
-                    "inputBinding": {"position": 2, "prefix": "--workflowfile=", "separate": False},
+                    "inputBinding": {
+                        "position": 2,
+                        "prefix": "--workflowfile=",
+                        "separate": False,
+                    },
                     "default": {"class": "File", "location": "workflow.py"},
                 },
             },

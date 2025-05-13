@@ -1,14 +1,16 @@
 import sys
-import os
-import shutil
 import pickle
 from ast import literal_eval
-from importlib import import_module
+import importlib.util
 
 
 def load_function(funct):
     p, m = funct.rsplit(".", 1)
-    return getattr(import_module(p), m)
+    spec = importlib.util.spec_from_file_location(p, p + ".py")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[p] = module
+    spec.loader.exec_module(module)
+    return getattr(module, m)
 
 
 def convert_argument(arg):
@@ -27,12 +29,6 @@ if __name__ == "__main__":
         for arg in argument_lst
         if "--function=" in arg
     ][0]
-    file = [
-        load_function(funct=arg.split("=")[-1])
-        for arg in argument_lst
-        if "--workflowfile=" in arg
-    ][0]
-    shutil.copyfile(file, os.curdir)
     kwargs = {
         arg.split("=")[0][6:]: convert_argument(arg=arg.split("=")[-1])
         for arg in argument_lst
