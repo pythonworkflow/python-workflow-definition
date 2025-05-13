@@ -128,6 +128,7 @@ jobs:
       run: |
         cd example_workflows/arithmetic
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill cwl.ipynb cwl_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
