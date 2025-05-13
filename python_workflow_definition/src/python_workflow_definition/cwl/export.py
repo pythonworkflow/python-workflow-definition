@@ -97,12 +97,9 @@ def _write_function_cwl(workflow):
                     "default": "python_workflow_definition.cwl",
                 },
                 "workflowfile": {
-                    "type": "string",
-                    "inputBinding": {
-                        "position": 2,
-                        "separate": False,
-                    },
-                    "default": "workflow.py",
+                    "type": "File",
+                    "inputBinding": {"position": 2},
+                    "default": {"class": "File", "location": "workflow.py"},
                 },
             },
             "outputs": {},
