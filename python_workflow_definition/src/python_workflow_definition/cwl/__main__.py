@@ -27,6 +27,12 @@ if __name__ == "__main__":
         for arg in argument_lst
         if "--function=" in arg
     ][0]
+    file = [
+        load_function(funct=arg.split("=")[-1])
+        for arg in argument_lst
+        if "--workflowfile=" in arg
+    ][0]
+    shutil.copyfile(file, os.curdir)
     kwargs = {
         arg.split("=")[0][6:]: convert_argument(arg=arg.split("=")[-1])
         for arg in argument_lst

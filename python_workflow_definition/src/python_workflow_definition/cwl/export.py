@@ -98,18 +98,18 @@ def _write_function_cwl(workflow):
                 },
                 "workflowfile": {
                     "type": "File",
-                    "inputBinding": {"position": 2},
+                    "inputBinding": {"position": 2, "prefix": "--workflowfile=", "separate": False},
                     "default": {"class": "File", "location": "workflow.py"},
                 },
             },
             "outputs": {},
         }
-        template["inputs"]["workflowfile"]["default"]["location"] = (
-            function_nodes_dict[i].split(".")[0] + ".py"
-        )
         file_name = function_nodes_dict[i].split(".")[-1] + ".cwl"
         if file_name not in file_lst:
             file_lst.append(file_name)
+            template["inputs"]["workflowfile"]["default"]["location"] = (
+                function_nodes_dict[i].split(".")[0] + ".py"
+            )
             template["inputs"].update(
                 _get_function_template(function_name=function_nodes_dict[i])
             )
