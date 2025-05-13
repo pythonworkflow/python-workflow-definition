@@ -170,6 +170,8 @@ def _write_workflow(workflow):
             "result_file": {
                 "type": "File",
                 "outputSource": function_nodes_dict[last_compute_id].split(".")[-1]
+                + "_"
+                + str(last_compute_id)
                 + "/result_file",
             },
         }
@@ -204,12 +206,18 @@ def _write_workflow(workflow):
             else:
                 in_dict[k + "_file"] = (
                     step_name_lst[v[SOURCE_LABEL]]
+                    + "_"
+                    + str(v[SOURCE_LABEL])
                     + "/"
                     + v[SOURCE_PORT_LABEL]
                     + "_file"
                 )
         workflow_template["steps"].update(
-            {step_name_lst[ind] + "_" + str(ind): {"run": node_script, "in": in_dict, "out": output}}
+            {
+                step_name_lst[ind]
+                + "_"
+                + str(ind): {"run": node_script, "in": in_dict, "out": output}
+            }
         )
     with open("workflow.cwl", "w") as f:
         dump(workflow_template, f, Dumper=Dumper)
