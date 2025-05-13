@@ -37,7 +37,7 @@ def _get_function_template(function_name: str) -> dict:
     return {
         "function": {
             "default": function_name,
-            "inputBinding": {"position": 2, "prefix": "--function=", "separate": False},
+            "inputBinding": {"position": 3, "prefix": "--function=", "separate": False},
             "type": "string",
         },
     }
@@ -96,9 +96,20 @@ def _write_function_cwl(workflow):
                     "inputBinding": {"position": 1, "prefix": "-m"},
                     "default": "python_workflow_definition.cwl",
                 },
+                "workflowfile": {
+                    "type": "string",
+                    "inputBinding": {
+                        "position": 2,
+                        "separate": False,
+                    },
+                    "default": "workflow.py",
+                },
             },
             "outputs": {},
         }
+        template["inputs"]["workflowfile"]["default"] = (
+            function_nodes_dict[i].split(".")[0] + ".py"
+        )
         file_name = function_nodes_dict[i].split(".")[-1] + ".cwl"
         if file_name not in file_lst:
             file_lst.append(file_name)
@@ -107,7 +118,7 @@ def _write_function_cwl(workflow):
             )
             for j, arg in enumerate(funct_dict[i]["targetPorts"]):
                 template["inputs"].update(
-                    _get_function_argument(argument=arg, position=3 + j)
+                    _get_function_argument(argument=arg, position=4 + j)
                 )
             for out in funct_dict[i]["sourcePorts"]:
                 if out is None:
