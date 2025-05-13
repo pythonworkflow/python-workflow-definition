@@ -104,7 +104,7 @@ def _write_function_cwl(workflow):
             },
             "outputs": {},
         }
-        template["inputs"]["workflowfile"]["default"] = (
+        template["inputs"]["workflowfile"]["default"]["location"] = (
             function_nodes_dict[i].split(".")[0] + ".py"
         )
         file_name = function_nodes_dict[i].split(".")[-1] + ".cwl"
