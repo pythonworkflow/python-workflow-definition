@@ -209,7 +209,7 @@ def _write_workflow(workflow):
                     + "_file"
                 )
         workflow_template["steps"].update(
-            {step_name_lst[ind]: {"run": node_script, "in": in_dict, "out": output}}
+            {step_name_lst[ind] + "_" + str(ind): {"run": node_script, "in": in_dict, "out": output}}
         )
     with open("workflow.cwl", "w") as f:
         dump(workflow_template, f, Dumper=Dumper)
