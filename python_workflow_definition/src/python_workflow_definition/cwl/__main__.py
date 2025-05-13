@@ -9,7 +9,7 @@ def load_function(file_name, funct):
     module = importlib.util.module_from_spec(spec)
     sys.modules["workflow"] = module
     spec.loader.exec_module(module)
-    return getattr(module, funct)
+    return getattr(module, funct.split(".")[-1])
 
 
 def convert_argument(arg):
