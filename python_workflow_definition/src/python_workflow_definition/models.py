@@ -12,6 +12,9 @@ T = TypeVar("T", bound="PwdWorkflow")
 
 __all__ = ("PwdInputNode", "PwdOutputNode", "PwdFunctionNode", "PwdEdge", "PwdWorkflow")
 
+# TODO: Check if validation _enforces_ this:
+# at the end of page 4, we discuss when sourcePort can be null. Let’s extend to also e.g. say links from functions to outputs, and for inputs to functions, MUST be null (to be validated). And sourcePort can be null only if we want to pass the whole output, and this is equivalent to passing the string `__result__`
+
 
 class PwdBaseNode(BaseModel):
     """Base model for all node types, containing common fields."""

@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "id": 0,
+      "type": "function",
+      "value": "workflow.get_prod_and_div"
+    },
+    {
+      "id": 1,
+      "type": "function",
+      "value": "workflow.get_sum"
+    },
+    {
+      "id": 2,
+      "type": "function",
+      "value": "workflow.square"
+    },
+    {
+      "id": 3,
+      "type": "output",
+      "name": "result",
+      "value": null
+    }
+  ],
+  "edges": [
+    {
+      "target": 1,
+      "targetPort": "x",
+      "source": 0,
+      "sourcePort": "prod"
+    },
+    {
+      "target": 1,
+      "targetPort": "y",
+      "source": 0,
+      "sourcePort": "div"
+    },
+    {
+      "target": 2,
+      "targetPort": "x",
+      "source": 1,
+      "sourcePort": null
+    },
+    {
+      "target": 3,
+      "targetPort": null,
+      "source": 2,
+      "sourcePort": null
+    }
+  ]
+}
