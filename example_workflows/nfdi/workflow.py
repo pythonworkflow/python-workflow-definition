@@ -80,7 +80,7 @@ def plot_over_line(poisson_output_pvd_file: str, poisson_output_vtu_file: str, s
     return os.path.abspath(os.path.join("postprocessing", pvbatch_output_file_name))
 
 
-def substitute_macros(pvbatch_output_file: str, ndofs: int, domain_size: float = 2.0, source_directory: str) -> str:
+def substitute_macros(pvbatch_output_file: str, ndofs: int, domain_size: float, source_directory: str) -> str:
     stage_name = "postprocessing"
     source_file_name = "prepare_paper_macros.py"
     template_file_name = "macros.tex.template"
