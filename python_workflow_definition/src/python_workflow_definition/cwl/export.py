@@ -85,7 +85,7 @@ def _write_function_cwl(workflow):
     function_nodes_dict, funct_dict = _get_function(workflow)
     file_lst = []
 
-    for i in range(len(function_nodes_dict)):
+    for i in function_nodes_dict.keys():
         template = {
             "cwlVersion": "v1.2",
             "class": "CommandLineTool",
