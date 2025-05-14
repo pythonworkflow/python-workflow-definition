@@ -116,6 +116,7 @@ class PythonWorkflowDefinitionEdge(BaseModel):
 class PythonWorkflowDefinitionWorkflow(BaseModel):
     """The main workflow model."""
 
+    version: str
     nodes: List[PythonWorkflowDefinitionNode]
     edges: List[PythonWorkflowDefinitionEdge]
 

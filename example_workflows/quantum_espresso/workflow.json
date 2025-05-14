@@ -1,4 +1,5 @@
 {
+  "version": "0.0.1",
   "nodes": [
     {"id": 0, "type": "function", "value": "workflow.get_bulk_structure"},
     {"id": 1, "type": "function", "value": "workflow.calculate_qe"},
