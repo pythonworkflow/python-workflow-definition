@@ -394,6 +394,13 @@ document.write(`
 <h2>Define workflow with aiida<a class="headerlink" href="#define-workflow-with-aiida" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">aiida_workgraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkGraph</span><span class="p">,</span> <span class="n">task</span>
@@ -403,7 +410,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;5b8a8d98b3014876a9eed7d85a954e5e&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;38168b192f654d6c9515c186d57ce4e1&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -432,6 +439,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain_size</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -450,6 +464,7 @@ document.write(`
     <span class="n">generate_mesh</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generate_mesh&quot;</span><span class="p">,</span>
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -473,6 +488,7 @@ document.write(`
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">,</span>
     <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">xdmf_file</span><span class="p">,</span> 
     <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">h5_file</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -485,6 +501,7 @@ document.write(`
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;plot_over_line&quot;</span><span class="p">,</span>
     <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">pvd_file</span><span class="p">,</span> 
     <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">vtu_file</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -498,6 +515,7 @@ document.write(`
     <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> 
     <span class="n">ndofs</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">numdofs</span><span class="p">,</span> 
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -510,6 +528,7 @@ document.write(`
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;compile_paper&quot;</span><span class="p">,</span>
     <span class="n">macros_tex</span><span class="o">=</span><span class="n">macros_tex_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> 
     <span class="n">plot_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -522,7 +541,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "cc82d573b0404a4697e86fea0f52b39d"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "146d8dc7dfb641ca8d2e9d74c21dd397"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -534,46 +553,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">wg</span><span class="o">=</span><span class="n">wg</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: [{&#39;id&#39;: 0, &#39;function&#39;: &#39;nfdi_ing_workflow.generate_mesh&#39;},
-  {&#39;id&#39;: 1, &#39;function&#39;: &#39;nfdi_ing_workflow.convert_to_xdmf&#39;},
-  {&#39;id&#39;: 2, &#39;function&#39;: &#39;nfdi_ing_workflow.poisson&#39;},
-  {&#39;id&#39;: 3, &#39;function&#39;: &#39;nfdi_ing_workflow.plot_over_line&#39;},
-  {&#39;id&#39;: 4, &#39;function&#39;: &#39;nfdi_ing_workflow.substitute_macros&#39;},
-  {&#39;id&#39;: 5, &#39;function&#39;: &#39;nfdi_ing_workflow.compile_paper&#39;},
-  {&#39;id&#39;: 6, &#39;value&#39;: 2.0}],
- &#39;edges&#39;: [{&#39;target&#39;: 1,
-   &#39;targetPort&#39;: &#39;gmsh_output_file&#39;,
-   &#39;source&#39;: 0,
-   &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 2,
-   &#39;targetPort&#39;: &#39;meshio_output_xdmf&#39;,
-   &#39;source&#39;: 1,
-   &#39;sourcePort&#39;: &#39;xdmf_file&#39;},
-  {&#39;target&#39;: 2,
-   &#39;targetPort&#39;: &#39;meshio_output_h5&#39;,
-   &#39;source&#39;: 1,
-   &#39;sourcePort&#39;: &#39;h5_file&#39;},
-  {&#39;target&#39;: 3,
-   &#39;targetPort&#39;: &#39;poisson_output_pvd_file&#39;,
-   &#39;source&#39;: 2,
-   &#39;sourcePort&#39;: &#39;pvd_file&#39;},
-  {&#39;target&#39;: 3,
-   &#39;targetPort&#39;: &#39;poisson_output_vtu_file&#39;,
-   &#39;source&#39;: 2,
-   &#39;sourcePort&#39;: &#39;vtu_file&#39;},
-  {&#39;target&#39;: 4,
-   &#39;targetPort&#39;: &#39;pvbatch_output_file&#39;,
-   &#39;source&#39;: 3,
-   &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 4, &#39;targetPort&#39;: &#39;ndofs&#39;, &#39;source&#39;: 2, &#39;sourcePort&#39;: &#39;numdofs&#39;},
-  {&#39;target&#39;: 5, &#39;targetPort&#39;: &#39;macros_tex&#39;, &#39;source&#39;: 4, &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 5, &#39;targetPort&#39;: &#39;plot_file&#39;, &#39;source&#39;: 3, &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 0, &#39;targetPort&#39;: &#39;domain_size&#39;, &#39;source&#39;: 6, &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 4, &#39;targetPort&#39;: &#39;domain_size&#39;, &#39;source&#39;: 6, &#39;sourcePort&#39;: None}]}
 </pre></div>
 </div>
 </div>
@@ -589,31 +568,50 @@ document.write(`
   &quot;nodes&quot;: [
     {
       &quot;id&quot;: 0,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.generate_mesh&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.generate_mesh&quot;
     },
     {
       &quot;id&quot;: 1,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.convert_to_xdmf&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.convert_to_xdmf&quot;
     },
     {
       &quot;id&quot;: 2,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.poisson&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.poisson&quot;
     },
     {
       &quot;id&quot;: 3,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.plot_over_line&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.plot_over_line&quot;
     },
     {
       &quot;id&quot;: 4,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.substitute_macros&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.substitute_macros&quot;
     },
     {
       &quot;id&quot;: 5,
-      &quot;function&quot;: &quot;nfdi_ing_workflow.compile_paper&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.compile_paper&quot;
     },
     {
       &quot;id&quot;: 6,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;domain_size&quot;,
       &quot;value&quot;: 2.0
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;source_directory&quot;,
+      &quot;value&quot;: &quot;/home/jovyan/example_workflows/nfdi/source&quot;
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
     }
   ],
   &quot;edges&quot;: [
@@ -678,9 +676,45 @@ document.write(`
       &quot;sourcePort&quot;: null
     },
     {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;source_directory&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;source_directory&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;source_directory&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
       &quot;target&quot;: 4,
       &quot;targetPort&quot;: &quot;domain_size&quot;,
       &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;source_directory&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;source_directory&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 5,
       &quot;sourcePort&quot;: null
     }
   ]
@@ -695,14 +729,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
 </pre></div>
 </div>
 </div>
@@ -729,28 +755,28 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:29:09,718 INFO Started executing jobs locally
-2025-04-23 09:29:10,027 INFO Starting job - generate_mesh (db4e4162-f31c-4da8-b474-aff5f748b02a)
-2025-04-23 09:29:11,997 INFO Finished job - generate_mesh (db4e4162-f31c-4da8-b474-aff5f748b02a)
-2025-04-23 09:29:11,998 INFO Starting job - convert_to_xdmf (25f3510a-42fc-4895-bb0c-1ea58a357c1d)
-2025-04-23 09:29:13,640 INFO Finished job - convert_to_xdmf (25f3510a-42fc-4895-bb0c-1ea58a357c1d)
-2025-04-23 09:29:13,642 INFO Starting job - poisson (03732863-096b-4c7f-b9fe-62edb0fd5d91)
-2025-04-23 09:29:23,400 INFO Finished job - poisson (03732863-096b-4c7f-b9fe-62edb0fd5d91)
-2025-04-23 09:29:23,401 INFO Starting job - plot_over_line (d326049f-820a-4b9c-8645-70a4d5a8b581)
-2025-04-23 09:29:25,817 INFO Finished job - plot_over_line (d326049f-820a-4b9c-8645-70a4d5a8b581)
-2025-04-23 09:29:25,818 INFO Starting job - substitute_macros (ce1245a5-8a5d-4428-9e90-437f8dff22e2)
-2025-04-23 09:29:26,635 INFO Finished job - substitute_macros (ce1245a5-8a5d-4428-9e90-437f8dff22e2)
-2025-04-23 09:29:26,636 INFO Starting job - compile_paper (5b619ad3-49d6-4e76-ad3f-0ac31e7d63cb)
-2025-04-23 09:30:40,178 INFO Finished job - compile_paper (5b619ad3-49d6-4e76-ad3f-0ac31e7d63cb)
-2025-04-23 09:30:40,179 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-14 08:19:05,840 INFO Started executing jobs locally
+2025-05-14 08:19:06,092 INFO Starting job - generate_mesh (2b5d3769-0843-43a0-b074-2b307413b932)
+2025-05-14 08:19:07,248 INFO Finished job - generate_mesh (2b5d3769-0843-43a0-b074-2b307413b932)
+2025-05-14 08:19:07,249 INFO Starting job - convert_to_xdmf (60d93a50-60c8-4ebc-9822-fae5e9f6bf4b)
+2025-05-14 08:19:08,519 INFO Finished job - convert_to_xdmf (60d93a50-60c8-4ebc-9822-fae5e9f6bf4b)
+2025-05-14 08:19:08,521 INFO Starting job - poisson (06a30fcc-b3e5-4223-aa6e-1090166cd9c7)
+2025-05-14 08:19:11,239 INFO Finished job - poisson (06a30fcc-b3e5-4223-aa6e-1090166cd9c7)
+2025-05-14 08:19:11,240 INFO Starting job - plot_over_line (f899080b-495a-401e-a71c-3abba9e81a5b)
+2025-05-14 08:19:12,690 INFO Finished job - plot_over_line (f899080b-495a-401e-a71c-3abba9e81a5b)
+2025-05-14 08:19:12,691 INFO Starting job - substitute_macros (b1612cb4-0027-4140-95c2-8cb7581109ca)
+2025-05-14 08:19:13,570 INFO Finished job - substitute_macros (b1612cb4-0027-4140-95c2-8cb7581109ca)
+2025-05-14 08:19:13,571 INFO Starting job - compile_paper (c5e6caaa-9766-4079-a235-a774a6d5c7fa)
+2025-05-14 08:19:15,636 INFO Finished job - compile_paper (c5e6caaa-9766-4079-a235-a774a6d5c7fa)
+2025-05-14 08:19:15,637 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;db4e4162-f31c-4da8-b474-aff5f748b02a&#39;: {1: Response(output=&#39;/home/jovyan/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;25f3510a-42fc-4895-bb0c-1ea58a357c1d&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jovyan/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jovyan/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;03732863-096b-4c7f-b9fe-62edb0fd5d91&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jovyan/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jovyan/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;d326049f-820a-4b9c-8645-70a4d5a8b581&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;ce1245a5-8a5d-4428-9e90-437f8dff22e2&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;5b619ad3-49d6-4e76-ad3f-0ac31e7d63cb&#39;: {1: Response(output=&#39;/home/jovyan/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;2b5d3769-0843-43a0-b074-2b307413b932&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
+ &#39;60d93a50-60c8-4ebc-9822-fae5e9f6bf4b&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
+ &#39;06a30fcc-b3e5-4223-aa6e-1090166cd9c7&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
+ &#39;f899080b-495a-401e-a71c-3abba9e81a5b&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
+ &#39;b1612cb4-0027-4140-95c2-8cb7581109ca&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
+ &#39;c5e6caaa-9766-4079-a235-a774a6d5c7fa&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))}}
 </pre></div>
 </div>
 </div>
@@ -773,7 +799,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c64145a34b34de0496bceb297ae501c26d81b6bb69b8e65077c19cda0fa0a802.svg" src="../../_images/c64145a34b34de0496bceb297ae501c26d81b6bb69b8e65077c19cda0fa0a802.svg" />
+<img alt="../../_images/fd78509895115d77bf83bc7b1c5a8b92faf9a810a1aacf61a531eb3b5caf374a.svg" src="../../_images/fd78509895115d77bf83bc7b1c5a8b92faf9a810a1aacf61a531eb3b5caf374a.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -783,15 +809,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_0b48cf5155cd6802c17d20bb58104132 was saved and received the ID: 1
-The job convert_to_xdmf_29ad6ec6927268429dc9aef8166fde43 was saved and received the ID: 2
-The job poisson_a0224b23ceb2119d105a5d98ef37f93e was saved and received the ID: 3
-The job plot_over_line_82b37a42e0747f11d9a7f6318f63ac6b was saved and received the ID: 4
-The job substitute_macros_874fc185ecec04b4cb9537c58b7efb7b was saved and received the ID: 5
-The job compile_paper_3cee534ffe692833d37faf1fd2170cb6 was saved and received the ID: 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_47725c16637f799ac042e47468005db3 was saved and received the ID: 1
+The job convert_to_xdmf_d6a46eb9a4ec352aa996e783ec3c785f was saved and received the ID: 2
+The job poisson_3c147fc86db87cf0c0f94bda333f8cd8 was saved and received the ID: 3
+The job plot_over_line_ef50933291910dadcc8311924971e127 was saved and received the ID: 4
+The job substitute_macros_63766eafd6b1980c7832dd8c9a97c96e was saved and received the ID: 5
+The job compile_paper_128d1d58374953c00e95b8de62cbb10b was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/postprocessing/paper.pdf&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;
 </pre></div>
 </div>
 </div>

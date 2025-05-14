@@ -394,17 +394,16 @@ document.write(`
 <h2>Define workflow with jobflow<a class="headerlink" href="#define-workflow-with-jobflow" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span><span class="p">,</span> <span class="n">Flow</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span><span class="p">,</span> <span class="n">Flow</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
 </pre></div>
 </div>
 </div>
@@ -437,6 +436,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain_size</span> <span class="o">=</span> <span class="mf">2.0</span>
 </pre></div>
 </div>
@@ -446,6 +452,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gmsh_output_file</span> <span class="o">=</span> <span class="n">generate_mesh</span><span class="p">(</span>
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -465,6 +472,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span>
     <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">xdmf_file</span><span class="p">,</span> 
     <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">h5_file</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -475,6 +483,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">plot_over_line</span><span class="p">(</span>
     <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">pvd_file</span><span class="p">,</span> 
     <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">vtu_file</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -486,6 +495,7 @@ document.write(`
     <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> 
     <span class="n">ndofs</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">numdofs</span><span class="p">,</span> 
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -496,6 +506,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paper_output</span> <span class="o">=</span> <span class="n">compile_paper</span><span class="p">(</span>
     <span class="n">macros_tex</span><span class="o">=</span><span class="n">macros_tex_file</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> 
     <span class="n">plot_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+    <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -534,7 +545,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;0ebe77003eb640d5b073762df56b1814&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;38168b192f654d6c9515c186d57ce4e1&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -554,7 +565,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "2639a5a7e617406f8d238d7022110ad2"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "fd19d63f68234bebaa4e1db7d6dcfc99"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -563,20 +574,20 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/24/2025 02:15:53 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_mesh1
-04/24/2025 02:15:55 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: generate_mesh1, type: PyFunction, finished.
-04/24/2025 02:15:55 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: convert_to_xdmf2
-04/24/2025 02:15:57 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: convert_to_xdmf2, type: PyFunction, finished.
-04/24/2025 02:15:57 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: poisson3
-04/24/2025 02:16:06 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: poisson3, type: PyFunction, finished.
-04/24/2025 02:16:06 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_over_line4
-04/24/2025 02:16:09 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: plot_over_line4, type: PyFunction, finished.
-04/24/2025 02:16:09 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: substitute_macros5
-04/24/2025 02:16:10 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: substitute_macros5, type: PyFunction, finished.
-04/24/2025 02:16:10 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: compile_paper6
-04/24/2025 02:17:18 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|update_task_state]: Task: compile_paper6, type: PyFunction, finished.
-04/24/2025 02:17:18 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/24/2025 02:17:18 PM &lt;316&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [14|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/14/2025 08:21:04 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_mesh1
+05/14/2025 08:21:06 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: generate_mesh1, type: PyFunction, finished.
+05/14/2025 08:21:06 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: convert_to_xdmf2
+05/14/2025 08:21:08 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: convert_to_xdmf2, type: PyFunction, finished.
+05/14/2025 08:21:08 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: poisson3
+05/14/2025 08:21:11 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: poisson3, type: PyFunction, finished.
+05/14/2025 08:21:11 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_over_line4
+05/14/2025 08:21:13 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: plot_over_line4, type: PyFunction, finished.
+05/14/2025 08:21:13 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: substitute_macros5
+05/14/2025 08:21:14 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: substitute_macros5, type: PyFunction, finished.
+05/14/2025 08:21:14 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: compile_paper6
+05/14/2025 08:21:17 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|update_task_state]: Task: compile_paper6, type: PyFunction, finished.
+05/14/2025 08:21:17 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/14/2025 08:21:17 AM &lt;3280&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [51|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 </div>
@@ -599,7 +610,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9f5518335ed431c04b8862e5307b37c382a82775b30e4bf24a1b636d555eb591.svg" src="../../_images/9f5518335ed431c04b8862e5307b37c382a82775b30e4bf24a1b636d555eb591.svg" />
+<img alt="../../_images/d27374b98d595db3fb5bfda7af9b5bf354152c6573314c0b4ba5d85f5c09735d.svg" src="../../_images/d27374b98d595db3fb5bfda7af9b5bf354152c6573314c0b4ba5d85f5c09735d.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -609,12 +620,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_33d3e231d4f5badd161639211a4df9ff was saved and received the ID: 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_47725c16637f799ac042e47468005db3 was saved and received the ID: 1
 The job convert_to_xdmf_d6a46eb9a4ec352aa996e783ec3c785f was saved and received the ID: 2
-The job poisson_757ce07607bbfc1ac00c0f2ed9fff133 was saved and received the ID: 3
-The job plot_over_line_78c9de5c91dd3550b1cc113d2523f1e8 was saved and received the ID: 4
-The job substitute_macros_06cc93df70c8a343d15e56040b1a651d was saved and received the ID: 5
-The job compile_paper_e8bba68a92b18c0a5be4abe502340394 was saved and received the ID: 6
+The job poisson_3c147fc86db87cf0c0f94bda333f8cd8 was saved and received the ID: 3
+The job plot_over_line_ef50933291910dadcc8311924971e127 was saved and received the ID: 4
+The job substitute_macros_63766eafd6b1980c7832dd8c9a97c96e was saved and received the ID: 5
+The job compile_paper_128d1d58374953c00e95b8de62cbb10b was saved and received the ID: 6
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;
