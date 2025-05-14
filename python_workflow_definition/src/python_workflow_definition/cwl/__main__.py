@@ -27,9 +27,11 @@ if __name__ == "__main__":
     file_lst = [arg.split("=")[-1] for arg in argument_lst if "--workflowfile=" in arg]
     if len(file_lst) > 0:
         workflow_function = load_function(file_name=file_lst[0], funct=funct_lst[0])
+        internal_function = False
     else:
         m, p = funct_lst[0].rsplit(".", 1)
         workflow_function = getattr(importlib.import_module(m), p)
+        internal_function = True
     kwargs = {
         arg.split("=")[0][6:]: convert_argument(arg=arg.split("=")[-1])
         for arg in argument_lst
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     result = workflow_function(**kwargs)
 
     # store output
-    if isinstance(result, dict):
+    if isinstance(result, dict) and not internal_function:
         for k, v in result.items():
             with open(k + ".pickle", "wb") as f:
                 pickle.dump(v, f)
