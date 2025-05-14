@@ -29,7 +29,7 @@ if __name__ == "__main__":
         workflow_function = load_function(file_name=file_lst[0], funct=funct_lst[0])
     else:
         m, p = funct_lst[0].rsplit(".", 1)
-        workflow_function = importlib.import_module(m)
+        workflow_function = getattr(importlib.import_module(m), p)
     kwargs = {
         arg.split("=")[0][6:]: convert_argument(arg=arg.split("=")[-1])
         for arg in argument_lst
