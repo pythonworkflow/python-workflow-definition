@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Overwrite source directory with absolute path &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/nfdi/cwl';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/nfdi/cwl.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/example_workflows/nfdi/cwl.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Overwrite source directory with absolute path</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.cwl.export</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="overwrite-source-directory-with-absolute-path">
+<h1>Overwrite source directory with absolute path<a class="headerlink" href="#overwrite-source-directory-with-absolute-path" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;source_directory&#39;</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="n">node_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_lst</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="execute-workflow">
+<h1>Execute workflow<a class="headerlink" href="#execute-workflow" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>cwltool<span class="w"> </span>--preserve-environment<span class="o">=</span>CONDA_EXE<span class="w"> </span>workflow.cwl<span class="w"> </span>workflow.yml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
+  sys.exit(run())
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/nfdi/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step generate_mesh_0
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_mesh_0] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] /tmp/2zy1qyud$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/3kq1m6dv/stgfdd0e5fa-ab2c-4ee5-a621-421e0f130c2d/workflow.py \
+    --function=workflow.generate_mesh \
+    --arg_source_directory=/tmp/3kq1m6dv/stgb3cb8d7a-2fd4-4bed-bddd-a53347db76d4/source_directory.pickle \
+    --arg_domain_size=/tmp/3kq1m6dv/stgf88b878d-cda3-46dc-b95b-1a5866fc79df/domain_size.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] Max memory used: 51MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_mesh_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step convert_to_xdmf_1
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step convert_to_xdmf_1] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] /tmp/wtfrae9y$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/mnez84gw/stg3b3a2c97-dc53-4fa4-8b26-1c0ef725455a/workflow.py \
+    --function=workflow.convert_to_xdmf \
+    --arg_gmsh_output_file=/tmp/mnez84gw/stg7cb20c0e-e3a4-40c7-b347-90b3861ac948/result.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] Max memory used: 62MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step convert_to_xdmf_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step poisson_2
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step poisson_2] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] /tmp/c25cseik$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/mdjrrwsb/stg9fc40fe1-ad74-4530-9b90-3f25cda3228b/workflow.py \
+    --function=workflow.poisson \
+    --arg_source_directory=/tmp/mdjrrwsb/stg95c5865b-b3b7-41a3-9f91-8c0d4e64e2cc/source_directory.pickle \
+    --arg_meshio_output_xdmf=/tmp/mdjrrwsb/stg3f852952-6283-4843-8a5a-799885c3a16f/xdmf_file.pickle \
+    --arg_meshio_output_h5=/tmp/mdjrrwsb/stg4c12ec47-0d6d-4749-afb0-b44bcfdae15c/h5_file.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] Max memory used: 71MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step poisson_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step plot_over_line_3
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_over_line_3] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] /tmp/6taq1l9y$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/fr8grips/stgcc344580-aae9-480d-915b-b011888e11a9/workflow.py \
+    --function=workflow.plot_over_line \
+    --arg_poisson_output_pvd_file=/tmp/fr8grips/stg7c2c93df-069a-4d33-8ebc-402be33d67d0/pvd_file.pickle \
+    --arg_poisson_output_vtu_file=/tmp/fr8grips/stg481f6c15-8e7c-4198-9f1b-d61aa097b829/vtu_file.pickle \
+    --arg_source_directory=/tmp/fr8grips/stge25af463-7689-43d8-b783-165f68b907bd/source_directory.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] Max memory used: 71MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_over_line_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step substitute_macros_4
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step substitute_macros_4] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] /tmp/ry44k1po$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/_yac4p7u/stge908c7b1-0d4d-44a4-a2d4-62c97b75d25f/workflow.py \
+    --function=workflow.substitute_macros \
+    --arg_ndofs=/tmp/_yac4p7u/stgd19106a7-26ec-4159-87e5-c55df4e05b3e/numdofs.pickle \
+    --arg_source_directory=/tmp/_yac4p7u/stgea87bc3d-5042-4044-b2bb-58a83646f704/source_directory.pickle \
+    --arg_pvbatch_output_file=/tmp/_yac4p7u/stga426ce18-a7c0-4941-9b4c-988615fb6dd6/result.pickle \
+    --arg_domain_size=/tmp/_yac4p7u/stg75e4cce3-e411-4ffe-b1df-e5d40daa8d61/domain_size.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] Max memory used: 92MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step substitute_macros_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step compile_paper_5
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step compile_paper_5] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] /tmp/u4tewx74$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/c_jbp86a/stge99c916c-dabe-474c-b5f1-947214d3f9ed/workflow.py \
+    --function=workflow.compile_paper \
+    --arg_source_directory=/tmp/c_jbp86a/stg09ed111f-9743-4670-a6e6-182b1b32360d/source_directory.pickle \
+    --arg_plot_file=/tmp/c_jbp86a/stg5649e17e-4a2b-416c-8107-31df66b6e769/result.pickle \
+    --arg_macros_tex=/tmp/c_jbp86a/stg26421152-a968-4c63-97a0-8ed741b07f1a/result.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] Max memory used: 260MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step compile_paper_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
+{
+    &quot;result_file&quot;: {
+        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/nfdi/result.pickle&quot;,
+        &quot;basename&quot;: &quot;result.pickle&quot;,
+        &quot;class&quot;: &quot;File&quot;,
+        &quot;checksum&quot;: &quot;sha1$1be622d292821508f2a41ec4bc8a04d06dfbdbaf&quot;,
+        &quot;size&quot;: 53,
+        &quot;path&quot;: &quot;/home/jovyan/example_workflows/nfdi/result.pickle&quot;
+    }
+}<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/u4tewx74/postprocessing/paper.pdf
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./example_workflows/nfdi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

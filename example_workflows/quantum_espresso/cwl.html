@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/quantum_espresso/cwl';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/quantum_espresso/cwl.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/example_workflows/quantum_espresso/cwl.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.cwl.export</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ESPRESSO_PSEUDO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;../../espresso/pseudo&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>cwltool<span class="w"> </span>--preserve-environment<span class="o">=</span>ESPRESSO_PSEUDO<span class="w"> </span>workflow.cwl<span class="w"> </span>workflow.yml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
+  sys.exit(run())
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/quantum_espresso/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_bulk_structure_0
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_bulk_structure_0] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_bulk_structure_0] /tmp/o5wvbmxj$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/3uzk268a/stgc8824dc9-f08d-44b9-9d9c-518dc0415f4d/workflow.py \
+    --function=workflow.get_bulk_structure \
+    --arg_a=/tmp/3uzk268a/stgbcb5cab3-e9ef-46e5-8f20-1a73f5b242e9/a.pickle \
+    --arg_element=/tmp/3uzk268a/stgb2678406-1178-4bf6-ba96-2b623c74f408/element.pickle \
+    --arg_cubic=/tmp/3uzk268a/stg7d836c8f-b499-4ea6-a341-97ff1a366b8f/cubic.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_bulk_structure_0] Max memory used: 100MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_bulk_structure_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_bulk_structure_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_13
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_13] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_13] /tmp/que74c90$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/k_sm4nc9/stg029d45cb-9d3e-4d26-a4f6-95cb0fb162d5/kpts.pickle \
+    --arg_structure=/tmp/k_sm4nc9/stgbde5b9c0-6926-4c08-886c-a7425fdf5571/result.pickle \
+    --arg_pseudopotentials=/tmp/k_sm4nc9/stg6717dca8-3880-4d1b-bed2-4078dca65fdb/pseudopotentials.pickle \
+    --arg_calculation=/tmp/k_sm4nc9/stg0e219c86-340f-4f1a-bc25-e366286137ea/calculation_0.pickle \
+    --arg_smearing=/tmp/k_sm4nc9/stg299bfaba-cb42-4aa5-b372-3101efa15660/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_13] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_13] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_1
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_1] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_1] /tmp/9ew4474v$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/3hzmn68a/stgf58c4a14-7b0f-4efc-bedd-3561b9fdb227/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/3hzmn68a/stg41392280-cfd6-4e67-ab11-915bfcbd0304/result.pickle \
+    --arg_working_directory=/tmp/3hzmn68a/stg6aa2aff2-eca4-41b7-bef5-a917188e0853/working_directory_0.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:01664] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_1] Max memory used: 250MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step generate_structures_2
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_structures_2] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_structures_2] /tmp/l8wkgfu9$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/aibj9rr4/stgb715e49b-e705-4371-8c63-5bc9f8addb97/workflow.py \
+    --function=workflow.generate_structures \
+    --arg_structure=/tmp/aibj9rr4/stg88fe1a91-5cb6-4f9c-9fff-a63e477a0ccb/structure.pickle \
+    --arg_strain_lst=/tmp/aibj9rr4/stg3489de05-cdc1-4f7f-af63-cb8612cefe10/strain_lst.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_structures_2] Max memory used: 108MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_structures_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_structures_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_20
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_20] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_20] /tmp/0ls08hbo$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/yb9nqwe7/stg475a5983-0e88-40ee-b3a4-0c9b916f08f1/kpts.pickle \
+    --arg_structure=/tmp/yb9nqwe7/stg4f27a44f-d76c-4278-855d-ab654ebe6e32/s_0.pickle \
+    --arg_pseudopotentials=/tmp/yb9nqwe7/stgbfcb2c02-776a-4101-b906-06a8ef758140/pseudopotentials.pickle \
+    --arg_calculation=/tmp/yb9nqwe7/stgd91d742a-82f8-459e-939b-2cd0876f41ee/calculation_1.pickle \
+    --arg_smearing=/tmp/yb9nqwe7/stga65643a5-b1bb-416e-bc6c-ee7b52c28bd8/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_20] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_20] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_3
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_3] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_3] /tmp/nzsw1xr6$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/gjwsgfmj/stg3069d789-517f-41bf-8d4b-07e51f9e924d/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/gjwsgfmj/stg9575b9dd-3336-4e26-a106-7c52c1e41f91/result.pickle \
+    --arg_working_directory=/tmp/gjwsgfmj/stg28ff68ea-caa6-47bf-be5e-67394ab72f64/working_directory_1.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:01846] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_3] Max memory used: 239MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_25
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_25] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_25] /tmp/zrs68r3d$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/jj2_r82j/stg13ba3696-061f-46f7-b012-bb7ab8a40796/kpts.pickle \
+    --arg_structure=/tmp/jj2_r82j/stg5ca9e71a-98fe-44df-8ca5-550908525a4e/s_2.pickle \
+    --arg_pseudopotentials=/tmp/jj2_r82j/stg9e1fe3f0-1192-4cde-9772-6be8dfa314fe/pseudopotentials.pickle \
+    --arg_calculation=/tmp/jj2_r82j/stgde664722-b13c-4ae9-9562-aec2063d548a/calculation_1.pickle \
+    --arg_smearing=/tmp/jj2_r82j/stg799e1f26-f08e-40bf-a7a9-c58e907674c8/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_25] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_25] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_23
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_23] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_23] /tmp/7qgifyu_$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/ojouuynn/stg7b99ab8b-9235-4007-b6b7-dd4170bd1760/kpts.pickle \
+    --arg_structure=/tmp/ojouuynn/stg8bfd87ff-e83d-4918-9a0d-71b958c46154/s_1.pickle \
+    --arg_pseudopotentials=/tmp/ojouuynn/stg0bcc3451-1700-46e0-9a5e-fca9968c8521/pseudopotentials.pickle \
+    --arg_calculation=/tmp/ojouuynn/stgb9d8de26-7d88-4119-ad13-8374ff498f72/calculation_1.pickle \
+    --arg_smearing=/tmp/ojouuynn/stg01fe91f8-b588-4adc-b207-9d9d4e0956e3/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_23] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_23] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_27
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_27] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_27] /tmp/v83aah99$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/_wg2md43/stgee67f0e5-87a9-4768-82ed-cb6c6cf74b6d/kpts.pickle \
+    --arg_structure=/tmp/_wg2md43/stgb39aa4d9-0909-4ffb-bfe8-c448a3d77669/s_3.pickle \
+    --arg_pseudopotentials=/tmp/_wg2md43/stgc7b618ee-6e90-4b93-a079-785fab087237/pseudopotentials.pickle \
+    --arg_calculation=/tmp/_wg2md43/stg738933fd-9a31-4c0e-ac99-984d1002fd0a/calculation_1.pickle \
+    --arg_smearing=/tmp/_wg2md43/stg174b61ec-1446-4c63-a433-49a940e48f39/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_27] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_27] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_4
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_4] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_4] /tmp/abio0491$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/pltanpun/stg312b10e4-f5f2-4770-b776-12c659453bef/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/pltanpun/stgceefbf38-ae57-4369-872d-4ea0895a6976/result.pickle \
+    --arg_working_directory=/tmp/pltanpun/stg6abc0b8b-ed0d-4692-b100-b510fe7de457/working_directory_2.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:01928] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_4] Max memory used: 244MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_dict_29
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_29] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_29] /tmp/li__ygke$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_dict \
+    --arg_kpts=/tmp/20wxb6mt/stg4f9c6f04-e0da-4f1d-9b91-17867111fcec/kpts.pickle \
+    --arg_structure=/tmp/20wxb6mt/stg27aeb042-5dba-406d-ad3f-c1a15414d462/s_4.pickle \
+    --arg_pseudopotentials=/tmp/20wxb6mt/stg00a521b7-0d6f-44fa-849f-611e82b816d2/pseudopotentials.pickle \
+    --arg_calculation=/tmp/20wxb6mt/stg51a4e465-9a6d-465e-a329-ec65c9631dca/calculation_1.pickle \
+    --arg_smearing=/tmp/20wxb6mt/stg72f4b40d-8647-441e-94ce-b4d60eb84837/smearing.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_dict_29] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_dict_29] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_7
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_7] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_7] /tmp/26ontyw1$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/3e7bw8e2/stg86169764-ce4e-40f6-9b63-ef5e11208258/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/3e7bw8e2/stge349561c-3f24-48da-94fa-2d16e4df4779/result.pickle \
+    --arg_working_directory=/tmp/3e7bw8e2/stg30622d6d-1c64-4440-9d76-7a70e081ff5e/working_directory_5.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:02006] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_7] Max memory used: 243MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_7] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_7] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_5
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_5] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_5] /tmp/nwlrltkk$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/q_jjx0ja/stgb8b85eae-791f-4e34-9696-ceb277f72155/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/q_jjx0ja/stg2efa8335-1138-47c3-b9e9-d8ea2d8754c0/result.pickle \
+    --arg_working_directory=/tmp/q_jjx0ja/stg4f726c25-7adb-4ce0-970e-bd9ddc5191cc/working_directory_3.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:02086] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_5] Max memory used: 246MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step calculate_qe_6
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_6] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_6] /tmp/9yp55i6u$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/1c_enl4x/stg2aeb7a80-3364-48a0-810d-955e246aa33b/workflow.py \
+    --function=workflow.calculate_qe \
+    --arg_input_dict=/tmp/1c_enl4x/stg19bec723-020c-4d0e-bca0-8124f6962c7e/result.pickle \
+    --arg_working_directory=/tmp/1c_enl4x/stgc36f93b3-f6f6-4fec-8eb2-0de1ca22f3cd/working_directory_4.pickle
+[jupyter-pythonworkflow-fl--x---ff79c5c6:02164] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_6] Max memory used: 243MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job calculate_qe_6] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step calculate_qe_6] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_list_31
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_list_31] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_list_31] /tmp/xgme48c0$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_list \
+    --arg_2=/tmp/u2adengu/stg036d73c4-50fd-4b84-9054-ef00e66e0ea8/energy.pickle \
+    --arg_4=/tmp/u2adengu/stg8736d42d-b110-43b3-8e1d-da22b9883ff5/energy.pickle \
+    --arg_1=/tmp/u2adengu/stg8cac7eb7-6132-4085-865d-673027e26baa/energy.pickle \
+    --arg_3=/tmp/u2adengu/stg55b370b4-c852-4493-bb7b-4acaa0588aa8/energy.pickle \
+    --arg_0=/tmp/u2adengu/stg5d319d67-b4fc-4c4d-886a-529b9bfd2458/energy.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_list_31] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_list_31] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_list_30
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_list_30] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_list_30] /tmp/1xbu0rii$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --function=python_workflow_definition.shared.get_list \
+    --arg_2=/tmp/0ads3xzd/stg24fc8770-2739-45d1-b535-89924a6234ed/volume.pickle \
+    --arg_4=/tmp/0ads3xzd/stgfb79ea5f-6109-4f2e-a1d6-0817648a5350/volume.pickle \
+    --arg_1=/tmp/0ads3xzd/stg0b1e9637-dba2-4e42-9dbe-c605e7469714/volume.pickle \
+    --arg_3=/tmp/0ads3xzd/stgdf4991ae-4266-4ab6-82be-8f87d46fa7f6/volume.pickle \
+    --arg_0=/tmp/0ads3xzd/stg623a06b5-d2a0-44fd-9473-833452ad5762/volume.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job get_list_30] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_list_30] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step plot_energy_volume_curve_8
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_energy_volume_curve_8] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_energy_volume_curve_8] /tmp/vcffw_nr$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/6s32h5zf/stg79d5980d-139d-4481-9277-3f58bb27d49f/workflow.py \
+    --function=workflow.plot_energy_volume_curve \
+    --arg_volume_lst=/tmp/6s32h5zf/stg67eb8ed0-f498-4181-a5a5-c7e74ecd3276/result.pickle \
+    --arg_energy_lst=/tmp/6s32h5zf/stg3ebdb224-bd9a-4ae7-ad4e-03489dcfb661/result.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_energy_volume_curve_8] Max memory used: 110MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_energy_volume_curve_8] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_energy_volume_curve_8] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
+{
+    &quot;result_file&quot;: {
+        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/quantum_espresso/result.pickle&quot;,
+        &quot;basename&quot;: &quot;result.pickle&quot;,
+        &quot;class&quot;: &quot;File&quot;,
+        &quot;checksum&quot;: &quot;sha1$dbc1aaddc8b7343d6d33b34edcf608b8f8801918&quot;,
+        &quot;size&quot;: 4,
+        &quot;path&quot;: &quot;/home/jovyan/example_workflows/quantum_espresso/result.pickle&quot;
+    }
+}<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./example_workflows/quantum_espresso"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
