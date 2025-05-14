@@ -8,20 +8,26 @@
     {"id": 4, "type": "function", "value": "workflow.substitute_macros"},
     {"id": 5, "type": "function", "value": "workflow.compile_paper"},
     {"id": 6, "type": "input", "value": 2.0, "name": "domain_size"},
-    {"id": 7, "type": "output", "name": "result"}
+    {"id": 7, "type": "input", "value": "source", "name": "source_directory"},
+    {"id": 8, "type": "output", "name": "result"}
   ],
   "edges": [
     {"target": 0, "targetPort": "domain_size", "source": 6, "sourcePort": null},
+    {"target": 0, "targetPort": "source_directory", "source": 7, "sourcePort": null},
     {"target": 1, "targetPort": "gmsh_output_file", "source": 0, "sourcePort": null},
     {"target": 2, "targetPort": "meshio_output_xdmf", "source": 1, "sourcePort": "xdmf_file"},
     {"target": 2, "targetPort": "meshio_output_h5", "source": 1, "sourcePort": "h5_file"},
+    {"target": 2, "targetPort": "source_directory", "source": 7, "sourcePort": null},
     {"target": 3, "targetPort": "poisson_output_pvd_file", "source": 2, "sourcePort": "pvd_file"},
     {"target": 3, "targetPort": "poisson_output_vtu_file", "source": 2, "sourcePort": "vtu_file"},
+    {"target": 3, "targetPort": "source_directory", "source": 7, "sourcePort": null},
     {"target": 4, "targetPort": "pvbatch_output_file", "source": 3, "sourcePort": null},
     {"target": 4, "targetPort": "ndofs", "source": 2, "sourcePort": "numdofs"},
     {"target": 4, "targetPort": "domain_size", "source": 6, "sourcePort": null},
+    {"target": 4, "targetPort": "source_directory", "source": 7, "sourcePort": null},
     {"target": 5, "targetPort": "macros_tex", "source": 4, "sourcePort": null},
     {"target": 5, "targetPort": "plot_file", "source": 3, "sourcePort": null},
-    {"target": 7, "targetPort": null, "source": 5, "sourcePort": null}
+    {"target": 5, "targetPort": "source_directory", "source": 7, "sourcePort": null},
+    {"target": 8, "targetPort": null, "source": 5, "sourcePort": null}
   ]
 }
