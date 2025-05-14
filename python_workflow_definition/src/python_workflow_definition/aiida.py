@@ -18,6 +18,8 @@ from python_workflow_definition.shared import (
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
     TARGET_PORT_LABEL,
+    VERSION_NUMBER,
+    VERSION_LABEL,
 )
 
 
@@ -139,6 +141,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         SOURCE_PORT_LABEL: None,
                     }
                 )
+    data[VERSION_LABEL] = VERSION_NUMBER
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(workflow_dict=update_node_names(workflow_dict=data))
     ).dump_json_file(file_name=file_name, indent=2)
