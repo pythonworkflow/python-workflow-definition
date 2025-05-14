@@ -2,15 +2,15 @@ import os
 from conda_subprocess import check_output
 import shutil
 
-source_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), "source")
+source_directory_global = os.path.join(os.path.dirname(os.path.abspath(__file__)), "source")
 
 
-def generate_mesh(domain_size: float = 2.0) -> str:
+def generate_mesh(domain_size: float = 2.0, source_directory: str = source_directory_global) -> str:
     stage_name = "preprocessing"
     gmsh_output_file_name = "square.msh"
     source_file_name ="unit_square.geo"
     os.makedirs(stage_name, exist_ok=True)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name, source_directory=source_directory)
     _ = check_output(
         [
             "gmsh", "-2", "-setnumber", "domain_size", str(domain_size),
@@ -40,13 +40,13 @@ def convert_to_xdmf(gmsh_output_file : str) -> dict:
     }
 
 
-def poisson(meshio_output_xdmf: str, meshio_output_h5: str) -> dict:
+def poisson(meshio_output_xdmf: str, meshio_output_h5: str, source_directory: str = source_directory_global) -> dict:
     stage_name = "processing"
     poisson_output_pvd_file_name = "poisson.pvd"
     poisson_output_numdofs_file_name = "numdofs.txt"
     source_file_name = "poisson.py"
     os.makedirs(stage_name, exist_ok=True)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name, source_directory=source_directory)
     _copy_file(stage_name=stage_name, source_file=meshio_output_xdmf)
     _copy_file(stage_name=stage_name, source_file=meshio_output_h5)
     _ = check_output(
@@ -65,12 +65,12 @@ def poisson(meshio_output_xdmf: str, meshio_output_h5: str) -> dict:
     }
 
 
-def plot_over_line(poisson_output_pvd_file: str, poisson_output_vtu_file: str) -> str:
+def plot_over_line(poisson_output_pvd_file: str, poisson_output_vtu_file: str, source_directory: str = source_directory_global) -> str:
     stage_name = "postprocessing"
     pvbatch_output_file_name = "plotoverline.csv"
     source_file_name = "postprocessing.py"
     os.makedirs(stage_name, exist_ok=True)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name, source_directory=source_directory)
     _copy_file(stage_name=stage_name, source_file=poisson_output_pvd_file)
     _copy_file(stage_name=stage_name, source_file=poisson_output_vtu_file)
     _ = check_output(
@@ -82,14 +82,14 @@ def plot_over_line(poisson_output_pvd_file: str, poisson_output_vtu_file: str) -
     return os.path.abspath(os.path.join("postprocessing", pvbatch_output_file_name))
 
 
-def substitute_macros(pvbatch_output_file: str, ndofs: int, domain_size: float = 2.0) -> str:
+def substitute_macros(pvbatch_output_file: str, ndofs: int, domain_size: float = 2.0, source_directory: str = source_directory_global) -> str:
     stage_name = "postprocessing"
     source_file_name = "prepare_paper_macros.py"
     template_file_name = "macros.tex.template"
     macros_output_file_name = "macros.tex"
     os.makedirs(stage_name, exist_ok=True)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=template_file_name)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name, source_directory=source_directory)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=template_file_name, source_directory=source_directory)
     _copy_file(stage_name=stage_name, source_file=pvbatch_output_file)
     _ = check_output(
         [
@@ -104,12 +104,12 @@ def substitute_macros(pvbatch_output_file: str, ndofs: int, domain_size: float =
     return os.path.abspath(os.path.join(stage_name, macros_output_file_name))
 
 
-def compile_paper(macros_tex: str, plot_file: str) -> str:
+def compile_paper(macros_tex: str, plot_file: str, source_directory: str = source_directory_global) -> str:
     stage_name = "postprocessing"
     paper_output = "paper.pdf"
     source_file_name = "paper.tex"
     os.makedirs(stage_name, exist_ok=True)
-    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name)
+    _copy_file_from_source(stage_name=stage_name, source_file_name=source_file_name, source_directory=source_directory)
     _copy_file(stage_name=stage_name, source_file=macros_tex)
     _copy_file(stage_name=stage_name, source_file=plot_file)
     _ = check_output(
@@ -132,6 +132,6 @@ def _copy_file(stage_name, source_file):
         shutil.copyfile(source_file, input_file)
 
 
-def _copy_file_from_source(stage_name, source_file_name):
+def _copy_file_from_source(stage_name, source_file_name, source_directory: str = source_directory_global):
     source_file = os.path.join(source_directory, source_file_name)
     shutil.copyfile(source_file, os.path.join(stage_name, source_file_name))
