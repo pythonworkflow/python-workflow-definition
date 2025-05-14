@@ -5,10 +5,13 @@ import importlib.util
 
 
 def load_function(file_name, funct):
-    spec = importlib.util.spec_from_file_location("workflow", file_name)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules["workflow"] = module
-    spec.loader.exec_module(module)
+    if file_name.split("/")[-1] != "python_workflow_definition.py":
+        spec = importlib.util.spec_from_file_location("workflow", file_name)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["workflow"] = module
+        spec.loader.exec_module(module)
+    else:
+        module = importlib.import_module("python_workflow_definition.shared")
     return getattr(module, funct.split(".")[-1])
 
 
