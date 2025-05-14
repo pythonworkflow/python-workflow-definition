@@ -83,7 +83,6 @@ def _get_function(workflow):
 
 def _write_function_cwl(workflow):
     function_nodes_dict, funct_dict = _get_function(workflow)
-    file_lst = []
 
     for i in function_nodes_dict.keys():
         template = {
@@ -108,26 +107,24 @@ def _write_function_cwl(workflow):
             },
             "outputs": {},
         }
-        file_name = function_nodes_dict[i].split(".")[-1] + ".cwl"
-        if file_name not in file_lst:
-            file_lst.append(file_name)
-            template["inputs"]["workflowfile"]["default"]["location"] = (
-                function_nodes_dict[i].split(".")[0] + ".py"
-            )
+        file_name = function_nodes_dict[i].split(".")[-1] + "_" + str(i) + ".cwl"
+        template["inputs"]["workflowfile"]["default"]["location"] = (
+            function_nodes_dict[i].split(".")[0] + ".py"
+        )
+        template["inputs"].update(
+            _get_function_template(function_name=function_nodes_dict[i])
+        )
+        for j, arg in enumerate(funct_dict[i]["targetPorts"]):
             template["inputs"].update(
-                _get_function_template(function_name=function_nodes_dict[i])
+                _get_function_argument(argument=arg, position=4 + j)
             )
-            for j, arg in enumerate(funct_dict[i]["targetPorts"]):
-                template["inputs"].update(
-                    _get_function_argument(argument=arg, position=4 + j)
-                )
-            for out in funct_dict[i]["sourcePorts"]:
-                if out is None:
-                    template["outputs"].update(_get_output_name(output_name="result"))
-                else:
-                    template["outputs"].update(_get_output_name(output_name=out))
-            with open(file_name, "w") as f:
-                dump(template, f, Dumper=Dumper)
+        for out in funct_dict[i]["sourcePorts"]:
+            if out is None:
+                template["outputs"].update(_get_output_name(output_name="result"))
+            else:
+                template["outputs"].update(_get_output_name(output_name=out))
+        with open(file_name, "w") as f:
+            dump(template, f, Dumper=Dumper)
 
 
 def _write_workflow_config(workflow):
@@ -194,7 +191,7 @@ def _write_workflow(workflow):
     }
     for t in total_new_lst:
         ind = t[0]
-        node_script = step_name_lst[ind] + ".cwl"
+        node_script = step_name_lst[ind] + "_" + str(ind) + ".cwl"
         output = [
             o + "_file" if o is not None else "result_file"
             for o in funct_dict[ind]["sourcePorts"]
