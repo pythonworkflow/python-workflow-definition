@@ -3,7 +3,7 @@ from conda_subprocess import check_output
 import shutil
 
 
-def generate_mesh(domain_size: float = 2.0, source_directory: str) -> str:
+def generate_mesh(domain_size: float, source_directory: str) -> str:
     stage_name = "preprocessing"
     gmsh_output_file_name = "square.msh"
     source_file_name ="unit_square.geo"
