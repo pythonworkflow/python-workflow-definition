@@ -204,12 +204,12 @@ def _write_workflow(workflow):
             if v[SOURCE_LABEL] in input_id_dict:
                 in_dict[k + "_file"] = input_id_dict[v[SOURCE_LABEL]] + "_file"
             else:
-                if v['sourcePort'] is None:
+                if v["sourcePort"] is None:
                     in_dict[k + "_file"] = (
-                            step_name_lst[v[SOURCE_LABEL]]
-                            + "_"
-                            + str(v[SOURCE_LABEL])
-                            + "/result_file"
+                        step_name_lst[v[SOURCE_LABEL]]
+                        + "_"
+                        + str(v[SOURCE_LABEL])
+                        + "/result_file"
                     )
                 else:
                     in_dict[k + "_file"] = (
