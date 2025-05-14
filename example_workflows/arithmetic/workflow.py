@@ -4,3 +4,7 @@ def get_prod_and_div(x, y):
 
 def get_sum(x, y):
     return x + y
+
+
+def square(x):
+    return x ** 2
