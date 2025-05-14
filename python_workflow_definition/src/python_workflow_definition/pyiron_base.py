@@ -20,6 +20,8 @@ from python_workflow_definition.shared import (
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
     TARGET_PORT_LABEL,
+    VERSION_NUMBER,
+    VERSION_LABEL,
 )
 
 
@@ -300,6 +302,7 @@ def write_workflow_json(
         **set_result_node(
             workflow_dict=update_node_names(
                 workflow_dict={
+                    VERSION_LABEL: VERSION_NUMBER,
                     NODES_LABEL: nodes_store_lst,
                     EDGES_LABEL: edges_new_lst,
                 }
