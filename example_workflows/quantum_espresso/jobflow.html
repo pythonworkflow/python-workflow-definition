@@ -374,6 +374,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-jobflow">Define workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 </ul>
@@ -389,8 +390,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="jobflow">
 <h1>jobflow<a class="headerlink" href="#jobflow" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://materialsproject.github.io/jobflow/index.html"><code class="docutils literal notranslate"><span class="pre">jobflow</span></code></a> and <a class="reference external" href="https://materialsproject.github.io/atomate2/index.html"><code class="docutils literal notranslate"><span class="pre">atomate2</span></code></a> are key packages of the <a class="reference external" href="https://materialsproject.org/">Materials Project</a> . <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> was especially designed to simplify the execution of dynamic workflows – when the actual number of jobs is dynamically determined upon runtime instead of being statically fixed before running the workflow(s). <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>’s overall flexibility allows for building workflows that go beyond the usage in materials science. <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> serves as the basis of <code class="docutils literal notranslate"><span class="pre">atomate2</span></code>, which implements data generation workflows in the context of materials science and will be used for data generation in the Materials Project in the future.</p>
 <section id="define-workflow-with-jobflow">
 <h2>Define workflow with jobflow<a class="headerlink" href="#define-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>We start by importing the job decorator and Flow class from <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and the respective PWD tools.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -420,6 +423,10 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="quantum-espresso-workflow">
+<h2>Quantum Espresso Workflow<a class="headerlink" href="#quantum-espresso-workflow" title="Link to this heading">#</a></h2>
+<p>We will use the knowledge from the previous arithmetic workflow example to create the Quantum Espresso-related tasks for calculating an “Energy vs. Volume” curve. It’s important to note that this is only a basic implementation, and further extensions towards data validation or for a simplified user experience can be added. For example, one can typically configure run commands for quantum-chemical programs via configuration files in atomate2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -449,6 +456,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>We need to specify the typical QE input like pseudopotential(s) and structure model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pseudopotentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Al&quot;</span><span class="p">:</span> <span class="s2">&quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;</span><span class="p">}</span>
@@ -483,6 +491,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Next, for the “Energy vs. Volume” curve, we meed to specify the number of strained structures and save them into a list object. For each of the strained structures, we will carry out a QE calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_strains</span> <span class="o">=</span> <span class="mi">5</span>
@@ -513,6 +522,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Finally, we specify a plotter for the “Energy vs. Volume” curve and can export the workflow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_energy_volume_curve</span><span class="p">(</span>
@@ -552,6 +562,7 @@ document.write(`
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p>Now, we can import the workflow, run it with <code class="docutils literal notranslate"><span class="pre">aiida</span></code> and plot the “Energy vs. Volume” curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
@@ -665,6 +676,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-pyiron-base">
 <h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>And we can repeat the same process using <code class="docutils literal notranslate"><span class="pre">pyiron</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -823,6 +835,7 @@ The job plot_energy_volume_curve_8d8f280c69be12b1969d95cc53f9411b was saved and 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-jobflow">Define workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 </ul>
