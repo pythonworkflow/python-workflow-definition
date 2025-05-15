@@ -231,7 +231,7 @@ def _write_workflow(workflow):
         dump(workflow_template, f, Dumper=Dumper)
 
 
-def load_workflow_json(file_name: str):
+def write_workflow(file_name: str):
     with open(file_name, "r") as f:
         workflow = json.load(f)
 
