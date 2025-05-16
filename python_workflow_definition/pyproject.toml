@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "python_workflow_definition"
-version = "0.0.1"
+version = "0.1.0"
 description = "Python Workflow Definition - workflow interoperability for aiida, jobflow and pyiron"
 authors = [
   { name = "Jan Janssen", email = "janssen@mpie.de" },
