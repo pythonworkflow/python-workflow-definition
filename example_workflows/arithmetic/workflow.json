@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.1.0",
   "nodes": [
     {"id": 0, "type": "function", "value": "workflow.get_prod_and_div"},
     {"id": 1, "type": "function", "value": "workflow.get_sum"},
