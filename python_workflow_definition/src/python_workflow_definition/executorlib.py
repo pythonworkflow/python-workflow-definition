@@ -72,7 +72,7 @@ def load_workflow_json(file_name: str, exe: Executor):
                 )
                 for k, v in lst[1].items()
             }
-            result_dict[lst[0]] = exe.submit(node, **kwargs)
+            result_dict[lst[0]] = exe.submit(fn=node, **kwargs)
             last_key = lst[0]
 
     return result_dict[last_key]
