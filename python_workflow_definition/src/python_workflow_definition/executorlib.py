@@ -34,7 +34,7 @@ def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict, exe: Ex
     if source_handle is None:
         return result
     else:
-        return exe.submit(fn=get_item, obj=result, key=source_handle)
+        return exe.submit(get_item, obj=result, key=source_handle)
 
 
 def load_workflow_json(file_name: str, exe: Executor):
@@ -72,7 +72,7 @@ def load_workflow_json(file_name: str, exe: Executor):
                 )
                 for k, v in lst[1].items()
             }
-            result_dict[lst[0]] = exe.submit(fn=node, **kwargs)
+            result_dict[lst[0]] = exe.submit(node, **kwargs)
             last_key = lst[0]
 
     return result_dict[last_key]
