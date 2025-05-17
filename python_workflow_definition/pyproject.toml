@@ -16,14 +16,20 @@ authors = [
 ]
 license = { file = "../LICENSE" }
 dependencies = [
-    "aiida-workgraph>=0.5.1,<=0.5.2",
     "numpy>=1.21,<2",
-    "jobflow>=0.1.18,<=0.1.19",
-    "pyiron_base>=0.11.10,<=0.12.0",
     "pydantic>=2.7.0,<=2.11.4",
 ]
 
 [project.optional-dependencies]
+aiida = [
+    "aiida-workgraph>=0.5.1,<=0.5.2",
+]
+jobflow = [
+    "jobflow>=0.1.18,<=0.1.19",
+]
+pyiron = [
+    "pyiron_base>=0.11.10,<=0.12.0",
+]
 plot = [
     "pygraphviz>=1.10,<=1.14",
     "networkx>=2.8.8,<=3.4.2",
