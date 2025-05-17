@@ -7,9 +7,9 @@ dependencies:
 - hatchling =1.27.0
 - httpcore =1.0.7
 - jobflow =0.1.19
-- pyiron_base =0.11.11
+- pyiron_base =0.12.0
 - pygraphviz =1.14
 - aiida-workgraph =0.5.2
-- conda_subprocess =0.0.6
+- conda_subprocess =0.0.7
 - networkx =3.4.2
 - cwltool =3.1.20250110105449
