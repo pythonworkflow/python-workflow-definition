@@ -462,7 +462,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gmsh_output_file</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">generate_mesh</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generate_mesh&quot;</span><span class="p">,</span>
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
@@ -474,7 +473,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meshio_output_dict</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">convert_to_xdmf</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;convert_to_xdmf&quot;</span><span class="p">,</span>
     <span class="n">gmsh_output_file</span><span class="o">=</span><span class="n">gmsh_output_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -485,7 +483,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">poisson</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">,</span>
     <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">xdmf_file</span><span class="p">,</span> 
     <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">meshio_output_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">h5_file</span><span class="p">,</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
@@ -498,7 +495,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">plot_over_line</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;plot_over_line&quot;</span><span class="p">,</span>
     <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">pvd_file</span><span class="p">,</span> 
     <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">vtu_file</span><span class="p">,</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
@@ -511,7 +507,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">macros_tex_file</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">substitute_macros</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;substitute_macros&quot;</span><span class="p">,</span>
     <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> 
     <span class="n">ndofs</span><span class="o">=</span><span class="n">poisson_dict</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">numdofs</span><span class="p">,</span> 
     <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
@@ -525,7 +520,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paper_output</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">compile_paper</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;compile_paper&quot;</span><span class="p">,</span>
     <span class="n">macros_tex</span><span class="o">=</span><span class="n">macros_tex_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> 
     <span class="n">plot_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>

@@ -426,7 +426,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_prod_and_div_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">])(</span><span class="n">_get_prod_and_div</span><span class="p">),</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_prod_and_div&quot;</span><span class="p">,</span>
     <span class="n">x</span><span class="o">=</span><span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
     <span class="n">y</span><span class="o">=</span><span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
 <span class="p">)</span>
@@ -438,7 +437,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">_get_sum</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_sum&quot;</span><span class="p">,</span>
     <span class="n">x</span><span class="o">=</span><span class="n">get_prod_and_div_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="n">get_prod_and_div_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">div</span><span class="p">,</span>
 <span class="p">)</span>
@@ -450,7 +448,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_square_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">_get_square</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_square&quot;</span><span class="p">,</span>
     <span class="n">x</span><span class="o">=</span><span class="n">get_sum_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>

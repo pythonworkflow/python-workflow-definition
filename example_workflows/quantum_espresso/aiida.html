@@ -467,7 +467,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_bulk_structure_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">get_bulk_structure</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_bulk_structure&quot;</span><span class="p">,</span>
     <span class="n">element</span><span class="o">=</span><span class="n">element</span><span class="p">,</span>
     <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span>
     <span class="n">cubic</span><span class="o">=</span><span class="n">cubic</span><span class="p">,</span>
@@ -480,7 +479,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relax_prepare_input_dict_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">get_dict</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;relax_get_dict&quot;</span><span class="p">,</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">get_bulk_structure_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
     <span class="n">calculation</span><span class="o">=</span><span class="n">calc_type_relax</span><span class="p">,</span>
     <span class="n">kpts</span><span class="o">=</span><span class="n">kpts</span><span class="p">,</span>
@@ -490,7 +488,6 @@ document.write(`
 
 <span class="n">relax_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">calculate_qe</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span><span class="p">,</span>
     <span class="n">input_dict</span><span class="o">=</span><span class="n">relax_prepare_input_dict_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
     <span class="n">working_directory</span><span class="o">=</span><span class="n">relax_workdir</span><span class="p">,</span>
 <span class="p">)</span>
@@ -502,7 +499,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_structures_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">generate_structures</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generate_structures&quot;</span><span class="p">,</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">relax_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
     <span class="n">strain_lst</span><span class="o">=</span><span class="n">strain_lst</span><span class="p">,</span>
 <span class="p">)</span>
@@ -512,14 +508,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_volumes_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">get_list</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_volumes&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_volumes_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">get_list</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_energies_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">get_list</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_energies&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_energies_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">get_list</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -536,7 +532,6 @@ document.write(`
 
     <span class="n">scf_prepare_input_dict_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
         <span class="n">get_dict</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;get_dict_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">structure</span><span class="o">=</span><span class="n">generate_structures_task</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">structure_key</span><span class="p">],</span>
         <span class="n">calculation</span><span class="o">=</span><span class="n">calc_type_scf</span><span class="p">,</span>
         <span class="n">kpts</span><span class="o">=</span><span class="n">kpts</span><span class="p">,</span>
@@ -546,7 +541,6 @@ document.write(`
 
     <span class="n">scf_qe_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
         <span class="n">calculate_qe</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;qe_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">input_dict</span><span class="o">=</span><span class="n">scf_prepare_input_dict_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
         <span class="n">working_directory</span><span class="o">=</span><span class="n">strain_dir</span><span class="p">,</span>
     <span class="p">)</span>
@@ -562,7 +556,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_energy_volume_curve_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
     <span class="n">plot_energy_volume_curve</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;plot_energy_volume_curve&quot;</span><span class="p">,</span>
     <span class="n">volume_lst</span><span class="o">=</span><span class="n">get_volumes_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
     <span class="n">energy_lst</span><span class="o">=</span><span class="n">get_energies_task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
 <span class="p">)</span>
