@@ -25,13 +25,11 @@ def get_linked_nodes(graph_dict):
         nodes_dict[i] = v.node_function
         node_mapping_dict[k] = i
         input_dict[k] = {
-            con.full_label: con.value 
-            for con in v.inputs.channel_dict.to_list() 
+            con.full_label: con.value
+            for con in v.inputs.channel_dict.to_list()
             if len(con.connections) == 0
         }
     return nodes_dict, node_mapping_dict, input_dict
-
-
 
 
 def extend_nodes_dict(nodes_dict, input_dict):
@@ -44,10 +42,8 @@ def extend_nodes_dict(nodes_dict, input_dict):
                 nodes_links_dict[k] = i
                 i += 1
             else:
-                nodes_links_dict[k] = {tv:tk for tk, tv in nodes_dict.items()}[v]
+                nodes_links_dict[k] = {tv: tk for tk, tv in nodes_dict.items()}[v]
     return nodes_links_dict
-
-
 
 
 def get_edges(graph_dict, node_mapping_dict, nodes_links_dict):
@@ -56,18 +52,32 @@ def get_edges(graph_dict, node_mapping_dict, nodes_links_dict):
         source_combo, target_combo = link
         target, target_handle = target_combo.split(".")
         source, source_handle = source_combo.split(".")
-        edges_lst.append({TARGET_LABEL: node_mapping_dict[target], TARGET_PORT_LABEL: target_handle, SOURCE_LABEL: node_mapping_dict[source], SOURCE_PORT_LABEL: source_handle})
+        edges_lst.append(
+            {
+                TARGET_LABEL: node_mapping_dict[target],
+                TARGET_PORT_LABEL: target_handle,
+                SOURCE_LABEL: node_mapping_dict[source],
+                SOURCE_PORT_LABEL: source_handle,
+            }
+        )
 
     for k, v in nodes_links_dict.items():
         target, target_handle = k.split(".")
-        edges_lst.append({TARGET_LABEL: node_mapping_dict[target], TARGET_PORT_LABEL: target_handle, SOURCE_LABEL: v, SOURCE_PORT_LABEL: None})
+        edges_lst.append(
+            {
+                TARGET_LABEL: node_mapping_dict[target],
+                TARGET_PORT_LABEL: target_handle,
+                SOURCE_LABEL: v,
+                SOURCE_PORT_LABEL: None,
+            }
+        )
     return edges_lst
 
 
-def write_workflow_json(
-    graph_as_dict: dict, file_name: str = "workflow.json"
-):
-    nodes_dict, node_mapping_dict, input_dict = get_linked_nodes(graph_dict=graph_as_dict)
+def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
+    nodes_dict, node_mapping_dict, input_dict = get_linked_nodes(
+        graph_dict=graph_as_dict
+    )
     nodes_links_dict = extend_nodes_dict(nodes_dict=nodes_dict, input_dict=input_dict)
     edges_lst = get_edges(
         graph_dict=graph_as_dict,
@@ -105,12 +115,14 @@ def write_workflow_json(
                 nodes_to_delete.append(edge[SOURCE_LABEL])
             else:
                 source = edge[SOURCE_LABEL]
-        edge_new_lst.append({
-            SOURCE_LABEL: source,
-            SOURCE_PORT_LABEL: sourcehandle,
-            TARGET_LABEL: source_dict[k][-1][TARGET_LABEL],
-            TARGET_PORT_LABEL: source_dict[k][-1][TARGET_PORT_LABEL],
-        })
+        edge_new_lst.append(
+            {
+                SOURCE_LABEL: source,
+                SOURCE_PORT_LABEL: sourcehandle,
+                TARGET_LABEL: source_dict[k][-1][TARGET_LABEL],
+                TARGET_PORT_LABEL: source_dict[k][-1][TARGET_PORT_LABEL],
+            }
+        )
 
     nodes_to_skip = nodes_to_delete + list(pyiron_workflow_modules.keys())
     nodes_new_dict = {k: v for k, v in nodes_dict.items() if k not in nodes_to_skip}
@@ -130,7 +142,10 @@ def write_workflow_json(
             nodes_store_lst.append({"id": k, "type": "input", "value": v})
 
     for edge in edges_lst:
-        if edge[TARGET_LABEL] not in nodes_to_skip and edge[SOURCE_LABEL] not in nodes_to_skip:
+        if (
+            edge[TARGET_LABEL] not in nodes_to_skip
+            and edge[SOURCE_LABEL] not in nodes_to_skip
+        ):
             edge_new_lst.append(edge)
 
     nodes_updated_dict, mapping_dict = {}, {}
@@ -143,8 +158,12 @@ def write_workflow_json(
     edge_updated_lst = []
     for edge in edge_new_lst:
         edge_updated_lst.append(
-            {SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]], SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
-             TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]], TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL]}
+            {
+                SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
+                SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
+                TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
+                TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+            }
         )
 
     PythonWorkflowDefinitionWorkflow(
