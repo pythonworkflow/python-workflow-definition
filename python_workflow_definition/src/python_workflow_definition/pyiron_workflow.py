@@ -157,14 +157,25 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
 
     edge_updated_lst = []
     for edge in edge_new_lst:
-        edge_updated_lst.append(
-            {
-                SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
-                SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
-                TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
-                TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
-            }
-        )
+        source_node = nodes_new_dict[edge[SOURCE_LABEL]]
+        if isfunction(source_node) and source_node.__name__ == edge[SOURCE_PORT_LABEL]:
+            edge_updated_lst.append(
+                {
+                    SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
+                    SOURCE_PORT_LABEL: None,
+                    TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
+                    TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                }
+            )
+        else:
+            edge_updated_lst.append(
+                {
+                    SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
+                    SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
+                    TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
+                    TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                }
+            )
 
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(
