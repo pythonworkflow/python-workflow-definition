@@ -133,6 +133,7 @@ jobs:
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
   documentation:
