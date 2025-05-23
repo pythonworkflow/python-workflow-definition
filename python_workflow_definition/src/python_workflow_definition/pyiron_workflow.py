@@ -330,7 +330,7 @@ def import_from_string(library_path: str) -> Any:
 
 def build_function_dag_workflow(file_name: str) -> Workflow:
     content = remove_result(
-        PythonWorkflowDefinitionWorkflow.load_json_file(file_name="workflow.json")
+        PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
     )
 
     input_values: dict[int, object] = (
