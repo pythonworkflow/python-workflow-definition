@@ -82,12 +82,10 @@ def get_edges(graph_dict, node_mapping_dict, nodes_links_dict):
 def create_input_nodes(nodes_dict, edges_lst):
     node_conversion_dict = {
         ed[SOURCE_LABEL]: ed[TARGET_PORT_LABEL]
-        for ed in edges_lst if ed[SOURCE_PORT_LABEL] is None
+        for ed in edges_lst
+        if ed[SOURCE_PORT_LABEL] is None
     }
-    nodes_to_create_dict = {
-        v: nodes_dict[k] 
-        for k, v in node_conversion_dict.items()
-    }
+    nodes_to_create_dict = {v: nodes_dict[k] for k, v in node_conversion_dict.items()}
     return nodes_to_create_dict, node_conversion_dict
 
 
@@ -99,7 +97,7 @@ def set_input_nodes(workflow, nodes_to_create_dict):
 
 def get_source_handles(edges_lst):
     source_handle_dict = {}
-    for ed in edges_lst: 
+    for ed in edges_lst:
         if ed[SOURCE_LABEL] not in source_handle_dict.keys():
             source_handle_dict[ed[SOURCE_LABEL]] = [ed[SOURCE_PORT_LABEL]]
         else:
@@ -116,7 +114,13 @@ def get_function_nodes(nodes_dict, source_handle_dict):
 
 
 def get_kwargs(lst):
-    return {t[TARGET_PORT_LABEL]: {SOURCE_LABEL: t[SOURCE_LABEL], SOURCE_PORT_LABEL: t[SOURCE_PORT_LABEL]} for t in lst}
+    return {
+        t[TARGET_PORT_LABEL]: {
+            SOURCE_LABEL: t[SOURCE_LABEL],
+            SOURCE_PORT_LABEL: t[SOURCE_PORT_LABEL],
+        }
+        for t in lst
+    }
 
 
 def group_edges(edges_lst):
@@ -141,11 +145,17 @@ def build_workflow(workflow, function_dict, total_dict, node_conversion_dict):
         kwargs_dict = {}
         for kw, vw in kwargs_link_dict.items():
             if vw[SOURCE_LABEL] in node_conversion_dict.keys():
-                kwargs_dict[kw] = workflow.__getattribute__(node_conversion_dict[vw[SOURCE_LABEL]])
-            else: 
-                kwargs_dict[kw] = workflow.__getattr__("tmp_" + str(vw[SOURCE_LABEL])).__getitem__(vw[SOURCE_PORT_LABEL])
+                kwargs_dict[kw] = workflow.__getattribute__(
+                    node_conversion_dict[vw[SOURCE_LABEL]]
+                )
+            else:
+                kwargs_dict[kw] = workflow.__getattr__(
+                    "tmp_" + str(vw[SOURCE_LABEL])
+                ).__getitem__(vw[SOURCE_PORT_LABEL])
         v.update(kwargs_dict)
-        workflow.__setattr__("tmp_" + str(k), function_node(**v, validate_output_labels=False))
+        workflow.__setattr__(
+            "tmp_" + str(k), function_node(**v, validate_output_labels=False)
+        )
     return workflow, "tmp_" + str(k)
 
 
@@ -276,7 +286,7 @@ def load_workflow_json(file_name: str, workflow: Optional[Workflow] = None):
     nodes_new_dict = {}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
         if isinstance(v, str) and "." in v:
-            p, m = v.rsplit('.', 1)
+            p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
         else:
@@ -285,11 +295,15 @@ def load_workflow_json(file_name: str, workflow: Optional[Workflow] = None):
     if workflow is None:
         workflow = Workflow(file_name.split(".")[0])
 
-    nodes_to_create_dict, node_conversion_dict = create_input_nodes(nodes_dict=nodes_new_dict, edges_lst=edges_lst)
+    nodes_to_create_dict, node_conversion_dict = create_input_nodes(
+        nodes_dict=nodes_new_dict, edges_lst=edges_lst
+    )
     wf = set_input_nodes(workflow=workflow, nodes_to_create_dict=nodes_to_create_dict)
 
     source_handle_dict = get_source_handles(edges_lst=edges_lst)
-    function_dict = get_function_nodes(nodes_dict=nodes_new_dict, source_handle_dict=source_handle_dict)
+    function_dict = get_function_nodes(
+        nodes_dict=nodes_new_dict, source_handle_dict=source_handle_dict
+    )
     total_dict = group_edges(edges_lst=edges_lst)
 
     return build_workflow(
