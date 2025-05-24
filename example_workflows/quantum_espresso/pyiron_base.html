@@ -518,7 +518,565 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;quantum_espresso_workflow.plot_energy_volume_curve&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;python_workflow_definition.shared.get_list&quot;}, {&quot;id&quot;: 2, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 3, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 4, &quot;function&quot;: &quot;quantum_espresso_workflow.generate_structures&quot;}, {&quot;id&quot;: 5, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 6, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 7, &quot;function&quot;: &quot;quantum_espresso_workflow.get_bulk_structure&quot;}, {&quot;id&quot;: 8, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 9, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 10, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 11, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 12, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 13, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 14, &quot;function&quot;: &quot;quantum_espresso_workflow.calculate_qe&quot;}, {&quot;id&quot;: 15, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 16, &quot;function&quot;: &quot;python_workflow_definition.shared.get_list&quot;}, {&quot;id&quot;: 17, &quot;value&quot;: &quot;strain_0&quot;}, {&quot;id&quot;: 18, &quot;value&quot;: &quot;mini&quot;}, {&quot;id&quot;: 19, &quot;value&quot;: &quot;Al&quot;}, {&quot;id&quot;: 20, &quot;value&quot;: 4.04}, {&quot;id&quot;: 21, &quot;value&quot;: true}, {&quot;id&quot;: 22, &quot;value&quot;: {&quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;}}, {&quot;id&quot;: 23, &quot;value&quot;: [3, 3, 3]}, {&quot;id&quot;: 24, &quot;value&quot;: &quot;vc-relax&quot;}, {&quot;id&quot;: 25, &quot;value&quot;: 0.02}, {&quot;id&quot;: 26, &quot;value&quot;: [0.9, 0.9500000000000001, 1.0, 1.05, 1.1]}, {&quot;id&quot;: 27, &quot;value&quot;: &quot;scf&quot;}, {&quot;id&quot;: 28, &quot;value&quot;: &quot;strain_1&quot;}, {&quot;id&quot;: 29, &quot;value&quot;: &quot;strain_2&quot;}, {&quot;id&quot;: 30, &quot;value&quot;: &quot;strain_3&quot;}, {&quot;id&quot;: 31, &quot;value&quot;: &quot;strain_4&quot;}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;volume_lst&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;0&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 2, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 2, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;s_0&quot;}, {&quot;target&quot;: 4, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 5, &quot;sourcePort&quot;: &quot;structure&quot;}, {&quot;target&quot;: 5, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 18, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 5, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 6, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 7, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 7, &quot;targetPort&quot;: &quot;element&quot;, &quot;source&quot;: 19, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 7, &quot;targetPort&quot;: &quot;a&quot;, &quot;source&quot;: 20, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 7, &quot;targetPort&quot;: &quot;cubic&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 24, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 4, &quot;targetPort&quot;: &quot;strain_lst&quot;, &quot;source&quot;: 26, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;1&quot;, &quot;source&quot;: 8, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 8, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 28, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 8, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 9, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 9, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;s_1&quot;}, {&quot;target&quot;: 9, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 9, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 9, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 9, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;2&quot;, &quot;source&quot;: 10, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 10, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 29, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 10, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 11, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 11, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;s_2&quot;}, {&quot;target&quot;: 11, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 11, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 11, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 11, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;3&quot;, &quot;source&quot;: 12, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 12, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 30, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 12, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 13, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;s_3&quot;}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;4&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 14, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 31, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 14, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 15, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;s_4&quot;}, {&quot;target&quot;: 15, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 15, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 15, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 15, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;energy_lst&quot;, &quot;source&quot;: 16, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 16, &quot;targetPort&quot;: &quot;0&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 16, &quot;targetPort&quot;: &quot;1&quot;, &quot;source&quot;: 8, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 16, &quot;targetPort&quot;: &quot;2&quot;, &quot;source&quot;: 10, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 16, &quot;targetPort&quot;: &quot;3&quot;, &quot;source&quot;: 12, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 16, &quot;targetPort&quot;: &quot;4&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: &quot;energy&quot;}]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.plot_energy_volume_curve&quot;
+    },
+    {
+      &quot;id&quot;: 1,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.generate_structures&quot;
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_bulk_structure&quot;
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 9,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 10,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 11,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 12,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 13,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 14,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 15,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 16,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 17,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_0&quot;,
+      &quot;value&quot;: &quot;strain_0&quot;
+    },
+    {
+      &quot;id&quot;: 18,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_1&quot;,
+      &quot;value&quot;: &quot;mini&quot;
+    },
+    {
+      &quot;id&quot;: 19,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;element&quot;,
+      &quot;value&quot;: &quot;Al&quot;
+    },
+    {
+      &quot;id&quot;: 20,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;a&quot;,
+      &quot;value&quot;: 4.04
+    },
+    {
+      &quot;id&quot;: 21,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;cubic&quot;,
+      &quot;value&quot;: true
+    },
+    {
+      &quot;id&quot;: 22,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;pseudopotentials&quot;,
+      &quot;value&quot;: {
+        &quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;
+      }
+    },
+    {
+      &quot;id&quot;: 23,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;kpts&quot;,
+      &quot;value&quot;: [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      &quot;id&quot;: 24,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_0&quot;,
+      &quot;value&quot;: &quot;vc-relax&quot;
+    },
+    {
+      &quot;id&quot;: 25,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;smearing&quot;,
+      &quot;value&quot;: 0.02
+    },
+    {
+      &quot;id&quot;: 26,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;strain_lst&quot;,
+      &quot;value&quot;: [
+        0.9,
+        0.9500000000000001,
+        1.0,
+        1.05,
+        1.1
+      ]
+    },
+    {
+      &quot;id&quot;: 27,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_1&quot;,
+      &quot;value&quot;: &quot;scf&quot;
+    },
+    {
+      &quot;id&quot;: 28,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_2&quot;,
+      &quot;value&quot;: &quot;strain_1&quot;
+    },
+    {
+      &quot;id&quot;: 29,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_3&quot;,
+      &quot;value&quot;: &quot;strain_2&quot;
+    },
+    {
+      &quot;id&quot;: 30,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_4&quot;,
+      &quot;value&quot;: &quot;strain_3&quot;
+    },
+    {
+      &quot;id&quot;: 31,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_5&quot;,
+      &quot;value&quot;: &quot;strain_4&quot;
+    },
+    {
+      &quot;id&quot;: 32,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;volume_lst&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;s_0&quot;
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;structure&quot;
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 18,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;element&quot;,
+      &quot;source&quot;: 19,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;a&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;cubic&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 24,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;strain_lst&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 8,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 28,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 9,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;s_1&quot;
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 10,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 29,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 11,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;s_2&quot;
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 12,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 30,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 13,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;s_3&quot;
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 31,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;s_4&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;energy_lst&quot;,
+      &quot;source&quot;: 16,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 8,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 10,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 12,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 32,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 0,
+      &quot;sourcePort&quot;: null
+    }
+  ]
+}
 </pre></div>
 </div>
 </div>
@@ -535,7 +1093,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;5b8a8d98b3014876a9eed7d85a954e5e&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -568,60 +1126,60 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/23/2025 09:47:03 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure8
-04/23/2025 09:47:04 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_bulk_structure8, type: PyFunction, finished.
-04/23/2025 09:47:04 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict7
-04/23/2025 09:47:05 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict7, type: PyFunction, finished.
-04/23/2025 09:47:05 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05529] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/24/2025 06:00:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure8
+05/24/2025 06:00:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_bulk_structure8, type: PyFunction, finished.
+05/24/2025 06:00:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict7
+05/24/2025 06:00:14 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict7, type: PyFunction, finished.
+05/24/2025 06:00:14 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6
+[jupyter-pythonworkflow-fl--x---d7231032:10471] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:47:58 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
-04/23/2025 09:47:58 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
-04/23/2025 09:47:58 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures5
-04/23/2025 09:47:59 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: generate_structures5, type: PyFunction, finished.
-04/23/2025 09:48:00 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict4,get_dict10,get_dict12,get_dict14,get_dict16
-04/23/2025 09:48:00 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict4, type: PyFunction, finished.
-04/23/2025 09:48:00 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe3,get_dict10,get_dict12,get_dict14,get_dict16
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05544] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 06:01:04 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/24/2025 06:01:04 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
+05/24/2025 06:01:04 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures5
+05/24/2025 06:01:05 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: generate_structures5, type: PyFunction, finished.
+05/24/2025 06:01:05 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict4,get_dict10,get_dict12,get_dict14,get_dict16
+05/24/2025 06:01:05 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict4, type: PyFunction, finished.
+05/24/2025 06:01:06 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe3,get_dict10,get_dict12,get_dict14,get_dict16
+[jupyter-pythonworkflow-fl--x---d7231032:10486] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:48:11 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/23/2025 09:48:12 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe3, type: PyFunction, finished.
-04/23/2025 09:48:12 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10,get_dict12,get_dict14,get_dict16
-04/23/2025 09:48:12 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
-04/23/2025 09:48:12 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe9,get_dict12,get_dict14,get_dict16
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05555] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 06:01:16 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 06:01:16 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe3, type: PyFunction, finished.
+05/24/2025 06:01:16 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10,get_dict12,get_dict14,get_dict16
+05/24/2025 06:01:18 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
+05/24/2025 06:01:18 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe9,get_dict12,get_dict14,get_dict16
+[jupyter-pythonworkflow-fl--x---d7231032:10497] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:48:25 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/23/2025 09:48:25 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe9, type: PyFunction, finished.
-04/23/2025 09:48:25 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict14,get_dict16
-04/23/2025 09:48:26 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
-04/23/2025 09:48:26 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe11,get_dict14,get_dict16
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05567] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 06:01:30 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 06:01:30 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe9, type: PyFunction, finished.
+05/24/2025 06:01:30 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict14,get_dict16
+05/24/2025 06:01:31 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
+05/24/2025 06:01:31 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe11,get_dict14,get_dict16
+[jupyter-pythonworkflow-fl--x---d7231032:10508] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:48:40 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/23/2025 09:48:41 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe11, type: PyFunction, finished.
-04/23/2025 09:48:41 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict16
-04/23/2025 09:48:41 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
-04/23/2025 09:48:42 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe13,get_dict16
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05577] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 06:01:43 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 06:01:43 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe11, type: PyFunction, finished.
+05/24/2025 06:01:43 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict16
+05/24/2025 06:01:44 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
+05/24/2025 06:01:44 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe13,get_dict16
+[jupyter-pythonworkflow-fl--x---d7231032:10519] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:48:58 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/23/2025 09:48:58 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe13, type: PyFunction, finished.
-04/23/2025 09:48:58 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict16
-04/23/2025 09:48:59 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_dict16, type: PyFunction, finished.
-04/23/2025 09:48:59 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe15
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05592] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 06:01:57 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 06:01:58 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe13, type: PyFunction, finished.
+05/24/2025 06:01:58 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict16
+05/24/2025 06:01:58 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_dict16, type: PyFunction, finished.
+05/24/2025 06:01:58 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe15
+[jupyter-pythonworkflow-fl--x---d7231032:10531] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/23/2025 09:49:14 AM &lt;5440&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/23/2025 09:49:15 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: calculate_qe15, type: PyFunction, finished.
-04/23/2025 09:49:15 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list2,get_list17
-04/23/2025 09:49:16 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_list2, type: PyFunction, finished.
-04/23/2025 09:49:16 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
-04/23/2025 09:49:16 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
-04/23/2025 09:49:16 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve1
-04/23/2025 09:49:17 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve1, type: PyFunction, finished.
-04/23/2025 09:49:17 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/23/2025 09:49:17 AM &lt;5440&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [193|WorkGraphEngine|finalize]: Finalize workgraph.
+05/24/2025 06:02:13 AM &lt;10378&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 06:02:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: calculate_qe15, type: PyFunction, finished.
+05/24/2025 06:02:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list2,get_list17
+05/24/2025 06:02:13 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_list2, type: PyFunction, finished.
+05/24/2025 06:02:14 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
+05/24/2025 06:02:14 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
+05/24/2025 06:02:14 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve1
+05/24/2025 06:02:15 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve1, type: PyFunction, finished.
+05/24/2025 06:02:15 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/24/2025 06:02:15 AM &lt;10378&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [249|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
@@ -633,14 +1191,6 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
 </pre></div>
 </div>
 </div>
@@ -674,97 +1224,97 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:49:19,623 INFO Started executing jobs locally
-2025-04-23 09:49:19,791 INFO Starting job - get_bulk_structure (3a79a0c7-c443-40e5-8c4c-030ccf176743)
-2025-04-23 09:49:19,795 INFO Finished job - get_bulk_structure (3a79a0c7-c443-40e5-8c4c-030ccf176743)
-2025-04-23 09:49:19,796 INFO Starting job - get_dict (d168da9a-66a0-4ab1-ab65-7b5b4b078fac)
-2025-04-23 09:49:19,799 INFO Finished job - get_dict (d168da9a-66a0-4ab1-ab65-7b5b4b078fac)
-2025-04-23 09:49:19,809 INFO Starting job - calculate_qe (0b40ca71-1ea2-4181-8d91-1de15ef3df17)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:02:16,526 INFO Started executing jobs locally
+2025-05-24 06:02:16,619 INFO Starting job - get_bulk_structure (49008d34-c2c0-41a9-a7cb-17f68fd503d3)
+2025-05-24 06:02:16,622 INFO Finished job - get_bulk_structure (49008d34-c2c0-41a9-a7cb-17f68fd503d3)
+2025-05-24 06:02:16,623 INFO Starting job - get_dict (f81de048-62e5-448c-9783-fc9cb4d4bb7d)
+2025-05-24 06:02:16,625 INFO Finished job - get_dict (f81de048-62e5-448c-9783-fc9cb4d4bb7d)
+2025-05-24 06:02:16,625 INFO Starting job - calculate_qe (e7891e79-cd64-4e19-b474-4e5c4521807b)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05604] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10547] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:50:11,885 INFO Finished job - calculate_qe (0b40ca71-1ea2-4181-8d91-1de15ef3df17)
-2025-04-23 09:50:11,886 INFO Starting job - generate_structures (451e4839-7612-4530-bbdb-9cb3e77cc6b8)
-2025-04-23 09:50:11,891 INFO Finished job - generate_structures (451e4839-7612-4530-bbdb-9cb3e77cc6b8)
-2025-04-23 09:50:11,892 INFO Starting job - get_dict (b586638f-b882-4439-a28e-a2c76f50c0e2)
-2025-04-23 09:50:11,893 INFO Finished job - get_dict (b586638f-b882-4439-a28e-a2c76f50c0e2)
-2025-04-23 09:50:11,895 INFO Starting job - get_dict (974e6f28-2911-4b3b-bc55-786c2111e39e)
-2025-04-23 09:50:11,896 INFO Finished job - get_dict (974e6f28-2911-4b3b-bc55-786c2111e39e)
-2025-04-23 09:50:11,897 INFO Starting job - get_dict (1c0b7807-d38a-4e23-880f-bccd87c84b28)
-2025-04-23 09:50:11,899 INFO Finished job - get_dict (1c0b7807-d38a-4e23-880f-bccd87c84b28)
-2025-04-23 09:50:11,908 INFO Starting job - get_dict (8791b0c0-b424-4f62-80a9-3170660b35f9)
-2025-04-23 09:50:11,910 INFO Finished job - get_dict (8791b0c0-b424-4f62-80a9-3170660b35f9)
-2025-04-23 09:50:11,911 INFO Starting job - get_dict (b0e2cd7f-9e49-40b6-8c79-6a3c8588fed4)
-2025-04-23 09:50:11,913 INFO Finished job - get_dict (b0e2cd7f-9e49-40b6-8c79-6a3c8588fed4)
-2025-04-23 09:50:11,913 INFO Starting job - calculate_qe (146dc5e6-1415-4c92-9b81-c1dac13c4af7)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:03:08,574 INFO Finished job - calculate_qe (e7891e79-cd64-4e19-b474-4e5c4521807b)
+2025-05-24 06:03:08,576 INFO Starting job - generate_structures (05513874-a1a3-428c-91ad-7ba4f44d13c4)
+2025-05-24 06:03:08,580 INFO Finished job - generate_structures (05513874-a1a3-428c-91ad-7ba4f44d13c4)
+2025-05-24 06:03:08,580 INFO Starting job - get_dict (4b033be6-d0c6-4bc4-8f10-eb0ff6ad94f8)
+2025-05-24 06:03:08,582 INFO Finished job - get_dict (4b033be6-d0c6-4bc4-8f10-eb0ff6ad94f8)
+2025-05-24 06:03:08,583 INFO Starting job - get_dict (8fb5c055-10cd-4cf0-adcc-57703638e0c8)
+2025-05-24 06:03:08,584 INFO Finished job - get_dict (8fb5c055-10cd-4cf0-adcc-57703638e0c8)
+2025-05-24 06:03:08,585 INFO Starting job - get_dict (0bc6f831-f685-4688-9f9a-194271b83d48)
+2025-05-24 06:03:08,586 INFO Finished job - get_dict (0bc6f831-f685-4688-9f9a-194271b83d48)
+2025-05-24 06:03:08,587 INFO Starting job - get_dict (90ac5a4e-6464-48c8-ae33-8efebb8ce336)
+2025-05-24 06:03:08,588 INFO Finished job - get_dict (90ac5a4e-6464-48c8-ae33-8efebb8ce336)
+2025-05-24 06:03:08,589 INFO Starting job - get_dict (d7a2d06e-aae2-40c6-914e-6145f1e22f35)
+2025-05-24 06:03:08,590 INFO Finished job - get_dict (d7a2d06e-aae2-40c6-914e-6145f1e22f35)
+2025-05-24 06:03:08,591 INFO Starting job - calculate_qe (7896c29a-eef8-425a-89b9-15c31c5b7555)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05619] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10573] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:50:23,619 INFO Finished job - calculate_qe (146dc5e6-1415-4c92-9b81-c1dac13c4af7)
-2025-04-23 09:50:23,620 INFO Starting job - calculate_qe (4760dd26-7403-4f3e-8d64-596893d84e95)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05630] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:50:35,807 INFO Finished job - calculate_qe (4760dd26-7403-4f3e-8d64-596893d84e95)
-2025-04-23 09:50:35,808 INFO Starting job - calculate_qe (e67d4ff9-8416-4eff-86da-8b82ca9e6a7b)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:03:19,134 INFO Finished job - calculate_qe (7896c29a-eef8-425a-89b9-15c31c5b7555)
+2025-05-24 06:03:19,135 INFO Starting job - calculate_qe (b7eb8441-9b20-4560-8fee-06794bc3eb04)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05641] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+[jupyter-pythonworkflow-fl--x---d7231032:10584] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:03:30,644 INFO Finished job - calculate_qe (b7eb8441-9b20-4560-8fee-06794bc3eb04)
+2025-05-24 06:03:30,645 INFO Starting job - calculate_qe (010f3f1a-792c-49ce-bbc8-d09be700575c)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---d7231032:10595] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:03:43,945 INFO Finished job - calculate_qe (010f3f1a-792c-49ce-bbc8-d09be700575c)
+2025-05-24 06:03:43,946 INFO Starting job - calculate_qe (b3b51b0e-49b7-4758-a561-94218cd03d6f)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---d7231032:10605] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:03:57,230 INFO Finished job - calculate_qe (b3b51b0e-49b7-4758-a561-94218cd03d6f)
+2025-05-24 06:03:57,231 INFO Starting job - calculate_qe (29c5cbc6-5912-48df-9cf7-ced1c0aad822)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---d7231032:10615] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:50:49,609 INFO Finished job - calculate_qe (e67d4ff9-8416-4eff-86da-8b82ca9e6a7b)
-2025-04-23 09:50:49,610 INFO Starting job - calculate_qe (b351bbe7-8e96-4167-8eef-83fb97b952e9)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 06:04:07,269 INFO Finished job - calculate_qe (29c5cbc6-5912-48df-9cf7-ced1c0aad822)
+2025-05-24 06:04:07,271 INFO Starting job - get_list (21df1d62-03ff-4f7c-ae36-34c9cb809b32)
+2025-05-24 06:04:07,277 INFO Finished job - get_list (21df1d62-03ff-4f7c-ae36-34c9cb809b32)
+2025-05-24 06:04:07,277 INFO Starting job - get_list (b1c1cd99-997b-4f4d-ad01-0e3af8c6a929)
+2025-05-24 06:04:07,288 INFO Finished job - get_list (b1c1cd99-997b-4f4d-ad01-0e3af8c6a929)
+2025-05-24 06:04:07,289 INFO Starting job - plot_energy_volume_curve (eb6fcf91-a5b3-4ddd-be2e-7406b51e5084)
+2025-05-24 06:04:07,353 INFO Finished job - plot_energy_volume_curve (eb6fcf91-a5b3-4ddd-be2e-7406b51e5084)
+2025-05-24 06:04:07,354 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05657] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:51:03,448 INFO Finished job - calculate_qe (b351bbe7-8e96-4167-8eef-83fb97b952e9)
-2025-04-23 09:51:03,449 INFO Starting job - calculate_qe (2eee6b99-b12e-4e61-96f5-359461bf3c10)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-[jupyter-pyiron-dev-pyth-flow-definition-5x990k36:05668] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
-Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:51:14,516 INFO Finished job - calculate_qe (2eee6b99-b12e-4e61-96f5-359461bf3c10)
-2025-04-23 09:51:14,517 INFO Starting job - get_list (7bb19e3c-c167-4477-beee-c93a5148e5ca)
-2025-04-23 09:51:14,520 INFO Finished job - get_list (7bb19e3c-c167-4477-beee-c93a5148e5ca)
-2025-04-23 09:51:14,521 INFO Starting job - get_list (cb1ca4e3-b479-40af-8f27-0a2562b9e246)
-2025-04-23 09:51:14,524 INFO Finished job - get_list (cb1ca4e3-b479-40af-8f27-0a2562b9e246)
-2025-04-23 09:51:14,525 INFO Starting job - plot_energy_volume_curve (15aebe69-961a-4b8f-a3e3-2371ca361d64)
-2025-04-23 09:51:14,588 INFO Finished job - plot_energy_volume_curve (15aebe69-961a-4b8f-a3e3-2371ca361d64)
-2025-04-23 09:51:14,589 INFO Finished executing jobs locally
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;3a79a0c7-c443-40e5-8c4c-030ccf176743&#39;: {1: Response(output=&#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;d168da9a-66a0-4ab1-ab65-7b5b4b078fac&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;vc-relax&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;0b40ca71-1ea2-4181-8d91-1de15ef3df17&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946928, 0.0, 0.0], [0.0, 4.045637215946928, 0.0], [0.0, 0.0, 4.045637215946928]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228186079734636, 2.0228186079734636], [2.0228186079734636, 0.0, 2.0228186079734636], [2.0228186079734636, 2.0228186079734636, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9365262253586, &#39;volume&#39;: 66.21567448236675}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;451e4839-7612-4530-bbdb-9cb3e77cc6b8&#39;: {1: Response(output={&#39;s_0&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859622328, 0.0, 0.0], [0.0, 3.9060197859622328, 0.0], [0.0, 0.0, 3.9060197859622328]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.953009892981116, 1.953009892981116], [1.953009892981116, 0.0, 1.953009892981116], [1.953009892981116, 1.953009892981116, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_1&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9770538443181347, 0.0, 0.0], [0.0, 3.9770538443181347, 0.0], [0.0, 0.0, 3.9770538443181347]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.988526922159067, 1.988526922159067], [1.988526922159067, 0.0, 1.988526922159067], [1.988526922159067, 1.988526922159067, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_2&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946928, 0.0, 0.0], [0.0, 4.045637215946928, 0.0], [0.0, 0.0, 4.045637215946928]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228186079734636, 2.0228186079734636], [2.0228186079734636, 0.0, 2.0228186079734636], [2.0228186079734636, 2.0228186079734636, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_3&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.1119709272830445, 0.0, 0.0], [0.0, 4.1119709272830445, 0.0], [0.0, 0.0, 4.1119709272830445]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.055985463641522, 2.055985463641522], [2.055985463641522, 0.0, 2.055985463641522], [2.055985463641522, 2.055985463641522, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_4&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372271, 0.0, 0.0], [0.0, 4.176230852372271, 0.0], [0.0, 0.0, 4.176230852372271]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.088115426186135, 2.088115426186135], [2.088115426186135, 0.0, 2.088115426186135], [2.088115426186135, 2.088115426186135, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;b586638f-b882-4439-a28e-a2c76f50c0e2&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9770538443181347, 0.0, 0.0], [0.0, 3.9770538443181347, 0.0], [0.0, 0.0, 3.9770538443181347]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.988526922159067, 1.988526922159067], [1.988526922159067, 0.0, 1.988526922159067], [1.988526922159067, 1.988526922159067, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;974e6f28-2911-4b3b-bc55-786c2111e39e&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946928, 0.0, 0.0], [0.0, 4.045637215946928, 0.0], [0.0, 0.0, 4.045637215946928]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228186079734636, 2.0228186079734636], [2.0228186079734636, 0.0, 2.0228186079734636], [2.0228186079734636, 2.0228186079734636, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;1c0b7807-d38a-4e23-880f-bccd87c84b28&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.1119709272830445, 0.0, 0.0], [0.0, 4.1119709272830445, 0.0], [0.0, 0.0, 4.1119709272830445]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.055985463641522, 2.055985463641522], [2.055985463641522, 0.0, 2.055985463641522], [2.055985463641522, 2.055985463641522, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;8791b0c0-b424-4f62-80a9-3170660b35f9&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372271, 0.0, 0.0], [0.0, 4.176230852372271, 0.0], [0.0, 0.0, 4.176230852372271]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.088115426186135, 2.088115426186135], [2.088115426186135, 0.0, 2.088115426186135], [2.088115426186135, 2.088115426186135, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;b0e2cd7f-9e49-40b6-8c79-6a3c8588fed4&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859622328, 0.0, 0.0], [0.0, 3.9060197859622328, 0.0], [0.0, 0.0, 3.9060197859622328]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.953009892981116, 1.953009892981116], [1.953009892981116, 0.0, 1.953009892981116], [1.953009892981116, 1.953009892981116, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;146dc5e6-1415-4c92-9b81-c1dac13c4af7&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.97705382693468, 0.0, 0.0], [0.0, 3.97705382693468, 0.0], [0.0, 0.0, 3.97705382693468]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269135082746, 1.9885269135082746], [1.9885269135082746, 0.0, 1.9885269135082746], [1.9885269135082746, 1.9885269135082746, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9161488594584, &#39;volume&#39;: 62.90488993338832}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;4760dd26-7403-4f3e-8d64-596893d84e95&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637198263706, 0.0, 0.0], [0.0, 4.045637198263706, 0.0], [0.0, 0.0, 4.045637198263706]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228185991583887, 2.0228185991583887], [2.0228185991583887, 0.0, 2.0228185991583887], [2.0228185991583887, 2.0228185991583887, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9365241668336, &#39;volume&#39;: 66.21567361409329}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;e67d4ff9-8416-4eff-86da-8b82ca9e6a7b&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.111970909309876, 0.0, 0.0], [0.0, 4.111970909309876, 0.0], [0.0, 0.0, 4.111970909309876]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854546134178, 2.0559854546134178], [2.0559854546134178, 0.0, 2.0559854546134178], [2.0559854546134178, 2.0559854546134178, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9192860025814, &#39;volume&#39;: 69.52645729479767}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;b351bbe7-8e96-4167-8eef-83fb97b952e9&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.17623083411823, 0.0, 0.0], [0.0, 4.17623083411823, 0.0], [0.0, 0.0, 4.17623083411823]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.08811541707298, 2.08811541707298], [2.08811541707298, 0.0, 2.08811541707298], [2.08811541707298, 2.08811541707298, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.8737904693405, &#39;volume&#39;: 72.83724097550255}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;2eee6b99-b12e-4e61-96f5-359461bf3c10&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197688892653, 0.0, 0.0], [0.0, 3.9060197688892653, 0.0], [0.0, 0.0, 3.9060197688892653]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098844635175, 1.9530098844635175], [1.9530098844635175, 0.0, 1.9530098844635175], [1.9530098844635175, 1.9530098844635175, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.8457446150649, &#39;volume&#39;: 59.59410625268378}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;7bb19e3c-c167-4477-beee-c93a5148e5ca&#39;: {1: Response(output=[-1074.8457446150649, -1074.9161488594584, -1074.9365241668336, -1074.9192860025814, -1074.8737904693405], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;cb1ca4e3-b479-40af-8f27-0a2562b9e246&#39;: {1: Response(output=[59.59410625268378, 62.90488993338832, 66.21567361409329, 69.52645729479767, 72.83724097550255], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;15aebe69-961a-4b8f-a3e3-2371ca361d64&#39;: {1: Response(output=None, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;49008d34-c2c0-41a9-a7cb-17f68fd503d3&#39;: {1: Response(output=&#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;f81de048-62e5-448c-9783-fc9cb4d4bb7d&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;vc-relax&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;e7891e79-cd64-4e19-b474-4e5c4521807b&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946847, 0.0, 0.0], [0.0, 4.045637215946847, 0.0], [0.0, 0.0, 4.045637215946846]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973423, 2.022818607973423], [2.022818607973423, 0.0, 2.022818607973423], [2.022818607973423, 2.022818607973423, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9365262253593, &#39;volume&#39;: 66.21567448236276}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;05513874-a1a3-428c-91ad-7ba4f44d13c4&#39;: {1: Response(output={&#39;s_0&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859621546, 0.0, 0.0], [0.0, 3.9060197859621546, 0.0], [0.0, 0.0, 3.9060197859621537]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098929810769, 1.9530098929810769], [1.9530098929810769, 0.0, 1.9530098929810769], [1.9530098929810769, 1.9530098929810769, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_1&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.977053844318055, 0.0, 0.0], [0.0, 3.977053844318055, 0.0], [0.0, 0.0, 3.9770538443180543]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269221590272, 1.9885269221590272], [1.9885269221590272, 0.0, 1.9885269221590272], [1.9885269221590272, 1.9885269221590272, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_2&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946847, 0.0, 0.0], [0.0, 4.045637215946847, 0.0], [0.0, 0.0, 4.045637215946846]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973423, 2.022818607973423], [2.022818607973423, 0.0, 2.022818607973423], [2.022818607973423, 2.022818607973423, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_3&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.111970927282963, 0.0, 0.0], [0.0, 4.111970927282963, 0.0], [0.0, 0.0, 4.111970927282961]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854636414805, 2.05598546364148], [2.0559854636414805, 0.0, 2.05598546364148], [2.0559854636414805, 2.0559854636414805, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_4&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372187, 0.0, 0.0], [0.0, 4.176230852372187, 0.0], [0.0, 0.0, 4.1762308523721865]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0881154261860932, 2.0881154261860932], [2.0881154261860932, 0.0, 2.0881154261860932], [2.0881154261860932, 2.0881154261860932, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;4b033be6-d0c6-4bc4-8f10-eb0ff6ad94f8&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.977053844318055, 0.0, 0.0], [0.0, 3.977053844318055, 0.0], [0.0, 0.0, 3.9770538443180543]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269221590272, 1.9885269221590272], [1.9885269221590272, 0.0, 1.9885269221590272], [1.9885269221590272, 1.9885269221590272, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;8fb5c055-10cd-4cf0-adcc-57703638e0c8&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946847, 0.0, 0.0], [0.0, 4.045637215946847, 0.0], [0.0, 0.0, 4.045637215946846]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973423, 2.022818607973423], [2.022818607973423, 0.0, 2.022818607973423], [2.022818607973423, 2.022818607973423, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;0bc6f831-f685-4688-9f9a-194271b83d48&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.111970927282963, 0.0, 0.0], [0.0, 4.111970927282963, 0.0], [0.0, 0.0, 4.111970927282961]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854636414805, 2.05598546364148], [2.0559854636414805, 0.0, 2.05598546364148], [2.0559854636414805, 2.0559854636414805, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;90ac5a4e-6464-48c8-ae33-8efebb8ce336&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372187, 0.0, 0.0], [0.0, 4.176230852372187, 0.0], [0.0, 0.0, 4.1762308523721865]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0881154261860932, 2.0881154261860932], [2.0881154261860932, 0.0, 2.0881154261860932], [2.0881154261860932, 2.0881154261860932, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;d7a2d06e-aae2-40c6-914e-6145f1e22f35&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859621546, 0.0, 0.0], [0.0, 3.9060197859621546, 0.0], [0.0, 0.0, 3.9060197859621537]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098929810769, 1.9530098929810769], [1.9530098929810769, 0.0, 1.9530098929810769], [1.9530098929810769, 1.9530098929810769, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;7896c29a-eef8-425a-89b9-15c31c5b7555&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.97705382693461, 0.0, 0.0], [0.0, 3.97705382693461, 0.0], [0.0, 0.0, 3.9770538269346]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269135082753, 1.9885269135082753], [1.9885269135082753, 0.0, 1.9885269135082753], [1.9885269135082753, 1.9885269135082753, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9161488594596, &#39;volume&#39;: 62.90488993338486}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;b7eb8441-9b20-4560-8fee-06794bc3eb04&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637198263626, 0.0, 0.0], [0.0, 4.045637198263626, 0.0], [0.0, 0.0, 4.045637198263626]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228185991583882, 2.0228185991583882], [2.0228185991583882, 0.0, 2.0228185991583882], [2.0228185991583882, 2.0228185991583882, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.936524166835, &#39;volume&#39;: 66.21567361408935}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;010f3f1a-792c-49ce-bbc8-d09be700575c&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.111970909309796, 0.0, 0.0], [0.0, 4.111970909309796, 0.0], [0.0, 0.0, 4.111970909309796]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854546134178, 2.0559854546134178], [2.0559854546134178, 0.0, 2.0559854546134178], [2.0559854546134178, 2.0559854546134178, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9192860025805, &#39;volume&#39;: 69.52645729479359}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;b3b51b0e-49b7-4758-a561-94218cd03d6f&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.17623083411815, 0.0, 0.0], [0.0, 4.17623083411815, 0.0], [0.0, 0.0, 4.17623083411815]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0881154170729803, 2.0881154170729803], [2.0881154170729803, 0.0, 2.0881154170729803], [2.0881154170729803, 2.0881154170729803, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.8737904693437, &#39;volume&#39;: 72.83724097549829}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;29c5cbc6-5912-48df-9cf7-ced1c0aad822&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197688891853, 0.0, 0.0], [0.0, 3.9060197688891853, 0.0], [0.0, 0.0, 3.9060197688891853]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098844635175, 1.9530098844635175], [1.9530098844635175, 0.0, 1.9530098844635175], [1.9530098844635175, 1.9530098844635175, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.845744615063, &#39;volume&#39;: 59.59410625268013}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;21df1d62-03ff-4f7c-ae36-34c9cb809b32&#39;: {1: Response(output=[-1074.845744615063, -1074.9161488594596, -1074.936524166835, -1074.9192860025805, -1074.8737904693437], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;b1c1cd99-997b-4f4d-ad01-0e3af8c6a929&#39;: {1: Response(output=[59.59410625268013, 62.90488993338486, 66.21567361408935, 69.52645729479359, 72.83724097549829], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;eb6fcf91-a5b3-4ddd-be2e-7406b51e5084&#39;: {1: Response(output=None, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))}}
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />

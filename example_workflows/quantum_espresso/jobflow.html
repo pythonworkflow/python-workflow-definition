@@ -407,14 +407,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -554,7 +546,565 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;workflow.get_bulk_structure&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 2, &quot;function&quot;: &quot;workflow.generate_structures&quot;}, {&quot;id&quot;: 3, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 4, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 5, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 6, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 7, &quot;function&quot;: &quot;workflow.calculate_qe&quot;}, {&quot;id&quot;: 8, &quot;function&quot;: &quot;workflow.plot_energy_volume_curve&quot;}, {&quot;id&quot;: 9, &quot;value&quot;: &quot;Al&quot;}, {&quot;id&quot;: 10, &quot;value&quot;: 4.04}, {&quot;id&quot;: 11, &quot;value&quot;: true}, {&quot;id&quot;: 12, &quot;value&quot;: &quot;mini&quot;}, {&quot;id&quot;: 13, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 14, &quot;value&quot;: {&quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;}}, {&quot;id&quot;: 15, &quot;value&quot;: [3, 3, 3]}, {&quot;id&quot;: 16, &quot;value&quot;: &quot;vc-relax&quot;}, {&quot;id&quot;: 17, &quot;value&quot;: 0.02}, {&quot;id&quot;: 18, &quot;value&quot;: [0.9, 0.9500000000000001, 1.0, 1.05, 1.1]}, {&quot;id&quot;: 19, &quot;value&quot;: &quot;strain_0&quot;}, {&quot;id&quot;: 20, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 21, &quot;value&quot;: &quot;scf&quot;}, {&quot;id&quot;: 22, &quot;value&quot;: &quot;strain_1&quot;}, {&quot;id&quot;: 23, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 24, &quot;value&quot;: &quot;strain_2&quot;}, {&quot;id&quot;: 25, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 26, &quot;value&quot;: &quot;strain_3&quot;}, {&quot;id&quot;: 27, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 28, &quot;value&quot;: &quot;strain_4&quot;}, {&quot;id&quot;: 29, &quot;function&quot;: &quot;python_workflow_definition.shared.get_dict&quot;}, {&quot;id&quot;: 30, &quot;function&quot;: &quot;python_workflow_definition.shared.get_list&quot;}, {&quot;id&quot;: 31, &quot;function&quot;: &quot;python_workflow_definition.shared.get_list&quot;}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;element&quot;, &quot;source&quot;: 9, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;a&quot;, &quot;source&quot;: 10, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;cubic&quot;, &quot;source&quot;: 11, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 12, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 0, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 16, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 13, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 13, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 2, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;structure&quot;}, {&quot;target&quot;: 2, &quot;targetPort&quot;: &quot;strain_lst&quot;, &quot;source&quot;: 18, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 19, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 20, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;s_0&quot;}, {&quot;target&quot;: 20, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 20, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 20, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 20, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 3, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 20, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 4, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 22, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 23, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;s_1&quot;}, {&quot;target&quot;: 23, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 23, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 23, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 23, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 4, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 23, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 5, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 24, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 25, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;s_2&quot;}, {&quot;target&quot;: 25, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 25, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 25, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 25, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 5, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 25, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 26, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 27, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;s_3&quot;}, {&quot;target&quot;: 27, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 27, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 27, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 27, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 6, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 27, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 7, &quot;targetPort&quot;: &quot;working_directory&quot;, &quot;source&quot;: 28, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 29, &quot;targetPort&quot;: &quot;structure&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: &quot;s_4&quot;}, {&quot;target&quot;: 29, &quot;targetPort&quot;: &quot;pseudopotentials&quot;, &quot;source&quot;: 14, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 29, &quot;targetPort&quot;: &quot;kpts&quot;, &quot;source&quot;: 15, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 29, &quot;targetPort&quot;: &quot;calculation&quot;, &quot;source&quot;: 21, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 29, &quot;targetPort&quot;: &quot;smearing&quot;, &quot;source&quot;: 17, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 7, &quot;targetPort&quot;: &quot;input_dict&quot;, &quot;source&quot;: 29, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 30, &quot;targetPort&quot;: &quot;0&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 30, &quot;targetPort&quot;: &quot;1&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 30, &quot;targetPort&quot;: &quot;2&quot;, &quot;source&quot;: 5, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 30, &quot;targetPort&quot;: &quot;3&quot;, &quot;source&quot;: 6, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 30, &quot;targetPort&quot;: &quot;4&quot;, &quot;source&quot;: 7, &quot;sourcePort&quot;: &quot;volume&quot;}, {&quot;target&quot;: 8, &quot;targetPort&quot;: &quot;volume_lst&quot;, &quot;source&quot;: 30, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 31, &quot;targetPort&quot;: &quot;0&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 31, &quot;targetPort&quot;: &quot;1&quot;, &quot;source&quot;: 4, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 31, &quot;targetPort&quot;: &quot;2&quot;, &quot;source&quot;: 5, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 31, &quot;targetPort&quot;: &quot;3&quot;, &quot;source&quot;: 6, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 31, &quot;targetPort&quot;: &quot;4&quot;, &quot;source&quot;: 7, &quot;sourcePort&quot;: &quot;energy&quot;}, {&quot;target&quot;: 8, &quot;targetPort&quot;: &quot;energy_lst&quot;, &quot;source&quot;: 31, &quot;sourcePort&quot;: null}]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_bulk_structure&quot;
+    },
+    {
+      &quot;id&quot;: 1,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.generate_structures&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.plot_energy_volume_curve&quot;
+    },
+    {
+      &quot;id&quot;: 9,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;element&quot;,
+      &quot;value&quot;: &quot;Al&quot;
+    },
+    {
+      &quot;id&quot;: 10,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;a&quot;,
+      &quot;value&quot;: 4.04
+    },
+    {
+      &quot;id&quot;: 11,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;cubic&quot;,
+      &quot;value&quot;: true
+    },
+    {
+      &quot;id&quot;: 12,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_0&quot;,
+      &quot;value&quot;: &quot;mini&quot;
+    },
+    {
+      &quot;id&quot;: 13,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 14,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;pseudopotentials&quot;,
+      &quot;value&quot;: {
+        &quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;
+      }
+    },
+    {
+      &quot;id&quot;: 15,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;kpts&quot;,
+      &quot;value&quot;: [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      &quot;id&quot;: 16,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_0&quot;,
+      &quot;value&quot;: &quot;vc-relax&quot;
+    },
+    {
+      &quot;id&quot;: 17,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;smearing&quot;,
+      &quot;value&quot;: 0.02
+    },
+    {
+      &quot;id&quot;: 18,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;strain_lst&quot;,
+      &quot;value&quot;: [
+        0.9,
+        0.9500000000000001,
+        1.0,
+        1.05,
+        1.1
+      ]
+    },
+    {
+      &quot;id&quot;: 19,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_1&quot;,
+      &quot;value&quot;: &quot;strain_0&quot;
+    },
+    {
+      &quot;id&quot;: 20,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 21,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_1&quot;,
+      &quot;value&quot;: &quot;scf&quot;
+    },
+    {
+      &quot;id&quot;: 22,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_2&quot;,
+      &quot;value&quot;: &quot;strain_1&quot;
+    },
+    {
+      &quot;id&quot;: 23,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 24,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_3&quot;,
+      &quot;value&quot;: &quot;strain_2&quot;
+    },
+    {
+      &quot;id&quot;: 25,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 26,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_4&quot;,
+      &quot;value&quot;: &quot;strain_3&quot;
+    },
+    {
+      &quot;id&quot;: 27,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 28,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_5&quot;,
+      &quot;value&quot;: &quot;strain_4&quot;
+    },
+    {
+      &quot;id&quot;: 29,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 30,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 31,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 32,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;element&quot;,
+      &quot;source&quot;: 9,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;a&quot;,
+      &quot;source&quot;: 10,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;cubic&quot;,
+      &quot;source&quot;: 11,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 12,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 0,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 16,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 13,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: &quot;structure&quot;
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;strain_lst&quot;,
+      &quot;source&quot;: 18,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 19,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_0&quot;
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 20,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_1&quot;
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 23,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 24,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_2&quot;
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 25,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_3&quot;
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 27,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 28,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;s_4&quot;
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 29,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 29,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 30,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;volume_lst&quot;,
+      &quot;source&quot;: 30,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 31,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;energy_lst&quot;,
+      &quot;source&quot;: 31,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 32,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 8,
+      &quot;sourcePort&quot;: null
+    }
+  ]
+}
 </pre></div>
 </div>
 </div>
@@ -572,7 +1122,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;0ebe77003eb640d5b073762df56b1814&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -605,7 +1155,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "adc64841c31f40c68e2f9cdd4652e3ab"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "39e130485f144a8abbf5c63c4812a3e3"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -614,60 +1164,60 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/24/2025 02:18:49 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
-04/24/2025 02:18:49 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
-04/24/2025 02:18:49 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10
-04/24/2025 02:18:50 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
-04/24/2025 02:18:50 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01816] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/24/2025 05:55:37 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
+05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
+05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10
+05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
+05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
+[jupyter-pythonworkflow-fl--x---d7231032:10078] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:19:40 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
-04/24/2025 02:19:40 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
-04/24/2025 02:19:40 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
-04/24/2025 02:19:41 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
-04/24/2025 02:19:42 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict12,get_dict13,get_dict14,get_dict15
-04/24/2025 02:19:42 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
-04/24/2025 02:19:42 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01832] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 05:56:29 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/24/2025 05:56:29 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
+05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
+05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
+05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict12,get_dict13,get_dict14,get_dict15
+05/24/2025 05:56:31 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
+05/24/2025 05:56:31 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---d7231032:10097] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:19:53 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/24/2025 02:19:53 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
-04/24/2025 02:19:53 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
-04/24/2025 02:19:54 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
-04/24/2025 02:19:54 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01842] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
+05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
+05/24/2025 05:56:43 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
+05/24/2025 05:56:43 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---d7231032:10108] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:20:05 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/24/2025 02:20:06 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
-04/24/2025 02:20:06 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
-04/24/2025 02:20:07 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
-04/24/2025 02:20:07 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01852] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 05:56:54 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
+05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
+05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
+05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---d7231032:10120] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:20:19 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/24/2025 02:20:19 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
-04/24/2025 02:20:19 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
-04/24/2025 02:20:20 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
-04/24/2025 02:20:20 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01862] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 05:57:07 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
+05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
+05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
+05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
+[jupyter-pythonworkflow-fl--x---d7231032:10131] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:20:34 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/24/2025 02:20:34 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
-04/24/2025 02:20:35 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
-04/24/2025 02:20:35 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
-04/24/2025 02:20:35 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
-[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01876] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
+05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
+05/24/2025 05:57:23 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
+05/24/2025 05:57:23 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
+[jupyter-pythonworkflow-fl--x---d7231032:10146] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-04/24/2025 02:20:51 PM &lt;1741&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-04/24/2025 02:20:51 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
-04/24/2025 02:20:51 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
-04/24/2025 02:20:52 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
-04/24/2025 02:20:52 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
-04/24/2025 02:20:52 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
-04/24/2025 02:20:52 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve9
-04/24/2025 02:20:53 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve9, type: PyFunction, finished.
-04/24/2025 02:20:53 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/24/2025 02:20:54 PM &lt;1741&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [58|WorkGraphEngine|finalize]: Finalize workgraph.
+05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
+05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
+05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
+05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
+05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
+05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve9
+05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve9, type: PyFunction, finished.
+05/24/2025 05:57:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/24/2025 05:57:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
@@ -692,7 +1242,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/56b50aeac12a67c606acce51eb6276fa8610339efaf1f915b3f307bd0667e704.svg" src="../../_images/56b50aeac12a67c606acce51eb6276fa8610339efaf1f915b3f307bd0667e704.svg" />
+<img alt="../../_images/84430642696c7e2ac5c3b159c83bf15e6283a08aafb500c198241c6132fb729d.svg" src="../../_images/84430642696c7e2ac5c3b159c83bf15e6283a08aafb500c198241c6132fb729d.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -714,54 +1264,54 @@ The job get_dict_1e47509b88d63a21fd421686554c8f4a was saved and received the ID:
 The job calculate_qe_411e578f2700d09ba2df9a4c682b4582 was saved and received the ID: 3
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01906] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10178] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_a2be118b5bff59eaa11d83f99eaced4d was saved and received the ID: 4
-The job get_dict_e6e21d04c5680e1114b80a92bc2e359c was saved and received the ID: 5
-The job calculate_qe_51a232f4324d311c7fd4f7f769ddfdfe was saved and received the ID: 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_758c1e24a8384d1f25f5126debddf480 was saved and received the ID: 4
+The job get_dict_db80165b1c83d6fa1ef1eef8d8b3188b was saved and received the ID: 5
+The job calculate_qe_c74608e7e5992312ade6c5737ad4d4f1 was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01916] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10193] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_437c0ffaf598d0a286c53012d3d36f25 was saved and received the ID: 7
-The job calculate_qe_8fb25b130b8e8e933d28d21f7c44b4ca was saved and received the ID: 8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_97c2cc17b8b86f75ac4b6341cd45956c was saved and received the ID: 7
+The job calculate_qe_3c59fd7824f74b10476745bf9830882f was saved and received the ID: 8
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01926] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10204] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_d1a00c031f330c896c8f5af25db5235b was saved and received the ID: 9
-The job calculate_qe_042e4d560dcfc093eea3a34f7e523669 was saved and received the ID: 10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_8c518d80d423ba91c334fe6a5d9543bd was saved and received the ID: 9
+The job calculate_qe_38624f0e23e56cbc7b388ef79234a0cf was saved and received the ID: 10
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01938] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10215] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_ea36d0f502795b1fc4b32e62fce9820d was saved and received the ID: 11
-The job calculate_qe_b4bd2031ca3d40580969fda1aecee94a was saved and received the ID: 12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_85562edba169c3c58d84415c89cc95ec was saved and received the ID: 11
+The job calculate_qe_78709c5d9efddf18fe3df6c5e14d06ed was saved and received the ID: 12
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01948] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10226] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_d190d6b6e585cababdcd49a344547984 was saved and received the ID: 13
-The job calculate_qe_b3927880779bfca53ff78c00360e9527 was saved and received the ID: 14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_c540734353f48fac14af5c29bd88abc9 was saved and received the ID: 13
+The job calculate_qe_1e912623736f139236a98ac679574bb4 was saved and received the ID: 14
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pyiron-dev-pyth-flow-definition-kk01elen:01958] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10242] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_90f0281f335962d10db1b3572abe82df was saved and received the ID: 15
-The job get_list_09fa36007fd192f793a1f218b70fe87b was saved and received the ID: 16
-The job plot_energy_volume_curve_8d8f280c69be12b1969d95cc53f9411b was saved and received the ID: 17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_eacb691fa58e50c0936b26623a5e36f9 was saved and received the ID: 15
+The job get_list_069bfd570461c3607a17813d3ecb126c was saved and received the ID: 16
+The job plot_energy_volume_curve_99f8fb836badb998aff830b255f6b0eb was saved and received the ID: 17
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />

@@ -467,7 +467,81 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;arithmetic_workflow.get_sum&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;arithmetic_workflow.get_prod_and_div&quot;}, {&quot;id&quot;: 2, &quot;value&quot;: 1}, {&quot;id&quot;: 3, &quot;value&quot;: 2}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;prod&quot;}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;div&quot;}]}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_square&quot;
+    },
+    {
+      &quot;id&quot;: 1,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_sum&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_prod_and_div&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;x&quot;,
+      &quot;value&quot;: 1
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;y&quot;,
+      &quot;value&quot;: 2
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;x&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;x&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;prod&quot;
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;x&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;y&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;y&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;div&quot;
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 0,
+      &quot;sourcePort&quot;: null
+    }
+  ]
+}
 </pre></div>
 </div>
 </div>
@@ -484,7 +558,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;5b8a8d98b3014876a9eed7d85a954e5e&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -504,7 +578,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cb6aafce370b43bb9904c64f03c93cc0", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "f52e57854d6e4d07b6a2c11a75873efe"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -513,12 +587,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/23/2025 09:45:47 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div2
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_prod_and_div2, type: PyFunction, finished.
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum1
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_sum1, type: PyFunction, finished.
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div3
+05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_prod_and_div3, type: PyFunction, finished.
+05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum2
+05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_sum2, type: PyFunction, finished.
+05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_square1
+05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_square1, type: PyFunction, finished.
+05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 </div>
@@ -529,14 +605,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
 </pre></div>
 </div>
 </div>
@@ -563,16 +631,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:45:49,174 INFO Started executing jobs locally
-2025-04-23 09:45:49,540 INFO Starting job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
-2025-04-23 09:45:49,543 INFO Finished job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
-2025-04-23 09:45:49,544 INFO Starting job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
-2025-04-23 09:45:49,546 INFO Finished job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
-2025-04-23 09:45:49,546 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 05:39:22,893 INFO Started executing jobs locally
+2025-05-24 05:39:23,184 INFO Starting job - get_prod_and_div (82cb13d7-d7c8-4bd1-84d1-c301d4ee2422)
+2025-05-24 05:39:23,187 INFO Finished job - get_prod_and_div (82cb13d7-d7c8-4bd1-84d1-c301d4ee2422)
+2025-05-24 05:39:23,187 INFO Starting job - get_sum (19c0830c-e918-44d2-82f1-b9418463c057)
+2025-05-24 05:39:23,189 INFO Finished job - get_sum (19c0830c-e918-44d2-82f1-b9418463c057)
+2025-05-24 05:39:23,189 INFO Starting job - get_square (78fc4e6e-2a99-490e-b829-fae9704296c2)
+2025-05-24 05:39:23,190 INFO Finished job - get_square (78fc4e6e-2a99-490e-b829-fae9704296c2)
+2025-05-24 05:39:23,191 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;77d76447-21f8-4ad8-b2b5-bef7263ef5b9&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;82cb13d7-d7c8-4bd1-84d1-c301d4ee2422&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
+ &#39;19c0830c-e918-44d2-82f1-b9418463c057&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
+ &#39;78fc4e6e-2a99-490e-b829-fae9704296c2&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))}}
 </pre></div>
 </div>
 </div>

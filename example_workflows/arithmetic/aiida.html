@@ -460,18 +460,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;nodes&#39;: [{&#39;id&#39;: 0, &#39;function&#39;: &#39;arithmetic_workflow.get_prod_and_div&#39;},
-  {&#39;id&#39;: 1, &#39;function&#39;: &#39;arithmetic_workflow.get_sum&#39;},
-  {&#39;id&#39;: 2, &#39;value&#39;: 1.0},
-  {&#39;id&#39;: 3, &#39;value&#39;: 2.0}],
- &#39;edges&#39;: [{&#39;target&#39;: 1, &#39;targetPort&#39;: &#39;x&#39;, &#39;source&#39;: 0, &#39;sourcePort&#39;: &#39;prod&#39;},
-  {&#39;target&#39;: 1, &#39;targetPort&#39;: &#39;y&#39;, &#39;source&#39;: 0, &#39;sourcePort&#39;: &#39;div&#39;},
-  {&#39;target&#39;: 0, &#39;targetPort&#39;: &#39;x&#39;, &#39;source&#39;: 2, &#39;sourcePort&#39;: None},
-  {&#39;target&#39;: 0, &#39;targetPort&#39;: &#39;y&#39;, &#39;source&#39;: 3, &#39;sourcePort&#39;: None}]}
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -481,22 +469,39 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
   &quot;nodes&quot;: [
     {
       &quot;id&quot;: 0,
-      &quot;function&quot;: &quot;arithmetic_workflow.get_prod_and_div&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_prod_and_div&quot;
     },
     {
       &quot;id&quot;: 1,
-      &quot;function&quot;: &quot;arithmetic_workflow.get_sum&quot;
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_sum&quot;
     },
     {
       &quot;id&quot;: 2,
-      &quot;value&quot;: 1.0
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_square&quot;
     },
     {
       &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;x&quot;,
+      &quot;value&quot;: 1.0
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;y&quot;,
       &quot;value&quot;: 2.0
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
     }
   ],
   &quot;edges&quot;: [
@@ -513,15 +518,27 @@ document.write(`
       &quot;sourcePort&quot;: &quot;div&quot;
     },
     {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;x&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: null
+    },
+    {
       &quot;target&quot;: 0,
       &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 2,
+      &quot;source&quot;: 3,
       &quot;sourcePort&quot;: null
     },
     {
       &quot;target&quot;: 0,
       &quot;targetPort&quot;: &quot;y&quot;,
-      &quot;source&quot;: 3,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 2,
       &quot;sourcePort&quot;: null
     }
   ]
@@ -536,14 +553,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
 </pre></div>
 </div>
 </div>
@@ -570,16 +579,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:27:52,129 INFO Started executing jobs locally
-2025-04-23 09:27:52,561 INFO Starting job - get_prod_and_div (6eae194f-04a4-4c7c-b0d9-baf624bac375)
-2025-04-23 09:27:52,564 INFO Finished job - get_prod_and_div (6eae194f-04a4-4c7c-b0d9-baf624bac375)
-2025-04-23 09:27:52,564 INFO Starting job - get_sum (21fda98d-7701-45c7-a30a-816e9a91ab75)
-2025-04-23 09:27:52,566 INFO Finished job - get_sum (21fda98d-7701-45c7-a30a-816e9a91ab75)
-2025-04-23 09:27:52,566 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 05:37:36,950 INFO Started executing jobs locally
+2025-05-24 05:37:37,216 INFO Starting job - get_prod_and_div (3ea26df7-3e4f-4541-a399-52684f0d763e)
+2025-05-24 05:37:37,218 INFO Finished job - get_prod_and_div (3ea26df7-3e4f-4541-a399-52684f0d763e)
+2025-05-24 05:37:37,219 INFO Starting job - get_sum (8d0957e4-21b1-433e-8e9a-b2af7b2d9b6d)
+2025-05-24 05:37:37,220 INFO Finished job - get_sum (8d0957e4-21b1-433e-8e9a-b2af7b2d9b6d)
+2025-05-24 05:37:37,221 INFO Starting job - get_square (af8ae958-4ce4-4b1f-a5df-eb7768a9aa86)
+2025-05-24 05:37:37,223 INFO Finished job - get_square (af8ae958-4ce4-4b1f-a5df-eb7768a9aa86)
+2025-05-24 05:37:37,223 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;6eae194f-04a4-4c7c-b0d9-baf624bac375&#39;: {1: Response(output={&#39;prod&#39;: 2.0, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;21fda98d-7701-45c7-a30a-816e9a91ab75&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;3ea26df7-3e4f-4541-a399-52684f0d763e&#39;: {1: Response(output={&#39;prod&#39;: 2.0, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
+ &#39;8d0957e4-21b1-433e-8e9a-b2af7b2d9b6d&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
+ &#39;af8ae958-4ce4-4b1f-a5df-eb7768a9aa86&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))}}
 </pre></div>
 </div>
 </div>
@@ -602,7 +614,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4beb6d2bf32e1df99f54253c520b1d914f3099c261471c2961d7d2a56f4c72fc.svg" src="../../_images/4beb6d2bf32e1df99f54253c520b1d914f3099c261471c2961d7d2a56f4c72fc.svg" />
+<img alt="../../_images/f56e8e4e1a270f2e47866a3f07539db63d9c9bf4fdd89487dc7b7be2cac68ee1.svg" src="../../_images/f56e8e4e1a270f2e47866a3f07539db63d9c9bf4fdd89487dc7b7be2cac68ee1.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -612,11 +624,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_7c19c6233dddb02781fc331f609558a1 was saved and received the ID: 1
-The job get_sum_92b8e0a2d45fff6b04940562a8d7d8f7 was saved and received the ID: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_4729edf2c689ca4cf512acd163c98b28 was saved and received the ID: 1
+The job get_sum_25f72a559657d0b1549593792391953e was saved and received the ID: 2
+The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the ID: 3
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.25
 </pre></div>
 </div>
 </div>
