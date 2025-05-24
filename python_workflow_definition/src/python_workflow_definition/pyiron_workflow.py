@@ -222,8 +222,7 @@ def load_workflow_json(file_name: str) -> Workflow:
         if node_dict["type"] == "function":
             fnc = import_from_string(node_dict["value"])
             n = function_node(
-                fnc,
-                output_labels=fnc.__name__  # Strictly force single-output
+                fnc, output_labels=fnc.__name__  # Strictly force single-output
             )
             nodes[node_dict["id"]] = n
             wf.add_child(n)
@@ -245,9 +244,7 @@ def load_workflow_json(file_name: str) -> Workflow:
             injected_attribute_access = nodes[source_id].__getitem__(source_port)
             upstream = injected_attribute_access
         downstream = nodes[target_id]
-        setattr(
-            downstream.inputs, target_port, upstream
-        )  # Exploit input panel magic
+        setattr(downstream.inputs, target_port, upstream)  # Exploit input panel magic
         # Warning: edge setup routine is bespoke for an environment where all nodes return
         # a single value or a dictionary
 
