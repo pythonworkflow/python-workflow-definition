@@ -1,3 +1,4 @@
+from collections import Counter
 from inspect import isfunction
 from importlib import import_module
 from typing import Any
@@ -217,12 +218,19 @@ def load_workflow_json(file_name: str) -> Workflow:
         {}
     )  # Type is actually more restrictive, must be jsonifyable object
     nodes: dict[int, Function] = {}
+    total_counter_dict = Counter([n["value"] for n in content[NODES_LABEL] if n["type"] == "function"])
+    counter_dict = {k: -1 for k in total_counter_dict.keys()}
     wf = Workflow(file_name.split(".")[0])
     for node_dict in content[NODES_LABEL]:
         if node_dict["type"] == "function":
             fnc = import_from_string(node_dict["value"])
+            if total_counter_dict[node_dict["value"]] > 1:
+                counter_dict[node_dict["value"]] += 1
+                name = fnc.__name__ + "_" + str(counter_dict[node_dict["value"]])
+            else:
+                name = fnc.__name__
             n = function_node(
-                fnc, output_labels=fnc.__name__  # Strictly force single-output
+                fnc, output_labels=name  # Strictly force single-output
             )
             nodes[node_dict["id"]] = n
             wf.add_child(n)
