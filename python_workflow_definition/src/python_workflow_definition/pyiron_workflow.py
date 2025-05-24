@@ -1,6 +1,6 @@
 from inspect import isfunction
 from importlib import import_module
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 from pyiron_workflow import function_node, Workflow
@@ -8,7 +8,6 @@ from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
-    convert_nodes_list_to_dict,
     update_node_names,
     set_result_node,
     remove_result,
@@ -78,86 +77,6 @@ def get_edges(graph_dict, node_mapping_dict, nodes_links_dict):
             }
         )
     return edges_lst
-
-
-def create_input_nodes(nodes_dict, edges_lst):
-    node_conversion_dict = {
-        ed[SOURCE_LABEL]: ed[TARGET_PORT_LABEL]
-        for ed in edges_lst
-        if ed[SOURCE_PORT_LABEL] is None
-    }
-    nodes_to_create_dict = {v: nodes_dict[k] for k, v in node_conversion_dict.items()}
-    return nodes_to_create_dict, node_conversion_dict
-
-
-def set_input_nodes(workflow, nodes_to_create_dict):
-    for k, v in nodes_to_create_dict.items():
-        workflow.__setattr__(k, v)
-    return workflow
-
-
-def get_source_handles(edges_lst):
-    source_handle_dict = {}
-    for ed in edges_lst:
-        if ed[SOURCE_LABEL] not in source_handle_dict.keys():
-            source_handle_dict[ed[SOURCE_LABEL]] = [ed[SOURCE_PORT_LABEL]]
-        else:
-            source_handle_dict[ed[SOURCE_LABEL]].append(ed[SOURCE_PORT_LABEL])
-    return source_handle_dict
-
-
-def get_function_nodes(nodes_dict, source_handle_dict):
-    function_dict = {}
-    for k, v in nodes_dict.items():
-        if isfunction(v):
-            function_dict[k] = {"node_function": v}
-    return function_dict
-
-
-def get_kwargs(lst):
-    return {
-        t[TARGET_PORT_LABEL]: {
-            SOURCE_LABEL: t[SOURCE_LABEL],
-            SOURCE_PORT_LABEL: t[SOURCE_PORT_LABEL],
-        }
-        for t in lst
-    }
-
-
-def group_edges(edges_lst):
-    edges_sorted_lst = sorted(edges_lst, key=lambda x: x[TARGET_LABEL], reverse=True)
-    total_dict = {}
-    tmp_lst = []
-    target_id = edges_sorted_lst[0][TARGET_LABEL]
-    for ed in edges_sorted_lst:
-        if target_id == ed[TARGET_LABEL]:
-            tmp_lst.append(ed)
-        else:
-            total_dict[target_id] = get_kwargs(lst=tmp_lst)
-            target_id = ed[TARGET_LABEL]
-            tmp_lst = [ed]
-    total_dict[target_id] = get_kwargs(lst=tmp_lst)
-    return total_dict
-
-
-def build_workflow(workflow, function_dict, total_dict, node_conversion_dict):
-    for k, v in function_dict.items():
-        kwargs_link_dict = total_dict[k]
-        kwargs_dict = {}
-        for kw, vw in kwargs_link_dict.items():
-            if vw[SOURCE_LABEL] in node_conversion_dict.keys():
-                kwargs_dict[kw] = workflow.__getattribute__(
-                    node_conversion_dict[vw[SOURCE_LABEL]]
-                )
-            else:
-                kwargs_dict[kw] = workflow.__getattr__(
-                    "tmp_" + str(vw[SOURCE_LABEL])
-                ).__getitem__(vw[SOURCE_PORT_LABEL])
-        v.update(kwargs_dict)
-        workflow.__setattr__(
-            "tmp_" + str(k), function_node(**v, validate_output_labels=False)
-        )
-    return workflow, "tmp_" + str(k)
 
 
 def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
@@ -276,45 +195,6 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
     ).dump_json_file(file_name=file_name, indent=2)
 
 
-def load_workflow_json(file_name: str, workflow: Optional[Workflow] = None):
-    content = remove_result(
-        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
-            file_name=file_name
-        )
-    )
-    edges_lst = content[EDGES_LABEL]
-
-    nodes_new_dict = {}
-    for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
-        if isinstance(v, str) and "." in v:
-            p, m = v.rsplit(".", 1)
-            mod = import_module(p)
-            nodes_new_dict[int(k)] = getattr(mod, m)
-        else:
-            nodes_new_dict[int(k)] = v
-
-    if workflow is None:
-        workflow = Workflow(file_name.split(".")[0])
-
-    nodes_to_create_dict, node_conversion_dict = create_input_nodes(
-        nodes_dict=nodes_new_dict, edges_lst=edges_lst
-    )
-    wf = set_input_nodes(workflow=workflow, nodes_to_create_dict=nodes_to_create_dict)
-
-    source_handle_dict = get_source_handles(edges_lst=edges_lst)
-    function_dict = get_function_nodes(
-        nodes_dict=nodes_new_dict, source_handle_dict=source_handle_dict
-    )
-    total_dict = group_edges(edges_lst=edges_lst)
-
-    return build_workflow(
-        workflow=wf,
-        function_dict=function_dict,
-        total_dict=total_dict,
-        node_conversion_dict=node_conversion_dict,
-    )
-
-
 def import_from_string(library_path: str) -> Any:
     # Copied from bagofholding
     split_path = library_path.split(".", 1)
@@ -328,7 +208,7 @@ def import_from_string(library_path: str) -> Any:
     return obj
 
 
-def build_function_dag_workflow(file_name: str) -> Workflow:
+def load_workflow_json(file_name: str) -> Workflow:
     content = remove_result(
         PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
     )
