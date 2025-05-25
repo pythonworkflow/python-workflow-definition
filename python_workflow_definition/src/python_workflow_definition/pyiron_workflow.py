@@ -258,7 +258,7 @@ def load_workflow_json(file_name: str) -> Workflow:
                 exec(
                     generate_get_list_function(
                         args_of_lst=[
-                            edge[TARGET_PORT_LABEL]
+                            "s_" + edge[TARGET_PORT_LABEL]
                             for edge in content[EDGES_LABEL]
                             if edge[TARGET_LABEL] == node_dict["id"]
                         ]
