@@ -209,12 +209,21 @@ def import_from_string(library_path: str) -> Any:
     return obj
 
 
-def generate_function(args_of_lst):
+def generate_get_dict_function(args_of_lst):
     lines = "def get_dict(" + ", ".join(args_of_lst) + "):\n"
     lines += "    return {\n"
     for parameter in args_of_lst:
         lines += '        "' + parameter + '": ' + parameter + ",\n"
     lines += "    }"
+    return lines
+
+
+def generate_get_list_function(args_of_lst):
+    lines = "def get_list(" + ", ".join(args_of_lst) + "):\n"
+    lines += "    return [\n"
+    for parameter in args_of_lst:
+        lines += "        " + parameter + ",\n"
+    lines += "    ]"
     return lines
 
 
@@ -236,15 +245,26 @@ def load_workflow_json(file_name: str) -> Workflow:
         if node_dict["type"] == "function":
             if node_dict["value"] == "python_workflow_definition.shared.get_dict":
                 exec(
-                    generate_function(
+                    generate_get_dict_function(
                         args_of_lst=[
                             edge[TARGET_PORT_LABEL]
                             for edge in content[EDGES_LABEL]
-                            if edge[TARGET_LABEL] == node_dict["value"]
+                            if edge[TARGET_LABEL] == node_dict["id"]
                         ]
                     )
                 )
                 fnc = eval("get_dict")
+            elif node_dict["value"] == "python_workflow_definition.shared.get_list":
+                exec(
+                    generate_get_list_function(
+                        args_of_lst=[
+                            edge[TARGET_PORT_LABEL]
+                            for edge in content[EDGES_LABEL]
+                            if edge[TARGET_LABEL] == node_dict["id"]
+                        ]
+                    )
+                )
+                fnc = eval("get_list")
             else:
                 fnc = import_from_string(node_dict["value"])
             if total_counter_dict[node_dict["value"]] > 1:
