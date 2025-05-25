@@ -241,9 +241,7 @@ def load_workflow_json(file_name: str) -> Workflow:
     )
     counter_dict = {k: -1 for k in total_counter_dict.keys()}
     wf = Workflow(file_name.split(".")[0])
-    nodes_look_up_dict = {
-        node["id"]: node["value"] for node in content[NODES_LABEL]
-    }
+    nodes_look_up_dict = {node["id"]: node["value"] for node in content[NODES_LABEL]}
     for node_dict in content[NODES_LABEL]:
         if node_dict["type"] == "function":
             if node_dict["value"] == "python_workflow_definition.shared.get_dict":
@@ -298,10 +296,15 @@ def load_workflow_json(file_name: str) -> Workflow:
             injected_attribute_access = nodes[source_id].__getitem__(source_port)
             upstream = injected_attribute_access
         downstream = nodes[target_id]
-        if nodes_look_up_dict[target_id] == "python_workflow_definition.shared.get_list":
+        if (
+            nodes_look_up_dict[target_id]
+            == "python_workflow_definition.shared.get_list"
+        ):
             setattr(downstream.inputs, "s_" + target_port, upstream)
         else:
-            setattr(downstream.inputs, target_port, upstream)  # Exploit input panel magic
+            setattr(
+                downstream.inputs, target_port, upstream
+            )  # Exploit input panel magic
             # Warning: edge setup routine is bespoke for an environment where all nodes return
             # a single value or a dictionary
 
