@@ -274,7 +274,7 @@ def load_workflow_json(file_name: str) -> Workflow:
                 name = fnc.__name__
             n = function_node(fnc, output_labels=name)  # Strictly force single-output
             nodes[node_dict["id"]] = n
-            wf.add_child(n)
+            wf.add_child(child=n, label=name)
         elif node_dict["type"] == "input":
             input_values[node_dict["id"]] = node_dict["value"]
 
