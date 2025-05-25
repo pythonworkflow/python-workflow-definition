@@ -4,7 +4,7 @@ from importlib import import_module
 from typing import Any
 
 import numpy as np
-from pyiron_workflow import function_node, Workflow
+from pyiron_workflow import as_function_node, function_node, Workflow
 from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
@@ -209,6 +209,15 @@ def import_from_string(library_path: str) -> Any:
     return obj
 
 
+def generate_function(args_of_lst):
+    lines = "def get_dict(" + ", ".join(args_of_lst) + "):\n"
+    lines += "    return {\n"
+    for parameter in args_of_lst:
+        lines += '        "' + parameter + '": ' + parameter + ",\n"
+    lines += "    }"
+    return lines
+
+
 def load_workflow_json(file_name: str) -> Workflow:
     content = remove_result(
         PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
@@ -225,7 +234,19 @@ def load_workflow_json(file_name: str) -> Workflow:
     wf = Workflow(file_name.split(".")[0])
     for node_dict in content[NODES_LABEL]:
         if node_dict["type"] == "function":
-            fnc = import_from_string(node_dict["value"])
+            if node_dict["value"] == "python_workflow_definition.shared.get_dict":
+                exec(
+                    generate_function(
+                        args_of_lst=[
+                            edge[TARGET_PORT_LABEL]
+                            for edge in content[EDGES_LABEL]
+                            if edge[TARGET_LABEL] == node_dict["value"]
+                        ]
+                    )
+                )
+                fnc = eval("get_dict")
+            else:
+                fnc = import_from_string(node_dict["value"])
             if total_counter_dict[node_dict["value"]] > 1:
                 counter_dict[node_dict["value"]] += 1
                 name = fnc.__name__ + "_" + str(counter_dict[node_dict["value"]])
@@ -238,10 +259,10 @@ def load_workflow_json(file_name: str) -> Workflow:
             input_values[node_dict["id"]] = node_dict["value"]
 
     for edge_dict in content[EDGES_LABEL]:
-        target_id = edge_dict["target"]
-        target_port = edge_dict["targetPort"]
-        source_id = edge_dict["source"]
-        source_port = edge_dict["sourcePort"]
+        target_id = edge_dict[TARGET_LABEL]
+        target_port = edge_dict[TARGET_PORT_LABEL]
+        source_id = edge_dict[SOURCE_LABEL]
+        source_port = edge_dict[SOURCE_PORT_LABEL]
 
         if source_port is None:
             if source_id in input_values.keys():  # Parent input value
