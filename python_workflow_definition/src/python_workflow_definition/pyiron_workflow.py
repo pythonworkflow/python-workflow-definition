@@ -28,7 +28,10 @@ def get_linked_nodes(graph_dict):
     node_mapping_dict = {}
     input_dict = {}
     for i, [k, v] in enumerate(graph_dict["nodes"].items()):
-        nodes_dict[i] = v.node_function
+        if "inputs_to_dict_factory" in str(type(v)):
+            nodes_dict[i] = get_dict
+        else:
+            nodes_dict[i] = v.node_function
         node_mapping_dict[k] = i
         input_dict[k] = {
             con.full_label: con.value
@@ -41,9 +44,10 @@ def get_linked_nodes(graph_dict):
 def extend_nodes_dict(nodes_dict, input_dict):
     i = len(nodes_dict)
     nodes_links_dict = {}
+    nodes_values_str_lst = [str(s) for s in nodes_dict.values()]
     for val_dict in input_dict.values():
         for k, v in val_dict.items():
-            if v not in nodes_dict.values():
+            if str(v) not in nodes_values_str_lst:
                 nodes_dict[i] = v
                 nodes_links_dict[k] = i
                 i += 1
@@ -96,8 +100,85 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
         if isfunction(v) and "pyiron_workflow" in v.__module__:
             pyiron_workflow_modules[k] = v
 
-    target_dict = {}
+    cache_mapping_dict, remap_dict = {}, {}
+    for k, v in nodes_dict.items():
+        if not isfunction(v) and str(v) not in cache_mapping_dict:
+            cache_mapping_dict[str(v)] = k
+        elif not isfunction(v):
+            remap_dict[k] = cache_mapping_dict[str(v)]
+
+    item_node_lst = [
+        e[SOURCE_LABEL] for e in edges_lst
+        if e[TARGET_LABEL] in pyiron_workflow_modules.keys() and e[TARGET_PORT_LABEL] == "item"
+    ]
+
+    values_from_dict_lst = [
+        k for k, v in nodes_dict.items()
+        if isfunction(v) and v.__name__ == "get_values_from_dict"
+    ]
+
+    remap_get_list_dict = {}
+    for e in edges_lst:
+        if e[TARGET_LABEL] in values_from_dict_lst:
+            remap_get_list_dict[e[SOURCE_LABEL]] = e[TARGET_LABEL]
+
+    nodes_remaining_dict = {
+        k: v for k, v in nodes_dict.items()
+        if k not in pyiron_workflow_modules.keys() and k not in remap_dict.keys() and k not in item_node_lst and k not in remap_get_list_dict.values()
+    }
+
+    nodes_store_lst = []
+    nodes_final_order_dict = {}
+    for k, [i, v] in enumerate(nodes_remaining_dict.items()):
+        if i in remap_get_list_dict:
+            nodes_store_lst.append(
+                {"id": k, "type": "function", "value": "python_workflow_definition.shared.get_list"}
+            )
+        elif isfunction(v):
+            mod = v.__module__
+            if mod == "python_workflow_definition.pyiron_workflow":
+                mod = "python_workflow_definition.shared"
+            nodes_store_lst.append(
+                {"id": k, "type": "function", "value": mod + "." + v.__name__}
+            )
+        elif isinstance(v, np.ndarray):
+            nodes_store_lst.append({"id": k, "type": "input", "value": v.tolist()})
+        else:
+            nodes_store_lst.append({"id": k, "type": "input", "value": v})
+        nodes_final_order_dict[i] = k
+
+    remap_get_list_remove_edges = [
+        edge for edge in edges_lst
+        if edge[TARGET_LABEL] in remap_get_list_dict.values()
+    ]
+
+    edge_get_list_updated_lst = []
     for edge in edges_lst:
+        if edge[SOURCE_LABEL] in remap_get_list_dict.values():
+            connected_edge = [
+                edge_con for edge_con in remap_get_list_remove_edges
+                if edge_con[TARGET_LABEL] == edge[SOURCE_LABEL]
+            ][-1]
+            edge_updated = {
+                TARGET_LABEL: edge[TARGET_LABEL],
+                TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                SOURCE_LABEL: connected_edge[SOURCE_LABEL],
+                SOURCE_PORT_LABEL: connected_edge[SOURCE_PORT_LABEL],
+            }
+            edge_get_list_updated_lst.append(edge_updated)
+        elif edge[SOURCE_LABEL] in remap_dict.keys():
+            edge_updated = {
+                TARGET_LABEL: edge[TARGET_LABEL],
+                TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                SOURCE_LABEL: remap_dict[edge[SOURCE_LABEL]],
+                SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
+            }
+            edge_get_list_updated_lst.append(edge_updated)
+        elif edge[TARGET_LABEL] not in remap_get_list_dict.values():
+            edge_get_list_updated_lst.append(edge)
+
+    target_dict = {}
+    for edge in edge_get_list_updated_lst:
         for k in pyiron_workflow_modules.keys():
             if k == edge[TARGET_LABEL]:
                 if k not in target_dict:
@@ -105,7 +186,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
                 target_dict[k].append(edge)
 
     source_dict = {}
-    for edge in edges_lst:
+    for edge in edge_get_list_updated_lst:
         for k in pyiron_workflow_modules.keys():
             if k == edge[SOURCE_LABEL]:
                 if k not in source_dict:
@@ -121,67 +202,53 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
                 nodes_to_delete.append(edge[SOURCE_LABEL])
             else:
                 source = edge[SOURCE_LABEL]
-        edge_new_lst.append(
-            {
-                SOURCE_LABEL: source,
-                SOURCE_PORT_LABEL: sourcehandle,
-                TARGET_LABEL: source_dict[k][-1][TARGET_LABEL],
-                TARGET_PORT_LABEL: source_dict[k][-1][TARGET_PORT_LABEL],
-            }
-        )
+        if "s_" == source_dict[k][-1][TARGET_PORT_LABEL][:2]:
+            edge_new_lst.append(
+                {
+                    SOURCE_LABEL: nodes_final_order_dict[source],
+                    SOURCE_PORT_LABEL: sourcehandle,
+                    TARGET_LABEL: nodes_final_order_dict[source_dict[k][-1][TARGET_LABEL]],
+                    TARGET_PORT_LABEL: source_dict[k][-1][TARGET_PORT_LABEL][2:],
+                }
+            )
+        else:
+            edge_new_lst.append(
+                {
+                    SOURCE_LABEL: nodes_final_order_dict[source],
+                    SOURCE_PORT_LABEL: sourcehandle,
+                    TARGET_LABEL: nodes_final_order_dict[source_dict[k][-1][TARGET_LABEL]],
+                    TARGET_PORT_LABEL: source_dict[k][-1][TARGET_PORT_LABEL],
+                }
+            )
 
     nodes_to_skip = nodes_to_delete + list(pyiron_workflow_modules.keys())
-    nodes_new_dict = {k: v for k, v in nodes_dict.items() if k not in nodes_to_skip}
-
-    nodes_store_lst = []
-    for k, v in enumerate(nodes_new_dict.values()):
-        if isfunction(v):
-            mod = v.__module__
-            if mod == "python_workflow_definition.pyiron_workflow":
-                mod = "python_workflow_definition.shared"
-            nodes_store_lst.append(
-                {"id": k, "type": "function", "value": mod + "." + v.__name__}
-            )
-        elif isinstance(v, np.ndarray):
-            nodes_store_lst.append({"id": k, "type": "input", "value": v.tolist()})
-        else:
-            nodes_store_lst.append({"id": k, "type": "input", "value": v})
-
-    for edge in edges_lst:
+    for edge in edge_get_list_updated_lst:
         if (
-            edge[TARGET_LABEL] not in nodes_to_skip
-            and edge[SOURCE_LABEL] not in nodes_to_skip
+                edge[TARGET_LABEL] not in nodes_to_skip
+                and edge[SOURCE_LABEL] not in nodes_to_skip
         ):
-            edge_new_lst.append(edge)
-
-    nodes_updated_dict, mapping_dict = {}, {}
-    i = 0
-    for k, v in nodes_new_dict.items():
-        nodes_updated_dict[i] = v
-        mapping_dict[k] = i
-        i += 1
-
-    edge_updated_lst = []
-    for edge in edge_new_lst:
-        source_node = nodes_new_dict[edge[SOURCE_LABEL]]
-        if isfunction(source_node) and source_node.__name__ == edge[SOURCE_PORT_LABEL]:
-            edge_updated_lst.append(
-                {
-                    SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
+            source_node = nodes_remaining_dict[edge[SOURCE_LABEL]]
+            if isfunction(source_node) and source_node.__name__ == edge[SOURCE_PORT_LABEL]:
+                edge_new_lst.append({
+                    TARGET_LABEL: nodes_final_order_dict[edge[TARGET_LABEL]],
+                    TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                    SOURCE_LABEL: nodes_final_order_dict[edge[SOURCE_LABEL]],
                     SOURCE_PORT_LABEL: None,
-                    TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
+                })
+            elif isfunction(source_node) and source_node.__name__ == "get_dict" and edge[SOURCE_PORT_LABEL] == "dict":
+                edge_new_lst.append({
+                    TARGET_LABEL: nodes_final_order_dict[edge[TARGET_LABEL]],
                     TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
-                }
-            )
-        else:
-            edge_updated_lst.append(
-                {
-                    SOURCE_LABEL: mapping_dict[edge[SOURCE_LABEL]],
+                    SOURCE_LABEL: nodes_final_order_dict[edge[SOURCE_LABEL]],
+                    SOURCE_PORT_LABEL: None,
+                })
+            else:
+                edge_new_lst.append({
+                    TARGET_LABEL: nodes_final_order_dict[edge[TARGET_LABEL]],
+                    TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+                    SOURCE_LABEL: nodes_final_order_dict[edge[SOURCE_LABEL]],
                     SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
-                    TARGET_LABEL: mapping_dict[edge[TARGET_LABEL]],
-                    TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
-                }
-            )
+                })
 
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(
