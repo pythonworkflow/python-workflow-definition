@@ -9,6 +9,7 @@ from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
+    get_dict,
     update_node_names,
     set_result_node,
     remove_result,
