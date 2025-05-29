@@ -1,6 +1,8 @@
 # Python Workflow Definition
 [![Pipeline](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml/badge.svg)](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/HEAD)
+[![DOI](https://zenodo.org/badge/945869529.svg)](https://doi.org/10.5281/zenodo.15516179)
+[![arXiv](https://img.shields.io/badge/arXiv-2505.20366-b31b1b.svg)](https://arxiv.org/abs/2505.20366)
 
 ## Definition
 In the Python Workflow Definition (PWD) each node represents a Python function, with the edges defining the connection 
