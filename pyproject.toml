@@ -14,7 +14,7 @@ authors = [
   { name = "Marnik Bercx", email = "marnik.bercx@psi.ch" },
   { name = "Christina Ertural", email = "christina.ertural@bam.de" },
 ]
-license = { file = "../LICENSE" }
+license = { file = "LICENSE" }
 dependencies = [
     "numpy>=1.21,<2",
     "pydantic>=2.7.0,<=2.11.4",
