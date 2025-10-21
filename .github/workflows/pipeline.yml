@@ -13,7 +13,7 @@ jobs:
     - uses: psf/black@stable
       with:
         options: "--check --diff"
-        src: ./python_workflow_definition/src/python_workflow_definition
+        src: ./src/python_workflow_definition
     - uses: psf/black@stable
       with:
         options: "--check --diff"
@@ -35,7 +35,7 @@ jobs:
     - name: Pip check
       shell: bash -l {0}
       run: |
-        pip install --no-deps --no-build-isolation -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e .
         pip check
 
   nfdi4ing:
@@ -53,7 +53,7 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install --no-deps --no-build-isolation -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e .
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
         sudo apt-get install -y $(cat binder/apt.txt)
@@ -92,7 +92,7 @@ jobs:
       shell: bash -l {0}
       run: |
         pip install --no-deps --no-build-isolation -e example_workflows/quantum_espresso/qe_xml_parser
-        pip install --no-deps --no-build-isolation -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e .
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
     - name: Tests
@@ -122,7 +122,7 @@ jobs:
     - name: Installation and setup
       shell: bash -l {0}
       run: |
-        pip install --no-deps --no-build-isolation -e python_workflow_definition
+        pip install --no-deps --no-build-isolation -e .
         conda install -c conda-forge jupyter papermill
         verdi presto --profile-name pwd
     - name: Tests
