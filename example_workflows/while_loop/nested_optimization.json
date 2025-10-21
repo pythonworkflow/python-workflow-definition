@@ -1,0 +1,180 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {
+      "id": 0,
+      "type": "input",
+      "name": "structure",
+      "value": {
+        "positions": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]],
+        "atom_types": ["H", "H"]
+      }
+    },
+    {
+      "id": 1,
+      "type": "input",
+      "name": "threshold",
+      "value": 0.001
+    },
+    {
+      "id": 2,
+      "type": "input",
+      "name": "initial_energy",
+      "value": 1000.0
+    },
+    {
+      "id": 3,
+      "type": "while",
+      "conditionFunction": "nested_workflow.not_converged",
+      "bodyWorkflow": {
+        "version": "0.1.0",
+        "nodes": [
+          {
+            "id": 100,
+            "type": "input",
+            "name": "structure"
+          },
+          {
+            "id": 101,
+            "type": "input",
+            "name": "energy"
+          },
+          {
+            "id": 102,
+            "type": "function",
+            "value": "nested_workflow.calculate_energy"
+          },
+          {
+            "id": 103,
+            "type": "function",
+            "value": "nested_workflow.calculate_forces"
+          },
+          {
+            "id": 104,
+            "type": "function",
+            "value": "nested_workflow.update_geometry"
+          },
+          {
+            "id": 105,
+            "type": "function",
+            "value": "nested_workflow.check_convergence"
+          },
+          {
+            "id": 106,
+            "type": "output",
+            "name": "threshold"
+          },
+          {
+            "id": 107,
+            "type": "output",
+            "name": "energy_change"
+          },
+          {
+            "id": 108,
+            "type": "output",
+            "name": "structure"
+          },
+          {
+            "id": 109,
+            "type": "output",
+            "name": "energy"
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "sourcePort": null,
+            "target": 102,
+            "targetPort": "structure"
+          },
+          {
+            "source": 102,
+            "sourcePort": null,
+            "target": 103,
+            "targetPort": "energy"
+          },
+          {
+            "source": 100,
+            "sourcePort": null,
+            "target": 103,
+            "targetPort": "structure"
+          },
+          {
+            "source": 103,
+            "sourcePort": null,
+            "target": 104,
+            "targetPort": "forces"
+          },
+          {
+            "source": 100,
+            "sourcePort": null,
+            "target": 104,
+            "targetPort": "structure"
+          },
+          {
+            "source": 104,
+            "sourcePort": null,
+            "target": 105,
+            "targetPort": "new_structure"
+          },
+          {
+            "source": 101,
+            "sourcePort": null,
+            "target": 105,
+            "targetPort": "old_energy"
+          },
+          {
+            "source": 105,
+            "sourcePort": "energy_change",
+            "target": 107,
+            "targetPort": null
+          },
+          {
+            "source": 105,
+            "sourcePort": "structure",
+            "target": 108,
+            "targetPort": null
+          },
+          {
+            "source": 105,
+            "sourcePort": "energy",
+            "target": 109,
+            "targetPort": null
+          }
+        ]
+      },
+      "maxIterations": 100
+    },
+    {
+      "id": 4,
+      "type": "output",
+      "name": "optimized_structure"
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "structure"
+    },
+    {
+      "source": 1,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "threshold"
+    },
+    {
+      "source": 2,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "energy"
+    },
+    {
+      "source": 3,
+      "sourcePort": "structure",
+      "target": 4,
+      "targetPort": null
+    }
+  ]
+}

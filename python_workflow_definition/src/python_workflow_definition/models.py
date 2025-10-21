@@ -1,6 +1,6 @@
 from pathlib import Path
-from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar
-from pydantic import BaseModel, Field, field_validator, field_serializer
+from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar, TYPE_CHECKING
+from pydantic import BaseModel, Field, field_validator, field_serializer, model_validator
 from pydantic import ValidationError
 import json
 import logging
@@ -10,10 +10,14 @@ logger = logging.getLogger(__name__)
 INTERNAL_DEFAULT_HANDLE = "__result__"
 T = TypeVar("T", bound="PythonWorkflowDefinitionWorkflow")
 
+if TYPE_CHECKING:
+    from typing import Self
+
 __all__ = (
     "PythonWorkflowDefinitionInputNode",
     "PythonWorkflowDefinitionOutputNode",
     "PythonWorkflowDefinitionFunctionNode",
+    "PythonWorkflowDefinitionWhileNode",
     "PythonWorkflowDefinitionEdge",
     "PythonWorkflowDefinitionWorkflow",
 )
@@ -64,12 +68,106 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
         return v
 
 
+class PythonWorkflowDefinitionWhileNode(PythonWorkflowDefinitionBaseNode):
+    """
+    Model for while loop control flow nodes.
+
+    Supports two modes of operation:
+    1. Simple mode: conditionFunction + bodyFunction (functions as strings)
+    2. Complex mode: conditionFunction/conditionExpression + bodyWorkflow (nested workflow)
+
+    Exactly one condition method (conditionFunction OR conditionExpression) must be specified.
+    Exactly one body method (bodyFunction OR bodyWorkflow) must be specified.
+    """
+
+    type: Literal["while"]
+
+    # Condition evaluation (exactly one must be set)
+    conditionFunction: Optional[str] = None  # Format: 'module.function' returns bool
+    conditionExpression: Optional[str] = None  # Safe expression like "m < n"
+
+    # Body execution (exactly one must be set)
+    bodyFunction: Optional[str] = None  # Format: 'module.function'
+    bodyWorkflow: Optional["PythonWorkflowDefinitionWorkflow"] = None  # Nested subgraph
+
+    # Safety and configuration
+    maxIterations: int = Field(default=1000, ge=1)
+
+    # Optional: Track specific state variables across iterations
+    stateVars: Optional[List[str]] = None
+
+    @field_validator("conditionFunction")
+    @classmethod
+    def check_condition_function_format(cls, v: Optional[str]) -> Optional[str]:
+        """Validate conditionFunction format if provided."""
+        if v is not None:
+            if not v or "." not in v or v.startswith(".") or v.endswith("."):
+                msg = (
+                    "WhileNode 'conditionFunction' must be a non-empty string "
+                    "in 'module.function' format with at least one period."
+                )
+                raise ValueError(msg)
+        return v
+
+    @field_validator("bodyFunction")
+    @classmethod
+    def check_body_function_format(cls, v: Optional[str]) -> Optional[str]:
+        """Validate bodyFunction format if provided."""
+        if v is not None:
+            if not v or "." not in v or v.startswith(".") or v.endswith("."):
+                msg = (
+                    "WhileNode 'bodyFunction' must be a non-empty string "
+                    "in 'module.function' format with at least one period."
+                )
+                raise ValueError(msg)
+        return v
+
+    @model_validator(mode="after")
+    def check_exactly_one_condition(self) -> "Self":
+        """Ensure exactly one condition method is specified."""
+        condition_count = sum([
+            self.conditionFunction is not None,
+            self.conditionExpression is not None,
+        ])
+        if condition_count == 0:
+            raise ValueError(
+                "WhileNode must specify exactly one condition method: "
+                "either 'conditionFunction' or 'conditionExpression'"
+            )
+        if condition_count > 1:
+            raise ValueError(
+                "WhileNode must specify exactly one condition method, "
+                f"but {condition_count} were provided"
+            )
+        return self
+
+    @model_validator(mode="after")
+    def check_exactly_one_body(self) -> "Self":
+        """Ensure exactly one body method is specified."""
+        body_count = sum([
+            self.bodyFunction is not None,
+            self.bodyWorkflow is not None,
+        ])
+        if body_count == 0:
+            raise ValueError(
+                "WhileNode must specify exactly one body method: "
+                "either 'bodyFunction' or 'bodyWorkflow'"
+            )
+        if body_count > 1:
+            raise ValueError(
+                "WhileNode must specify exactly one body method, "
+                f"but {body_count} were provided"
+            )
+        return self
+
+
 # Discriminated Union for Nodes
 PythonWorkflowDefinitionNode = Annotated[
     Union[
         PythonWorkflowDefinitionInputNode,
         PythonWorkflowDefinitionOutputNode,
         PythonWorkflowDefinitionFunctionNode,
+        PythonWorkflowDefinitionWhileNode,
     ],
     Field(discriminator="type"),
 ]

@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {
+      "id": 0,
+      "type": "input",
+      "name": "n",
+      "value": 10
+    },
+    {
+      "id": 1,
+      "type": "input",
+      "name": "m",
+      "value": 0
+    },
+    {
+      "id": 2,
+      "type": "while",
+      "conditionExpression": "m < n",
+      "bodyFunction": "workflow.increment_m",
+      "maxIterations": 1000,
+      "stateVars": ["n", "m"]
+    },
+    {
+      "id": 3,
+      "type": "output",
+      "name": "result"
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "sourcePort": null,
+      "target": 2,
+      "targetPort": "n"
+    },
+    {
+      "source": 1,
+      "sourcePort": null,
+      "target": 2,
+      "targetPort": "m"
+    },
+    {
+      "source": 2,
+      "sourcePort": "m",
+      "target": 3,
+      "targetPort": null
+    }
+  ]
+}
