@@ -5,5 +5,5 @@ dependencies:
 - matplotlib=3.10.1
 - xmlschema=3.4.3
 - optimade=1.2.3
-- qe=7.2
+- qe=7.4
 - qe-tools=2.0.0
