@@ -28,7 +28,7 @@ jobs:
     - name: Setup Mambaforge
       uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: binder/environment.yml
@@ -46,7 +46,7 @@ jobs:
       run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: binder/environment.yml
@@ -84,7 +84,7 @@ jobs:
         tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: binder/environment.yml
@@ -115,7 +115,7 @@ jobs:
       run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: binder/environment.yml
@@ -143,7 +143,7 @@ jobs:
       run: echo -e "channels:\n  - conda-forge\n" > .condarc
     - uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: documentation/environment.yml
