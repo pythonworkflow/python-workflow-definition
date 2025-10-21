@@ -1,0 +1,83 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {
+      "id": 0,
+      "type": "input",
+      "name": "n",
+      "value": 10
+    },
+    {
+      "id": 1,
+      "type": "input",
+      "name": "current",
+      "value": 0
+    },
+    {
+      "id": 2,
+      "type": "input",
+      "name": "a",
+      "value": 0
+    },
+    {
+      "id": 3,
+      "type": "input",
+      "name": "b",
+      "value": 1
+    },
+    {
+      "id": 4,
+      "type": "input",
+      "name": "results",
+      "value": []
+    },
+    {
+      "id": 5,
+      "type": "function",
+      "value": "workflow.fibonacci_recursive"
+    },
+    {
+      "id": 6,
+      "type": "output",
+      "name": "fibonacci_sequence"
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "sourcePort": null,
+      "target": 5,
+      "targetPort": "n"
+    },
+    {
+      "source": 1,
+      "sourcePort": null,
+      "target": 5,
+      "targetPort": "current"
+    },
+    {
+      "source": 2,
+      "sourcePort": null,
+      "target": 5,
+      "targetPort": "a"
+    },
+    {
+      "source": 3,
+      "sourcePort": null,
+      "target": 5,
+      "targetPort": "b"
+    },
+    {
+      "source": 4,
+      "sourcePort": null,
+      "target": 5,
+      "targetPort": "results"
+    },
+    {
+      "source": 5,
+      "sourcePort": null,
+      "target": 6,
+      "targetPort": null
+    }
+  ]
+}

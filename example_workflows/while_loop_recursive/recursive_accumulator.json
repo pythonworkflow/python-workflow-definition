@@ -1,0 +1,59 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {
+      "id": 0,
+      "type": "input",
+      "name": "n",
+      "value": 5
+    },
+    {
+      "id": 1,
+      "type": "input",
+      "name": "m",
+      "value": 0
+    },
+    {
+      "id": 2,
+      "type": "input",
+      "name": "accumulator",
+      "value": []
+    },
+    {
+      "id": 3,
+      "type": "function",
+      "value": "workflow.while_loop_with_accumulator"
+    },
+    {
+      "id": 4,
+      "type": "output",
+      "name": "final_state"
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "n"
+    },
+    {
+      "source": 1,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "m"
+    },
+    {
+      "source": 2,
+      "sourcePort": null,
+      "target": 3,
+      "targetPort": "accumulator"
+    },
+    {
+      "source": 3,
+      "sourcePort": null,
+      "target": 4,
+      "targetPort": null
+    }
+  ]
+}
