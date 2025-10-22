@@ -24,11 +24,9 @@ from python_workflow_definition.shared import (
 
 
 def load_workflow_json(file_name: str) -> WorkGraph:
-    data = remove_result(
-        workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
-            file_name=file_name
-        )
-    )
+
+    data=PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    # data = remove_result(workflow_dict=workflow_dict)
 
     wg = WorkGraph()
     task_name_mapping = {}
@@ -51,13 +49,17 @@ def load_workflow_json(file_name: str) -> WorkGraph:
 
     # add links
     for link in data[EDGES_LABEL]:
+        # TODO: continue here
         to_task = task_name_mapping[str(link[TARGET_LABEL])]
         # if the input is not exit, it means we pass the data into to the kwargs
         # in this case, we add the input socket
-        if link[TARGET_PORT_LABEL] not in to_task.inputs:
-            to_socket = to_task.add_input("workgraph.any", name=link[TARGET_PORT_LABEL])
-        else:
-            to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
+        try:
+            if link[TARGET_PORT_LABEL] not in to_task.inputs:
+                to_socket = to_task.add_input("workgraph.any", name=link[TARGET_PORT_LABEL])
+            else:
+                to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
+        except:
+            breakpoint()
         from_task = task_name_mapping[str(link[SOURCE_LABEL])]
         if isinstance(from_task, orm.Data):
             to_socket.value = from_task
@@ -73,7 +75,7 @@ def load_workflow_json(file_name: str) -> WorkGraph:
                         "workgraph.any",
                         name=link[SOURCE_PORT_LABEL],
                         # name=str(link["sourcePort"]),
-                        metadata={"is_function_output": True},
+                        # metadata={"is_function_output": True},
                     )
                 else:
                     from_socket = from_task.outputs[link[SOURCE_PORT_LABEL]]
