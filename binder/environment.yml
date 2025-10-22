@@ -4,6 +4,7 @@ dependencies:
 - python =3.12
 - click =8.1.8
 - pydantic =2.12.3
+- hatch =1.14.1
 - hatchling =1.27.0
 - httpcore =1.0.7
 - jobflow =0.2.0
