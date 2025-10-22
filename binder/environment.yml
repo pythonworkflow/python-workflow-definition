@@ -13,5 +13,5 @@ dependencies:
 - aiida-workgraph =0.5.2
 - plumpy =0.25.0
 - conda_subprocess =0.0.7
-- networkx =3.5
+- networkx =3.4.2
 - cwltool =3.1.20250110105449
