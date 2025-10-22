@@ -100,7 +100,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
         node_name_mapping[node.name] = i
 
         executor = node.get_executor()
-        callable_name = executor.callable_name
+        callable_name = f"{executor.module_path}.{executor.callable_name}"
 
         data[NODES_LABEL].append({"id": i, "type": "function", "value": callable_name})
         i += 1
