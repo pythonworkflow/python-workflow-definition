@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "input",
+      "name": "initial_x",
+      "value": 1
+    },
+    {
+      "id": 2,
+      "type": "input",
+      "name": "initial_y",
+      "value": 1
+    },
+    {
+      "id": 3,
+      "type": "function",
+      "value": "mymodule.add"
+    },
+    {
+      "id": 4,
+      "type": "while",
+      "conditionFunction": null,
+      "conditionExpression": "ctx.n < 8",
+      "conditionWorkflow": null,
+      "bodyFunction": null,
+      "bodyWorkflow": {
+        "version": "1.0",
+        "nodes": [
+          {
+            "id": 1,
+            "type": "function",
+            "value": "mymodule.add"
+          },
+          {
+            "id": 2,
+            "type": "function",
+            "value": "mymodule.multiply"
+          }
+        ],
+        "edges": [
+          {
+            "target": 2,
+            "targetPort": "x",
+            "source": 1,
+            "sourcePort": null
+          }
+        ]
+      },
+      "contextVars": [
+        "n"
+      ],
+      "inputPorts": {
+        "n": null
+      },
+      "outputPorts": {
+        "n": "final_n"
+      },
+      "maxIterations": 10,
+      "stateMapping": null
+    },
+    {
+      "id": 5,
+      "type": "function",
+      "value": "mymodule.add"
+    },
+    {
+      "id": 6,
+      "type": "output",
+      "name": "result"
+    }
+  ],
+  "edges": [
+    {
+      "target": 3,
+      "targetPort": "x",
+      "source": 1,
+      "sourcePort": null
+    },
+    {
+      "target": 3,
+      "targetPort": "y",
+      "source": 2,
+      "sourcePort": null
+    },
+    {
+      "target": 4,
+      "targetPort": "n",
+      "source": 3,
+      "sourcePort": null
+    },
+    {
+      "target": 5,
+      "targetPort": "x",
+      "source": 4,
+      "sourcePort": "final_n"
+    },
+    {
+      "target": 6,
+      "targetPort": null,
+      "source": 5,
+      "sourcePort": null
+    }
+  ]
+}

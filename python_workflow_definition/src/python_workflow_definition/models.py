@@ -68,58 +68,152 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
         return v
 
 
+# class PythonWorkflowDefinitionWhileNode(PythonWorkflowDefinitionBaseNode):
+#     """
+#     Model for while loop control flow nodes.
+#
+#     Supports two modes of operation:
+#     1. Simple mode: conditionFunction + bodyFunction (functions as strings)
+#     2. Complex mode: conditionFunction/conditionExpression + bodyWorkflow (nested workflow)
+#
+#     Exactly one condition method (conditionFunction OR conditionExpression) must be specified.
+#     Exactly one body method (bodyFunction OR bodyWorkflow) must be specified.
+#     """
+#
+#     type: Literal["while"]
+#
+#     # Condition evaluation (exactly one must be set)
+#     conditionFunction: Optional[str] = None  # Format: 'module.function' returns bool
+#     conditionExpression: Optional[str] = None  # Safe expression like "m < n"
+#
+#     # Body execution (exactly one must be set)
+#     bodyFunction: Optional[str] = None  # Format: 'module.function'
+#     bodyWorkflow: Optional["PythonWorkflowDefinitionWorkflow"] = None  # Nested subgraph
+#
+#     # Safety and configuration
+#     maxIterations: int = Field(default=1000, ge=1)
+#
+#     # Optional: Track specific state variables across iterations
+#     stateVars: Optional[List[str]] = None
+#
+#     @field_validator("conditionFunction")
+#     @classmethod
+#     def check_condition_function_format(cls, v: Optional[str]) -> Optional[str]:
+#         """Validate conditionFunction format if provided."""
+#         if v is not None:
+#             if not v or "." not in v or v.startswith(".") or v.endswith("."):
+#                 msg = (
+#                     "WhileNode 'conditionFunction' must be a non-empty string "
+#                     "in 'module.function' format with at least one period."
+#                 )
+#                 raise ValueError(msg)
+#         return v
+#
+#     @field_validator("bodyFunction")
+#     @classmethod
+#     def check_body_function_format(cls, v: Optional[str]) -> Optional[str]:
+#         """Validate bodyFunction format if provided."""
+#         if v is not None:
+#             if not v or "." not in v or v.startswith(".") or v.endswith("."):
+#                 msg = (
+#                     "WhileNode 'bodyFunction' must be a non-empty string "
+#                     "in 'module.function' format with at least one period."
+#                 )
+#                 raise ValueError(msg)
+#         return v
+#
+#     @model_validator(mode="after")
+#     def check_exactly_one_condition(self) -> "Self":
+#         """Ensure exactly one condition method is specified."""
+#         condition_count = sum([
+#             self.conditionFunction is not None,
+#             self.conditionExpression is not None,
+#         ])
+#         if condition_count == 0:
+#             raise ValueError(
+#                 "WhileNode must specify exactly one condition method: "
+#                 "either 'conditionFunction' or 'conditionExpression'"
+#             )
+#         if condition_count > 1:
+#             raise ValueError(
+#                 "WhileNode must specify exactly one condition method, "
+#                 f"but {condition_count} were provided"
+#             )
+#         return self
+#
+#     @model_validator(mode="after")
+#     def check_exactly_one_body(self) -> "Self":
+#         """Ensure exactly one body method is specified."""
+#         body_count = sum([
+#             self.bodyFunction is not None,
+#             self.bodyWorkflow is not None,
+#         ])
+#         if body_count == 0:
+#             raise ValueError(
+#                 "WhileNode must specify exactly one body method: "
+#                 "either 'bodyFunction' or 'bodyWorkflow'"
+#             )
+#         if body_count > 1:
+#             raise ValueError(
+#                 "WhileNode must specify exactly one body method, "
+#                 f"but {body_count} were provided"
+#             )
+#         return self
+#
+
+
 class PythonWorkflowDefinitionWhileNode(PythonWorkflowDefinitionBaseNode):
     """
     Model for while loop control flow nodes.
-
-    Supports two modes of operation:
-    1. Simple mode: conditionFunction + bodyFunction (functions as strings)
-    2. Complex mode: conditionFunction/conditionExpression + bodyWorkflow (nested workflow)
-
-    Exactly one condition method (conditionFunction OR conditionExpression) must be specified.
-    Exactly one body method (bodyFunction OR bodyWorkflow) must be specified.
+    
+    Supports multiple execution modes:
+    1. Function-based: conditionFunction + bodyFunction
+    2. Workflow-based: conditionWorkflow + bodyWorkflow (nested subgraphs)
+    3. Expression-based: conditionExpression + bodyFunction/bodyWorkflow
     """
-
+    
     type: Literal["while"]
-
+    
     # Condition evaluation (exactly one must be set)
-    conditionFunction: Optional[str] = None  # Format: 'module.function' returns bool
-    conditionExpression: Optional[str] = None  # Safe expression like "m < n"
-
+    conditionFunction: Optional[str] = None  # 'module.function' returns bool
+    conditionExpression: Optional[str] = None  # Expression like "ctx.n < 8"
+    conditionWorkflow: Optional["PythonWorkflowDefinitionWorkflow"] = None  # Subgraph returning bool
+    
     # Body execution (exactly one must be set)
-    bodyFunction: Optional[str] = None  # Format: 'module.function'
+    bodyFunction: Optional[str] = None  # 'module.function'
     bodyWorkflow: Optional["PythonWorkflowDefinitionWorkflow"] = None  # Nested subgraph
-
+    
+    # Context state management
+    contextVars: Optional[List[str]] = None  # Variables tracked in loop context (e.g., ["n", "sum"])
+    
+    # Input/output port mappings for the while loop
+    inputPorts: Optional[dict[str, Any]] = None  # Initial values for context vars
+    outputPorts: Optional[dict[str, str]] = None  # Map context vars to output ports
+    
     # Safety and configuration
     maxIterations: int = Field(default=1000, ge=1)
-
-    # Optional: Track specific state variables across iterations
-    stateVars: Optional[List[str]] = None
+    
+    # Optional: Specify which context variables to pass between iterations
+    stateMapping: Optional[dict[str, str]] = None  # Map outputs to next iteration inputs
 
     @field_validator("conditionFunction")
     @classmethod
     def check_condition_function_format(cls, v: Optional[str]) -> Optional[str]:
-        """Validate conditionFunction format if provided."""
         if v is not None:
             if not v or "." not in v or v.startswith(".") or v.endswith("."):
-                msg = (
-                    "WhileNode 'conditionFunction' must be a non-empty string "
-                    "in 'module.function' format with at least one period."
+                raise ValueError(
+                    "WhileNode 'conditionFunction' must be in 'module.function' format"
                 )
-                raise ValueError(msg)
         return v
 
     @field_validator("bodyFunction")
     @classmethod
     def check_body_function_format(cls, v: Optional[str]) -> Optional[str]:
-        """Validate bodyFunction format if provided."""
         if v is not None:
             if not v or "." not in v or v.startswith(".") or v.endswith("."):
-                msg = (
-                    "WhileNode 'bodyFunction' must be a non-empty string "
-                    "in 'module.function' format with at least one period."
+                raise ValueError(
+                    "WhileNode 'bodyFunction' must be in 'module.function' format"
                 )
-                raise ValueError(msg)
         return v
 
     @model_validator(mode="after")
@@ -128,15 +222,16 @@ class PythonWorkflowDefinitionWhileNode(PythonWorkflowDefinitionBaseNode):
         condition_count = sum([
             self.conditionFunction is not None,
             self.conditionExpression is not None,
+            self.conditionWorkflow is not None,
         ])
         if condition_count == 0:
             raise ValueError(
                 "WhileNode must specify exactly one condition method: "
-                "either 'conditionFunction' or 'conditionExpression'"
+                "'conditionFunction', 'conditionExpression', or 'conditionWorkflow'"
             )
         if condition_count > 1:
             raise ValueError(
-                "WhileNode must specify exactly one condition method, "
+                f"WhileNode must specify exactly one condition method, "
                 f"but {condition_count} were provided"
             )
         return self
@@ -151,13 +246,31 @@ class PythonWorkflowDefinitionWhileNode(PythonWorkflowDefinitionBaseNode):
         if body_count == 0:
             raise ValueError(
                 "WhileNode must specify exactly one body method: "
-                "either 'bodyFunction' or 'bodyWorkflow'"
+                "'bodyFunction' or 'bodyWorkflow'"
             )
         if body_count > 1:
             raise ValueError(
-                "WhileNode must specify exactly one body method, "
+                f"WhileNode must specify exactly one body method, "
                 f"but {body_count} were provided"
             )
+        return self
+    
+    @model_validator(mode="after")
+    def check_context_vars_consistency(self) -> "Self":
+        """Ensure contextVars aligns with inputPorts/outputPorts if specified."""
+        if self.contextVars:
+            if self.inputPorts:
+                for var in self.contextVars:
+                    if var not in self.inputPorts:
+                        raise ValueError(
+                            f"Context variable '{var}' declared but not in inputPorts"
+                        )
+            if self.outputPorts:
+                for var in self.contextVars:
+                    if var not in self.outputPorts:
+                        raise ValueError(
+                            f"Context variable '{var}' declared but not in outputPorts"
+                        )
         return self
 
 
