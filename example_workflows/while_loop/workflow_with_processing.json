@@ -1,0 +1,106 @@
+{
+	"version": "0.1.0",
+	"nodes": [
+		{
+			"id": 0,
+			"type": "input",
+			"name": "initial_value",
+			"value": 5
+		},
+		{
+			"id": 1,
+			"type": "input",
+			"name": "offset",
+			"value": 3
+		},
+		{
+			"id": 2,
+			"type": "function",
+			"value": "workflow.add_numbers"
+		},
+		{
+			"id": 3,
+			"type": "function",
+			"value": "workflow.multiply_by_two"
+		},
+		{
+			"id": 4,
+			"type": "input",
+			"name": "start_counter",
+			"value": 0
+		},
+		{
+			"id": 5,
+			"type": "while",
+			"conditionExpression": "m < n",
+			"bodyFunction": "workflow.increment_m",
+			"maxIterations": 1000,
+			"stateVars": ["n", "m"]
+		},
+		{
+			"id": 6,
+			"type": "function",
+			"value": "workflow.square_number"
+		},
+		{
+			"id": 7,
+			"type": "function",
+			"value": "workflow.format_result"
+		},
+		{
+			"id": 8,
+			"type": "output",
+			"name": "final_result"
+		}
+	],
+	"edges": [
+		{
+			"source": 0,
+			"sourcePort": null,
+			"target": 2,
+			"targetPort": "x"
+		},
+		{
+			"source": 1,
+			"sourcePort": null,
+			"target": 2,
+			"targetPort": "y"
+		},
+		{
+			"source": 2,
+			"sourcePort": null,
+			"target": 3,
+			"targetPort": "x"
+		},
+		{
+			"source": 3,
+			"sourcePort": null,
+			"target": 5,
+			"targetPort": "n"
+		},
+		{
+			"source": 4,
+			"sourcePort": null,
+			"target": 5,
+			"targetPort": "m"
+		},
+		{
+			"source": 5,
+			"sourcePort": "m",
+			"target": 6,
+			"targetPort": "x"
+		},
+		{
+			"source": 6,
+			"sourcePort": null,
+			"target": 7,
+			"targetPort": "value"
+		},
+		{
+			"source": 7,
+			"sourcePort": null,
+			"target": 8,
+			"targetPort": null
+		}
+	]
+}

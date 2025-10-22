@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "nodes": [
+    {"id": 0, "type": "input", "value": 2, "name": "x"},
+    {"id": 1, "type": "input", "value": 3, "name": "y"},
+    {"id": 2, "type": "function", "value": "workflow.get_prod_and_div"},
+    {"id": 3, "type": "function", "value": "workflow.get_sum"},
+    {"id": 4, "type": "input", "value": 0, "name": "start"},
+
+    {"id": 5, "type": "while",
+     "conditionFunction": "workflow.is_less_than",
+     "bodyFunction": "workflow.increment_m",
+     "maxIterations": 1000
+    },
+
+    {"id": 6, "type": "function", "value": "workflow.get_square"},
+    {"id": 7, "type": "output", "name": "result"}
+  ],
+  "edges": [
+    {"target": 2, "targetPort": "x", "source": 0, "sourcePort": null},
+    {"target": 2, "targetPort": "y", "source": 1, "sourcePort": null},
+    {"target": 3, "targetPort": "x", "source": 2, "sourcePort": "prod"},
+    {"target": 3, "targetPort": "y", "source": 2, "sourcePort": "div"},
+    {"target": 5, "targetPort": "n", "source": 3, "sourcePort": null},
+    {"target": 5, "targetPort": "m", "source": 4, "sourcePort": null},
+    {"target": 6, "targetPort": "x", "source": 5, "sourcePort": "m"},
+    {"target": 7, "targetPort": null, "source": 6, "sourcePort": null}
+  ]
+}

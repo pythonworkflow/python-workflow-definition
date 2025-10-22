@@ -5,6 +5,7 @@ import numpy as np
 from jobflow import job, Flow
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
+from python_workflow_definition.expression_eval import evaluate_condition
 from python_workflow_definition.shared import (
     get_dict,
     get_list,
@@ -23,6 +24,51 @@ from python_workflow_definition.shared import (
     VERSION_NUMBER,
     VERSION_LABEL,
 )
+
+
+def _create_while_loop_job(while_node_data: dict):
+    """Create a recursive job from while node definition."""
+    # Extract while node components
+    condition_func_str = while_node_data.get("conditionFunction")
+    condition_expr = while_node_data.get("conditionExpression")
+    body_func_str = while_node_data.get("bodyFunction")
+    body_workflow = while_node_data.get("bodyWorkflow")
+    max_iterations = while_node_data.get("maxIterations", 1000)
+
+    # Import condition function if needed
+    if condition_func_str:
+        p, m = condition_func_str.rsplit(".", 1)
+        mod = import_module(p)
+        check_condition = getattr(mod, m)
+    else:
+        # Create condition function from expression
+        def check_condition(**kwargs):
+            return evaluate_condition(condition_expr, kwargs)
+
+    # Import body function if using function-based body
+    if body_func_str:
+        p, m = body_func_str.rsplit(".", 1)
+        mod = import_module(p)
+        body_func = getattr(mod, m)
+
+        # Create recursive job function
+        @job
+        def while_loop_job(**kwargs):
+            iteration = kwargs.pop("_iteration", 0)
+            if iteration >= max_iterations:
+                return kwargs
+            if not check_condition(**kwargs):
+                return kwargs
+            result = body_func(**kwargs)
+            if not isinstance(result, dict):
+                raise ValueError(f"While loop body must return dict, got {type(result)}")
+            result["_iteration"] = iteration + 1
+            return while_loop_job(**result)
+
+        return while_loop_job
+    else:
+        # TODO: Handle nested workflow body
+        raise NotImplementedError("Nested workflow bodies not yet supported in Jobflow backend")
 
 
 def _get_function_dict(flow: Flow):
@@ -295,13 +341,24 @@ def load_workflow_json(file_name: str) -> Flow:
             )
 
     nodes_new_dict = {}
-    for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
-        if isinstance(v, str) and "." in v:
+    for node in content[NODES_LABEL]:
+        k = str(node["id"])
+        node_type = node["type"]
+
+        if node_type == "function":
+            v = node["value"]
             p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
-        else:
-            nodes_new_dict[int(k)] = v
+        elif node_type == "while":
+            # Create while loop job
+            while_job = _create_while_loop_job(node)
+            nodes_new_dict[int(k)] = while_job
+        elif node_type == "input":
+            nodes_new_dict[int(k)] = node["value"]
+        elif node_type == "output":
+            # output nodes are handled via edges
+            pass
 
     source_handles_dict = get_source_handles(edges_lst=edges_new_lst)
     total_dict = _group_edges(edges_lst=edges_new_lst)

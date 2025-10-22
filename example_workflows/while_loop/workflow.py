@@ -1,10 +1,29 @@
 """
 Example workflow functions for while loop demonstration.
 
-This module contains simple functions used in while loop examples:
-1. Simple counter increment
+This module contains:
+1. Simple counter increment functions for while loops
 2. Convergence checking for iterative algorithms
+3. Arithmetic functions for testing workflows
 """
+
+
+def double(x):
+    """Double a number."""
+    return x * 2
+
+
+def get_square(x):
+    """Square a number or extract 'm' from dict and square it."""
+    return x ** 2
+
+
+def get_prod_and_div(x, y):
+    return {"prod": x * y, "div": x / y}
+
+
+def get_sum(x, y):
+    return x + y
 
 
 def is_less_than(n, m):
@@ -36,6 +55,20 @@ def increment_m(n, m):
         dict: Updated state with incremented m
     """
     return {"n": n, "m": m + 1}
+
+
+def increment_simple(n, m):
+    """
+    Simple increment that returns just m (for single-output workflows).
+
+    Args:
+        n: Upper bound (unchanged)
+        m: Current value
+
+    Returns:
+        int: Incremented m value
+    """
+    return m + 1
 
 
 def not_converged(threshold, current_error):
@@ -76,3 +109,20 @@ def iterative_step(threshold, current_error, data):
         "current_error": new_error,
         "data": new_data,
     }
+
+
+# Pre-processing and post-processing functions for realistic workflows
+
+
+def add_numbers(x, y):
+    """
+    Add two numbers together.
+
+    Args:
+        x: First number
+        y: Second number
+
+    Returns:
+        int/float: Sum of x and y
+    """
+    return x + y
