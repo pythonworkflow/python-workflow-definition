@@ -3,8 +3,7 @@ channels:
 dependencies:
 - python =3.12
 - click =8.1.8
-- pydantic =2.11.4
-- hatch =1.14.1
+- pydantic =2.12.3
 - hatchling =1.27.0
 - httpcore =1.0.7
 - jobflow =0.2.0
@@ -13,5 +12,5 @@ dependencies:
 - pygraphviz =1.14
 - aiida-workgraph =0.5.2
 - conda_subprocess =0.0.7
-- networkx =3.4.2
+- networkx =3.5
 - cwltool =3.1.20250110105449
