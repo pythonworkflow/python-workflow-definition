@@ -1,0 +1,1592 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyiron_workflow &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/quantum_espresso/pyiron_workflow';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfdi/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/quantum_espresso/pyiron_workflow.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/example_workflows/quantum_espresso/pyiron_workflow.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>pyiron_workflow</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-workflow">Define workflow with pyiron_workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pyiron-workflow">
+<h1>pyiron_workflow<a class="headerlink" href="#pyiron-workflow" title="Link to this heading">#</a></h1>
+<section id="define-workflow-with-pyiron-workflow">
+<h2>Define workflow with pyiron_workflow<a class="headerlink" href="#define-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">isfunction</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">to_function_node</span><span class="p">,</span> <span class="n">as_function_node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">inputs_to_dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_qe</span> <span class="k">as</span> <span class="n">_calculate_qe</span><span class="p">,</span> 
+    <span class="n">generate_structures</span> <span class="k">as</span> <span class="n">_generate_structures</span><span class="p">,</span> 
+    <span class="n">get_bulk_structure</span> <span class="k">as</span> <span class="n">_get_bulk_structure</span><span class="p">,</span> 
+    <span class="n">plot_energy_volume_curve</span> <span class="k">as</span> <span class="n">_plot_energy_volume_curve</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@as_function_node</span><span class="p">(</span><span class="s2">&quot;output_dict&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_values_from_dict</span><span class="p">(</span><span class="n">input_dict</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_workflow_qe.json&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;calculate_qe&quot;</span><span class="p">,</span> <span class="n">_calculate_qe</span><span class="p">,</span> <span class="s2">&quot;calculate_qe&quot;</span><span class="p">)</span>
+<span class="n">generate_structures</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;generate_structures&quot;</span><span class="p">,</span> <span class="n">_generate_structures</span><span class="p">,</span> <span class="s2">&quot;generate_structures&quot;</span><span class="p">)</span>
+<span class="n">get_bulk_structure</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;get_bulk_structure&quot;</span><span class="p">,</span> <span class="n">_get_bulk_structure</span><span class="p">,</span> <span class="s2">&quot;get_bulk_structure&quot;</span><span class="p">)</span>
+<span class="n">plot_energy_volume_curve</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;plot_energy_volume_curve&quot;</span><span class="p">,</span> <span class="n">_plot_energy_volume_curve</span><span class="p">,</span> <span class="s2">&quot;plot_energy_volume_curve&quot;</span><span class="p">,</span> <span class="n">validate_output_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">&quot;my_workflow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">pseudopotentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Al&quot;</span><span class="p">:</span> <span class="s2">&quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="s2">&quot;Al&quot;</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">4.04</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">cubic</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">get_bulk_structure</span><span class="p">(</span>
+    <span class="n">element</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">element</span><span class="p">,</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+    <span class="n">cubic</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">cubic</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">working_directory_0</span> <span class="o">=</span> <span class="s2">&quot;mini&quot;</span>
+<span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">wf</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> 
+    <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">:</span> <span class="n">wf</span><span class="o">.</span><span class="n">pseudopotentials</span><span class="p">,</span> 
+    <span class="s2">&quot;kpts&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> 
+    <span class="s2">&quot;calculation&quot;</span><span class="p">:</span> <span class="s2">&quot;vc-relax&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;smearing&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">input_dict_0</span> <span class="o">=</span> <span class="n">inputs_to_dict</span><span class="p">(</span>
+    <span class="n">input_specification</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">input_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="o">**</span><span class="n">input_dict</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">calc_mini</span> <span class="o">=</span> <span class="n">calculate_qe</span><span class="p">(</span>
+    <span class="n">working_directory</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">working_directory_0</span><span class="p">,</span>
+    <span class="n">input_dict</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">input_dict_0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_strains</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">strain_lst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">number_of_strains</span><span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">structure_lst</span> <span class="o">=</span> <span class="n">generate_structures</span><span class="p">(</span>  <span class="c1"># the generate_structures() function is not available in the workflow graph</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">calc_mini</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">],</span>
+    <span class="n">strain_lst</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">strain_lst</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job_strain_lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_strains</span><span class="p">):</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="s2">&quot;input_dict_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">inputs_to_dict</span><span class="p">(</span>
+        <span class="n">input_specification</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">,</span> <span class="s2">&quot;kpts&quot;</span><span class="p">,</span> <span class="s2">&quot;calculation&quot;</span><span class="p">,</span> <span class="s2">&quot;smearing&quot;</span><span class="p">],</span>
+        <span class="n">structure</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">structure_lst</span><span class="p">[</span><span class="s2">&quot;s_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span>
+        <span class="n">pseudopotentials</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">pseudopotentials</span><span class="p">,</span>
+        <span class="n">kpts</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="n">calculation</span><span class="o">=</span><span class="s2">&quot;scf&quot;</span><span class="p">,</span>
+        <span class="n">smearing</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+    <span class="p">))</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="s2">&quot;calc_strain_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">calculate_qe</span><span class="p">(</span>
+        <span class="n">working_directory</span><span class="o">=</span><span class="s2">&quot;strain_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+        <span class="n">input_dict</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="s2">&quot;input_dict_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
+    <span class="p">))</span>
+    <span class="n">job_strain_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">wf</span><span class="p">,</span> <span class="s2">&quot;calc_strain_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">volume_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">job_strain_lst</span><span class="p">)}</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">volume_dict</span> <span class="o">=</span> <span class="n">inputs_to_dict</span><span class="p">(</span>
+    <span class="n">input_specification</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">volume_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="o">**</span><span class="n">volume_dict</span>
+<span class="p">)</span>
+<span class="n">energy_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">job_strain_lst</span><span class="p">)}</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">energy_dict</span> <span class="o">=</span> <span class="n">inputs_to_dict</span><span class="p">(</span>
+    <span class="n">input_specification</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">energy_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="o">**</span><span class="n">energy_dict</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">volume_lst</span> <span class="o">=</span> <span class="n">get_values_from_dict</span><span class="p">(</span>
+    <span class="n">input_dict</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">volume_dict</span>
+<span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">energy_lst</span> <span class="o">=</span> <span class="n">get_values_from_dict</span><span class="p">(</span>
+    <span class="n">input_dict</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">energy_dict</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot_energy_volume_curve</span><span class="p">(</span><span class="n">volume_lst</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">volume_lst</span><span class="p">,</span> <span class="n">energy_lst</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">energy_lst</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3601f1e7b83f34c799cf6d96b9136f2d94fa110c23a3f807087dd336c0d571c9.svg" src="../../_images/3601f1e7b83f34c799cf6d96b9136f2d94fa110c23a3f807087dd336c0d571c9.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">graph_as_dict</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">graph_as_dict</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="o">{</span>workflow_json_filename<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.get_bulk_structure&quot;
+    },
+    {
+      &quot;id&quot;: 1,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 2,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 3,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.generate_structures&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 5,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 9,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 10,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 11,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 12,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+    },
+    {
+      &quot;id&quot;: 13,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+    },
+    {
+      &quot;id&quot;: 14,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 15,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+    },
+    {
+      &quot;id&quot;: 16,
+      &quot;type&quot;: &quot;function&quot;,
+      &quot;value&quot;: &quot;workflow.plot_energy_volume_curve&quot;
+    },
+    {
+      &quot;id&quot;: 17,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;element&quot;,
+      &quot;value&quot;: &quot;Al&quot;
+    },
+    {
+      &quot;id&quot;: 18,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;a&quot;,
+      &quot;value&quot;: 4.04
+    },
+    {
+      &quot;id&quot;: 19,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;cubic&quot;,
+      &quot;value&quot;: true
+    },
+    {
+      &quot;id&quot;: 20,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;pseudopotentials&quot;,
+      &quot;value&quot;: {
+        &quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;
+      }
+    },
+    {
+      &quot;id&quot;: 21,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;kpts&quot;,
+      &quot;value&quot;: [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      &quot;id&quot;: 22,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_0&quot;,
+      &quot;value&quot;: &quot;vc-relax&quot;
+    },
+    {
+      &quot;id&quot;: 23,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;smearing&quot;,
+      &quot;value&quot;: 0.02
+    },
+    {
+      &quot;id&quot;: 24,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_0&quot;,
+      &quot;value&quot;: &quot;mini&quot;
+    },
+    {
+      &quot;id&quot;: 25,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;strain_lst&quot;,
+      &quot;value&quot;: [
+        0.9,
+        0.9500000000000001,
+        1.0,
+        1.05,
+        1.1
+      ]
+    },
+    {
+      &quot;id&quot;: 26,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;calculation_1&quot;,
+      &quot;value&quot;: &quot;scf&quot;
+    },
+    {
+      &quot;id&quot;: 27,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_1&quot;,
+      &quot;value&quot;: &quot;strain_0&quot;
+    },
+    {
+      &quot;id&quot;: 28,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_2&quot;,
+      &quot;value&quot;: &quot;strain_1&quot;
+    },
+    {
+      &quot;id&quot;: 29,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_3&quot;,
+      &quot;value&quot;: &quot;strain_2&quot;
+    },
+    {
+      &quot;id&quot;: 30,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_4&quot;,
+      &quot;value&quot;: &quot;strain_3&quot;
+    },
+    {
+      &quot;id&quot;: 31,
+      &quot;type&quot;: &quot;input&quot;,
+      &quot;name&quot;: &quot;working_directory_5&quot;,
+      &quot;value&quot;: &quot;strain_4&quot;
+    },
+    {
+      &quot;id&quot;: 32,
+      &quot;type&quot;: &quot;output&quot;,
+      &quot;name&quot;: &quot;result&quot;
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 2,
+      &quot;sourcePort&quot;: &quot;structure&quot;
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;s_4&quot;
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;s_3&quot;
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;s_2&quot;
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;s_1&quot;
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 3,
+      &quot;sourcePort&quot;: &quot;s_0&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;0&quot;,
+      &quot;source&quot;: 5,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;1&quot;,
+      &quot;source&quot;: 7,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 9,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;2&quot;,
+      &quot;source&quot;: 9,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 11,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;3&quot;,
+      &quot;source&quot;: 11,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 15,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 13,
+      &quot;sourcePort&quot;: &quot;energy&quot;
+    },
+    {
+      &quot;target&quot;: 14,
+      &quot;targetPort&quot;: &quot;4&quot;,
+      &quot;source&quot;: 13,
+      &quot;sourcePort&quot;: &quot;volume&quot;
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;structure&quot;,
+      &quot;source&quot;: 0,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 1,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 4,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 6,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 8,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 10,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;input_dict&quot;,
+      &quot;source&quot;: 12,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;volume_lst&quot;,
+      &quot;source&quot;: 14,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 16,
+      &quot;targetPort&quot;: &quot;energy_lst&quot;,
+      &quot;source&quot;: 15,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;element&quot;,
+      &quot;source&quot;: 17,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;a&quot;,
+      &quot;source&quot;: 18,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 0,
+      &quot;targetPort&quot;: &quot;cubic&quot;,
+      &quot;source&quot;: 19,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 22,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 1,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 2,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 24,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 3,
+      &quot;targetPort&quot;: &quot;strain_lst&quot;,
+      &quot;source&quot;: 25,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 4,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 5,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 27,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 6,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 7,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 28,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 8,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 9,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 29,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 10,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 11,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 30,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
+      &quot;source&quot;: 20,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;kpts&quot;,
+      &quot;source&quot;: 21,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;calculation&quot;,
+      &quot;source&quot;: 26,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 12,
+      &quot;targetPort&quot;: &quot;smearing&quot;,
+      &quot;source&quot;: 23,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 13,
+      &quot;targetPort&quot;: &quot;working_directory&quot;,
+      &quot;source&quot;: 31,
+      &quot;sourcePort&quot;: null
+    },
+    {
+      &quot;target&quot;: 32,
+      &quot;targetPort&quot;: null,
+      &quot;source&quot;: 16,
+      &quot;sourcePort&quot;: null
+    }
+  ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-workflow-with-aiida">
+<h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
+
+<span class="n">load_profile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;10fd2c58703f4c7697d0aa96b3624683&#39; name=&#39;pwd&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">get_bulk_structure1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mf">4.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/26/2025 05:57:55 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
+05/26/2025 05:57:56 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
+05/26/2025 05:57:56 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict2
+05/26/2025 05:57:56 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict2, type: PyFunction, finished.
+05/26/2025 05:57:56 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe3
+[jupyter-pythonworkflow-fl--x---35e2fba5:00217] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:58:48 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/26/2025 05:58:48 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe3, type: PyFunction, finished.
+05/26/2025 05:58:48 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures4
+05/26/2025 05:58:49 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: generate_structures4, type: PyFunction, finished.
+05/26/2025 05:58:49 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict5,get_dict7,get_dict9,get_dict11,get_dict13
+05/26/2025 05:58:49 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict5, type: PyFunction, finished.
+05/26/2025 05:58:50 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict7,get_dict9,get_dict11,get_dict13
+[jupyter-pythonworkflow-fl--x---35e2fba5:00262] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:59:03 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:59:04 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
+05/26/2025 05:59:04 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict7,get_dict9,get_dict11,get_dict13
+05/26/2025 05:59:04 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict7, type: PyFunction, finished.
+05/26/2025 05:59:05 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8,get_dict9,get_dict11,get_dict13
+[jupyter-pythonworkflow-fl--x---35e2fba5:00273] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:59:16 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:59:16 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
+05/26/2025 05:59:16 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict9,get_dict11,get_dict13
+05/26/2025 05:59:17 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict9, type: PyFunction, finished.
+05/26/2025 05:59:17 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe10,get_dict11,get_dict13
+[jupyter-pythonworkflow-fl--x---35e2fba5:00285] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:59:28 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:59:29 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe10, type: PyFunction, finished.
+05/26/2025 05:59:29 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict13
+05/26/2025 05:59:29 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
+05/26/2025 05:59:29 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe12,get_dict13
+[jupyter-pythonworkflow-fl--x---35e2fba5:00296] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:59:43 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:59:43 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe12, type: PyFunction, finished.
+05/26/2025 05:59:43 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13
+05/26/2025 05:59:44 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
+05/26/2025 05:59:44 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe14
+[jupyter-pythonworkflow-fl--x---35e2fba5:00307] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+05/26/2025 05:59:58 AM &lt;86&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:59:59 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: calculate_qe14, type: PyFunction, finished.
+05/26/2025 05:59:59 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list15,get_list16
+05/26/2025 05:59:59 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_list15, type: PyFunction, finished.
+05/26/2025 05:59:59 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16
+05/26/2025 06:00:00 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
+05/26/2025 06:00:00 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve17
+05/26/2025 06:00:01 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve17, type: PyFunction, finished.
+05/26/2025 06:00:01 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/26/2025 06:00:01 AM &lt;86&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [17|WorkGraphEngine|finalize]: Finalize workgraph.
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+<section id="load-workflow-with-jobflow">
+<h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">function_kwargs</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">run_locally</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:00:02,662 INFO Started executing jobs locally
+2025-05-26 06:00:02,768 INFO Starting job - get_bulk_structure (2521ebff-2219-4e59-9425-4f3ab2851e2a)
+2025-05-26 06:00:02,771 INFO Finished job - get_bulk_structure (2521ebff-2219-4e59-9425-4f3ab2851e2a)
+2025-05-26 06:00:02,772 INFO Starting job - get_dict (16a60b49-6205-418e-a640-7a128111d10c)
+2025-05-26 06:00:02,776 INFO Finished job - get_dict (16a60b49-6205-418e-a640-7a128111d10c)
+2025-05-26 06:00:02,777 INFO Starting job - calculate_qe (ac278a4f-b187-498e-a234-4060e13f5b06)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00319] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:00:53,435 INFO Finished job - calculate_qe (ac278a4f-b187-498e-a234-4060e13f5b06)
+2025-05-26 06:00:53,436 INFO Starting job - generate_structures (40215563-bfe0-47dc-a31b-124b15688007)
+2025-05-26 06:00:53,440 INFO Finished job - generate_structures (40215563-bfe0-47dc-a31b-124b15688007)
+2025-05-26 06:00:53,440 INFO Starting job - get_dict (65b32304-10b3-4711-9f55-2dcc5c405641)
+2025-05-26 06:00:53,442 INFO Finished job - get_dict (65b32304-10b3-4711-9f55-2dcc5c405641)
+2025-05-26 06:00:53,442 INFO Starting job - get_dict (77f8e7d0-2281-42cc-b39e-d7acc34f5458)
+2025-05-26 06:00:53,444 INFO Finished job - get_dict (77f8e7d0-2281-42cc-b39e-d7acc34f5458)
+2025-05-26 06:00:53,445 INFO Starting job - get_dict (65655d5b-ccf4-44bd-8c8d-6e833b329ede)
+2025-05-26 06:00:53,446 INFO Finished job - get_dict (65655d5b-ccf4-44bd-8c8d-6e833b329ede)
+2025-05-26 06:00:53,447 INFO Starting job - get_dict (bc4172ef-be1c-4ad0-86c0-156181da184a)
+2025-05-26 06:00:53,448 INFO Finished job - get_dict (bc4172ef-be1c-4ad0-86c0-156181da184a)
+2025-05-26 06:00:53,449 INFO Starting job - get_dict (46148184-d180-4a07-95f7-31bd43ada4b2)
+2025-05-26 06:00:53,451 INFO Finished job - get_dict (46148184-d180-4a07-95f7-31bd43ada4b2)
+2025-05-26 06:00:53,452 INFO Starting job - calculate_qe (1bae14bc-f3b4-4be4-a504-7c100cf1b54c)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---35e2fba5:00344] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:03,461 INFO Finished job - calculate_qe (1bae14bc-f3b4-4be4-a504-7c100cf1b54c)
+2025-05-26 06:01:03,462 INFO Starting job - calculate_qe (8c6e7e3c-4acc-4434-b140-ce8c97100240)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---35e2fba5:00355] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:16,096 INFO Finished job - calculate_qe (8c6e7e3c-4acc-4434-b140-ce8c97100240)
+2025-05-26 06:01:16,097 INFO Starting job - calculate_qe (45156baf-8ffa-4c3f-8da4-6b9121e77306)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---35e2fba5:00366] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:28,481 INFO Finished job - calculate_qe (45156baf-8ffa-4c3f-8da4-6b9121e77306)
+2025-05-26 06:01:28,482 INFO Starting job - calculate_qe (7662120d-f6da-415a-9da8-5fbcadf166aa)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---35e2fba5:00378] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:41,772 INFO Finished job - calculate_qe (7662120d-f6da-415a-9da8-5fbcadf166aa)
+2025-05-26 06:01:41,773 INFO Starting job - calculate_qe (9d38753b-3c9d-40f9-aa27-eceec701734b)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00389] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:54,979 INFO Finished job - calculate_qe (9d38753b-3c9d-40f9-aa27-eceec701734b)
+2025-05-26 06:01:54,980 INFO Starting job - get_list (cd676100-1e89-4293-a77f-7ca752f228cd)
+2025-05-26 06:01:54,983 INFO Finished job - get_list (cd676100-1e89-4293-a77f-7ca752f228cd)
+2025-05-26 06:01:54,984 INFO Starting job - get_list (44aeb1e8-6af4-4b97-8345-fc78009db91c)
+2025-05-26 06:01:54,987 INFO Finished job - get_list (44aeb1e8-6af4-4b97-8345-fc78009db91c)
+2025-05-26 06:01:54,987 INFO Starting job - plot_energy_volume_curve (09bec337-1bd0-434d-a322-14b6485445bf)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-26 06:01:55,044 INFO Finished job - plot_energy_volume_curve (09bec337-1bd0-434d-a322-14b6485445bf)
+2025-05-26 06:01:55,045 INFO Finished executing jobs locally
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;2521ebff-2219-4e59-9425-4f3ab2851e2a&#39;: {1: Response(output=&#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;16a60b49-6205-418e-a640-7a128111d10c&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.05, 0.0, 0.0], [0.0, 4.05, 0.0], [0.0, 0.0, 4.05]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.025, 2.025], [2.025, 0.0, 2.025], [2.025, 2.025, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;vc-relax&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;ac278a4f-b187-498e-a234-4060e13f5b06&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946772, 0.0, 0.0], [0.0, 4.045637215946772, 0.0], [0.0, 0.0, 4.045637215946772]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973386, 2.0228186079733863], [2.022818607973386, 0.0, 2.0228186079733863], [2.022818607973386, 2.022818607973386, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9365262253611, &#39;volume&#39;: 66.2156744823591}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;40215563-bfe0-47dc-a31b-124b15688007&#39;: {1: Response(output={&#39;s_0&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859620818, 0.0, 0.0], [0.0, 3.9060197859620818, 0.0], [0.0, 0.0, 3.9060197859620818]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098929810409, 1.9530098929810413], [1.9530098929810409, 0.0, 1.9530098929810413], [1.9530098929810409, 1.9530098929810409, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_1&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.977053844317981, 0.0, 0.0], [0.0, 3.977053844317981, 0.0], [0.0, 0.0, 3.977053844317981]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269221589905, 1.988526922158991], [1.9885269221589905, 0.0, 1.988526922158991], [1.9885269221589905, 1.9885269221589905, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_2&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946772, 0.0, 0.0], [0.0, 4.045637215946772, 0.0], [0.0, 0.0, 4.045637215946772]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973386, 2.0228186079733863], [2.022818607973386, 0.0, 2.0228186079733863], [2.022818607973386, 2.022818607973386, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_3&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.1119709272828855, 0.0, 0.0], [0.0, 4.1119709272828855, 0.0], [0.0, 0.0, 4.1119709272828855]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854636414427, 2.055985463641443], [2.0559854636414427, 0.0, 2.055985463641443], [2.0559854636414427, 2.0559854636414427, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;s_4&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372109, 0.0, 0.0], [0.0, 4.176230852372109, 0.0], [0.0, 0.0, 4.176230852372109]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.088115426186054, 2.0881154261860546], [2.088115426186054, 0.0, 2.0881154261860546], [2.088115426186054, 2.088115426186054, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;65b32304-10b3-4711-9f55-2dcc5c405641&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.9060197859620818, 0.0, 0.0], [0.0, 3.9060197859620818, 0.0], [0.0, 0.0, 3.9060197859620818]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098929810409, 1.9530098929810413], [1.9530098929810409, 0.0, 1.9530098929810413], [1.9530098929810409, 1.9530098929810409, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;77f8e7d0-2281-42cc-b39e-d7acc34f5458&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.977053844317981, 0.0, 0.0], [0.0, 3.977053844317981, 0.0], [0.0, 0.0, 3.977053844317981]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269221589905, 1.988526922158991], [1.9885269221589905, 0.0, 1.988526922158991], [1.9885269221589905, 1.9885269221589905, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;65655d5b-ccf4-44bd-8c8d-6e833b329ede&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637215946772, 0.0, 0.0], [0.0, 4.045637215946772, 0.0], [0.0, 0.0, 4.045637215946772]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.022818607973386, 2.0228186079733863], [2.022818607973386, 0.0, 2.0228186079733863], [2.022818607973386, 2.022818607973386, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;bc4172ef-be1c-4ad0-86c0-156181da184a&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.1119709272828855, 0.0, 0.0], [0.0, 4.1119709272828855, 0.0], [0.0, 0.0, 4.1119709272828855]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854636414427, 2.055985463641443], [2.0559854636414427, 0.0, 2.055985463641443], [2.0559854636414427, 2.0559854636414427, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;46148184-d180-4a07-95f7-31bd43ada4b2&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.176230852372109, 0.0, 0.0], [0.0, 4.176230852372109, 0.0], [0.0, 0.0, 4.176230852372109]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.088115426186054, 2.0881154261860546], [2.088115426186054, 0.0, 2.0881154261860546], [2.088115426186054, 2.088115426186054, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;pseudopotentials&#39;: {&#39;Al&#39;: &#39;Al.pbe-n-kjpaw_psl.1.0.0.UPF&#39;}, &#39;kpts&#39;: [3, 3, 3], &#39;calculation&#39;: &#39;scf&#39;, &#39;smearing&#39;: 0.02}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;1bae14bc-f3b4-4be4-a504-7c100cf1b54c&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.906019768889115, 0.0, 0.0], [0.0, 3.906019768889115, 0.0], [0.0, 0.0, 3.906019768889115]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9530098844635175, 1.9530098844635175], [1.9530098844635175, 0.0, 1.9530098844635175], [1.9530098844635175, 1.9530098844635175, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.8457446150628, &#39;volume&#39;: 59.59410625267695}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;8c6e7e3c-4acc-4434-b140-ce8c97100240&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[3.97705382693453, 0.0, 0.0], [0.0, 3.97705382693453, 0.0], [0.0, 0.0, 3.97705382693453]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 1.9885269135082746, 1.9885269135082746], [1.9885269135082746, 0.0, 1.9885269135082746], [1.9885269135082746, 1.9885269135082746, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.9161488594593, &#39;volume&#39;: 62.90488993338123}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;45156baf-8ffa-4c3f-8da4-6b9121e77306&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.045637198263546, 0.0, 0.0], [0.0, 4.045637198263546, 0.0], [0.0, 0.0, 4.045637198263546]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0228185991583882, 2.0228185991583882], [2.0228185991583882, 0.0, 2.0228185991583882], [2.0228185991583882, 2.0228185991583882, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.936524166837, &#39;volume&#39;: 66.21567361408542}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;7662120d-f6da-415a-9da8-5fbcadf166aa&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.111970909309726, 0.0, 0.0], [0.0, 4.111970909309726, 0.0], [0.0, 0.0, 4.111970909309726]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.0559854546134178, 2.0559854546134178], [2.0559854546134178, 0.0, 2.0559854546134178], [2.0559854546134178, 2.0559854546134178, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.919286002583, &#39;volume&#39;: 69.52645729479006}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;9d38753b-3c9d-40f9-aa27-eceec701734b&#39;: {1: Response(output={&#39;structure&#39;: &#39;{&quot;immutable_id&quot;: null, &quot;last_modified&quot;: null, &quot;elements&quot;: [&quot;Al&quot;], &quot;nelements&quot;: 1, &quot;elements_ratios&quot;: [1.0], &quot;chemical_formula_descriptive&quot;: &quot;Al4&quot;, &quot;chemical_formula_reduced&quot;: &quot;Al&quot;, &quot;chemical_formula_hill&quot;: null, &quot;chemical_formula_anonymous&quot;: &quot;A&quot;, &quot;dimension_types&quot;: [1, 1, 1], &quot;nperiodic_dimensions&quot;: 3, &quot;lattice_vectors&quot;: [[4.17623083411807, 0.0, 0.0], [0.0, 4.17623083411807, 0.0], [0.0, 0.0, 4.17623083411807]], &quot;space_group_symmetry_operations_xyz&quot;: null, &quot;space_group_symbol_hall&quot;: null, &quot;space_group_symbol_hermann_mauguin&quot;: null, &quot;space_group_symbol_hermann_mauguin_extended&quot;: null, &quot;space_group_it_number&quot;: null, &quot;cartesian_site_positions&quot;: [[0.0, 0.0, 0.0], [0.0, 2.08811541707298, 2.08811541707298], [2.08811541707298, 0.0, 2.08811541707298], [2.08811541707298, 2.08811541707298, 0.0]], &quot;nsites&quot;: 4, &quot;species&quot;: [{&quot;name&quot;: &quot;Al&quot;, &quot;chemical_symbols&quot;: [&quot;Al&quot;], &quot;concentration&quot;: [1.0], &quot;mass&quot;: null, &quot;original_name&quot;: null, &quot;attached&quot;: null, &quot;nattached&quot;: null}], &quot;species_at_sites&quot;: [&quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;, &quot;Al&quot;], &quot;assemblies&quot;: null, &quot;structure_features&quot;: []}&#39;, &#39;energy&#39;: -1074.8737904693417, &#39;volume&#39;: 72.83724097549414}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;cd676100-1e89-4293-a77f-7ca752f228cd&#39;: {1: Response(output=[59.59410625267695, 62.90488993338123, 66.21567361408542, 69.52645729479006, 72.83724097549414], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;44aeb1e8-6af4-4b97-8345-fc78009db91c&#39;: {1: Response(output=[-1074.8457446150628, -1074.9161488594593, -1074.936524166837, -1074.919286002583, -1074.8737904693417], detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))},
+ &#39;09bec337-1bd0-434d-a322-14b6485445bf&#39;: {1: Response(output=None, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/quantum_espresso&#39;))}}
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+<section id="load-workflow-with-pyiron-base">
+<h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bd1fa7a44a99e0832ce4d2e75114f5fb0e7041bf007832cd252b2ec622d08d0b.svg" src="../../_images/bd1fa7a44a99e0832ce4d2e75114f5fb0e7041bf007832cd252b2ec622d08d0b.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_bulk_structure_2ca4aeae204ceaa28593c93054b07908 was saved and received the ID: 1
+The job get_dict_1e47509b88d63a21fd421686554c8f4a was saved and received the ID: 2
+The job calculate_qe_411e578f2700d09ba2df9a4c682b4582 was saved and received the ID: 3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00404] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_4d77d481fc8ea55229ec1ece04d63682 was saved and received the ID: 4
+The job get_dict_83639a473c5a24b39cda4262a11ce660 was saved and received the ID: 5
+The job calculate_qe_bc7507e47b3777418bec8bd6a10e8db9 was saved and received the ID: 6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00423] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_8911ea3b715c48fd9e6ebfd933827ad8 was saved and received the ID: 7
+The job calculate_qe_3bf1743787b6db34eb1482e0cb2b49f2 was saved and received the ID: 8
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00435] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_b30dd89506e55e06e63a020a5033af19 was saved and received the ID: 9
+The job calculate_qe_7fdc96db9da025b4936748f5616be588 was saved and received the ID: 10
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00446] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_899289e3717fb81edaca9c5c2b5d8f48 was saved and received the ID: 11
+The job calculate_qe_9bb68591280fb0b90a58521fd3c6bc9d was saved and received the ID: 12
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00457] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_12373ab37ecdba93cf91b2a4c3c016d6 was saved and received the ID: 13
+The job calculate_qe_c41612cee84a2bc87674f7f0720f27af was saved and received the ID: 14
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---35e2fba5:00468] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_4a53d87f56ee9d519ca6c738ae2cef3f was saved and received the ID: 15
+The job get_list_5a5af7c495c3bd034f3904760535ba3e was saved and received the ID: 16
+The job plot_energy_volume_curve_aea478ca6598efbe0596a61e39e1154d was saved and received the ID: 17
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./example_workflows/quantum_espresso"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-workflow">Define workflow with pyiron_workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

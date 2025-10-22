@@ -378,6 +378,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
             </nav>
@@ -590,6 +591,37 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </div>
 </div>
 </section>
+<section id="load-workflow-with-pyiron-workflow">
+<h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -665,6 +697,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
   </nav></div>

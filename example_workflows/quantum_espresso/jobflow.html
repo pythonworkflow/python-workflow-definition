@@ -377,6 +377,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 </ul>
             </nav>
         </div>
@@ -1122,7 +1123,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;1682a1dbda304ec998030372ef5350ab&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -1155,7 +1156,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "39e130485f144a8abbf5c63c4812a3e3"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "e9bb01de73ff4284a7578d7064ae369f"}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1164,60 +1165,60 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/24/2025 05:55:37 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
-05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
-05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10
-05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
-05/24/2025 05:55:38 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
-[jupyter-pythonworkflow-fl--x---d7231032:10078] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_bulk_structure1
+05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_bulk_structure1, type: PyFunction, finished.
+05/26/2025 04:59:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict10
+05/26/2025 04:59:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict10, type: PyFunction, finished.
+05/26/2025 04:59:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
+[jupyter-pythonworkflow-fl--x---218119f8:02569] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:56:29 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
-05/24/2025 05:56:29 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
-05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
-05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
-05/24/2025 05:56:30 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict12,get_dict13,get_dict14,get_dict15
-05/24/2025 05:56:31 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
-05/24/2025 05:56:31 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
-[jupyter-pythonworkflow-fl--x---d7231032:10097] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/26/2025 04:59:56 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
+05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict11,get_dict12,get_dict13,get_dict14,get_dict15
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict11, type: PyFunction, finished.
+05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02586] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
-05/24/2025 05:56:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
-05/24/2025 05:56:43 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
-05/24/2025 05:56:43 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
-[jupyter-pythonworkflow-fl--x---d7231032:10108] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
+05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
+05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02596] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:56:54 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
-05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
-05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
-05/24/2025 05:56:55 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
-[jupyter-pythonworkflow-fl--x---d7231032:10120] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
+05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
+05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02606] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:57:07 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
-05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
-05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
-05/24/2025 05:57:08 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
-[jupyter-pythonworkflow-fl--x---d7231032:10131] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
+05/26/2025 05:00:36 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
+[jupyter-pythonworkflow-fl--x---218119f8:02616] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
-05/24/2025 05:57:22 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
-05/24/2025 05:57:23 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
-05/24/2025 05:57:23 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
-[jupyter-pythonworkflow-fl--x---d7231032:10146] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+05/26/2025 05:00:50 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
+05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
+[jupyter-pythonworkflow-fl--x---218119f8:02626] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
-05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
-05/24/2025 05:57:40 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
-05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
-05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
-05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
-05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve9
-05/24/2025 05:57:41 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve9, type: PyFunction, finished.
-05/24/2025 05:57:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-05/24/2025 05:57:42 AM &lt;10006&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [155|WorkGraphEngine|finalize]: Finalize workgraph.
+05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
+05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
+05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list17
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_list17, type: PyFunction, finished.
+05/26/2025 05:01:07 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_energy_volume_curve9
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: plot_energy_volume_curve9, type: PyFunction, finished.
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+05/26/2025 05:01:08 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|finalize]: Finalize workgraph.
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
@@ -1242,7 +1243,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/84430642696c7e2ac5c3b159c83bf15e6283a08aafb500c198241c6132fb729d.svg" src="../../_images/84430642696c7e2ac5c3b159c83bf15e6283a08aafb500c198241c6132fb729d.svg" />
+<img alt="../../_images/c4a7b7438914bc4d8a2af98fd80cb1fe1108c75ae2410c1e308e2918b1de01d0.svg" src="../../_images/c4a7b7438914bc4d8a2af98fd80cb1fe1108c75ae2410c1e308e2918b1de01d0.svg" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1264,54 +1265,115 @@ The job get_dict_1e47509b88d63a21fd421686554c8f4a was saved and received the ID:
 The job calculate_qe_411e578f2700d09ba2df9a4c682b4582 was saved and received the ID: 3
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10178] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02656] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_758c1e24a8384d1f25f5126debddf480 was saved and received the ID: 4
-The job get_dict_db80165b1c83d6fa1ef1eef8d8b3188b was saved and received the ID: 5
-The job calculate_qe_c74608e7e5992312ade6c5737ad4d4f1 was saved and received the ID: 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_structures_550221ce8aa27fbdf50dbf13e059ce24 was saved and received the ID: 4
+The job get_dict_68a4c6ff00bffbd8f249d6022ec8abb2 was saved and received the ID: 5
+The job calculate_qe_8e11594357cf470d576634593684ae66 was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10193] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02670] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_97c2cc17b8b86f75ac4b6341cd45956c was saved and received the ID: 7
-The job calculate_qe_3c59fd7824f74b10476745bf9830882f was saved and received the ID: 8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_64aacd2badb7b0a126a5662dabd1ce0c was saved and received the ID: 7
+The job calculate_qe_95276d45f24b5e6e645aab15a3b853df was saved and received the ID: 8
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10204] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02680] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_8c518d80d423ba91c334fe6a5d9543bd was saved and received the ID: 9
-The job calculate_qe_38624f0e23e56cbc7b388ef79234a0cf was saved and received the ID: 10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_7079cab3db71ad163cfc2e39fcf98688 was saved and received the ID: 9
+The job calculate_qe_3c1dbc8b42e651e328ae99033a426980 was saved and received the ID: 10
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10215] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02690] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_85562edba169c3c58d84415c89cc95ec was saved and received the ID: 11
-The job calculate_qe_78709c5d9efddf18fe3df6c5e14d06ed was saved and received the ID: 12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_0e89a9ec0ef1fd918240aa8d2dc44178 was saved and received the ID: 11
+The job calculate_qe_2550d6d1ccd7ab3d68c384d3887a3fe3 was saved and received the ID: 12
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10226] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02700] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_c540734353f48fac14af5c29bd88abc9 was saved and received the ID: 13
-The job calculate_qe_1e912623736f139236a98ac679574bb4 was saved and received the ID: 14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_dict_2ac7f25535cfa6c6850c0f9af197b541 was saved and received the ID: 13
+The job calculate_qe_10d82eb36a247279f62c63b70e1a55d2 was saved and received the ID: 14
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---d7231032:10242] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02710] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_eacb691fa58e50c0936b26623a5e36f9 was saved and received the ID: 15
-The job get_list_069bfd570461c3607a17813d3ecb126c was saved and received the ID: 16
-The job plot_energy_volume_curve_99f8fb836badb998aff830b255f6b0eb was saved and received the ID: 17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_list_e21c87f95f3795055e7214eec6d7c927 was saved and received the ID: 15
+The job get_list_61df540ee8a34a06782249cbe8834865 was saved and received the ID: 16
+The job plot_energy_volume_curve_bbe171c30a8de804ba8d4227e65e62bf was saved and received the ID: 17
+</pre></div>
+</div>
+<img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
+</div>
+</div>
+</section>
+<section id="load-workflow-with-pyiron-workflow">
+<h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">get_bulk_structure</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">4.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a1745bc5b97604c9bc0ee74c2c5f923c1221b809d84fcb202681237924200325.svg" src="../../_images/a1745bc5b97604c9bc0ee74c2c5f923c1221b809d84fcb202681237924200325.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[jupyter-pythonworkflow-fl--x---218119f8:02722] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02738] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02748] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02758] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02768] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+[jupyter-pythonworkflow-fl--x---218119f8:02778] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;plot_energy_volume_curve__plot_energy_volume_curve&#39;: None}
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />
@@ -1388,6 +1450,7 @@ The job plot_energy_volume_curve_99f8fb836badb998aff830b255f6b0eb was saved and 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-espresso-workflow">Quantum Espresso Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 </ul>
   </nav></div>
 
