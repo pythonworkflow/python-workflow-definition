@@ -1,0 +1,40 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Janssen
+  given-names: Jan
+  orcid: "https://orcid.org/0000-0001-9948-7119"
+- family-names: George
+  given-names: Janine
+  orcid: "https://orcid.org/0000-0001-8907-0336"
+- family-names: Geiger
+  given-names: Julian
+  orcid: "https://orcid.org/0000-0003-0023-1960"
+- family-names: Bercx
+  given-names: Marnik
+  orcid: "https://orcid.org/0000-0001-8470-1012"
+- family-names: Wang
+  given-names: Xing
+- family-names: Ertural
+  given-names: Christina
+  orcid: "https://orcid.org/0000-0002-7696-5824"
+- family-names: Schaarschmidt
+  given-names: Joerg
+  orcid: "https://orcid.org/0000-0002-4389-2366"
+- family-names: Ganose
+  given-names: Alex
+  orcid: "https://orcid.org/0000-0002-4486-3321"
+- family-names: Pizzi
+  given-names: Giovanni
+  orcid: "https://orcid.org/0000-0002-3583-4377"
+- family-names: Hickel
+  given-names: Tilmann
+  orcid: "https://orcid.org/0000-0003-0698-4891"
+- family-names: Neugebauer
+  given-names: Joerg
+  orcid: "https://orcid.org/0000-0002-7903-2472"
+title: "A Python workflow definition for computational materials design"
+version: 0.1.1
+doi: 10.5281/zenodo.15516180
+date-released: 2025-05-26
+license: bsd-3-clause
+url: "https://github.com/pythonworkflow/python-workflow-definition"

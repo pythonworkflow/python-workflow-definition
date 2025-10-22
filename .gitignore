@@ -178,7 +178,7 @@ cython_debug/
 input_tmp.in
 pyiron.log
 pyiron_draw.png
-python_workflow_definition/src/python_workflow_definition/__pycache__/
+src/python_workflow_definition/__pycache__/
 test/
 mini/
 evcurve.png
