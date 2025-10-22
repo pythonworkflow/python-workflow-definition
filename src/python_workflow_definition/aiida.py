@@ -90,12 +90,18 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
     node_name_mapping = {}
     data_node_name_mapping = {}
     i = 0
+    GRAPH_LEVEL_NAMES = ['graph_inputs', 'graph_outputs', 'graph_ctx']
+
     for node in wg.tasks:
-        executor = node.get_executor()
+
+        if node.name in GRAPH_LEVEL_NAMES:
+            continue
+
         node_name_mapping[node.name] = i
 
-        callable_name = executor["callable_name"]
-        callable_name = f"{executor['module_path']}.{callable_name}"
+        executor = node.get_executor()
+        callable_name = executor.callable_name
+
         data[NODES_LABEL].append({"id": i, "type": "function", "value": callable_name})
         i += 1
 
@@ -109,6 +115,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
         link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
         link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
         data[EDGES_LABEL].append(link_data)
+
 
     for node in wg.tasks:
         for input in node.inputs:
@@ -141,6 +148,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         SOURCE_PORT_LABEL: None,
                     }
                 )
+
     data[VERSION_LABEL] = VERSION_NUMBER
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(workflow_dict=update_node_names(workflow_dict=data))
