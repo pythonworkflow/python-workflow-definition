@@ -9,7 +9,7 @@ dependencies:
 - httpcore =1.0.7
 - jobflow =0.2.0
 - pyiron_base =0.15.5
-- pyiron_workflow =0.13.0
+- pyiron_workflow =0.15.4
 - pygraphviz =1.14
 - aiida-workgraph =0.5.2
 - conda_subprocess =0.0.7
