@@ -98,7 +98,7 @@ def get_dict(**kwargs) -> dict:
 
 
 def get_list(**kwargs) -> list:
-    return list(kwargs["kwargs"].values())
+    return list(kwargs["kwargs"])
 
 
 def _remove_server_obj(nodes_dict: dict, edges_lst: list):
