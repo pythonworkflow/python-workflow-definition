@@ -292,7 +292,6 @@ def _get_workflow(
                 for kw, vw in total_dict[k].items()
             }
             memory_dict[k] = fn(**kwargs)
-    print(memory_dict)
 
     return list(memory_dict.values())
 
