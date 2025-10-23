@@ -5,7 +5,8 @@ on:
     branches: [ main ]
 
 jobs:
-  documentation:
+  # Run all the test jobs first
+  arithmetic:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -16,8 +17,141 @@ jobs:
         python-version: "3.12"
         miniforge-version: latest
         condarc-file: .condarc
+        environment-file: binder/environment.yml
+    - name: Installation and setup
+      shell: bash -l {0}
+      run: |
+        pip install --no-deps --no-build-isolation -e .
+        conda install -c conda-forge jupyter papermill
+        verdi presto --profile-name pwd
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        cd example_workflows/arithmetic
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: arithmetic-notebooks
+        path: example_workflows/arithmetic/*_out.ipynb
+        retention-days: 1
+
+  quantumespresso:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup environment
+      shell: bash -l {0}
+      run: |
+        echo -e "channels:\n  - conda-forge\n" > .condarc
+        tail --lines=+4 example_workflows/quantum_espresso/environment.yml >> binder/environment.yml
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: binder/environment.yml
+    - name: Installation and setup
+      shell: bash -l {0}
+      run: |
+        pip install --no-deps --no-build-isolation -e example_workflows/quantum_espresso/qe_xml_parser
+        pip install --no-deps --no-build-isolation -e .
+        conda install -c conda-forge jupyter papermill
+        verdi presto --profile-name pwd
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        cp -r example_workflows/quantum_espresso/espresso .
+        cd example_workflows/quantum_espresso
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: quantumespresso-notebooks
+        path: example_workflows/quantum_espresso/*_out.ipynb
+        retention-days: 1
+
+  nfdi4ing:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: binder/environment.yml
+    - name: Installation and setup
+      shell: bash -l {0}
+      run: |
+        pip install --no-deps --no-build-isolation -e .
+        conda install -c conda-forge jupyter papermill
+        verdi presto --profile-name pwd
+        sudo apt-get install -y $(cat binder/apt.txt)
+    - name: Create Additional Conda Environments
+      shell: bash -l {0}
+      run: |
+        conda env create -n preprocessing -f example_workflows/nfdi/source/envs/preprocessing.yaml -y
+        conda env create -n processing -f example_workflows/nfdi/source/envs/processing.yaml -y
+        conda env create -n postprocessing -f example_workflows/nfdi/source/envs/postprocessing.yaml -y
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        cd example_workflows/nfdi/
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+        papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
+        papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
+        papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
+        papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: nfdi-notebooks
+        path: example_workflows/nfdi/*_out.ipynb
+        retention-days: 1
+
+  documentation:
+    runs-on: ubuntu-latest
+    needs: [arithmetic, quantumespresso, nfdi4ing]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
         environment-file: documentation/environment.yml
-    - name: Install Jupyterbook
+    - name: Download executed notebooks
+      uses: actions/download-artifact@v4
+      with:
+        path: executed-notebooks
+    - name: Copy executed notebooks to their locations
+      run: |
+        # Copy arithmetic notebooks
+        cp executed-notebooks/arithmetic-notebooks/*.ipynb example_workflows/arithmetic/
+        
+        # Copy quantum espresso notebooks
+        cp executed-notebooks/quantumespresso-notebooks/*.ipynb example_workflows/quantum_espresso/
+        
+        # Copy nfdi notebooks
+        cp executed-notebooks/nfdi-notebooks/*.ipynb example_workflows/nfdi/
+    - name: Build Jupyterbook
       shell: bash -l {0}
       run: |
         cp documentation/_config.yml .
@@ -30,6 +164,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: public_html # The folder the action should deploy.
+        BRANCH: gh-pages
+        FOLDER: public_html
         CLEAN: true

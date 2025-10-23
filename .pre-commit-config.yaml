@@ -1,0 +1,9 @@
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+        name: nbstripout - Strip outputs from notebooks
+        args:
+          - --extra-keys
+          - "metadata.kernelspec metadata.language_info"
