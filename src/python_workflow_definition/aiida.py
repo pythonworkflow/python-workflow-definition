@@ -26,7 +26,7 @@ from python_workflow_definition.shared import (
 
 def load_workflow_json(file_name: str) -> WorkGraph:
 
-    data=PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
     # data = remove_result(workflow_dict=workflow_dict)
 
     wg = WorkGraph()
@@ -41,9 +41,7 @@ def load_workflow_json(file_name: str) -> WorkGraph:
             func = getattr(mod, m)
             decorated_func = task(outputs=namespace())(func)
             new_task = wg.add_task(decorated_func)
-            new_task.spec = replace(
-                new_task.spec, schema_source=SchemaSource.EMBEDDED
-            )
+            new_task.spec = replace(new_task.spec, schema_source=SchemaSource.EMBEDDED)
             task_name_mapping[id] = new_task
         else:
             # data task
@@ -58,7 +56,9 @@ def load_workflow_json(file_name: str) -> WorkGraph:
         # in this case, we add the input socket
         if isinstance(to_task, Task):
             if link[TARGET_PORT_LABEL] not in to_task.inputs:
-                to_socket = to_task.add_input_spec("workgraph.any", name=link[TARGET_PORT_LABEL])
+                to_socket = to_task.add_input_spec(
+                    "workgraph.any", name=link[TARGET_PORT_LABEL]
+                )
             else:
                 to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
         from_task = task_name_mapping[str(link[SOURCE_LABEL])]
@@ -70,7 +70,7 @@ def load_workflow_json(file_name: str) -> WorkGraph:
                     link[SOURCE_PORT_LABEL] = "result"
                 # if link[SOURCE_PORT_LABEL] == 'result':
                 #     pass
-                    # link[SOURCE_PORT_LABEL] = "__result__"
+                # link[SOURCE_PORT_LABEL] = "__result__"
                 # because we are not define the outputs explicitly during the pythonjob creation
                 # we add it here, and assume the output exit
                 if link[SOURCE_PORT_LABEL] not in from_task.outputs:
@@ -94,7 +94,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
     node_name_mapping = {}
     data_node_name_mapping = {}
     i = 0
-    GRAPH_LEVEL_NAMES = ['graph_inputs', 'graph_outputs', 'graph_ctx']
+    GRAPH_LEVEL_NAMES = ["graph_inputs", "graph_outputs", "graph_ctx"]
 
     for node in wg.tasks:
 
@@ -119,7 +119,6 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
         link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
         link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
         data[EDGES_LABEL].append(link_data)
-
 
     for node in wg.tasks:
         for input in node.inputs:
