@@ -1,5 +1,7 @@
 from importlib import import_module
 import traceback
+from pathlib import Path
+from typing import Any
 
 from aiida import orm
 from aiida_pythonjob.data.serializer import general_serializer
@@ -22,6 +24,169 @@ from python_workflow_definition.shared import (
     VERSION_LABEL,
 )
 
+
+def load_workflow_json_nested(file_name: str) -> WorkGraph:
+    """Load a workflow from JSON with support for nested workflows.
+
+    This function recursively loads workflows, properly exposing inputs/outputs
+    of nested workflows so they can be connected in the parent workflow.
+    """
+    data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
+    parent_dir = Path(file_name).parent
+
+    # Check if this workflow has workflow-type nodes (nested workflows)
+    has_nested = any(n["type"] == "workflow" for n in data[NODES_LABEL])
+
+    # Extract input/output nodes for this workflow
+    input_nodes = [n for n in data[NODES_LABEL] if n["type"] == "input"]
+    output_nodes = [n for n in data[NODES_LABEL] if n["type"] == "output"]
+
+    # Create WorkGraph with proper inputs/outputs if this will be used as a sub-workflow
+    if has_nested or input_nodes or output_nodes:
+        # Build namespace for inputs
+        inputs_ns = {}
+        for inp_node in input_nodes:
+            inputs_ns[inp_node["name"]] = namespace
+
+        # Build namespace for outputs
+        outputs_ns = {}
+        for out_node in output_nodes:
+            outputs_ns[out_node["name"]] = namespace
+
+        wg = WorkGraph(
+            inputs=namespace(**inputs_ns) if inputs_ns else None,
+            outputs=namespace(**outputs_ns) if outputs_ns else None
+        )
+    else:
+        wg = WorkGraph()
+
+    task_name_mapping = {}
+    input_node_mapping = {}  # Map input node IDs to their names
+
+    # Process nodes
+    for node in data[NODES_LABEL]:
+        node_id = str(node["id"])
+        node_type = node["type"]
+
+        if node_type == "function":
+            # Handle function nodes
+            func_path = node["value"]
+            p, m = func_path.rsplit(".", 1)
+            mod = import_module(p)
+            func = getattr(mod, m)
+            decorated_func = task(outputs=namespace())(func)
+            new_task = wg.add_task(decorated_func)
+            new_task.spec = replace(new_task.spec, schema_source=SchemaSource.EMBEDDED)
+            task_name_mapping[node_id] = new_task
+
+        elif node_type == "workflow":
+            # Handle nested workflow nodes
+            workflow_file = node["value"]
+            # Resolve path relative to parent workflow file
+            workflow_path = parent_dir / workflow_file
+
+            # Recursively load the sub-workflow with proper input/output exposure
+            sub_wg = load_workflow_json_nested(file_name=str(workflow_path))
+
+            # Add the sub-workflow as a task - it will automatically have the right inputs/outputs
+            workflow_task = wg.add_task(sub_wg)
+            task_name_mapping[node_id] = workflow_task
+
+        elif node_type == "input":
+            # Store input node info for later connection to wg.inputs
+            input_node_mapping[node_id] = node["name"]
+            # Also create a data node for direct value setting if needed
+            if "value" in node and node["value"] is not None:
+                value = node["value"]
+                data_node = general_serializer(value)
+                task_name_mapping[node_id] = data_node
+
+        elif node_type == "output":
+            # Output nodes will be handled when setting wg.outputs
+            pass
+
+    # Add links
+    for link in data[EDGES_LABEL]:
+        source_id = str(link[SOURCE_LABEL])
+        target_id = str(link[TARGET_LABEL])
+        source_port = link[SOURCE_PORT_LABEL]
+        target_port = link[TARGET_PORT_LABEL]
+
+        # Handle output node connections
+        target_node = next((n for n in data[NODES_LABEL] if str(n["id"]) == target_id), None)
+        if target_node and target_node["type"] == "output":
+            # This connects a task output to a workflow output
+            from_task = task_name_mapping.get(source_id)
+            if from_task and isinstance(from_task, Task):
+                if source_port is None:
+                    source_port = "result"
+                if source_port not in from_task.outputs:
+                    from_socket = from_task.add_output_spec("workgraph.any", name=source_port)
+                else:
+                    from_socket = from_task.outputs[source_port]
+
+                # Set the workflow output
+                output_name = target_node["name"]
+                if hasattr(wg.outputs, output_name):
+                    setattr(wg.outputs, output_name, from_socket)
+            continue
+
+        # Handle input node connections
+        source_node = next((n for n in data[NODES_LABEL] if str(n["id"]) == source_id), None)
+        if source_node and source_node["type"] == "input":
+            to_task = task_name_mapping.get(target_id)
+            if to_task and isinstance(to_task, Task):
+                # Add target socket if it doesn't exist
+                if target_port not in to_task.inputs:
+                    to_socket = to_task.add_input_spec("workgraph.any", name=target_port)
+                else:
+                    to_socket = to_task.inputs[target_port]
+
+                # Connect from workflow input or from data node
+                if hasattr(wg.inputs, source_node["name"]):
+                    # Connect from workflow input
+                    from_socket = getattr(wg.inputs, source_node["name"])
+                    wg.add_link(from_socket, to_socket)
+                elif source_id in task_name_mapping:
+                    # Connect from data node (has a value)
+                    data_node = task_name_mapping[source_id]
+                    if isinstance(data_node, orm.Data):
+                        to_socket.value = data_node
+            continue
+
+        # Handle regular task-to-task connections
+        to_task = task_name_mapping.get(target_id)
+        from_task = task_name_mapping.get(source_id)
+
+        if to_task is None or from_task is None:
+            continue
+
+        if isinstance(to_task, Task):
+            # Add target socket if needed
+            if target_port not in to_task.inputs:
+                to_socket = to_task.add_input_spec("workgraph.any", name=target_port)
+            else:
+                to_socket = to_task.inputs[target_port]
+
+            if isinstance(from_task, orm.Data):
+                to_socket.value = from_task
+            elif isinstance(from_task, Task):
+                try:
+                    if source_port is None:
+                        source_port = "result"
+
+                    # Add source socket if needed
+                    if source_port not in from_task.outputs:
+                        from_socket = from_task.add_output_spec("workgraph.any", name=source_port)
+                    else:
+                        from_socket = from_task.outputs[source_port]
+
+                    wg.add_link(from_socket, to_socket)
+                except Exception as e:
+                    traceback.print_exc()
+                    print("Failed to link", link, "with error:", e)
+
+    return wg
 
 def load_workflow_json(file_name: str) -> WorkGraph:
 
