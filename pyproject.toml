@@ -17,7 +17,7 @@ authors = [
 license = { file = "LICENSE" }
 dependencies = [
     "numpy>=1.21,<2",
-    "pydantic>=2.7.0,<=2.11.4",
+    "pydantic>=2.7.0,<=2.12.3",
 ]
 
 [project.optional-dependencies]
@@ -32,6 +32,6 @@ pyiron = [
 ]
 plot = [
     "pygraphviz>=1.10,<=1.14",
-    "networkx>=2.8.8,<=3.4.2",
+    "networkx>=2.8.8,<=3.5",
     "ipython>=7.33.0,<=9.0.2",
 ]
