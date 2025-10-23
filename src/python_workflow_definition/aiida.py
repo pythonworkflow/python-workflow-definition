@@ -11,7 +11,6 @@ from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
     update_node_names,
-    remove_result,
     set_result_node,
     NODES_LABEL,
     EDGES_LABEL,
@@ -27,7 +26,6 @@ from python_workflow_definition.shared import (
 def load_workflow_json(file_name: str) -> WorkGraph:
 
     data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
-    # data = remove_result(workflow_dict=workflow_dict)
 
     wg = WorkGraph()
     task_name_mapping = {}
@@ -68,9 +66,6 @@ def load_workflow_json(file_name: str) -> WorkGraph:
             try:
                 if link[SOURCE_PORT_LABEL] is None:
                     link[SOURCE_PORT_LABEL] = "result"
-                # if link[SOURCE_PORT_LABEL] == 'result':
-                #     pass
-                # link[SOURCE_PORT_LABEL] = "__result__"
                 # because we are not define the outputs explicitly during the pythonjob creation
                 # we add it here, and assume the output exit
                 if link[SOURCE_PORT_LABEL] not in from_task.outputs:
