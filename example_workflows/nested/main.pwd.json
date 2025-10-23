@@ -1,0 +1,14 @@
+{
+  "version": "0.1.1",
+  "nodes": [
+    { "id": 0, "type": "workflow", "value": "prod_div.json" },
+    { "id": 1, "value": 1, "type": "input", "name": "a" },
+    { "id": 2, "value": 2, "type": "input", "name": "b" },
+    { "id": 3, "type": "output", "name": "final_result" }
+  ],
+  "edges": [
+    { "target": 0, "targetPort": "x", "source": 1, "sourcePort": null },
+    { "target": 0, "targetPort": "y", "source": 2, "sourcePort": null },
+    { "target": 3, "targetPort": "null", "source": 0, "sourcePort": "result" }
+  ]
+}
