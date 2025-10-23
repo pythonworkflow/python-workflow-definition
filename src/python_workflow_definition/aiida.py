@@ -53,13 +53,10 @@ def load_workflow_json(file_name: str) -> WorkGraph:
         to_task = task_name_mapping[str(link[TARGET_LABEL])]
         # if the input is not exit, it means we pass the data into to the kwargs
         # in this case, we add the input socket
-        try:
-            if link[TARGET_PORT_LABEL] not in to_task.inputs:
-                to_socket = to_task.add_input("workgraph.any", name=link[TARGET_PORT_LABEL])
-            else:
-                to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
-        except:
-            breakpoint()
+        if link[TARGET_PORT_LABEL] not in to_task.inputs:
+            to_socket = to_task.add_input_spec("workgraph.any", name=link[TARGET_PORT_LABEL])
+        else:
+            to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
         from_task = task_name_mapping[str(link[SOURCE_LABEL])]
         if isinstance(from_task, orm.Data):
             to_socket.value = from_task
@@ -67,20 +64,25 @@ def load_workflow_json(file_name: str) -> WorkGraph:
             try:
                 if link[SOURCE_PORT_LABEL] is None:
                     link[SOURCE_PORT_LABEL] = "result"
+                # if link[SOURCE_PORT_LABEL] == 'result':
+                #     pass
+                    # link[SOURCE_PORT_LABEL] = "__result__"
                 # because we are not define the outputs explicitly during the pythonjob creation
                 # we add it here, and assume the output exit
-                if link[SOURCE_PORT_LABEL] not in from_task.outputs:
-                    # if str(link["sourcePort"]) not in from_task.outputs:
-                    from_socket = from_task.add_output(
-                        "workgraph.any",
-                        name=link[SOURCE_PORT_LABEL],
-                        # name=str(link["sourcePort"]),
-                        # metadata={"is_function_output": True},
-                    )
-                else:
-                    from_socket = from_task.outputs[link[SOURCE_PORT_LABEL]]
+                try:
+                    if link[SOURCE_PORT_LABEL] not in from_task.outputs:
+                        # if str(link["sourcePort"]) not in from_task.outputs:
+                        from_socket = from_task.add_output_spec(
+                            "workgraph.any",
+                            name=link[SOURCE_PORT_LABEL],
+                        )
+                    else:
+                        from_socket = from_task.outputs[link[SOURCE_PORT_LABEL]]
 
-                wg.add_link(from_socket, to_socket)
+                    wg.add_link(from_socket, to_socket)
+                except:
+                    breakpoint()
+                    pass
             except Exception as e:
                 traceback.print_exc()
                 print("Failed to link", link, "with error:", e)
