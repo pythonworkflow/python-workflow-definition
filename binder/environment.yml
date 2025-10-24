@@ -10,7 +10,7 @@ dependencies:
 - pyiron_base =0.15.5
 - pyiron_workflow =0.7.1
 - pygraphviz =1.14
-- aiida-workgraph =0.5.2
+- aiida-workgraph =0.7.4
 - plumpy =0.25.0
 - conda_subprocess =0.0.7
 - networkx =3.4.2
