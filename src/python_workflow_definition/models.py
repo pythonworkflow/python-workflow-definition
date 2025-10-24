@@ -64,12 +64,34 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
         return v
 
 
+class PythonWorkflowDefinitionWorklowNode(PythonWorkflowDefinitionBaseNode):
+    """
+    Model for function execution nodes.
+    The 'name' attribute is computed automatically from 'value'.
+    """
+
+    type: Literal["workflow"]
+    value: str  # Expected format: 'module.function'
+
+    @field_validator("value")
+    @classmethod
+    def check_value_format(cls, v: str):
+        if not v or "." not in v or v.startswith(".") or v.endswith("."):
+            msg = (
+                "FunctionNode 'value' must be a non-empty string ",
+                "in 'module.function' format with at least one period.",
+            )
+            raise ValueError(msg)
+        return v
+
+
 # Discriminated Union for Nodes
 PythonWorkflowDefinitionNode = Annotated[
     Union[
         PythonWorkflowDefinitionInputNode,
         PythonWorkflowDefinitionOutputNode,
         PythonWorkflowDefinitionFunctionNode,
+        PythonWorkflowDefinitionWorklowNode,
     ],
     Field(discriminator="type"),
 ]
