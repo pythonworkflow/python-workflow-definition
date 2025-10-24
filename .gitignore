@@ -199,4 +199,4 @@ jobflow_to_aiida_qe.json
 aiida_to_jobflow_qe.json
 pyiron_base_to_aiida_simple.json
 pyiron_base_to_jobflow_qe.json
-
+**/*.h5

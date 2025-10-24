@@ -98,11 +98,11 @@ def get_dict(**kwargs) -> dict:
 
 
 def get_list(**kwargs) -> list:
-    return list(kwargs["kwargs"].values())
+    return list(kwargs["kwargs"])
 
 
 def _remove_server_obj(nodes_dict: dict, edges_lst: list):
-    server_lst = [k for k in nodes_dict.keys() if k.startswith("server_obj_")]
+    server_lst = [k for k in nodes_dict.keys() if k.startswith("_server_obj_")]
     for s in server_lst:
         del nodes_dict[s]
         edges_lst = [ep for ep in edges_lst if s not in ep]
