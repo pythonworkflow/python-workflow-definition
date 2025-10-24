@@ -203,7 +203,9 @@ def load_workflow_json(file_name: str) -> WorkGraph:
     return wg
 
 
-def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = None) -> dict:
+def write_workflow_json(
+    wg: WorkGraph, file_name: str, _nested_counter: dict = None
+) -> dict:
     """Write a WorkGraph to JSON file(s), with support for nested workflows.
 
     Args:
@@ -237,13 +239,13 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
         nested_wg = None
 
         # Method 1: Check if this is a SubGraphTask (has spec.node_type == 'SubGraph')
-        if hasattr(node, 'spec') and hasattr(node.spec, 'node_type'):
-            if node.spec.node_type == 'SubGraph' and hasattr(node, 'tasks'):
+        if hasattr(node, "spec") and hasattr(node.spec, "node_type"):
+            if node.spec.node_type == "SubGraph" and hasattr(node, "tasks"):
                 is_graph = True
                 nested_wg = node
 
         # Method 2: Check if the node itself has tasks attribute (indicating it's a subgraph)
-        if not is_graph and hasattr(node, 'tasks'):
+        if not is_graph and hasattr(node, "tasks"):
             # Make sure it has actual tasks (not just an empty list)
             tasks_list = [t for t in node.tasks if t.name not in GRAPH_LEVEL_NAMES]
             if len(tasks_list) > 0:
@@ -264,38 +266,49 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
             # Recursively write the nested workflow
             write_workflow_json(nested_wg, str(nested_path), _nested_counter)
 
-            data[NODES_LABEL].append({"id": i, "type": "workflow", "value": nested_filename})
+            data[NODES_LABEL].append(
+                {"id": i, "type": "workflow", "value": nested_filename}
+            )
         else:
             # This is a regular function task
             # Try to get the module path from different sources
             module_path = executor.module_path
 
             # If module_path is None, try to extract from pickled_callable
-            if module_path is None and hasattr(executor, 'pickled_callable'):
+            if module_path is None and hasattr(executor, "pickled_callable"):
                 # For pickled callables, try to get the original function
                 try:
                     import cloudpickle
+
                     func = cloudpickle.loads(executor.pickled_callable)
-                    if hasattr(func, '__module__'):
+                    if hasattr(func, "__module__"):
                         module_path = func.__module__
                 except Exception:
                     pass  # Keep module_path as None
 
             callable_name = f"{module_path}.{executor.callable_name}"
-            data[NODES_LABEL].append({"id": i, "type": "function", "value": callable_name})
+            data[NODES_LABEL].append(
+                {"id": i, "type": "function", "value": callable_name}
+            )
 
         i += 1
 
     # Handle workflow-level inputs (create input nodes)
     input_name_mapping = {}
-    INTERNAL_SOCKETS = ['metadata', '_wait', '_outputs', 'function_data', 'function_inputs']
+    INTERNAL_SOCKETS = [
+        "metadata",
+        "_wait",
+        "_outputs",
+        "function_data",
+        "function_inputs",
+    ]
 
     # First, try to get default values from graph_inputs task (for SubGraphTasks)
     graph_inputs_defaults = {}
     for task in wg.tasks:
-        if task.name == 'graph_inputs' and hasattr(task, 'outputs'):
+        if task.name == "graph_inputs" and hasattr(task, "outputs"):
             for output in task.outputs:
-                if hasattr(output, '_name') and hasattr(output, 'value'):
+                if hasattr(output, "_name") and hasattr(output, "value"):
                     output_name = output._name
                     if output.value is not None and isinstance(output.value, orm.Data):
                         if isinstance(output.value, orm.List):
@@ -311,12 +324,16 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
                                 val = int(val)
                             graph_inputs_defaults[output_name] = val
 
-    if hasattr(wg, 'inputs') and wg.inputs is not None and hasattr(wg.inputs, '_sockets'):
+    if (
+        hasattr(wg, "inputs")
+        and wg.inputs is not None
+        and hasattr(wg.inputs, "_sockets")
+    ):
         for input_name, input_socket in wg.inputs._sockets.items():
             # Skip metadata and other special namespaces/internal sockets
             if isinstance(input_socket, TaskSocketNamespace):
                 continue
-            if input_name in INTERNAL_SOCKETS or input_name.startswith('_'):
+            if input_name in INTERNAL_SOCKETS or input_name.startswith("_"):
                 continue
 
             # Check if this input has a default value
@@ -324,7 +341,7 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
             input_value = None
             if input_name in graph_inputs_defaults:
                 input_value = graph_inputs_defaults[input_name]
-            elif hasattr(input_socket, 'value') and input_socket.value is not None:
+            elif hasattr(input_socket, "value") and input_socket.value is not None:
                 if isinstance(input_socket.value, orm.Data):
                     if isinstance(input_socket.value, orm.List):
                         input_value = input_socket.value.get_list()
@@ -347,12 +364,16 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
 
     # Handle workflow-level outputs (create output nodes)
     output_name_mapping = {}
-    if hasattr(wg, 'outputs') and wg.outputs is not None and hasattr(wg.outputs, '_sockets'):
+    if (
+        hasattr(wg, "outputs")
+        and wg.outputs is not None
+        and hasattr(wg.outputs, "_sockets")
+    ):
         for output_name, output_socket in wg.outputs._sockets.items():
             # Skip metadata and other special namespaces/internal sockets
             if isinstance(output_socket, TaskSocketNamespace):
                 continue
-            if output_name in INTERNAL_SOCKETS or output_name.startswith('_'):
+            if output_name in INTERNAL_SOCKETS or output_name.startswith("_"):
                 continue
 
             data[NODES_LABEL].append({"id": i, "type": "output", "name": output_name})
@@ -376,7 +397,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
         else:
             link_data[SOURCE_LABEL] = node_name_mapping.get(from_node_name)
             # if the from socket is the default result, we set it to None
-            link_data[SOURCE_PORT_LABEL] = None if from_socket == "result" else from_socket
+            link_data[SOURCE_PORT_LABEL] = (
+                None if from_socket == "result" else from_socket
+            )
 
         # Handle links to graph_outputs
         if to_node_name == "graph_outputs":
@@ -410,7 +433,10 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
             if isinstance(input.value, orm.Data):
                 # Check if this input is already connected (e.g., from workflow inputs)
                 node_id = node_name_mapping[node.name]
-                if any(link[1] == node_id and link[2] == input._name for link in existing_links):
+                if any(
+                    link[1] == node_id and link[2] == input._name
+                    for link in existing_links
+                ):
                     continue
 
                 if input.value.uuid not in data_node_name_mapping:
@@ -441,7 +467,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
                         SOURCE_PORT_LABEL: None,
                     }
                 )
-                existing_links.add((input_node_name, node_name_mapping[node.name], input._name))
+                existing_links.add(
+                    (input_node_name, node_name_mapping[node.name], input._name)
+                )
 
     data[VERSION_LABEL] = VERSION_NUMBER
 
@@ -456,6 +484,10 @@ def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = N
         workflow_data = data
     else:
         # Old-style workflow - need to update names and add result node
-        workflow_data = set_result_node(workflow_dict=update_node_names(workflow_dict=data))
+        workflow_data = set_result_node(
+            workflow_dict=update_node_names(workflow_dict=data)
+        )
 
-    PythonWorkflowDefinitionWorkflow(**workflow_data).dump_json_file(file_name=file_name, indent=2)
+    PythonWorkflowDefinitionWorkflow(**workflow_data).dump_json_file(
+        file_name=file_name, indent=2
+    )
