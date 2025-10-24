@@ -203,12 +203,23 @@ def load_workflow_json(file_name: str) -> WorkGraph:
     return wg
 
 
-def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
+def write_workflow_json(wg: WorkGraph, file_name: str, _nested_counter: dict = None) -> dict:
+    """Write a WorkGraph to JSON file(s), with support for nested workflows.
+
+    Args:
+        wg: The WorkGraph to write
+        file_name: Output JSON file path
+        _nested_counter: Internal counter for generating nested workflow filenames
+    """
+    if _nested_counter is None:
+        _nested_counter = {"count": 0}
+
     data = {NODES_LABEL: [], EDGES_LABEL: []}
     node_name_mapping = {}
     data_node_name_mapping = {}
     i = 0
     GRAPH_LEVEL_NAMES = ["graph_inputs", "graph_outputs", "graph_ctx"]
+    parent_dir = Path(file_name).parent
 
     for node in wg.tasks:
 
@@ -217,29 +228,191 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
 
         node_name_mapping[node.name] = i
 
+        # Try to determine if this is a nested WorkGraph or a regular function task
         executor = node.get_executor()
-        callable_name = f"{executor.module_path}.{executor.callable_name}"
 
-        data[NODES_LABEL].append({"id": i, "type": "function", "value": callable_name})
+        # Check if this is a SubGraph-type task (truly nested workflow)
+        # Note: GraphTask (from @task.graph) is flattened and can't be exported as nested
+        is_graph = False
+        nested_wg = None
+
+        # Method 1: Check if this is a SubGraphTask (has spec.node_type == 'SubGraph')
+        if hasattr(node, 'spec') and hasattr(node.spec, 'node_type'):
+            if node.spec.node_type == 'SubGraph' and hasattr(node, 'tasks'):
+                is_graph = True
+                nested_wg = node
+
+        # Method 2: Check if the node itself has tasks attribute (indicating it's a subgraph)
+        if not is_graph and hasattr(node, 'tasks'):
+            # Make sure it has actual tasks (not just an empty list)
+            tasks_list = [t for t in node.tasks if t.name not in GRAPH_LEVEL_NAMES]
+            if len(tasks_list) > 0:
+                is_graph = True
+                nested_wg = node
+
+        # Method 3: Check if executor is a WorkGraph instance
+        if not is_graph and isinstance(executor, WorkGraph):
+            is_graph = True
+            nested_wg = executor
+
+        if is_graph and nested_wg is not None:
+            # This is a nested workflow - write it to a separate file
+            _nested_counter["count"] += 1
+            nested_filename = f"nested_{_nested_counter['count']}.json"
+            nested_path = parent_dir / nested_filename
+
+            # Recursively write the nested workflow
+            write_workflow_json(nested_wg, str(nested_path), _nested_counter)
+
+            data[NODES_LABEL].append({"id": i, "type": "workflow", "value": nested_filename})
+        else:
+            # This is a regular function task
+            # Try to get the module path from different sources
+            module_path = executor.module_path
+
+            # If module_path is None, try to extract from pickled_callable
+            if module_path is None and hasattr(executor, 'pickled_callable'):
+                # For pickled callables, try to get the original function
+                try:
+                    import cloudpickle
+                    func = cloudpickle.loads(executor.pickled_callable)
+                    if hasattr(func, '__module__'):
+                        module_path = func.__module__
+                except Exception:
+                    pass  # Keep module_path as None
+
+            callable_name = f"{module_path}.{executor.callable_name}"
+            data[NODES_LABEL].append({"id": i, "type": "function", "value": callable_name})
+
         i += 1
+
+    # Handle workflow-level inputs (create input nodes)
+    input_name_mapping = {}
+    INTERNAL_SOCKETS = ['metadata', '_wait', '_outputs', 'function_data', 'function_inputs']
+
+    # First, try to get default values from graph_inputs task (for SubGraphTasks)
+    graph_inputs_defaults = {}
+    for task in wg.tasks:
+        if task.name == 'graph_inputs' and hasattr(task, 'outputs'):
+            for output in task.outputs:
+                if hasattr(output, '_name') and hasattr(output, 'value'):
+                    output_name = output._name
+                    if output.value is not None and isinstance(output.value, orm.Data):
+                        if isinstance(output.value, orm.List):
+                            graph_inputs_defaults[output_name] = output.value.get_list()
+                        elif isinstance(output.value, orm.Dict):
+                            val = output.value.get_dict()
+                            val.pop("node_type", None)
+                            graph_inputs_defaults[output_name] = val
+                        else:
+                            val = output.value.value
+                            # Convert float to int if it's a whole number
+                            if isinstance(val, float) and val.is_integer():
+                                val = int(val)
+                            graph_inputs_defaults[output_name] = val
+
+    if hasattr(wg, 'inputs') and wg.inputs is not None and hasattr(wg.inputs, '_sockets'):
+        for input_name, input_socket in wg.inputs._sockets.items():
+            # Skip metadata and other special namespaces/internal sockets
+            if isinstance(input_socket, TaskSocketNamespace):
+                continue
+            if input_name in INTERNAL_SOCKETS or input_name.startswith('_'):
+                continue
+
+            # Check if this input has a default value
+            # First try graph_inputs defaults, then the socket value
+            input_value = None
+            if input_name in graph_inputs_defaults:
+                input_value = graph_inputs_defaults[input_name]
+            elif hasattr(input_socket, 'value') and input_socket.value is not None:
+                if isinstance(input_socket.value, orm.Data):
+                    if isinstance(input_socket.value, orm.List):
+                        input_value = input_socket.value.get_list()
+                    elif isinstance(input_socket.value, orm.Dict):
+                        input_value = input_socket.value.get_dict()
+                        input_value.pop("node_type", None)
+                    else:
+                        input_value = input_socket.value.value
+                        # Convert float to int if it's a whole number
+                        if isinstance(input_value, float) and input_value.is_integer():
+                            input_value = int(input_value)
+
+            # Create input node
+            node_data = {"id": i, "type": "input", "name": input_name}
+            if input_value is not None:
+                node_data["value"] = input_value
+            data[NODES_LABEL].append(node_data)
+            input_name_mapping[input_name] = i
+            i += 1
+
+    # Handle workflow-level outputs (create output nodes)
+    output_name_mapping = {}
+    if hasattr(wg, 'outputs') and wg.outputs is not None and hasattr(wg.outputs, '_sockets'):
+        for output_name, output_socket in wg.outputs._sockets.items():
+            # Skip metadata and other special namespaces/internal sockets
+            if isinstance(output_socket, TaskSocketNamespace):
+                continue
+            if output_name in INTERNAL_SOCKETS or output_name.startswith('_'):
+                continue
+
+            data[NODES_LABEL].append({"id": i, "type": "output", "name": output_name})
+            output_name_mapping[output_name] = i
+            i += 1
 
     for link in wg.links:
         link_data = link.to_dict()
-        # if the from socket is the default result, we set it to None
-        if link_data["from_socket"] == "result":
-            link_data["from_socket"] = None
-        link_data[TARGET_LABEL] = node_name_mapping[link_data.pop("to_node")]
-        link_data[TARGET_PORT_LABEL] = link_data.pop("to_socket")
-        link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
-        link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
-        data[EDGES_LABEL].append(link_data)
+        from_node_name = link_data.pop("from_node")
+        to_node_name = link_data.pop("to_node")
+        from_socket = link_data.pop("from_socket")
+        to_socket = link_data.pop("to_socket")
+
+        # Handle links from graph_inputs
+        if from_node_name == "graph_inputs":
+            if from_socket in input_name_mapping:
+                link_data[SOURCE_LABEL] = input_name_mapping[from_socket]
+                link_data[SOURCE_PORT_LABEL] = None
+            else:
+                continue
+        else:
+            link_data[SOURCE_LABEL] = node_name_mapping.get(from_node_name)
+            # if the from socket is the default result, we set it to None
+            link_data[SOURCE_PORT_LABEL] = None if from_socket == "result" else from_socket
+
+        # Handle links to graph_outputs
+        if to_node_name == "graph_outputs":
+            if to_socket in output_name_mapping:
+                link_data[TARGET_LABEL] = output_name_mapping[to_socket]
+                link_data[TARGET_PORT_LABEL] = None
+            else:
+                continue
+        else:
+            link_data[TARGET_LABEL] = node_name_mapping.get(to_node_name)
+            link_data[TARGET_PORT_LABEL] = to_socket
+
+        # Only add link if both source and target are valid
+        if link_data[SOURCE_LABEL] is not None and link_data[TARGET_LABEL] is not None:
+            data[EDGES_LABEL].append(link_data)
+
+    # Build set of links that are already handled (to avoid duplicates)
+    existing_links = {
+        (link[SOURCE_LABEL], link[TARGET_LABEL], link[TARGET_PORT_LABEL])
+        for link in data[EDGES_LABEL]
+    }
 
     for node in wg.tasks:
+        if node.name in GRAPH_LEVEL_NAMES:
+            continue
+
         for input in node.inputs:
             # assume namespace is not used as input
             if isinstance(input, TaskSocketNamespace):
                 continue
             if isinstance(input.value, orm.Data):
+                # Check if this input is already connected (e.g., from workflow inputs)
+                node_id = node_name_mapping[node.name]
+                if any(link[1] == node_id and link[2] == input._name for link in existing_links):
+                    continue
+
                 if input.value.uuid not in data_node_name_mapping:
                     if isinstance(input.value, orm.List):
                         raw_value = input.value.get_list()
@@ -249,6 +422,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         raw_value.pop("node_type", None)
                     else:
                         raw_value = input.value.value
+                        # Convert float to int if it's a whole number
+                        if isinstance(raw_value, float) and raw_value.is_integer():
+                            raw_value = int(raw_value)
                     data[NODES_LABEL].append(
                         {"id": i, "type": "input", "value": raw_value}
                     )
@@ -265,8 +441,21 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
                         SOURCE_PORT_LABEL: None,
                     }
                 )
+                existing_links.add((input_node_name, node_name_mapping[node.name], input._name))
 
     data[VERSION_LABEL] = VERSION_NUMBER
-    PythonWorkflowDefinitionWorkflow(
-        **set_result_node(workflow_dict=update_node_names(workflow_dict=data))
-    ).dump_json_file(file_name=file_name, indent=2)
+
+    # Check if we have named input nodes (from workflow-level inputs)
+    has_named_inputs = any(
+        node.get("type") == "input" and "name" in node for node in data[NODES_LABEL]
+    )
+    has_output_nodes = any(node.get("type") == "output" for node in data[NODES_LABEL])
+
+    if has_named_inputs or has_output_nodes:
+        # New-style workflow with exposed inputs/outputs - names are already set, don't rename
+        workflow_data = data
+    else:
+        # Old-style workflow - need to update names and add result node
+        workflow_data = set_result_node(workflow_dict=update_node_names(workflow_dict=data))
+
+    PythonWorkflowDefinitionWorkflow(**workflow_data).dump_json_file(file_name=file_name, indent=2)
