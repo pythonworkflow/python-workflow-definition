@@ -7,8 +7,7 @@
 In the Python Workflow Definition (PWD) each node represents a Python function, with the edges defining the connection 
 between input and output of the different Python functions. 
 
-Publication:
-* [J. Janssen, J. George, J. Geiger, M. Bercx, X. Wang, C. Ertural, J. Schaarschmidt, A.M. Ganose, G. Pizzi, T. Hickel and J. Neugebauer. A python workflow definition for computational materials design. Digital Discovery, 2025](https://doi.org/10.1039/D5DD00231A)
+Published in: [J. Janssen, J. George, J. Geiger, M. Bercx, X. Wang, C. Ertural, J. Schaarschmidt, A.M. Ganose, G. Pizzi, T. Hickel and J. Neugebauer. A python workflow definition for computational materials design. Digital Discovery, 2025](https://doi.org/10.1039/D5DD00231A)
 
 ## Format
 Each workflow consists of three files, a Python module which defines the individual Pythons, a JSON file which defines
