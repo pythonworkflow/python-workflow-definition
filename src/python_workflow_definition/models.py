@@ -63,6 +63,7 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
             raise ValueError(msg)
         return v
 
+
 class PythonWorkflowDefinitionWorklowNode(PythonWorkflowDefinitionBaseNode):
     """
     Model for function execution nodes.
@@ -90,7 +91,7 @@ PythonWorkflowDefinitionNode = Annotated[
         PythonWorkflowDefinitionInputNode,
         PythonWorkflowDefinitionOutputNode,
         PythonWorkflowDefinitionFunctionNode,
-        PythonWorkflowDefinitionWorklowNode
+        PythonWorkflowDefinitionWorklowNode,
     ],
     Field(discriminator="type"),
 ]
