@@ -203,7 +203,6 @@ def load_workflow_json(file_name: str) -> WorkGraph:
     return wg
 
 
-
 def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
     data = {NODES_LABEL: [], EDGES_LABEL: []}
     node_name_mapping = {}
