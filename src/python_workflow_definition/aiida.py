@@ -55,7 +55,7 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
 
         wg = WorkGraph(
             inputs=namespace(**inputs_ns) if inputs_ns else None,
-            outputs=namespace(**outputs_ns) if outputs_ns else None
+            outputs=namespace(**outputs_ns) if outputs_ns else None,
         )
     else:
         wg = WorkGraph()
@@ -95,10 +95,14 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
         elif node_type == "input":
             # Store input node info for later connection to wg.inputs
             input_node_mapping[node_id] = node["name"]
-            # Also create a data node for direct value setting if needed
+            # Set default value on the workflow's exposed input if provided
             if "value" in node and node["value"] is not None:
                 value = node["value"]
                 data_node = general_serializer(value)
+                # Set the default on the workflow's exposed input
+                if hasattr(wg.inputs, node["name"]):
+                    setattr(wg.inputs, node["name"], data_node)
+                # Also store in mapping for direct connections in non-nested contexts
                 task_name_mapping[node_id] = data_node
 
         elif node_type == "output":
@@ -113,7 +117,9 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
         target_port = link[TARGET_PORT_LABEL]
 
         # Handle output node connections
-        target_node = next((n for n in data[NODES_LABEL] if str(n["id"]) == target_id), None)
+        target_node = next(
+            (n for n in data[NODES_LABEL] if str(n["id"]) == target_id), None
+        )
         if target_node and target_node["type"] == "output":
             # This connects a task output to a workflow output
             from_task = task_name_mapping.get(source_id)
@@ -121,7 +127,9 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
                 if source_port is None:
                     source_port = "result"
                 if source_port not in from_task.outputs:
-                    from_socket = from_task.add_output_spec("workgraph.any", name=source_port)
+                    from_socket = from_task.add_output_spec(
+                        "workgraph.any", name=source_port
+                    )
                 else:
                     from_socket = from_task.outputs[source_port]
 
@@ -132,13 +140,17 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
             continue
 
         # Handle input node connections
-        source_node = next((n for n in data[NODES_LABEL] if str(n["id"]) == source_id), None)
+        source_node = next(
+            (n for n in data[NODES_LABEL] if str(n["id"]) == source_id), None
+        )
         if source_node and source_node["type"] == "input":
             to_task = task_name_mapping.get(target_id)
             if to_task and isinstance(to_task, Task):
                 # Add target socket if it doesn't exist
                 if target_port not in to_task.inputs:
-                    to_socket = to_task.add_input_spec("workgraph.any", name=target_port)
+                    to_socket = to_task.add_input_spec(
+                        "workgraph.any", name=target_port
+                    )
                 else:
                     to_socket = to_task.inputs[target_port]
 
@@ -177,7 +189,9 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
 
                     # Add source socket if needed
                     if source_port not in from_task.outputs:
-                        from_socket = from_task.add_output_spec("workgraph.any", name=source_port)
+                        from_socket = from_task.add_output_spec(
+                            "workgraph.any", name=source_port
+                        )
                     else:
                         from_socket = from_task.outputs[source_port]
 
@@ -187,6 +201,7 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
                     print("Failed to link", link, "with error:", e)
 
     return wg
+
 
 def load_workflow_json(file_name: str) -> WorkGraph:
 
