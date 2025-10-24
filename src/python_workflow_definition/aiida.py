@@ -25,7 +25,7 @@ from python_workflow_definition.shared import (
 )
 
 
-def load_workflow_json_nested(file_name: str) -> WorkGraph:
+def load_workflow_json(file_name: str) -> WorkGraph:
     """Load a workflow from JSON with support for nested workflows.
 
     This function recursively loads workflows, properly exposing inputs/outputs
@@ -86,7 +86,7 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
             workflow_path = parent_dir / workflow_file
 
             # Recursively load the sub-workflow with proper input/output exposure
-            sub_wg = load_workflow_json_nested(file_name=str(workflow_path))
+            sub_wg = load_workflow_json(file_name=str(workflow_path))
 
             # Add the sub-workflow as a task - it will automatically have the right inputs/outputs
             workflow_task = wg.add_task(sub_wg)
@@ -202,66 +202,6 @@ def load_workflow_json_nested(file_name: str) -> WorkGraph:
 
     return wg
 
-
-def load_workflow_json(file_name: str) -> WorkGraph:
-
-    data = PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
-
-    wg = WorkGraph()
-    task_name_mapping = {}
-
-    for id, identifier in convert_nodes_list_to_dict(
-        nodes_list=data[NODES_LABEL]
-    ).items():
-        if isinstance(identifier, str) and "." in identifier:
-            p, m = identifier.rsplit(".", 1)
-            mod = import_module(p)
-            func = getattr(mod, m)
-            decorated_func = task(outputs=namespace())(func)
-            new_task = wg.add_task(decorated_func)
-            new_task.spec = replace(new_task.spec, schema_source=SchemaSource.EMBEDDED)
-            task_name_mapping[id] = new_task
-        else:
-            # data task
-            data_node = general_serializer(identifier)
-            task_name_mapping[id] = data_node
-
-    # add links
-    for link in data[EDGES_LABEL]:
-        # TODO: continue here
-        to_task = task_name_mapping[str(link[TARGET_LABEL])]
-        # if the input is not exit, it means we pass the data into to the kwargs
-        # in this case, we add the input socket
-        if isinstance(to_task, Task):
-            if link[TARGET_PORT_LABEL] not in to_task.inputs:
-                to_socket = to_task.add_input_spec(
-                    "workgraph.any", name=link[TARGET_PORT_LABEL]
-                )
-            else:
-                to_socket = to_task.inputs[link[TARGET_PORT_LABEL]]
-        from_task = task_name_mapping[str(link[SOURCE_LABEL])]
-        if isinstance(from_task, orm.Data):
-            to_socket.value = from_task
-        else:
-            try:
-                if link[SOURCE_PORT_LABEL] is None:
-                    link[SOURCE_PORT_LABEL] = "result"
-                # because we are not define the outputs explicitly during the pythonjob creation
-                # we add it here, and assume the output exit
-                if link[SOURCE_PORT_LABEL] not in from_task.outputs:
-                    # if str(link["sourcePort"]) not in from_task.outputs:
-                    from_socket = from_task.add_output_spec(
-                        "workgraph.any",
-                        name=link[SOURCE_PORT_LABEL],
-                    )
-                else:
-                    from_socket = from_task.outputs[link[SOURCE_PORT_LABEL]]
-                if isinstance(to_task, Task):
-                    wg.add_link(from_socket, to_socket)
-            except Exception as e:
-                traceback.print_exc()
-                print("Failed to link", link, "with error:", e)
-    return wg
 
 
 def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
