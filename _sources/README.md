@@ -1,14 +1,12 @@
 # Python Workflow Definition
 [![Pipeline](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml/badge.svg)](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/HEAD)
+[![arXiv](https://img.shields.io/badge/arXiv-2505.20366-b31b1b.svg)](https://arxiv.org/abs/2505.20366)
 [![DOI](https://zenodo.org/badge/945869529.svg)](https://doi.org/10.5281/zenodo.15516179)
 
 ## Definition
 In the Python Workflow Definition (PWD) each node represents a Python function, with the edges defining the connection 
 between input and output of the different Python functions. 
-
-Publication:
-* [J. Janssen, J. George, J. Geiger, M. Bercx, X. Wang, C. Ertural, J. Schaarschmidt, A.M. Ganose, G. Pizzi, T. Hickel and J. Neugebauer. A python workflow definition for computational materials design. Digital Discovery, 2025](https://doi.org/10.1039/D5DD00231A)
 
 ## Format
 Each workflow consists of three files, a Python module which defines the individual Pythons, a JSON file which defines
