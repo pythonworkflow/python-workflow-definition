@@ -235,21 +235,33 @@ def _get_workflow(
     nodes_dict: dict, input_dict: dict, total_dict: dict, source_handles_dict: dict
 ) -> list:
     def get_attr_helper(obj, source_handle):
-        if source_handle is None:
-            return getattr(obj, "output")
+        print("here2")
+        print(obj)
+        if type(obj) is not list:
+            if source_handle is None:
+                return getattr(obj, "output")
+            else:
+                return getattr(getattr(obj, "output"), source_handle)
         else:
-            return getattr(getattr(obj, "output"), source_handle)
+            if source_handle is None:
+                return getattr(obj[-1], "output")
+            else:
+                return getattr(getattr(obj[-1], "output"), source_handle)
 
     memory_dict = {}
-    print(total_dict)
+
+    output_reference=None
     for k in total_dict.keys():
         v = nodes_dict[k]
         if type(v) is list:
+            # i need to export the uuid and output references
+            # from workflows and jobs
             fn=v
             job1_dict=v[0].as_dict()
             uuid=job1_dict["uuid"]
             mod = import_module(job1_dict["function"]["@module"])
             method=getattr(mod, job1_dict["function"]["@callable"])
+
             if k in source_handles_dict.keys():
                 new_job1 = job(
                     method=method,
@@ -258,21 +270,35 @@ def _get_workflow(
                 )
             else:
                 new_job1 = job(method=method, uuid=uuid)
-            kwargs = {
-                kw: (
-                    input_dict[vw[SOURCE_LABEL]]
-                    if vw[SOURCE_LABEL] in input_dict
-                    else get_attr_helper(
-                        obj=memory_dict[vw[SOURCE_LABEL]],
-                        source_handle=vw[SOURCE_PORT_LABEL],
-                    )
-                )
-                for kw, vw in total_dict[k].items()
-            }
+            kwargs = {}
+
+            for kw, vw in total_dict[k].items():
+                if output_reference is not None:
+                    # not sure this works?
+                    kwargs[kw] = output_reference
+                    output_reference = None
+                else:
+                    if vw[SOURCE_LABEL] in input_dict:
+                        kwargs[kw] = input_dict[vw[SOURCE_LABEL]]
+                    else:
+                        kwargs[kw] = get_attr_helper(
+                            obj=memory_dict[vw[SOURCE_LABEL]],
+                            source_handle=vw[SOURCE_PORT_LABEL],
+                        )
+            output_reference=v[-1].output
+
+
             memory_stuff = new_job1(**kwargs)
+
             fn = [memory_stuff]+v[1:]
+
             memory_dict[k] =Flow(fn)
+
         if isfunction(v):
+            #if output_reference is None:
+
+            #    output_reference=None
+
             if k in source_handles_dict.keys():
                 fn = job(
                     method=v,
@@ -280,17 +306,28 @@ def _get_workflow(
                 )
             else:
                 fn = job(method=v)
-            kwargs = {
-                kw: (
-                    input_dict[vw[SOURCE_LABEL]]
-                    if vw[SOURCE_LABEL] in input_dict
-                    else get_attr_helper(
+
+            kwargs={}
+
+            for kw, vw in total_dict[k].items():
+                if output_reference is not None:
+                    # not sure this works?
+                    kwargs[kw] = output_reference
+                    output_reference=None
+                else:    
+                    if  vw[SOURCE_LABEL] in input_dict:
+                        kwargs[kw]=input_dict[vw[SOURCE_LABEL]]
+                    else:
+                        kwargs[kw]= get_attr_helper(
                         obj=memory_dict[vw[SOURCE_LABEL]],
                         source_handle=vw[SOURCE_PORT_LABEL],
-                    )
-                )
-                for kw, vw in total_dict[k].items()
-            }
+                        )
+
+            print("here")
+            print(kwargs)
+
+
+
             memory_dict[k] = fn(**kwargs)
 
     return list(memory_dict.values())
@@ -312,7 +349,7 @@ def load_workflow_json(file_name: str) -> Flow:
         source_handles_dict=source_handles_dict,
     )
     print(task_lst)
-    return Flow(task_lst)
+    return Flow(task_lst, output=task_lst[-1].output)
 
 
 def recursive_load_workflow_json(file_name: str) -> list:
