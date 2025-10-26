@@ -235,15 +235,70 @@ def _get_workflow(
     nodes_dict: dict, input_dict: dict, total_dict: dict, source_handles_dict: dict
 ) -> list:
     def get_attr_helper(obj, source_handle):
-        if source_handle is None:
-            return getattr(obj, "output")
+        print("here2")
+        print(obj)
+        if type(obj) is not list:
+            if source_handle is None:
+                return getattr(obj, "output")
+            else:
+                return getattr(getattr(obj, "output"), source_handle)
         else:
-            return getattr(getattr(obj, "output"), source_handle)
+            if source_handle is None:
+                return getattr(obj[-1], "output")
+            else:
+                return getattr(getattr(obj[-1], "output"), source_handle)
 
     memory_dict = {}
+
+    output_reference=None
     for k in total_dict.keys():
         v = nodes_dict[k]
+        if type(v) is list:
+            # i need to export the uuid and output references
+            # from workflows and jobs
+            fn=v
+            job1_dict=v[0].as_dict()
+            uuid=job1_dict["uuid"]
+            mod = import_module(job1_dict["function"]["@module"])
+            method=getattr(mod, job1_dict["function"]["@callable"])
+
+            if k in source_handles_dict.keys():
+                new_job1 = job(
+                    method=method,
+                    data=[el for el in source_handles_dict[k] if el is not None],
+                    uuid=uuid,
+                )
+            else:
+                new_job1 = job(method=method, uuid=uuid)
+            kwargs = {}
+
+            for kw, vw in total_dict[k].items():
+                if output_reference is not None:
+                    # not sure this works?
+                    kwargs[kw] = output_reference
+                    output_reference = None
+                else:
+                    if vw[SOURCE_LABEL] in input_dict:
+                        kwargs[kw] = input_dict[vw[SOURCE_LABEL]]
+                    else:
+                        kwargs[kw] = get_attr_helper(
+                            obj=memory_dict[vw[SOURCE_LABEL]],
+                            source_handle=vw[SOURCE_PORT_LABEL],
+                        )
+            output_reference=v[-1].output
+
+
+            memory_stuff = new_job1(**kwargs)
+
+            fn = [memory_stuff]+v[1:]
+
+            memory_dict[k] =Flow(fn)
+
         if isfunction(v):
+            #if output_reference is None:
+
+            #    output_reference=None
+
             if k in source_handles_dict.keys():
                 fn = job(
                     method=v,
@@ -251,18 +306,30 @@ def _get_workflow(
                 )
             else:
                 fn = job(method=v)
-            kwargs = {
-                kw: (
-                    input_dict[vw[SOURCE_LABEL]]
-                    if vw[SOURCE_LABEL] in input_dict
-                    else get_attr_helper(
+
+            kwargs={}
+
+            for kw, vw in total_dict[k].items():
+                if output_reference is not None:
+                    # not sure this works?
+                    kwargs[kw] = output_reference
+                    output_reference=None
+                else:    
+                    if  vw[SOURCE_LABEL] in input_dict:
+                        kwargs[kw]=input_dict[vw[SOURCE_LABEL]]
+                    else:
+                        kwargs[kw]= get_attr_helper(
                         obj=memory_dict[vw[SOURCE_LABEL]],
                         source_handle=vw[SOURCE_PORT_LABEL],
-                    )
-                )
-                for kw, vw in total_dict[k].items()
-            }
+                        )
+
+            print("here")
+            print(kwargs)
+
+
+
             memory_dict[k] = fn(**kwargs)
+
     return list(memory_dict.values())
 
 
@@ -274,6 +341,18 @@ def _get_item_from_tuple(input_obj, index, index_lst):
 
 
 def load_workflow_json(file_name: str) -> Flow:
+    nodes_new_dict, input_dict, new_total_dict, source_handles_dict = recursive_load_workflow_json(file_name)
+    task_lst = _get_workflow(
+        nodes_dict=nodes_new_dict,
+        input_dict=input_dict,
+        total_dict=new_total_dict,
+        source_handles_dict=source_handles_dict,
+    )
+    print(task_lst)
+    return Flow(task_lst, output=task_lst[-1].output)
+
+
+def recursive_load_workflow_json(file_name: str) -> list:
     content = remove_result(
         workflow_dict=PythonWorkflowDefinitionWorkflow.load_json_file(
             file_name=file_name
@@ -296,7 +375,10 @@ def load_workflow_json(file_name: str) -> Flow:
 
     nodes_new_dict = {}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
-        if isinstance(v, str) and "." in v:
+        if isinstance(v, str) and ".json" in v:
+            nodes_new_dict_here, input_dict_here, new_total_dict_here, sources_handles_dict_here = recursive_load_workflow_json(file_name=v)
+            nodes_new_dict[int(k)] = _get_workflow(nodes_new_dict_here, input_dict_here, new_total_dict_here, sources_handles_dict_here)
+        elif isinstance(v, str) and "." in v:
             p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)
@@ -307,13 +389,10 @@ def load_workflow_json(file_name: str) -> Flow:
     total_dict = _group_edges(edges_lst=edges_new_lst)
     input_dict = _get_input_dict(nodes_dict=nodes_new_dict)
     new_total_dict = _resort_total_lst(total_dict=total_dict, nodes_dict=nodes_new_dict)
-    task_lst = _get_workflow(
-        nodes_dict=nodes_new_dict,
-        input_dict=input_dict,
-        total_dict=new_total_dict,
-        source_handles_dict=source_handles_dict,
-    )
-    return Flow(task_lst)
+
+    # go through the whole list again and update the dicts with the inputs from the outer workflwos
+
+    return nodes_new_dict, input_dict, new_total_dict, source_handles_dict
 
 
 def write_workflow_json(flow: Flow, file_name: str = "workflow.json"):
