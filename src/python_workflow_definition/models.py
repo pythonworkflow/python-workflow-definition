@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar
+from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar, Dict
 from pydantic import BaseModel, Field, field_validator, field_serializer
 from pydantic import ValidationError
 import json
@@ -51,6 +51,10 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
 
     type: Literal["function"]
     value: str  # Expected format: 'module.function'
+
+    # Added to support data parsing from execution results
+    output: Optional[Union[Dict[str, Any], Any]] = None
+    working_directory: Optional[str] = None
 
     @field_validator("value")
     @classmethod
