@@ -2,7 +2,7 @@ channels:
 - conda-forge
 dependencies:
 - python =3.12
-- click =8.2.1
+- click =8.1.8
 - pydantic =2.12.4
 - hatchling =1.27.0
 - httpcore =1.0.7
