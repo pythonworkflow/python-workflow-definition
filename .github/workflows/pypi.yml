@@ -26,7 +26,9 @@ jobs:
         environment-file: binder/environment.yml
     - name: Build
       shell: bash -l {0}
-      run: hatchling build -t sdist -t wheel
+      run: |
+        git update-index --assume-unchanged src/python_workflow_definition/_version.py
+        hatchling build -t sdist -t wheel
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
