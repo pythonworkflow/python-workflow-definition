@@ -1,0 +1,4 @@
+import python_workflow_definition._version
+
+
+__version__ = python_workflow_definition._version.__version__
