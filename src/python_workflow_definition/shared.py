@@ -6,7 +6,7 @@ SOURCE_LABEL = "source"
 SOURCE_PORT_LABEL = "sourcePort"
 TARGET_LABEL = "target"
 TARGET_PORT_LABEL = "targetPort"
-VERSION_NUMBER = "0.1.0"
+VERSION_NUMBER = "0.1.1"
 VERSION_LABEL = "version"
 
 
