@@ -38,7 +38,7 @@ class TestAiiDA(unittest.TestCase):
             x=get_sum_task.outputs.result,
         )
         write_workflow_json(wg=wg, file_name=workflow_json_filename)
-        workgraph = load_workflow_json(file_name='workflow.json')
+        workgraph = load_workflow_json(file_name=workflow_json_filename)
         workgraph.run()
 
         self.assertTrue(os.path.exists(workflow_json_filename))
