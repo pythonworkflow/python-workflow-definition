@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar
-from pydantic import BaseModel, Field, field_validator, field_serializer
+from pydantic import BaseModel, Field, field_validator, field_serializer, model_validator
 from pydantic import ValidationError
 import json
 import logging
@@ -82,6 +82,13 @@ class PythonWorkflowDefinitionEdge(BaseModel):
     targetPort: Optional[str] = None
     source: int
     sourcePort: Optional[str] = None
+
+    @model_validator(mode='before')
+    @classmethod
+    def set_default_source_port(cls, data: Any) -> Any:
+        if isinstance(data, dict) and 'sourcePort' not in data:
+            data['sourcePort'] = None
+        return data
 
     @field_validator("sourcePort", mode="before")
     @classmethod
@@ -214,9 +221,6 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             return instance.model_dump()
         except ValidationError:  # Catch validation errors specifically
             logger.error("Workflow model validation failed.", exc_info=True)
-            raise
-        except json.JSONDecodeError:  # Catch JSON parsing errors specifically
-            logger.error("Invalid JSON format encountered.", exc_info=True)
             raise
         except Exception as e:  # Catch any other unexpected errors
             logger.error(
