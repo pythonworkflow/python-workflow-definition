@@ -68,7 +68,7 @@ class TestModels(unittest.TestCase):
         edge = PythonWorkflowDefinitionEdge(source=1, target=2)
         self.assertEqual(edge.source, 1)
         self.assertEqual(edge.target, 2)
-        self.assertEqual(edge.sourcePort, INTERNAL_DEFAULT_HANDLE)
+        self.assertIsNone(edge.sourcePort)
         self.assertIsNone(edge.targetPort)
 
         edge_with_ports = PythonWorkflowDefinitionEdge(
