@@ -35,3 +35,7 @@ plot = [
     "networkx>=2.8.8,<=3.5",
     "ipython>=7.33.0,<=9.8.0",
 ]
+
+[tool.coverage.run]
+source = ["python_workflow_definition"]
+command_line = "-m unittest discover tests"

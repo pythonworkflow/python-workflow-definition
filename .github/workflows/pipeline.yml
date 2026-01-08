@@ -217,7 +217,7 @@ jobs:
       timeout-minutes: 30
       run: |
         pip install . --no-deps --no-build-isolation
-        coverage run -m unittest discover tests
+        coverage run
         coverage xml
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
