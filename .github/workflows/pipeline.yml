@@ -189,6 +189,7 @@ jobs:
       shell: bash -l {0}
       run: |
         echo -e "channels:\n  - conda-forge\n" > .condarc
+        sed '/- python/d' binder/environment.yml
     - name: Setup Mambaforge
       uses: conda-incubator/setup-miniconda@v3
       with:
