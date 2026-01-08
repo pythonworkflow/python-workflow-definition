@@ -192,6 +192,7 @@ jobs:
       shell: bash -l {0}
       timeout-minutes: 30
       run: |
+        verdi presto --profile-name pwd
         pip install . --no-deps --no-build-isolation
         python -m unittest discover tests
 
@@ -216,6 +217,7 @@ jobs:
       shell: bash -l {0}
       timeout-minutes: 30
       run: |
+        verdi presto --profile-name pwd
         pip install . --no-deps --no-build-isolation
         coverage run
         coverage xml
