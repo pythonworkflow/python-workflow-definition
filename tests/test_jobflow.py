@@ -32,4 +32,4 @@ class TestJobflow(unittest.TestCase):
         result = run_locally(flow)
 
         self.assertTrue(os.path.exists(workflow_json_filename))
-        self.assertEqual(result[result.keys()[-1]][1].output, 6.25)
+        self.assertEqual(result[list(result.keys())[-1]][1].output, 6.25)
