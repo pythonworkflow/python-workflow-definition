@@ -28,7 +28,7 @@ jobflow = [
     "jobflow>=0.1.18,<=0.2.1",
 ]
 pyiron = [
-    "pyiron_base>=0.11.10,<=0.15.10",
+    "pyiron_base>=0.11.10,<=0.15.12",
 ]
 plot = [
     "pygraphviz>=1.10,<=1.14",
