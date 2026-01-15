@@ -69,6 +69,7 @@ jobs:
         cd example_workflows/nfdi/
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
@@ -104,6 +105,7 @@ jobs:
         cd example_workflows/quantum_espresso
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
@@ -133,6 +135,7 @@ jobs:
         cd example_workflows/arithmetic
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
