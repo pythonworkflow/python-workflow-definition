@@ -141,6 +141,30 @@ jobs:
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
 
+  nested:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Conda config
+      run: echo -e "channels:\n  - conda-forge\n" > .condarc
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: "3.12"
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: binder/environment.yml
+    - name: Installation and setup
+      shell: bash -l {0}
+      run: |
+        pip install --no-deps --no-build-isolation -e .
+        conda install -c conda-forge jupyter papermill
+        verdi presto --profile-name pwd
+    - name: Tests
+      shell: bash -l {0}
+      run: |
+        cd example_workflows/nested
+        papermill aiida.ipynb aiida_out.ipynb -k "python3"
+
   documentation:
     runs-on: ubuntu-latest
     steps:
