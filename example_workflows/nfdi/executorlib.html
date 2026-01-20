@@ -1,0 +1,985 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>executorlib &#8212; Python Workflow Definition</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/nfdi/executorlib';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Python Workflow Definition</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Python Workflow Definition
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/nfdi/executorlib.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/example_workflows/nfdi/executorlib.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>executorlib</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">executorlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-executorlib">Define workflow with executorlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="executorlib">
+<h1>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h1>
+<p><a class="github reference external" href="https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements">BAMresearch/NFDI4IngScientificWorkflowRequirements</a></p>
+<section id="define-workflow-with-executorlib">
+<h2>Define workflow with executorlib<a class="headerlink" href="#define-workflow-with-executorlib" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_mesh</span><span class="p">,</span> <span class="n">convert_to_xdmf</span><span class="p">,</span> <span class="n">poisson</span><span class="p">,</span> <span class="n">plot_over_line</span><span class="p">,</span> <span class="n">substitute_macros</span><span class="p">,</span> <span class="n">compile_paper</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleNodeExecutor</span><span class="p">,</span> <span class="n">get_item_from_future</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain_size</span> <span class="o">=</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;executorlib_nfdi.json&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">export_workflow_filename</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
+    <span class="n">gmsh_output_file</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">generate_mesh</span><span class="p">,</span>
+        <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+        <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">meshio_output_dict</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">convert_to_xdmf</span><span class="p">,</span>
+        <span class="n">gmsh_output_file</span><span class="o">=</span><span class="n">gmsh_output_file</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">poisson</span><span class="p">,</span>
+        <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;xdmf_file&quot;</span><span class="p">),</span> 
+        <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;h5_file&quot;</span><span class="p">),</span>
+        <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">plot_over_line</span><span class="p">,</span>
+        <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;pvd_file&quot;</span><span class="p">),</span> 
+        <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;vtu_file&quot;</span><span class="p">),</span>
+        <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">macros_tex_file</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">substitute_macros</span><span class="p">,</span>
+        <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="p">,</span> 
+        <span class="n">ndofs</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;numdofs&quot;</span><span class="p">),</span> 
+        <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
+        <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">paper_output</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">compile_paper</span><span class="p">,</span>
+        <span class="n">macros_tex</span><span class="o">=</span><span class="n">macros_tex_file</span><span class="p">,</span> 
+        <span class="n">plot_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="p">,</span>
+        <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="o">{</span>workflow_json_filename<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;nodes&quot;: [
+        {
+            &quot;id&quot;: 0,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.generate_mesh&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.convert_to_xdmf&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.poisson&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.plot_over_line&quot;
+        },
+        {
+            &quot;id&quot;: 4,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.substitute_macros&quot;
+        },
+        {
+            &quot;id&quot;: 5,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.compile_paper&quot;
+        },
+        {
+            &quot;id&quot;: 6,
+            &quot;type&quot;: &quot;input&quot;,
+            &quot;value&quot;: 2.0,
+            &quot;name&quot;: &quot;domain_size&quot;
+        },
+        {
+            &quot;id&quot;: 7,
+            &quot;type&quot;: &quot;input&quot;,
+            &quot;value&quot;: &quot;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/source&quot;,
+            &quot;name&quot;: &quot;source_directory&quot;
+        },
+        {
+            &quot;id&quot;: 8,
+            &quot;type&quot;: &quot;output&quot;,
+            &quot;name&quot;: &quot;result&quot;
+        }
+    ],
+    &quot;edges&quot;: [
+        {
+            &quot;target&quot;: 0,
+            &quot;targetPort&quot;: &quot;domain_size&quot;,
+            &quot;source&quot;: 6,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 0,
+            &quot;targetPort&quot;: &quot;source_directory&quot;,
+            &quot;source&quot;: 7,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 1,
+            &quot;targetPort&quot;: &quot;gmsh_output_file&quot;,
+            &quot;source&quot;: 0,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 2,
+            &quot;targetPort&quot;: &quot;meshio_output_xdmf&quot;,
+            &quot;source&quot;: 1,
+            &quot;sourcePort&quot;: &quot;xdmf_file&quot;
+        },
+        {
+            &quot;target&quot;: 2,
+            &quot;targetPort&quot;: &quot;meshio_output_h5&quot;,
+            &quot;source&quot;: 1,
+            &quot;sourcePort&quot;: &quot;h5_file&quot;
+        },
+        {
+            &quot;target&quot;: 2,
+            &quot;targetPort&quot;: &quot;source_directory&quot;,
+            &quot;source&quot;: 7,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 3,
+            &quot;targetPort&quot;: &quot;poisson_output_pvd_file&quot;,
+            &quot;source&quot;: 2,
+            &quot;sourcePort&quot;: &quot;pvd_file&quot;
+        },
+        {
+            &quot;target&quot;: 3,
+            &quot;targetPort&quot;: &quot;poisson_output_vtu_file&quot;,
+            &quot;source&quot;: 2,
+            &quot;sourcePort&quot;: &quot;vtu_file&quot;
+        },
+        {
+            &quot;target&quot;: 3,
+            &quot;targetPort&quot;: &quot;source_directory&quot;,
+            &quot;source&quot;: 7,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 4,
+            &quot;targetPort&quot;: &quot;pvbatch_output_file&quot;,
+            &quot;source&quot;: 3,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 4,
+            &quot;targetPort&quot;: &quot;ndofs&quot;,
+            &quot;source&quot;: 2,
+            &quot;sourcePort&quot;: &quot;numdofs&quot;
+        },
+        {
+            &quot;target&quot;: 4,
+            &quot;targetPort&quot;: &quot;domain_size&quot;,
+            &quot;source&quot;: 6,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 4,
+            &quot;targetPort&quot;: &quot;source_directory&quot;,
+            &quot;source&quot;: 7,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 5,
+            &quot;targetPort&quot;: &quot;macros_tex&quot;,
+            &quot;source&quot;: 4,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 5,
+            &quot;targetPort&quot;: &quot;plot_file&quot;,
+            &quot;source&quot;: 3,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 5,
+            &quot;targetPort&quot;: &quot;source_directory&quot;,
+            &quot;source&quot;: 7,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 8,
+            &quot;targetPort&quot;: null,
+            &quot;source&quot;: 5,
+            &quot;sourcePort&quot;: null
+        }
+    ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-workflow-with-aiida">
+<h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span>
+
+<span class="n">load_profile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;c08748df7ab74ec08c14e5f16cebc987&#39; name=&#39;pwd&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<span class="n">wg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d1895b0b32c4451c8847cc76ded8f82e", "version_major": 2, "version_minor": 1}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01/16/2026 08:09:53 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_mesh
+01/16/2026 08:09:56 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: generate_mesh, type: PYFUNCTION, finished.
+01/16/2026 08:09:56 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: convert_to_xdmf
+01/16/2026 08:10:00 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: convert_to_xdmf, type: PYFUNCTION, finished.
+01/16/2026 08:10:00 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: poisson
+/home/jan/miniforge3/envs/processing/lib/python3.9/site-packages/ufl/__init__.py:250: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  import pkg_resources
+01/16/2026 08:10:04 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: poisson, type: PYFUNCTION, finished.
+01/16/2026 08:10:05 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: plot_over_line
+01/16/2026 08:10:09 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: plot_over_line, type: PYFUNCTION, finished.
+01/16/2026 08:10:09 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: substitute_macros
+01/16/2026 08:10:11 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: substitute_macros, type: PYFUNCTION, finished.
+01/16/2026 08:10:11 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: compile_paper
+01/16/2026 08:10:16 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|update_task_state]: Task: compile_paper, type: PYFUNCTION, finished.
+01/16/2026 08:10:16 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+01/16/2026 08:10:16 AM &lt;39943&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1584|WorkGraphEngine|finalize]: Finalize workgraph.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-workflow-with-jobflow">
+<h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">run_locally</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-01-16 08:10:22,433 INFO Started executing jobs locally
+2026-01-16 08:10:22,747 INFO Starting job - generate_mesh (fca356ed-0f12-49aa-90c5-3161982fb757)
+2026-01-16 08:10:24,797 INFO Finished job - generate_mesh (fca356ed-0f12-49aa-90c5-3161982fb757)
+2026-01-16 08:10:24,797 INFO Starting job - convert_to_xdmf (2be5b5a6-4ba9-4962-b09c-c7565e4655a8)
+2026-01-16 08:10:27,186 INFO Finished job - convert_to_xdmf (2be5b5a6-4ba9-4962-b09c-c7565e4655a8)
+2026-01-16 08:10:27,186 INFO Starting job - poisson (e539fd0a-4e53-42b4-b79d-9d07a2f602d7)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/jan/miniforge3/envs/processing/lib/python3.9/site-packages/ufl/__init__.py:250: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  import pkg_resources
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-01-16 08:10:30,319 INFO Finished job - poisson (e539fd0a-4e53-42b4-b79d-9d07a2f602d7)
+2026-01-16 08:10:30,320 INFO Starting job - plot_over_line (e71edb93-5784-4a14-9cb8-29180644c4e1)
+2026-01-16 08:10:33,201 INFO Finished job - plot_over_line (e71edb93-5784-4a14-9cb8-29180644c4e1)
+2026-01-16 08:10:33,202 INFO Starting job - substitute_macros (ca231d17-16ce-409c-a4cc-9a3988b7524a)
+2026-01-16 08:10:35,251 INFO Finished job - substitute_macros (ca231d17-16ce-409c-a4cc-9a3988b7524a)
+2026-01-16 08:10:35,252 INFO Starting job - compile_paper (43798414-e406-411e-9daa-bf1bf3d20c25)
+2026-01-16 08:10:39,264 INFO Finished job - compile_paper (43798414-e406-411e-9daa-bf1bf3d20c25)
+2026-01-16 08:10:39,265 INFO Finished executing jobs locally
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;fca356ed-0f12-49aa-90c5-3161982fb757&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
+ &#39;2be5b5a6-4ba9-4962-b09c-c7565e4655a8&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
+ &#39;e539fd0a-4e53-42b4-b79d-9d07a2f602d7&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
+ &#39;e71edb93-5784-4a14-9cb8-29180644c4e1&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
+ &#39;ca231d17-16ce-409c-a4cc-9a3988b7524a&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
+ &#39;43798414-e406-411e-9daa-bf1bf3d20c25&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="load-workflow-with-pyiron-base">
+<h1>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/afe05aefade47497f84cba8d5e6b6f94a1357ea1e7505a4e903e30d60a273a08.svg" src="../../_images/afe05aefade47497f84cba8d5e6b6f94a1357ea1e7505a4e903e30d60a273a08.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job generate_mesh_48a36c5747cacb5a404050510014e47e was saved and received the ID: 34
+The job convert_to_xdmf_eb9b45572042c1ef8c618184cde64b0d was saved and received the ID: 35
+The job poisson_2fd5008b2250fed255cc4f58e009fe7e was saved and received the ID: 36
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/jan/miniforge3/envs/processing/lib/python3.9/site-packages/ufl/__init__.py:250: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  import pkg_resources
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job plot_over_line_e59dd6066e3aaeb378917024209e71cf was saved and received the ID: 37
+The job substitute_macros_317cac7b98bf8b6278cdf40a45350ccb was saved and received the ID: 38
+The job compile_paper_32a7807be3644bd018cad61f46ebfb35 was saved and received the ID: 39
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-workflow-with-pyiron-workflow">
+<h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9b166521d39390707af8c6097e0ad4bb491ccb0c214cad6471b185419794f860.svg" src="../../_images/9b166521d39390707af8c6097e0ad4bb491ccb0c214cad6471b185419794f860.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/jan/miniforge3/envs/processing/lib/python3.9/site-packages/ufl/__init__.py:250: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  import pkg_resources
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;compile_paper__compile_paper&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./example_workflows/nfdi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">executorlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-executorlib">Define workflow with executorlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jan Janssen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
