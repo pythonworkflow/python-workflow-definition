@@ -287,7 +287,7 @@ def write_workflow_json(
     nodes_store_lst = []
     translate_dict = {}
     for i, k in enumerate(nodes_new_dict.keys()):
-        v = nodes_new_dict[v]
+        v = nodes_new_dict[k]
         translate_dict[k] = i
         if isfunction(v):
             mod = v.__module__
