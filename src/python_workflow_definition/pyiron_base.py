@@ -310,7 +310,7 @@ def write_workflow_json(
         }
         for edge in edges_new_lst
     ]
-                            
+
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(
             workflow_dict=update_node_names(
