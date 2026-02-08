@@ -286,7 +286,7 @@ def write_workflow_json(
 
     nodes_store_lst = []
     translate_dict = {}
-    for i, k in enumerate(nodes_new_dict.keys()):
+    for i, k in enumerate(list(nodes_new_dict.keys())[::-1]):
         v = nodes_new_dict[k]
         translate_dict[k] = i
         if isfunction(v):
@@ -301,6 +301,7 @@ def write_workflow_json(
         else:
             nodes_store_lst.append({"id": i, "type": "input", "value": v})
 
+    print(translate_dict)
     edges_store_lst = [
         {
             TARGET_LABEL: translate_dict[edge[TARGET_LABEL]],
