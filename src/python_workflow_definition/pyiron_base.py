@@ -285,18 +285,32 @@ def write_workflow_json(
     )
 
     nodes_store_lst = []
-    for k, v in nodes_new_dict.items():
+    translate_dict = {}
+    for i, k in enumerate(list(nodes_new_dict.keys())[::-1]):
+        v = nodes_new_dict[k]
+        translate_dict[k] = i
         if isfunction(v):
             mod = v.__module__
             if mod == "python_workflow_definition.pyiron_base":
                 mod = "python_workflow_definition.shared"
             nodes_store_lst.append(
-                {"id": k, "type": "function", "value": mod + "." + v.__name__}
+                {"id": i, "type": "function", "value": mod + "." + v.__name__}
             )
         elif isinstance(v, np.ndarray):
-            nodes_store_lst.append({"id": k, "type": "input", "value": v.tolist()})
+            nodes_store_lst.append({"id": i, "type": "input", "value": v.tolist()})
         else:
-            nodes_store_lst.append({"id": k, "type": "input", "value": v})
+            nodes_store_lst.append({"id": i, "type": "input", "value": v})
+
+    print(translate_dict)
+    edges_store_lst = [
+        {
+            TARGET_LABEL: translate_dict[edge[TARGET_LABEL]],
+            TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
+            SOURCE_LABEL: translate_dict[edge[SOURCE_LABEL]],
+            SOURCE_PORT_LABEL: edge[SOURCE_PORT_LABEL],
+        }
+        for edge in edges_new_lst
+    ]
 
     PythonWorkflowDefinitionWorkflow(
         **set_result_node(
@@ -304,7 +318,7 @@ def write_workflow_json(
                 workflow_dict={
                     VERSION_LABEL: VERSION_NUMBER,
                     NODES_LABEL: nodes_store_lst,
-                    EDGES_LABEL: edges_new_lst,
+                    EDGES_LABEL: edges_store_lst,
                 }
             )
         )
