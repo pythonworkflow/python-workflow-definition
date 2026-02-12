@@ -1,0 +1,21 @@
+{
+  "version": "0.1.1",
+  "nodes": [
+    { "id": 0, "value": 3, "type": "input", "name": "a" },
+    { "id": 1, "value": 2, "type": "input", "name": "b" },
+    { "id": 2, "value": 4, "type": "input", "name": "c" },
+    { "id": 3, "type": "function", "value": "workflow.get_prod_and_div" },
+    { "id": 4, "type": "workflow", "value": "prod_div.json" },
+    { "id": 5, "type": "function", "value": "workflow.get_sum" },
+    { "id": 6, "type": "output", "name": "final_result" }
+  ],
+  "edges": [
+    { "target": 3, "targetPort": "x", "source": 0, "sourcePort": null },
+    { "target": 3, "targetPort": "y", "source": 2, "sourcePort": null },
+    { "target": 4, "targetPort": "x", "source": 3, "sourcePort": "prod" },
+    { "target": 4, "targetPort": "y", "source": 3, "sourcePort": "div" },
+    { "target": 5, "targetPort": "x", "source": 4, "sourcePort": "result" },
+    { "target": 5, "targetPort": "y", "source": 1, "sourcePort": null },
+    { "target": 6, "targetPort": null, "source": 5, "sourcePort": null }
+  ]
+}
