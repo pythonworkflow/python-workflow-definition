@@ -19,6 +19,9 @@ __all__ = (
 )
 
 
+JsonPrimitive = Union[str, int, float, bool, None]
+
+
 class PythonWorkflowDefinitionBaseNode(BaseModel):
     """Base model for all node types, containing common fields."""
 
@@ -33,7 +36,7 @@ class PythonWorkflowDefinitionInputNode(PythonWorkflowDefinitionBaseNode):
 
     type: Literal["input"]
     name: str
-    value: Optional[Any] = None
+    value: Optional[JsonPrimitive] = None
 
 
 class PythonWorkflowDefinitionOutputNode(PythonWorkflowDefinitionBaseNode):
