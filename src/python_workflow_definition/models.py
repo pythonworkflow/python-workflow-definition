@@ -1,5 +1,15 @@
 from pathlib import Path
-from typing import List, Union, Optional, Literal, Any, Annotated, Type, TypeVar
+from typing import (
+    List,
+    Union,
+    Optional,
+    Literal,
+    Any,
+    Annotated,
+    Type,
+    TypeVar,
+)
+from typing_extensions import TypeAliasType
 from pydantic import BaseModel, Field, field_validator, field_serializer
 from pydantic import ValidationError
 import json
@@ -20,7 +30,9 @@ __all__ = (
 
 
 JsonPrimitive = Union[str, int, float, bool, None]
-JsonValue = Union[JsonPrimitive, list[JsonPrimitive], dict[str, JsonPrimitive]]
+AllowableDefaults = TypeAliasType(
+    "AllowableDefaults", "Union[JsonPrimitive, dict[str, AllowableDefaults], tuple[AllowableDefaults, ...]]"
+)
 
 
 class PythonWorkflowDefinitionBaseNode(BaseModel):
@@ -37,7 +49,7 @@ class PythonWorkflowDefinitionInputNode(PythonWorkflowDefinitionBaseNode):
 
     type: Literal["input"]
     name: str
-    value: Optional[JsonValue] = None
+    value: Optional[AllowableDefaults] = None
 
 
 class PythonWorkflowDefinitionOutputNode(PythonWorkflowDefinitionBaseNode):
