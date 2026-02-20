@@ -42,7 +42,7 @@ class TestModels(unittest.TestCase):
         self.assertEqual(node_with_value.value, 42)
 
     def test_input_node_invalid_value_raises(self):
-        bad_value = [(1, 2)]
+        bad_value = {1: 2}
         self.assertNotIsInstance(bad_value, JsonPrimitive)
         with self.assertRaises(ValidationError):
             PythonWorkflowDefinitionInputNode.model_validate(
