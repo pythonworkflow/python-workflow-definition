@@ -7,9 +7,9 @@ from typing import (
     Any,
     Annotated,
     Type,
-    TypeAliasType,
     TypeVar,
 )
+from typing_extensions import TypeAliasType
 from pydantic import BaseModel, Field, field_validator, field_serializer
 from pydantic import ValidationError
 import json
