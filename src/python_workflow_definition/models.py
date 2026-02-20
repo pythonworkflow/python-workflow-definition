@@ -20,6 +20,7 @@ __all__ = (
 
 
 JsonPrimitive = Union[str, int, float, bool, None]
+JsonValue = Union[JsonPrimitive, list[JsonPrimitive], dict[str, JsonPrimitive]]
 
 
 class PythonWorkflowDefinitionBaseNode(BaseModel):
@@ -36,7 +37,7 @@ class PythonWorkflowDefinitionInputNode(PythonWorkflowDefinitionBaseNode):
 
     type: Literal["input"]
     name: str
-    value: Optional[JsonPrimitive] = None
+    value: Optional[JsonValue] = None
 
 
 class PythonWorkflowDefinitionOutputNode(PythonWorkflowDefinitionBaseNode):
