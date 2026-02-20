@@ -32,7 +32,7 @@ __all__ = (
 JsonPrimitive = Union[str, int, float, bool, None]
 AllowableDefaults = TypeAliasType(
     "AllowableDefaults",
-    "Union[JsonPrimitive, dict[str, AllowableDefaults], tuple[AllowableDefaults, ...]]",
+    "Union[JsonPrimitive, dict[str, AllowableDefaults], list[AllowableDefaults]]",
 )
 
 
