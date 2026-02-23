@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest import mock
 from pydantic import ValidationError
 from python_workflow_definition.models import (
+    JsonPrimitive,
     PythonWorkflowDefinitionInputNode,
     PythonWorkflowDefinitionOutputNode,
     PythonWorkflowDefinitionFunctionNode,
@@ -11,6 +12,11 @@ from python_workflow_definition.models import (
     PythonWorkflowDefinitionWorkflow,
     INTERNAL_DEFAULT_HANDLE,
 )
+
+
+class _NoTrivialSerialization:
+    pass
+
 
 class TestModels(unittest.TestCase):
     def setUp(self):
@@ -39,6 +45,50 @@ class TestModels(unittest.TestCase):
             id=2, type="input", name="test_input_2", value=42
         )
         self.assertEqual(node_with_value.value, 42)
+
+    def test_input_node_valid_values(self):
+        good_values = (
+            1,
+            1.1,
+            "string",
+            True,
+            None,
+            [1, 2],
+            [["recursive", "tuple"], [True, False]],
+        )
+        for value in good_values:
+            with self.subTest(value=value):
+                model = PythonWorkflowDefinitionInputNode.model_validate(
+                    {
+                        "id": 0,
+                        "type": "input",
+                        "name": "x",
+                        "value": value,
+                    }
+                )
+                self.assertEqual(
+                    value,
+                    PythonWorkflowDefinitionInputNode.model_validate(
+                        model.model_dump(mode="json")
+                    ).value
+                )
+
+    def test_input_node_invalid_value_raises(self):
+        bad_values = (
+            {1: 2},
+            _NoTrivialSerialization(),
+        )
+        for value in bad_values:
+            with self.subTest(value=value):
+                with self.assertRaises(ValidationError):
+                    PythonWorkflowDefinitionInputNode.model_validate(
+                        {
+                            "id": 0,
+                            "type": "input",
+                            "name": "x",
+                            "value": value,
+                        }
+                    )
 
     def test_output_node(self):
         node = PythonWorkflowDefinitionOutputNode(id=1, type="output", name="test_output")
