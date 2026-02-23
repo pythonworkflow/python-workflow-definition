@@ -1,5 +1,6 @@
 # Python Workflow Definition
 [![Pipeline](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml/badge.svg)](https://github.com/pythonworkflow/python-workflow-definition/actions/workflows/pipeline.yml)
+[![codecov](https://codecov.io/github/pythonworkflow/python-workflow-definition/graph/badge.svg?token=3JXD1GN8LG)](https://codecov.io/github/pythonworkflow/python-workflow-definition)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/HEAD)
 [![DOI](https://zenodo.org/badge/945869529.svg)](https://doi.org/10.5281/zenodo.15516179)
 

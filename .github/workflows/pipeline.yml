@@ -69,6 +69,7 @@ jobs:
         cd example_workflows/nfdi/
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
@@ -104,6 +105,7 @@ jobs:
         cd example_workflows/quantum_espresso
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
@@ -133,6 +135,7 @@ jobs:
         cd example_workflows/arithmetic
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
+        papermill executorlib.ipynb executorlib_out.ipynb -k "python3"
         papermill jobflow.ipynb jobflow_out.ipynb -k "python3"
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
@@ -159,3 +162,69 @@ jobs:
         jupyter-book build . --path-output public
         mv public/_build/html public_html
         touch public_html/.nojekyll
+
+  unittest_matrix:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        include:
+        - operating-system: macos-latest
+          python-version: '3.12'
+
+        - operating-system: ubuntu-latest
+          python-version: '3.12'
+
+        - operating-system: ubuntu-latest
+          python-version: '3.11'
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup environment
+      shell: bash -l {0}
+      run: |
+        echo -e "channels:\n  - conda-forge\n" > .condarc
+        sed '/- python/d' binder/environment.yml > environment.yml
+    - name: Setup Mambaforge
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: environment.yml
+    - name: Test
+      shell: bash -l {0}
+      timeout-minutes: 30
+      run: |
+        verdi presto --profile-name pwd
+        pip install . --no-deps --no-build-isolation
+        python -m unittest discover tests
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup environment
+      shell: bash -l {0}
+      run: |
+        echo -e "channels:\n  - conda-forge\n" > .condarc
+        sed '/- python/d' binder/environment.yml > environment.yml
+        echo '- coverage' >> environment.yml
+    - name: Setup Mambaforge
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: '3.12'
+        miniforge-version: latest
+        condarc-file: .condarc
+        environment-file: environment.yml
+    - name: Test
+      shell: bash -l {0}
+      timeout-minutes: 30
+      run: |
+        verdi presto --profile-name pwd
+        pip install . --no-deps --no-build-isolation
+        coverage run
+        coverage xml
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
