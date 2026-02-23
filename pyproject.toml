@@ -4,7 +4,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "python_workflow_definition"
-version = "0.1.2"
 description = "Python Workflow Definition - workflow interoperability for aiida, jobflow and pyiron"
 authors = [
   { name = "Jan Janssen", email = "janssen@mpie.de" },
@@ -19,6 +18,7 @@ dependencies = [
     "numpy>=1.21",
     "pydantic>=2.7.0,<=2.12.4",
 ]
+dynamic = ["version"]
 
 [project.optional-dependencies]
 aiida = [
@@ -35,6 +35,28 @@ plot = [
     "networkx>=2.8.8,<=3.5",
     "ipython>=7.33.0,<=9.8.0",
 ]
+
+[tool.hatch.build]
+include = [
+    "src/python_workflow_definition"
+]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/python_workflow_definition/_version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/python_workflow_definition"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/python_workflow_definition"
+]
+
+[tool.hatch.version]
+source = "vcs"
+path = "src/python_workflow_definition/_version.py"
 
 [tool.coverage.run]
 source = ["python_workflow_definition"]

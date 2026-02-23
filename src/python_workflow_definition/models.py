@@ -34,6 +34,13 @@ AllowableDefaults = TypeAliasType(
 )
 
 
+JsonPrimitive = Union[str, int, float, bool, None]
+AllowableDefaults = TypeAliasType(
+    "AllowableDefaults",
+    "Union[JsonPrimitive, dict[str, AllowableDefaults], list[AllowableDefaults]]",
+)
+
+
 class PythonWorkflowDefinitionBaseNode(BaseModel):
     """Base model for all node types, containing common fields."""
 

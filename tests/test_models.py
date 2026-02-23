@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest import mock
 from pydantic import ValidationError
 from python_workflow_definition.models import (
+    JsonPrimitive,
     PythonWorkflowDefinitionInputNode,
     PythonWorkflowDefinitionOutputNode,
     PythonWorkflowDefinitionFunctionNode,
