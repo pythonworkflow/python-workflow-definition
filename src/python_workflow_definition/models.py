@@ -28,6 +28,11 @@ __all__ = (
     "PythonWorkflowDefinitionWorkflow",
 )
 
+JsonPrimitive = Union[str, int, float, bool, None]
+AllowableDefaults = TypeAliasType(
+    "AllowableDefaults", "Union[JsonPrimitive, tuple[AllowableDefaults, ...]]"
+)
+
 
 JsonPrimitive = Union[str, int, float, bool, None]
 AllowableDefaults = TypeAliasType(

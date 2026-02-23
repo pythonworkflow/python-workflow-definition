@@ -53,8 +53,8 @@ class TestModels(unittest.TestCase):
             "string",
             True,
             None,
-            [1, 2],
-            [["recursive", "tuple"], [True, False]],
+            (1, 2),
+            (("recursive", "tuple"), (True, False)),
         )
         for value in good_values:
             with self.subTest(value=value):
@@ -73,9 +73,10 @@ class TestModels(unittest.TestCase):
                     ).value
                 )
 
+
     def test_input_node_invalid_value_raises(self):
         bad_values = (
-            {1: 2},
+            {"mutable": "thing"},
             _NoTrivialSerialization(),
         )
         for value in bad_values:
