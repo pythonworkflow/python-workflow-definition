@@ -109,9 +109,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
         # if the from socket is the default result, we set it to None
         if link_data["from_socket"] == "result":
             link_data["from_socket"] = None
-        link_data[TARGET_LABEL] = node_name_mapping[link_data.pop("to_node")]
+        link_data[TARGET_LABEL] = node_name_mapping[link_data.pop("to_task")]
         link_data[TARGET_PORT_LABEL] = link_data.pop("to_socket")
-        link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
+        link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_task")]
         link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
         data[EDGES_LABEL].append(link_data)
 
