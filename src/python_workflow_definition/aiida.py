@@ -6,7 +6,7 @@ from aiida_pythonjob.data.serializer import general_serializer
 from aiida_workgraph import WorkGraph, task, Task, namespace
 from aiida_workgraph.socket import TaskSocketNamespace
 from dataclasses import replace
-from node_graph.node_spec import SchemaSource
+from node_graph.task_spec import SchemaSource
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
