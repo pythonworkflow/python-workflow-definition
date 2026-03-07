@@ -16,7 +16,7 @@ authors = [
 license = { file = "LICENSE" }
 dependencies = [
     "numpy>=1.21",
-    "pydantic>=2.7.0,<=2.12.4",
+    "pydantic>=2.7.0,<2.13.0",
 ]
 dynamic = ["version"]
 
