@@ -10,7 +10,7 @@ dependencies:
 - jobflow =0.3.1
 - executorlib =1.7.4
 - pyiron_base =0.15.12
-- pyiron_workflow =0.15.4
+- pyiron_workflow =0.15.5
 - pygraphviz =1.14
 - aiida-workgraph =0.8.1
 - plumpy =0.25.0
