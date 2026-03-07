@@ -6,7 +6,7 @@ from aiida_pythonjob.data.serializer import general_serializer
 from aiida_workgraph import WorkGraph, task, Task, namespace
 from aiida_workgraph.socket import TaskSocketNamespace
 from dataclasses import replace
-from node_graph.node_spec import SchemaSource
+from node_graph.task_spec import SchemaSource
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
     convert_nodes_list_to_dict,
@@ -109,9 +109,9 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
         # if the from socket is the default result, we set it to None
         if link_data["from_socket"] == "result":
             link_data["from_socket"] = None
-        link_data[TARGET_LABEL] = node_name_mapping[link_data.pop("to_node")]
+        link_data[TARGET_LABEL] = node_name_mapping[link_data.pop("to_task")]
         link_data[TARGET_PORT_LABEL] = link_data.pop("to_socket")
-        link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_node")]
+        link_data[SOURCE_LABEL] = node_name_mapping[link_data.pop("from_task")]
         link_data[SOURCE_PORT_LABEL] = link_data.pop("from_socket")
         data[EDGES_LABEL].append(link_data)
 
