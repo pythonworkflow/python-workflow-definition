@@ -2,10 +2,10 @@ channels:
 - conda-forge
 dependencies:
 - python =3.12
-- pydantic =2.12.4
+- pydantic =2.12.5
 - hatchling =1.28.0
 - hatch-vcs =0.5.0
-- jobflow =0.2.1
+- jobflow =0.3.1
 - executorlib =1.7.4
 - pyiron_base =0.15.12
 - pyiron_workflow =0.15.4
@@ -13,4 +13,4 @@ dependencies:
 - aiida-workgraph =0.8.1
 - conda_subprocess =0.0.10
 - networkx =3.4.2
-- cwltool =3.1.20251031082601
+- cwltool =3.1.20260108082145
