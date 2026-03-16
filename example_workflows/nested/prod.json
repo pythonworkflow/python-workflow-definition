@@ -1,0 +1,12 @@
+{
+  "version": "0.1.1",
+  "nodes": [
+    { "id": 0, "type": "function", "value": "workflow.get_square" },
+    { "id": 1, "type": "input", "value": 1, "name": "x" },
+    { "id": 2, "type": "output", "name": "result" }
+  ],
+  "edges": [
+    { "target": 0, "targetPort": "x", "source": 1, "sourcePort": null },
+    { "target": 2, "targetPort": null, "source": 1, "sourcePort": null }
+  ]
+}
