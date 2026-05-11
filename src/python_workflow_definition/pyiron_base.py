@@ -239,9 +239,10 @@ def load_workflow_json(file_name: str, project: Optional[Project] = None):
     )
 
     edges_new_lst = content[EDGES_LABEL]
+    nodes_types_dict = {int(n["id"]): n["type"] for n in content[NODES_LABEL]}
     nodes_new_dict = {}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
-        if isinstance(v, str) and "." in v:
+        if nodes_types_dict[int(k)] == "function" and isinstance(v, str) and "." in v:
             p, m = v.rsplit(".", 1)
             if p == "python_workflow_definition.shared":
                 p = "python_workflow_definition.pyiron_base"
