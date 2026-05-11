@@ -35,7 +35,7 @@ def load_workflow_json(file_name: str) -> WorkGraph:
         nodes_list=data[NODES_LABEL]
     ).items():
         if (
-            nodes_types_dict[int(k)] == "function"
+            nodes_types_dict[int(id)] == "function"
             and isinstance(identifier, str)
             and "." in identifier
         ):
