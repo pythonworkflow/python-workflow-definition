@@ -75,8 +75,9 @@ def load_workflow_json(file_name: str):
 
     edges_new_lst = content[EDGES_LABEL]
     nodes_new_dict = {}
+    nodes_types_dict = {int(n["id"]): n["type"] for n in content[NODES_LABEL]}
     for k, v in convert_nodes_list_to_dict(nodes_list=content[NODES_LABEL]).items():
-        if isinstance(v, str) and "." in v:
+        if nodes_types_dict[int(k)] == "function" and isinstance(v, str) and "." in v:
             p, m = v.rsplit(".", 1)
             mod = import_module(p)
             nodes_new_dict[int(k)] = getattr(mod, m)

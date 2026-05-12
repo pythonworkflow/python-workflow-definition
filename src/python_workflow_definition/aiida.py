@@ -30,10 +30,15 @@ def load_workflow_json(file_name: str) -> WorkGraph:
     wg = WorkGraph()
     task_name_mapping = {}
 
+    nodes_types_dict = {int(n["id"]): n["type"] for n in data[NODES_LABEL]}
     for id, identifier in convert_nodes_list_to_dict(
         nodes_list=data[NODES_LABEL]
     ).items():
-        if isinstance(identifier, str) and "." in identifier:
+        if (
+            nodes_types_dict[int(id)] == "function"
+            and isinstance(identifier, str)
+            and "." in identifier
+        ):
             p, m = identifier.rsplit(".", 1)
             mod = import_module(p)
             func = getattr(mod, m)
