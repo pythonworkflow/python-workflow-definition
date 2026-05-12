@@ -8,13 +8,20 @@ from pyiron_workflow import Workflow, as_function_node, function_node
 from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               TARGET_LABEL, TARGET_PORT_LABEL,
-                                               VERSION_LABEL, VERSION_NUMBER,
-                                               get_dict, remove_result,
-                                               set_result_node,
-                                               update_node_names)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+    VERSION_LABEL,
+    VERSION_NUMBER,
+    get_dict,
+    remove_result,
+    set_result_node,
+    update_node_names,
+)
 
 
 def get_linked_nodes(graph_dict):

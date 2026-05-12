@@ -3,10 +3,14 @@ from IPython.display import SVG, display
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.purepython import group_edges
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               convert_nodes_list_to_dict,
-                                               get_kwargs)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    convert_nodes_list_to_dict,
+    get_kwargs,
+)
 
 
 def plot(file_name: str):

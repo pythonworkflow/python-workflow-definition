@@ -4,12 +4,18 @@ from inspect import isfunction
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.purepython import group_edges, resort_total_lst
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               convert_nodes_list_to_dict,
-                                               get_dict, get_kwargs, get_list,
-                                               get_source_handles,
-                                               remove_result)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    convert_nodes_list_to_dict,
+    get_dict,
+    get_kwargs,
+    get_list,
+    get_source_handles,
+    remove_result,
+)
 
 
 def get_item(obj, key):

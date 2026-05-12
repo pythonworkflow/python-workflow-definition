@@ -5,11 +5,16 @@ from yaml import CDumper as Dumper
 from yaml import dump
 
 from python_workflow_definition.purepython import group_edges, resort_total_lst
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               TARGET_LABEL, TARGET_PORT_LABEL,
-                                               convert_nodes_list_to_dict,
-                                               remove_result)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+    convert_nodes_list_to_dict,
+    remove_result,
+)
 
 
 def _get_function_argument(argument: str, position: int = 3) -> dict:

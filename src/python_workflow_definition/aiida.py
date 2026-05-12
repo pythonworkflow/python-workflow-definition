@@ -9,13 +9,19 @@ from aiida_workgraph.socket import TaskSocketNamespace
 from node_graph.task_spec import SchemaSource
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               TARGET_LABEL, TARGET_PORT_LABEL,
-                                               VERSION_LABEL, VERSION_NUMBER,
-                                               convert_nodes_list_to_dict,
-                                               set_result_node,
-                                               update_node_names)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+    VERSION_LABEL,
+    VERSION_NUMBER,
+    convert_nodes_list_to_dict,
+    set_result_node,
+    update_node_names,
+)
 
 
 def load_workflow_json(file_name: str) -> WorkGraph:

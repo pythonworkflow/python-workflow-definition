@@ -7,14 +7,22 @@ from pyiron_base import Project, job
 from pyiron_base.project.delayed import DelayedObject
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               TARGET_LABEL, TARGET_PORT_LABEL,
-                                               VERSION_LABEL, VERSION_NUMBER,
-                                               convert_nodes_list_to_dict,
-                                               get_kwargs, get_source_handles,
-                                               remove_result, set_result_node,
-                                               update_node_names)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+    VERSION_LABEL,
+    VERSION_NUMBER,
+    convert_nodes_list_to_dict,
+    get_kwargs,
+    get_source_handles,
+    remove_result,
+    set_result_node,
+    update_node_names,
+)
 
 
 def _resort_total_lst(total_lst: list, nodes_dict: dict) -> list:

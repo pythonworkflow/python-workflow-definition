@@ -5,15 +5,24 @@ import numpy as np
 from jobflow import Flow, job
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
-                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
-                                               TARGET_LABEL, TARGET_PORT_LABEL,
-                                               VERSION_LABEL, VERSION_NUMBER,
-                                               convert_nodes_list_to_dict,
-                                               get_dict, get_kwargs, get_list,
-                                               get_source_handles,
-                                               remove_result, set_result_node,
-                                               update_node_names)
+from python_workflow_definition.shared import (
+    EDGES_LABEL,
+    NODES_LABEL,
+    SOURCE_LABEL,
+    SOURCE_PORT_LABEL,
+    TARGET_LABEL,
+    TARGET_PORT_LABEL,
+    VERSION_LABEL,
+    VERSION_NUMBER,
+    convert_nodes_list_to_dict,
+    get_dict,
+    get_kwargs,
+    get_list,
+    get_source_handles,
+    remove_result,
+    set_result_node,
+    update_node_names,
+)
 
 
 def _get_function_dict(flow: Flow):
