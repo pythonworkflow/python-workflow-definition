@@ -1,26 +1,21 @@
-from importlib import import_module
 import traceback
+from dataclasses import replace
+from importlib import import_module
 
 from aiida import orm
 from aiida_pythonjob.data.serializer import general_serializer
-from aiida_workgraph import WorkGraph, task, Task, namespace
+from aiida_workgraph import Task, WorkGraph, namespace, task
 from aiida_workgraph.socket import TaskSocketNamespace
-from dataclasses import replace
 from node_graph.task_spec import SchemaSource
+
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (
-    convert_nodes_list_to_dict,
-    update_node_names,
-    set_result_node,
-    NODES_LABEL,
-    EDGES_LABEL,
-    SOURCE_LABEL,
-    SOURCE_PORT_LABEL,
-    TARGET_LABEL,
-    TARGET_PORT_LABEL,
-    VERSION_NUMBER,
-    VERSION_LABEL,
-)
+from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
+                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
+                                               TARGET_LABEL, TARGET_PORT_LABEL,
+                                               VERSION_LABEL, VERSION_NUMBER,
+                                               convert_nodes_list_to_dict,
+                                               set_result_node,
+                                               update_node_names)
 
 
 def load_workflow_json(file_name: str) -> WorkGraph:

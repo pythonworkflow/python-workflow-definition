@@ -2,21 +2,14 @@ from concurrent.futures import Executor
 from importlib import import_module
 from inspect import isfunction
 
-
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (
-    get_dict,
-    get_list,
-    get_kwargs,
-    get_source_handles,
-    convert_nodes_list_to_dict,
-    remove_result,
-    NODES_LABEL,
-    EDGES_LABEL,
-    SOURCE_LABEL,
-    SOURCE_PORT_LABEL,
-)
-from python_workflow_definition.purepython import resort_total_lst, group_edges
+from python_workflow_definition.purepython import group_edges, resort_total_lst
+from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
+                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
+                                               convert_nodes_list_to_dict,
+                                               get_dict, get_kwargs, get_list,
+                                               get_source_handles,
+                                               remove_result)
 
 
 def get_item(obj, key):

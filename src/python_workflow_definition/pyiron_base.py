@@ -3,26 +3,18 @@ from inspect import isfunction
 from typing import Optional
 
 import numpy as np
-from pyiron_base import job, Project
+from pyiron_base import Project, job
 from pyiron_base.project.delayed import DelayedObject
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
-from python_workflow_definition.shared import (
-    get_kwargs,
-    get_source_handles,
-    convert_nodes_list_to_dict,
-    update_node_names,
-    remove_result,
-    set_result_node,
-    NODES_LABEL,
-    EDGES_LABEL,
-    SOURCE_LABEL,
-    SOURCE_PORT_LABEL,
-    TARGET_LABEL,
-    TARGET_PORT_LABEL,
-    VERSION_NUMBER,
-    VERSION_LABEL,
-)
+from python_workflow_definition.shared import (EDGES_LABEL, NODES_LABEL,
+                                               SOURCE_LABEL, SOURCE_PORT_LABEL,
+                                               TARGET_LABEL, TARGET_PORT_LABEL,
+                                               VERSION_LABEL, VERSION_NUMBER,
+                                               convert_nodes_list_to_dict,
+                                               get_kwargs, get_source_handles,
+                                               remove_result, set_result_node,
+                                               update_node_names)
 
 
 def _resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
