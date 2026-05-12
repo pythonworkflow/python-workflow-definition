@@ -2,26 +2,26 @@ from importlib import import_module
 from inspect import isfunction
 
 import numpy as np
-from jobflow import job, Flow
+from jobflow import Flow, job
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
-    get_dict,
-    get_list,
-    get_kwargs,
-    get_source_handles,
-    update_node_names,
-    convert_nodes_list_to_dict,
-    remove_result,
-    set_result_node,
-    NODES_LABEL,
     EDGES_LABEL,
+    NODES_LABEL,
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
     TARGET_PORT_LABEL,
-    VERSION_NUMBER,
     VERSION_LABEL,
+    VERSION_NUMBER,
+    convert_nodes_list_to_dict,
+    get_dict,
+    get_kwargs,
+    get_list,
+    get_source_handles,
+    remove_result,
+    set_result_node,
+    update_node_names,
 )
 
 

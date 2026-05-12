@@ -1,26 +1,26 @@
 from collections import Counter
-from inspect import isfunction
 from importlib import import_module
+from inspect import isfunction
 from typing import Any
 
 import numpy as np
-from pyiron_workflow import as_function_node, function_node, Workflow
+from pyiron_workflow import Workflow, as_function_node, function_node
 from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
-    get_dict,
-    update_node_names,
-    set_result_node,
-    remove_result,
-    NODES_LABEL,
     EDGES_LABEL,
+    NODES_LABEL,
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
     TARGET_PORT_LABEL,
-    VERSION_NUMBER,
     VERSION_LABEL,
+    VERSION_NUMBER,
+    get_dict,
+    remove_result,
+    set_result_node,
+    update_node_names,
 )
 
 

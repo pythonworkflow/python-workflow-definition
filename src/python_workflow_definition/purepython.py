@@ -1,21 +1,20 @@
 from importlib import import_module
 from inspect import isfunction
 
-
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
-    get_dict,
-    get_list,
-    get_kwargs,
-    get_source_handles,
-    convert_nodes_list_to_dict,
-    remove_result,
-    NODES_LABEL,
     EDGES_LABEL,
+    NODES_LABEL,
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
     TARGET_PORT_LABEL,
+    convert_nodes_list_to_dict,
+    get_dict,
+    get_kwargs,
+    get_list,
+    get_source_handles,
+    remove_result,
 )
 
 
