@@ -1,5 +1,6 @@
-import unittest
+import json
 import os
+import unittest
 from jobflow import job, Flow
 from jobflow.managers.local import run_locally
 from python_workflow_definition.jobflow import load_workflow_json, write_workflow_json
@@ -15,6 +16,10 @@ def get_sum(x, y):
 
 def get_square(x):
     return x ** 2
+
+
+def echo(filename):
+    return filename
 
 
 class TestJobflow(unittest.TestCase):
@@ -33,3 +38,27 @@ class TestJobflow(unittest.TestCase):
 
         self.assertTrue(os.path.exists(workflow_json_filename))
         self.assertEqual(result[list(result.keys())[-1]][1].output, 6.25)
+
+    def test_jobflow_filename_input(self):
+        """A filename string like 'image.png' must be passed through as a plain
+        string input, not interpreted as a Python module path or a float."""
+        workflow_json_filename = "jobflow_filename.json"
+        echo_job = job(echo)
+        result_job = echo_job(filename="image.png")
+        flow = Flow([result_job])
+
+        write_workflow_json(flow=flow, file_name=workflow_json_filename)
+        self.assertTrue(os.path.exists(workflow_json_filename))
+
+        with open(workflow_json_filename) as f:
+            saved = json.load(f)
+        input_values = [
+            n["value"]
+            for n in saved["nodes"]
+            if n["type"] == "input"
+        ]
+        self.assertIn("image.png", input_values)
+
+        flow = load_workflow_json(file_name=workflow_json_filename)
+        result = run_locally(flow)
+        self.assertEqual(result[list(result.keys())[-1]][1].output, "image.png")
