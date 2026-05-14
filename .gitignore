@@ -200,3 +200,21 @@ aiida_to_jobflow_qe.json
 pyiron_base_to_aiida_simple.json
 pyiron_base_to_jobflow_qe.json
 **/*.h5
+
+# Test-generated temporary files (created at runtime by the test suite)
+workflow.py
+workflow.json
+echo_module.py
+filename_workflow.json
+multi_dot_workflow.json
+echo_pyiron_wf.py
+jobflow_filename.json
+jobflow_simple.json
+pyiron_arithmetic.json
+pyiron_filename.json
+pyiron_workflow_arithmetic.json
+pyiron_workflow_filename.json
+pyiron_workflow_filename_prog.json
+aiida_simple.json
+test_workflow.json
+invalid_workflow.json
