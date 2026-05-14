@@ -51,6 +51,9 @@ class TestModels(unittest.TestCase):
             1,
             1.1,
             "string",
+            "image.png",
+            "path/to/file.tar.gz",
+            "my.module.like.string",
             True,
             None,
             [1, 2],
@@ -72,6 +75,50 @@ class TestModels(unittest.TestCase):
                         model.model_dump(mode="json")
                     ).value
                 )
+
+    def test_input_node_filename_value_roundtrip(self):
+        """Input nodes with filename-like values (e.g. 'image.png') must survive a
+        full JSON serialise/deserialise round-trip without being misinterpreted as
+        a Python module path or a floating-point number."""
+        filenames = [
+            "image.png",
+            "archive.tar.gz",
+            "report.2024.pdf",
+            "data.csv",
+        ]
+        for filename in filenames:
+            with self.subTest(filename=filename):
+                node = PythonWorkflowDefinitionInputNode(
+                    id=1, type="input", name="file_input", value=filename
+                )
+                self.assertEqual(node.value, filename)
+                dumped = node.model_dump(mode="json")
+                self.assertEqual(dumped["value"], filename)
+                reloaded = PythonWorkflowDefinitionInputNode.model_validate(dumped)
+                self.assertEqual(reloaded.value, filename)
+
+    def test_workflow_with_filename_input_roundtrip(self):
+        """A full workflow containing a filename as an input value must serialise and
+        deserialise correctly through dump_json / load_json_str."""
+        workflow_dict = {
+            "version": "1.0",
+            "nodes": [
+                {"id": 1, "type": "input", "name": "file_input", "value": "image.png"},
+                {"id": 2, "type": "function", "value": "module.process"},
+                {"id": 3, "type": "output", "name": "result"},
+            ],
+            "edges": [
+                {"source": 1, "target": 2, "targetPort": "filename"},
+                {"source": 2, "target": 3, "sourcePort": None},
+            ],
+        }
+        wf = PythonWorkflowDefinitionWorkflow(**workflow_dict)
+        json_str = wf.dump_json()
+        reloaded_dict = PythonWorkflowDefinitionWorkflow.load_json_str(json_str)
+        reloaded_wf = PythonWorkflowDefinitionWorkflow(**reloaded_dict)
+        input_node = reloaded_wf.nodes[0]
+        self.assertIsInstance(input_node, PythonWorkflowDefinitionInputNode)
+        self.assertEqual(input_node.value, "image.png")
 
     def test_input_node_invalid_value_raises(self):
         bad_values = (
