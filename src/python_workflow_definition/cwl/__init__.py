@@ -1,5 +1,6 @@
 import json
 import pickle
+from pathlib import Path
 
 from yaml import CDumper as Dumper
 from yaml import dump
@@ -79,8 +80,10 @@ def _get_function(workflow):
     return function_nodes_dict, funct_dict
 
 
-def _write_function_cwl(workflow):
+def _write_function_cwl(workflow, directory_path: str = "."):
     function_nodes_dict, funct_dict = _get_function(workflow)
+    export_path = Path(directory_path)
+    export_path.mkdir(parents=True, exist_ok=True)
 
     for i in function_nodes_dict.keys():
         template = {
@@ -105,7 +108,7 @@ def _write_function_cwl(workflow):
             },
             "outputs": {},
         }
-        file_name = function_nodes_dict[i].split(".")[-1] + "_" + str(i) + ".cwl"
+        file_name = export_path / (function_nodes_dict[i].split(".")[-1] + "_" + str(i) + ".cwl")
         if function_nodes_dict[i].split(".")[0] != "python_workflow_definition":
             template["inputs"]["workflowfile"]["default"]["location"] = (
                 function_nodes_dict[i].split(".")[0] + ".py"
@@ -128,11 +131,13 @@ def _write_function_cwl(workflow):
             dump(template, f, Dumper=Dumper)
 
 
-def _write_workflow_config(workflow):
+def _write_workflow_config(workflow, directory_path: str = "."):
     input_dict = {
         n["name"]: n["value"] for n in workflow[NODES_LABEL] if n["type"] == "input"
     }
-    with open("workflow.yml", "w") as f:
+    export_path = Path(directory_path)
+    export_path.mkdir(parents=True, exist_ok=True)
+    with open(export_path / "workflow.yml", "w") as f:
         dump(
             {
                 k + "_file": {"class": "File", "path": k + ".pickle"}
@@ -142,11 +147,11 @@ def _write_workflow_config(workflow):
             Dumper=Dumper,
         )
     for k, v in input_dict.items():
-        with open(k + ".pickle", "wb") as f:
+        with open(export_path / (k + ".pickle"), "wb") as f:
             pickle.dump(v, f)
 
 
-def _write_workflow(workflow):
+def _write_workflow(workflow, directory_path: str = "."):
     workflow_template = {
         "cwlVersion": "v1.2",
         "class": "Workflow",
@@ -225,14 +230,16 @@ def _write_workflow(workflow):
                 + str(ind): {"run": node_script, "in": in_dict, "out": output}
             }
         )
-    with open("workflow.cwl", "w") as f:
+    export_path = Path(directory_path)
+    export_path.mkdir(parents=True, exist_ok=True)
+    with open(export_path / "workflow.cwl", "w") as f:
         dump(workflow_template, f, Dumper=Dumper)
 
 
-def write_workflow(file_name: str):
+def write_workflow(file_name: str, directory_path: str = "."):
     with open(file_name, "r") as f:
         workflow = json.load(f)
 
-    _write_function_cwl(workflow=workflow)
-    _write_workflow_config(workflow=workflow)
-    _write_workflow(workflow=workflow)
+    _write_function_cwl(workflow=workflow, directory_path=directory_path)
+    _write_workflow_config(workflow=workflow, directory_path=directory_path)
+    _write_workflow(workflow=workflow, directory_path=directory_path)
