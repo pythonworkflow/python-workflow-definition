@@ -1,6 +1,8 @@
 import unittest
 import pickle
 import subprocess
+import tempfile
+from pathlib import Path
 from python_workflow_definition.cwl import write_workflow
 
 function_str = """
@@ -39,13 +41,15 @@ workflow_str = """
 
 class TestCommonWorkflowLanguage(unittest.TestCase):
     def test_common_workflow_language(self):
-        with open("workflow.py", "w") as f:
-            f.write(function_str)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            with open(tmp_path / "workflow.py", "w") as f:
+                f.write(function_str)
 
-        with open("workflow.json", "w") as f:
-            f.write(workflow_str)
+            with open(tmp_path / "workflow.json", "w") as f:
+                f.write(workflow_str)
 
-        write_workflow(file_name="workflow.json")
-        subprocess.check_output(["cwltool", "workflow.cwl", "workflow.yml"])
-        with open("result.pickle", "rb") as f:
-            self.assertEqual(pickle.load(f), 6.25)
+            write_workflow(file_name=str(tmp_path / "workflow.json"), directory_path=tmpdir)
+            subprocess.check_output(["cwltool", "workflow.cwl", "workflow.yml"], cwd=tmpdir)
+            with open(tmp_path / "result.pickle", "rb") as f:
+                self.assertEqual(pickle.load(f), 6.25)
