@@ -1,9 +1,9 @@
 channels:
 - conda-forge
 dependencies:
-- ase=3.24.0
-- matplotlib=3.10.1
-- xmlschema=3.4.3
-- optimade=1.2.3
+- ase=3.29.0
+- matplotlib=3.11.1
+- xmlschema=4.3.2
+- optimade=1.5.0
 - qe=7.5
 - qe-tools=2.0.0
