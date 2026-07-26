@@ -13,5 +13,5 @@ dependencies:
 - pygraphviz =1.14
 - aiida-workgraph =0.8.1
 - conda_subprocess =0.0.12
-- networkx =3.4.2
+- networkx =3.6.1
 - cwltool =3.2.20260413085819
