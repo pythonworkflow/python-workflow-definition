@@ -1,3 +1,5 @@
+from typing import Any
+
 import networkx as nx
 from IPython.display import SVG, display
 
@@ -25,7 +27,7 @@ def plot(file_name: str):
 
     for edge_tuple in total_lst:
         target_node, edge_dict = edge_tuple
-        edge_label_dict = {}
+        edge_label_dict: dict[Any, list] = {}
         for k, v in edge_dict.items():
             if v[SOURCE_LABEL] not in edge_label_dict:
                 edge_label_dict[v[SOURCE_LABEL]] = []

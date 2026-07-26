@@ -1,5 +1,6 @@
 from importlib import import_module
 from inspect import isfunction
+from typing import Any
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (
@@ -23,7 +24,8 @@ def resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
     ]
-    ordered_lst, total_new_lst = [], []
+    ordered_lst: list = []
+    total_new_lst: list[list] = []
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
@@ -86,7 +88,7 @@ def load_workflow_json(file_name: str):
     total_lst = group_edges(edges_new_lst)
     total_new_lst = resort_total_lst(total_lst=total_lst, nodes_dict=nodes_new_dict)
 
-    result_dict = {}
+    result_dict: dict[Any, Any] = {}
     last_key = None
     for lst in total_new_lst:
         node = nodes_new_dict[lst[0]]

@@ -1,6 +1,6 @@
 from importlib import import_module
 from inspect import isfunction
-from typing import Optional
+from typing import Any, Optional
 
 import numpy as np
 from pyiron_base import Project, job
@@ -30,7 +30,8 @@ def _resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
     ]
-    ordered_lst, total_new_lst = [], []
+    ordered_lst: list = []
+    total_new_lst: list[list] = []
     while len(total_new_lst) < len(total_lst):
         for ind, connect in total_lst:
             if ind not in ordered_lst:
@@ -74,7 +75,7 @@ def _get_source(
 def _get_delayed_object_dict(
     total_lst: list, nodes_dict: dict, source_handle_dict: dict, pyiron_project: Project
 ) -> dict:
-    delayed_object_dict = {}
+    delayed_object_dict: dict[Any, DelayedObject] = {}
     for item in total_lst:
         key, input_dict = item
         kwargs = {
@@ -134,8 +135,9 @@ def _get_unique_objects(nodes_dict: dict):
             )
             delayed_object_dict[k]._python_function = get_dict
             delayed_object_dict[k]._input = v
-    unique_lst = []
-    delayed_object_updated_dict, match_dict = {}, {}
+    unique_lst: list = []
+    delayed_object_updated_dict: dict[Any, DelayedObject] = {}
+    match_dict: dict[Any, Any] = {}
     for dobj in delayed_object_dict.keys():
         match = False
         for obj in unique_lst:

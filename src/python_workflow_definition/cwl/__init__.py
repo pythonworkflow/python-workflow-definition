@@ -1,6 +1,7 @@
 import json
 import pickle
 from pathlib import Path
+from typing import Any
 
 from yaml import CDumper as Dumper
 from yaml import dump
@@ -86,7 +87,7 @@ def _write_function_cwl(workflow, directory_path: str = "."):
     export_path.mkdir(parents=True, exist_ok=True)
 
     for i in function_nodes_dict.keys():
-        template = {
+        template: dict[str, Any] = {
             "cwlVersion": "v1.2",
             "class": "CommandLineTool",
             "baseCommand": "python",
@@ -154,7 +155,7 @@ def _write_workflow_config(workflow, directory_path: str = "."):
 
 
 def _write_workflow(workflow, directory_path: str = "."):
-    workflow_template = {
+    workflow_template: dict[str, Any] = {
         "cwlVersion": "v1.2",
         "class": "Workflow",
         "inputs": {},
