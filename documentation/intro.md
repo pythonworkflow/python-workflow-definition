@@ -13,6 +13,9 @@ Currently supported workflow engines:
 * [aiida-workgraph](https://github.com/aiidateam/aiida-workgraph)
 * [jobflow](https://github.com/materialsproject/jobflow)
 * [pyiron_base](https://github.com/pyiron/pyiron_base)
+* [pyiron_workflow](https://github.com/pyiron/pyiron_workflow)
+* [executorlib](https://github.com/pyiron/executorlib)
+* [CWL](https://www.commonwl.org/) via [cwltool](https://github.com/common-workflow-language/cwltool)
 
 ## Example Workflows
 Three workflows are implemented:
