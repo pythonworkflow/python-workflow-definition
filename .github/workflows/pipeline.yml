@@ -19,6 +19,22 @@ jobs:
         options: "--check --diff"
         src: ./example_workflows/quantum_espresso/qe_xml_parser/src/qe_xml_parser
 
+  mypy:
+    needs: [black]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          architecture: x64
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install mypy
+        run: pip install mypy
+      - name: Test
+        run: mypy --ignore-missing-imports src/${{ github.event.repository.name }}
+
   pip_check:
     runs-on: ubuntu-latest
     steps:
