@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Aiida &#8212; Python Workflow Definition</title>
+    <title>aiida-workgraph &#8212; Python Workflow Definition</title>
   
   
   
@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Aiida</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
@@ -349,7 +349,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Aiida</h1>
+    <h1>aiida-workgraph</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -361,7 +361,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-aiida">Define workflow with aiida</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-inputs">Prepare the inputs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actual-tasks-to-construct-the-eos-workflow">Actual tasks to construct the EOS workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-task-graph">Build the task graph</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
@@ -378,10 +378,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="aiida">
-<h1>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="aiida-workgraph">
+<h1>aiida-workgraph<a class="headerlink" href="#aiida-workgraph" title="Link to this heading">#</a></h1>
+<p>This notebook builds the Quantum Espresso energy-volume-curve workflow directly with <a class="reference external" href="https://github.com/aiidateam/aiida-workgraph"><code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code></a> and exports it as a PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code>. The second half of the notebook loads that same JSON file with <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>, <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> to show that a graph built with one engine can be executed by another.</p>
 <section id="define-workflow-with-aiida">
 <h2>Define workflow with aiida<a class="headerlink" href="#define-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> represents a workflow as a <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> built from <code class="docutils literal notranslate"><span class="pre">task</span></code>s, each wrapping a Python function; connecting a task’s output to another task’s input builds up the graph. <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code> connects to the local AiiDA profile/database, which is required before any AiiDA node can be created, since every task and its result are stored there for provenance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
@@ -415,6 +417,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> (defined in <a class="reference download internal" download="" href="../../_downloads/0d09bdc32538ec374fdfcc8b206a84a1/workflow.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">workflow.py</span></code></span></a>) returns a dict with <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">structure</span></code> keys. Wrapping it with <code class="docutils literal notranslate"><span class="pre">task(outputs=[...])</span></code> tells <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> to expose these as separate output sockets (<code class="docutils literal notranslate"><span class="pre">.outputs.energy</span></code>, <code class="docutils literal notranslate"><span class="pre">.outputs.volume</span></code>, <code class="docutils literal notranslate"><span class="pre">.outputs.structure</span></code>) instead of a single opaque result, so downstream tasks can connect to individual keys.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">])(</span><span class="n">_calculate_qe</span><span class="p">)</span>
@@ -431,6 +434,7 @@
 </div>
 <section id="prepare-the-inputs">
 <h3>Prepare the inputs<a class="headerlink" href="#prepare-the-inputs" title="Link to this heading">#</a></h3>
+<p>Scalar inputs are wrapped as AiiDA data types (<code class="docutils literal notranslate"><span class="pre">orm.Str</span></code>, <code class="docutils literal notranslate"><span class="pre">orm.Float</span></code>, <code class="docutils literal notranslate"><span class="pre">orm.Bool</span></code>, <code class="docutils literal notranslate"><span class="pre">orm.Dict</span></code>, <code class="docutils literal notranslate"><span class="pre">orm.List</span></code>) so AiiDA can track their provenance. <code class="docutils literal notranslate"><span class="pre">strain_lst</span></code> are the five volumetric strains (0.9-1.1) that will later be applied to the relaxed structure to sample the energy-volume curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="s2">&quot;Al&quot;</span><span class="p">)</span>
@@ -448,8 +452,9 @@
 </div>
 </div>
 </section>
-<section id="actual-tasks-to-construct-the-eos-workflow">
-<h3>Actual tasks to construct the EOS workflow<a class="headerlink" href="#actual-tasks-to-construct-the-eos-workflow" title="Link to this heading">#</a></h3>
+<section id="build-the-task-graph">
+<h3>Build the task graph<a class="headerlink" href="#build-the-task-graph" title="Link to this heading">#</a></h3>
+<p>The pipeline is: <code class="docutils literal notranslate"><span class="pre">get_bulk_structure</span></code> builds the initial Al structure, <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> relaxes it (<code class="docutils literal notranslate"><span class="pre">vc-relax</span></code>), <code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> applies the strains, and one <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> (<code class="docutils literal notranslate"><span class="pre">scf</span></code>) task per strained structure computes its energy and volume. <code class="docutils literal notranslate"><span class="pre">get_dict</span></code> bundles the structure, calculation type, k-points, pseudopotentials and smearing into the <code class="docutils literal notranslate"><span class="pre">input_dict</span></code> argument <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> expects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_bulk_structure_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
@@ -482,6 +487,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> applies each of the five strains to the relaxed structure, producing five strained structures (<code class="docutils literal notranslate"><span class="pre">s_0</span></code> … <code class="docutils literal notranslate"><span class="pre">s_4</span></code>). This is the fan-out point of the workflow: the loop below adds one independent <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> task per strained structure, and their <code class="docutils literal notranslate"><span class="pre">energy</span></code>/<code class="docutils literal notranslate"><span class="pre">volume</span></code> outputs are collected into two lists (via <code class="docutils literal notranslate"><span class="pre">get_list</span></code> tasks) for the final plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_structures_task</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
@@ -550,6 +556,7 @@
 </div>
 </div>
 </div>
+<p>Displaying <code class="docutils literal notranslate"><span class="pre">wg</span></code> renders an interactive <code class="docutils literal notranslate"><span class="pre">NodeGraphWidget</span></code> of the task graph, which is useful to check the wiring before running it. <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> then serializes the <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> into the PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> format (nodes = functions/inputs/outputs, edges = data connections) so it can be loaded by another engine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span>
@@ -1140,6 +1147,7 @@
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> reconstructs the same graph as a <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> <code class="docutils literal notranslate"><span class="pre">Flow</span></code> of <code class="docutils literal notranslate"><span class="pre">Job</span></code>s. To show that the loaded graph behaves like a native <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> object, the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code> of the first job is overridden (4.04 -&gt; 4.05) before the flow is executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1279,6 +1287,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-pyiron-base">
 <h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>’s <code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> turns each node into a delayed pyiron job. <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> renders the dependency graph, and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> triggers execution of the whole chain, saving every intermediate job (relax + 5 strained SCF calculations) to the pyiron project.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1372,6 +1381,7 @@ The job plot_energy_volume_curve_a817e1974411e9ad4e1c06ce96b8a65d was saved and 
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the same JSON is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> object. Nodes become graph nodes reachable via attribute access (e.g. <code class="docutils literal notranslate"><span class="pre">wf.get_bulk_structure</span></code>), and <code class="docutils literal notranslate"><span class="pre">.run()</span></code> executes them in dependency order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1501,7 +1511,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-aiida">Define workflow with aiida</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-inputs">Prepare the inputs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actual-tasks-to-construct-the-eos-workflow">Actual tasks to construct the EOS workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-task-graph">Build the task graph</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>

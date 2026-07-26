@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -305,7 +305,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -321,6 +323,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -333,7 +343,24 @@
   <section class="tex2jax_ignore mathjax_ignore" id="conclusion">
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
 <p>Based on the Python Workflow Definition three rather different workflows were implemented in rather different workflow
-engines. This demonstrates the interoperability achieved with the Python Workflow Definition.</p>
+engines: a simple arithmetic example coupling two Python functions, a Quantum Espresso energy volume curve calculation
+with fan-out parallelism, and a file based, multi-tool NFDI4Ing benchmark. In each case the same <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> was
+written by one workflow engine and successfully loaded and executed by the others, without any change to the underlying
+Python functions in <code class="docutils literal notranslate"><span class="pre">workflow.py</span></code>. This demonstrates the interoperability achieved with the Python Workflow Definition,
+and shows that it scales from small, in-memory Python workflows to larger, file based, multi-environment scientific
+workflows.</p>
+<section id="where-to-go-next">
+<h2>Where to go next<a class="headerlink" href="#where-to-go-next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Browse the <a class="reference external" href="https://github.com/pythonworkflow/python-workflow-definition/tree/main/example_workflows">example_workflows</a>
+directory for the full set of notebooks, including engines not covered in this book such as <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code>,
+<code class="docutils literal notranslate"><span class="pre">executorlib</span></code> and CWL.</p></li>
+<li><p>See the <a class="reference external" href="https://github.com/pythonworkflow/python-workflow-definition">README</a> for installation instructions via
+<code class="docutils literal notranslate"><span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span></code>.</p></li>
+<li><p>Read the accompanying publication: <a class="reference external" href="https://doi.org/10.1039/D5DD00231A">J. Janssen et al., A python workflow definition for computational materials
+design, Digital Discovery, 2025</a>.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -372,6 +399,23 @@ engines. This demonstrates the interoperability achieved with the Python Workflo
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

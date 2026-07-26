@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Python Workflow Definition</title>
+    <title>CWL &#8212; Python Workflow Definition</title>
   
   
   
@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -336,9 +336,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -349,19 +347,11 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>CWL</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -371,7 +361,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="cwl">
+<h1>CWL<a class="headerlink" href="#cwl" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://github.com/common-workflow-language/cwltool"><code class="docutils literal notranslate"><span class="pre">cwltool</span></code></a> is the reference implementation of the <a class="reference external" href="https://www.commonwl.org/">Common Workflow Language (CWL)</a>, a standard for describing command-line based workflows. Unlike the other engines in this repository, CWL has no Python API: workflows are described in YAML/JSON documents and executed by the external <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> command. This notebook converts the arithmetic <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> into an equivalent set of CWL files and executes them with <code class="docutils literal notranslate"><span class="pre">cwltool</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 </pre></div>
@@ -385,6 +378,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">write_workflow</span></code> reads the existing <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> and generates the corresponding CWL description: one <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> <code class="docutils literal notranslate"><span class="pre">.cwl</span></code> file per function node, a <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> file that wires the steps together, and a <code class="docutils literal notranslate"><span class="pre">workflow.yml</span></code> file listing the input values (each serialized to its own pickle file). Every generated tool invokes <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">python_workflow_definition.cwl</span></code>, which loads the target function from <code class="docutils literal notranslate"><span class="pre">workflow.py</span></code> and calls it with the pickled inputs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
@@ -392,6 +386,7 @@
 </div>
 </div>
 </div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">cwltool</span> <span class="pre">workflow.cwl</span> <span class="pre">workflow.yml</span></code> executes the steps in dependency order, passing intermediate results between steps as pickle files, and prints the location of the final output file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>cwltool<span class="w"> </span>workflow.cwl<span class="w"> </span>workflow.yml
@@ -451,6 +446,7 @@
 </div>
 </div>
 </div>
+<p>The workflow’s final output is written to <code class="docutils literal notranslate"><span class="pre">result.pickle</span></code>; unpickling it gives the same numeric result produced by the other engines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -464,6 +460,7 @@
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -501,23 +498,6 @@
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>

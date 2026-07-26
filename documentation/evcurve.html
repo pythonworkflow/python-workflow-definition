@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../example_workflows/quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -305,7 +305,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -321,6 +323,16 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-json">workflow.json</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -335,6 +347,71 @@
 <p>Based on <a class="reference external" href="https://materialdigital.github.io/ADIS2023/README.html">previous work</a> from the <a class="reference external" href="https://www.mpie.de/4902385/adis2023">ADIS 2023 workshop</a>
 the calculation of an energy volume curve with the <a class="reference external" href="https://www.quantum-espresso.org">quantum espresso</a> density
 functional theory (DFT) simulation code is implemented in the Python Workflow Definition.</p>
+<section id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
+<p>An energy-volume curve is computed by relaxing a bulk crystal structure, straining it to a series of volumes and
+computing the total energy at each volume with a self-consistent-field (SCF) calculation. The pipeline is implemented
+as five Python functions in <a class="reference internal" href="#example_workflows/quantum_espresso/workflow.py"><span class="xref myst">workflow.py</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_bulk_structure</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">cubic</span><span class="p">):</span>
+    <span class="c1"># build an ASE bulk crystal structure, e.g. Al</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_qe</span><span class="p">(</span><span class="n">working_directory</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">):</span>
+    <span class="c1"># write a pw.x input file, run &quot;pw.x -in input.pwi &gt; output.pwo&quot; and parse the pwscf.xml output;</span>
+    <span class="c1"># input_dict[&quot;calculation&quot;] selects &quot;vc-relax&quot; (cell + geometry relaxation) or &quot;scf&quot; (single-point energy)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_structures</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">strain_lst</span><span class="p">):</span>
+    <span class="c1"># apply each volumetric strain in strain_lst to a structure, returning one structure per strain</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_energy_volume_curve</span><span class="p">(</span><span class="n">volume_lst</span><span class="p">,</span> <span class="n">energy_lst</span><span class="p">):</span>
+    <span class="c1"># plot energy against volume and save it as evcurve.png</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">write_input</span></code>/<code class="docutils literal notranslate"><span class="pre">collect_output</span></code> handle the file-based <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> input/output (<code class="docutils literal notranslate"><span class="pre">.pwi</span></code>/<code class="docutils literal notranslate"><span class="pre">.pwo</span></code>/<code class="docutils literal notranslate"><span class="pre">.xml</span></code> files), and
+<code class="docutils literal notranslate"><span class="pre">ase_to_json</span></code>/<code class="docutils literal notranslate"><span class="pre">json_to_ase</span></code> (de)serialize ASE <code class="docutils literal notranslate"><span class="pre">Atoms</span></code> objects to/from OPTIMADE-JSON strings, so structures can be
+passed between functions as plain JSON data instead of Python objects.</p>
+<p>The workflow combines these functions as: <code class="docutils literal notranslate"><span class="pre">get_bulk_structure</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> (<code class="docutils literal notranslate"><span class="pre">vc-relax</span></code>, once) -&gt;
+<code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> (<code class="docutils literal notranslate"><span class="pre">scf</span></code>, once per strained structure) -&gt; <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code>. With five
+strains this means one relaxation followed by five independent SCF calculations that fan out from
+<code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> and feed back into a single plot.</p>
+</section>
+<section id="workflow-json">
+<h2>workflow.json<a class="headerlink" href="#workflow-json" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="#example_workflows/quantum_espresso/workflow.json"><span class="xref myst">workflow.json</span></a> encodes this fan-out as five separate
+<code class="docutils literal notranslate"><span class="pre">workflow.calculate_qe</span></code> function nodes, each connected to its own strained structure and its own <code class="docutils literal notranslate"><span class="pre">working_directory</span></code>
+input, all reading the same shared inputs (<code class="docutils literal notranslate"><span class="pre">pseudopotentials</span></code>, <code class="docutils literal notranslate"><span class="pre">kpts</span></code>, <code class="docutils literal notranslate"><span class="pre">calculation</span></code>, <code class="docutils literal notranslate"><span class="pre">smearing</span></code>) via
+<code class="docutils literal notranslate"><span class="pre">python_workflow_definition.shared.get_dict</span></code>. An excerpt showing the pattern for two of the five strained
+calculations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.generate_structures&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.calculate_qe&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.calculate_qe&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;strain_0&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;working_directory_1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;python_workflow_definition.shared.get_dict&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;strain_1&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;working_directory_2&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;python_workflow_definition.shared.get_dict&quot;</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;working_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="s2">&quot;s_0&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;input_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;working_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="s2">&quot;s_1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;input_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Node 2 (<code class="docutils literal notranslate"><span class="pre">generate_structures</span></code>) exposes one output port per strain (<code class="docutils literal notranslate"><span class="pre">s_0</span></code>, <code class="docutils literal notranslate"><span class="pre">s_1</span></code>, …); each port is wired into its
+own <code class="docutils literal notranslate"><span class="pre">get_dict</span></code>/<code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> pair. The energy and volume outputs of all five <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> nodes are collected back
+into lists with <code class="docutils literal notranslate"><span class="pre">python_workflow_definition.shared.get_list</span></code> before being passed to <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code>.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>Running this workflow (rather than just loading/inspecting the JSON) requires the Quantum Espresso <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> binary,
+matching pseudopotential files (see <a class="reference internal" href="#example_workflows/quantum_espresso/espresso/pseudo"><span class="xref myst">espresso/pseudo</span></a>) and the
+Python dependencies listed in <a class="reference internal" href="#example_workflows/quantum_espresso/environment.yml"><span class="xref myst">environment.yml</span></a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -373,6 +450,25 @@ functional theory (DFT) simulation code is implemented in the Python Workflow De
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-json">workflow.json</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

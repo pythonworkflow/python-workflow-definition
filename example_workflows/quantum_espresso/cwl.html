@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Python Workflow Definition</title>
+    <title>CWL &#8212; Python Workflow Definition</title>
   
   
   
@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
@@ -349,7 +349,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>CWL</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,9 +358,10 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-workflow-json-to-cwl">Translate workflow.json to CWL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-workflow-with-cwltool">Run the workflow with cwltool</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -371,7 +372,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="cwl">
+<h1>CWL<a class="headerlink" href="#cwl" title="Link to this heading">#</a></h1>
+<p>This notebook executes the Quantum Espresso energy-volume-curve <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> (produced by one of the other notebooks in this directory, e.g. <code class="docutils literal notranslate"><span class="pre">aiida.ipynb</span></code>) with the <a class="reference external" href="https://www.commonwl.org">Common Workflow Language</a> via <a class="reference external" href="https://github.com/common-workflow-language/cwltool"><code class="docutils literal notranslate"><span class="pre">cwltool</span></code></a>. Unlike the other engines, PWD does not build a CWL graph directly in Python - instead it translates an existing <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> into native CWL files, which <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> then executes as a separate command line process.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
@@ -385,6 +389,9 @@
 </div>
 </div>
 </div>
+<section id="translate-workflow-json-to-cwl">
+<h2>Translate workflow.json to CWL<a class="headerlink" href="#translate-workflow-json-to-cwl" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">write_workflow</span></code> reads the existing <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> and generates: one <code class="docutils literal notranslate"><span class="pre">.cwl</span></code> <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> per PWD function node (each one invokes <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">python_workflow_definition.cwl</span> <span class="pre">--function=...</span></code> to call the matching function in <code class="docutils literal notranslate"><span class="pre">workflow.py</span></code>), a top-level <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> that chains these steps together following the <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> edges, and a <code class="docutils literal notranslate"><span class="pre">workflow.yml</span></code> job file listing one input file per PWD input node. Since CWL only passes files between steps, every input and every function output is exchanged as a pickle file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.cwl</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow</span>
@@ -399,6 +406,10 @@
 </div>
 </div>
 </div>
+</section>
+<section id="run-the-workflow-with-cwltool">
+<h2>Run the workflow with cwltool<a class="headerlink" href="#run-the-workflow-with-cwltool" title="Link to this heading">#</a></h2>
+<p>ASE’s Quantum Espresso writer resolves the pseudopotential directory from the <code class="docutils literal notranslate"><span class="pre">ESPRESSO_PSEUDO</span></code> environment variable when no explicit path is given. Because <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> runs every step in its own isolated temporary directory, the environment variable has to be forwarded explicitly with <code class="docutils literal notranslate"><span class="pre">--preserve-environment=ESPRESSO_PSEUDO</span></code>, so that <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> can find the pseudopotential file shipped in <a class="reference internal" href="#espresso/pseudo"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">espresso/pseudo</span></code></span></a> from any step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ESPRESSO_PSEUDO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;../../espresso/pseudo&quot;</span><span class="p">))</span>
@@ -658,6 +669,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">cwltool</span></code> runs one step per PWD function node - <code class="docutils literal notranslate"><span class="pre">get_bulk_structure</span></code>, the <code class="docutils literal notranslate"><span class="pre">vc-relax</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code>, <code class="docutils literal notranslate"><span class="pre">generate_structures</span></code>, the five strained <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> steps and finally <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code> - each reading its input pickles and writing its output pickle(s), exactly mirroring the fan-out of one relax followed by five parallel SCF calculations seen in the other notebooks. The workflow’s final output is declared as <code class="docutils literal notranslate"><span class="pre">result_file</span></code>, the pickle produced by the last step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -671,6 +683,9 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code> has no return value, so <code class="docutils literal notranslate"><span class="pre">result_file</span></code> unpickles to <code class="docutils literal notranslate"><span class="pre">None</span></code> here - that is expected. The actual output of this workflow is the <code class="docutils literal notranslate"><span class="pre">evcurve.png</span></code> plot, written as a side effect into the working directory of the last CWL step.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -719,9 +734,10 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-workflow-json-to-cwl">Translate workflow.json to CWL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-workflow-with-cwltool">Run the workflow with cwltool</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

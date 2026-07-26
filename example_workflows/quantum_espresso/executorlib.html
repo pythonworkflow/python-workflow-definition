@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
@@ -377,8 +377,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="executorlib">
 <h1>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h1>
+<p>This notebook builds the Quantum Espresso energy-volume-curve workflow with <a class="reference external" href="https://github.com/pyiron/executorlib"><code class="docutils literal notranslate"><span class="pre">executorlib</span></code></a>, a lightweight <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code>-style executor. Tasks are submitted individually with <code class="docutils literal notranslate"><span class="pre">.submit()</span></code>, and the resulting graph is exported as a PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> as a side effect. The second half of the notebook loads that same JSON with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>/<code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code>.</p>
 <section id="define-workflow-with-executorlib">
 <h2>Define workflow with executorlib<a class="headerlink" href="#define-workflow-with-executorlib" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SingleNodeExecutor</span></code> runs submitted functions in local worker processes. Passing <code class="docutils literal notranslate"><span class="pre">export_workflow_filename</span></code> makes it record every <code class="docutils literal notranslate"><span class="pre">.submit()</span></code> call and its dependencies and write them out as <code class="docutils literal notranslate"><span class="pre">workflow_json_filename</span></code> once the <code class="docutils literal notranslate"><span class="pre">with</span></code> block exits - no separate <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> call is needed, unlike the other engines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -408,6 +410,7 @@
 </div>
 </div>
 </div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">exe.submit()</span></code> call schedules one function call and returns a <code class="docutils literal notranslate"><span class="pre">Future</span></code>. Since <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> returns a dict, <code class="docutils literal notranslate"><span class="pre">get_item_from_future</span></code> extracts a single key (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;structure&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;energy&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;volume&quot;</span></code>) from a future’s eventual result so it can be passed as an argument to the next <code class="docutils literal notranslate"><span class="pre">submit()</span></code> call. The relaxed structure is strained into <code class="docutils literal notranslate"><span class="pre">number_of_strains</span></code> (5) structures by <code class="docutils literal notranslate"><span class="pre">generate_structures</span></code>, and each strained structure is submitted as its own independent <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> call - the fan-out that produces the 5 points of the energy-volume curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">export_workflow_filename</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
@@ -1029,6 +1032,7 @@
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> reconstructs the graph as an <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code>. To demonstrate that the loaded graph can still be edited like one built natively with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code> is overridden (4.04 -&gt; 4.05) before running it with <code class="docutils literal notranslate"><span class="pre">wg.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
@@ -1124,6 +1128,7 @@
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>The same JSON is loaded as a <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>, again after overriding the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1223,6 +1228,7 @@
 </section>
 <section id="load-workflow-with-pyiron-base">
 <h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>’s loader turns the graph into a list of delayed jobs. <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes the dependency graph and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> executes the whole chain (relax + 5 strained SCF calculations), after the lattice constant override.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1280,6 +1286,7 @@ The job plot_energy_volume_curve_9e2db727fd8ef415e376c937e44a8213 was saved and 
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the graph is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, its lattice constant overridden, drawn with <code class="docutils literal notranslate"><span class="pre">.draw()</span></code>, and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>

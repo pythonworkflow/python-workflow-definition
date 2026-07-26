@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -376,8 +376,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pyiron">
 <h1>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h1>
+<p>This notebook defines the arithmetic workflow with <a class="reference external" href="https://github.com/pyiron/pyiron_base"><code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code></a> and then loads the resulting <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> into <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code>.</p>
 <section id="define-workflow-with-pyiron-base">
 <h2>Define workflow with pyiron_base<a class="headerlink" href="#define-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">job</span></code> decorator from <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> turns a plain Python function into a pyiron job: calling the decorated function no longer executes it immediately, but returns a delayed object that can be chained with other jobs. For functions such as <code class="docutils literal notranslate"><span class="pre">get_prod_and_div</span></code> that return a dictionary, <code class="docutils literal notranslate"><span class="pre">output_key_lst</span></code> declares the dictionary keys so that individual entries (<code class="docutils literal notranslate"><span class="pre">prod</span></code>, <code class="docutils literal notranslate"><span class="pre">div</span></code>) can be wired as separate outputs to downstream jobs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span>
@@ -440,6 +442,7 @@
 </div>
 </div>
 </div>
+<p>None of these calls run yet, they only build up a graph of delayed jobs. <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> walks that graph starting from the final <code class="docutils literal notranslate"><span class="pre">result</span></code> job and serializes it into the PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> format.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">delayed_object</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
@@ -536,6 +539,7 @@
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p>The exported <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> is loaded into <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>. An AiiDA profile must be connected via <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code> before the resulting <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> can be run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span>
@@ -589,6 +593,7 @@
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>The same JSON is loaded into a jobflow <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -638,6 +643,7 @@
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the workflow is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> object, drawn with <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>

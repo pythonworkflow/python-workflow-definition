@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pyiron</a></li>
 </ul>
@@ -376,8 +376,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pyiron">
 <h1>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h1>
+<p>This notebook builds the Quantum Espresso energy-volume-curve workflow with <a class="reference external" href="https://github.com/pyiron/pyiron_base"><code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code></a>. The <code class="docutils literal notranslate"><span class="pre">job</span></code> decorator turns plain functions into delayed pyiron jobs that are only executed once <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> is called on the final result, and the whole chain of jobs is exported as a PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code>. The second half of the notebook loads that same JSON with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code>.</p>
 <section id="define-workflow-with-pyiron-base">
 <h2>Define workflow with pyiron_base<a class="headerlink" href="#define-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>We import the <code class="docutils literal notranslate"><span class="pre">job</span></code> decorator from <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> and the PWD writer for <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>, together with the Quantum Espresso functions from <code class="docutils literal notranslate"><span class="pre">workflow.py</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -406,6 +408,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> returns a dict with <code class="docutils literal notranslate"><span class="pre">energy</span></code>, <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">structure</span></code> keys. <code class="docutils literal notranslate"><span class="pre">job(...,</span> <span class="pre">output_key_lst=[...])</span></code> tells <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> which keys to expose as separate delayed outputs (e.g. <code class="docutils literal notranslate"><span class="pre">calc_mini.output.structure</span></code>), so a single downstream job can depend on just one of them instead of the whole dict.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_qe</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_calculate_qe</span><span class="p">,</span> <span class="n">output_key_lst</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">])</span>
@@ -450,6 +453,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> fans out the relaxed structure into <code class="docutils literal notranslate"><span class="pre">number_of_strains</span></code> (5) strained structures. Since <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> builds the graph lazily, it cannot know how many items a delayed dict result will contain, so <code class="docutils literal notranslate"><span class="pre">list_length</span></code> is passed explicitly - this lets <code class="docutils literal notranslate"><span class="pre">structure_lst</span></code> be iterated with <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> below to create one independent <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> job per strained structure, before anything has actually run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_strains</span> <span class="o">=</span> <span class="mi">5</span>
@@ -491,6 +495,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> only needs the single terminal delayed object (<code class="docutils literal notranslate"><span class="pre">plot</span></code>, the plotting job) - <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> walks its dependency chain backwards to discover the full graph, unlike <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>’s <code class="docutils literal notranslate"><span class="pre">Flow</span></code> which needs an explicit list of jobs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">delayed_object</span><span class="o">=</span><span class="n">plot</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
@@ -1071,6 +1076,7 @@
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> reconstructs the graph as an <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code>. The lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code> is overridden (4.04 -&gt; 4.05) to show the loaded graph can still be edited like one built natively with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, before running it with <code class="docutils literal notranslate"><span class="pre">wg.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
@@ -1175,6 +1181,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>The same JSON is loaded as a <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>, again after overriding the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1312,6 +1319,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the graph is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, its lattice constant overridden, drawn with <code class="docutils literal notranslate"><span class="pre">.draw()</span></code>, and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>

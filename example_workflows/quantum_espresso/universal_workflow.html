@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
@@ -379,8 +379,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="load-quantum-espresso-energy-volume-curve-workflow">
 <h1>Load Quantum Espresso Energy Volume Curve Workflow<a class="headerlink" href="#load-quantum-espresso-energy-volume-curve-workflow" title="Link to this heading">#</a></h1>
+<p>This notebook loads the same, already-exported <a class="reference download internal" download="" href="../../_downloads/074c18a527b229dcf1aceecb3ceb2862/workflow.json"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">workflow.json</span></code></span></a> with six different backends in turn - <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">executorlib</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>, <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>, <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> and plain Python - to demonstrate that the PWD format is interoperable regardless of which engine originally produced it.</p>
 <section id="plot">
 <h2>Plot<a class="headerlink" href="#plot" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python_workflow_definition.plot.plot</span></code> renders the raw node/edge structure of <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> as a graph, independent of any workflow engine - useful to inspect the relax -&gt; strain -&gt; 5x scf -&gt; plot pipeline before executing it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
@@ -401,6 +403,7 @@
 </section>
 <section id="aiida">
 <h2>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> reconstructs the graph as an <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code>, after connecting to the local AiiDA profile with <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code>. <code class="docutils literal notranslate"><span class="pre">wg.run()</span></code> executes the relax step followed by the 5 parallel strained SCF calculations and the final plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -500,6 +503,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="executorlib">
 <h2>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h2>
+<p>Here <code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> takes a live <code class="docutils literal notranslate"><span class="pre">exe</span></code> (a <code class="docutils literal notranslate"><span class="pre">SingleNodeExecutor</span></code>) and submits the whole graph to it, returning a <code class="docutils literal notranslate"><span class="pre">Future</span></code> for the final result; <code class="docutils literal notranslate"><span class="pre">.result()</span></code> blocks until every node - including the 5 fanned-out SCF calculations - has finished executing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleNodeExecutor</span>
@@ -548,6 +552,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="jobflow">
 <h2>jobflow<a class="headerlink" href="#jobflow" title="Link to this heading">#</a></h2>
+<p>The graph is loaded as a <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>, which runs the relax job, the 5 strained SCF jobs and the plotting job in dependency order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
@@ -680,6 +685,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="pyiron-base">
 <h2>pyiron_base<a class="headerlink" href="#pyiron-base" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> turns the graph into a list of delayed pyiron jobs; <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes the dependency graph (including the fan-out into 5 strained SCF jobs) and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> executes the whole chain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -766,6 +772,7 @@ The job plot_energy_volume_curve_33e1f4fbca145ac4d2a72d20544cad9d was saved and 
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>The graph is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, drawn with <code class="docutils literal notranslate"><span class="pre">.draw()</span></code>, and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -797,6 +804,7 @@ The job plot_energy_volume_curve_33e1f4fbca145ac4d2a72d20544cad9d was saved and 
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python_workflow_definition.purepython.load_workflow_json</span></code> is a minimal reference implementation with no external workflow engine: it topologically sorts the nodes by their edges and calls each function directly in plain Python, returning the final result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.purepython</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>

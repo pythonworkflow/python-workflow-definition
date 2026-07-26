@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -359,15 +359,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">pyiron_workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-in-pyiron-workflow">Define workflow in pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -380,8 +376,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pyiron-workflow">
 <h1>pyiron_workflow<a class="headerlink" href="#pyiron-workflow" title="Link to this heading">#</a></h1>
+<p>This notebook defines the arithmetic workflow with <a class="reference external" href="https://github.com/pyiron/pyiron_workflow"><code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code></a> and then loads the resulting <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> into <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>.</p>
 <section id="define-workflow-in-pyiron-workflow">
 <h2>Define workflow in pyiron_workflow<a class="headerlink" href="#define-workflow-in-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">to_function_node</span></code> wraps a plain Python function into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> node that can be added to a <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> graph. Nodes are assembled into a graph with attribute access: assigning <code class="docutils literal notranslate"><span class="pre">wf.&lt;name&gt;</span> <span class="pre">=</span> <span class="pre">node(...)</span></code> both registers the node under that name and connects its inputs to the outputs of other nodes already on the graph.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
@@ -441,6 +439,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">wf.draw()</span></code> renders the resulting node graph, and <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> serializes <code class="docutils literal notranslate"><span class="pre">wf.graph_as_dict</span></code> into the PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> format.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
@@ -547,6 +546,7 @@
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p>The exported <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> is loaded into <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>. An AiiDA profile must be connected via <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code> before the resulting <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> can be run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span>
@@ -579,9 +579,9 @@
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="load-workflow-with-jobflow">
-<h1>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h1>
+<section id="load-workflow-with-jobflow">
+<h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>The same JSON is loaded into a jobflow <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -612,8 +612,9 @@
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="load-workflow-with-pyiron-base">
-<h1>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h1>
+<section id="load-workflow-with-pyiron-base">
+<h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>Finally, the workflow is loaded into <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>, producing a list of delayed jobs. <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes the dependency graph and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> triggers delayed execution of the whole chain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -636,6 +637,7 @@
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -686,15 +688,11 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">pyiron_workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-in-pyiron-workflow">Define workflow in pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

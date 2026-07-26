@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
@@ -378,6 +378,7 @@
 <h1>pyiron_workflow<a class="headerlink" href="#pyiron-workflow" title="Link to this heading">#</a></h1>
 <section id="define-workflow-with-pyiron-workflow">
 <h2>Define workflow with pyiron_workflow<a class="headerlink" href="#define-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>This notebook builds the Quantum Espresso energy-volume-curve workflow with <a class="reference external" href="https://github.com/pyiron/pyiron_workflow"><code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code></a>. Plain functions are converted to graph nodes with <code class="docutils literal notranslate"><span class="pre">to_function_node</span></code>, assembled into a <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> via attribute access, and exported as a PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code>. The second half of the notebook loads that same JSON with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">isfunction</span>
@@ -401,6 +402,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> has no built-in equivalent of the <code class="docutils literal notranslate"><span class="pre">get_list</span></code> helper the other engines use to collect several outputs into a list, so <code class="docutils literal notranslate"><span class="pre">get_values_from_dict</span></code> is defined here as a custom node with <code class="docutils literal notranslate"><span class="pre">as_function_node</span></code> to turn a dict of energies/volumes into a plain list for the final plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@as_function_node</span><span class="p">(</span><span class="s2">&quot;output_dict&quot;</span><span class="p">)</span>
@@ -427,6 +429,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">to_function_node</span></code> wraps each plain Python function into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> node type. <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code> passes <code class="docutils literal notranslate"><span class="pre">validate_output_labels=False</span></code> since it has no return value, so its output cannot be matched to an explicit output label.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">&quot;my_workflow&quot;</span><span class="p">)</span>
@@ -441,6 +444,7 @@
 </div>
 </div>
 </div>
+<p>Nodes are added to the <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> by assigning their result to an attribute of <code class="docutils literal notranslate"><span class="pre">wf</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">wf.structure</span> <span class="pre">=</span> <span class="pre">get_bulk_structure(...)</span></code>), which both registers the node and gives it a name in the graph. Since <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> expects a single <code class="docutils literal notranslate"><span class="pre">input_dict</span></code> argument, <code class="docutils literal notranslate"><span class="pre">inputs_to_dict</span></code> is used to bundle the structure, pseudopotentials, k-points, calculation type and smearing into one dict-valued node before the first (<code class="docutils literal notranslate"><span class="pre">vc-relax</span></code>) QE calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">element</span> <span class="o">=</span> <span class="s2">&quot;Al&quot;</span>
@@ -483,6 +487,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">generate_structures</span></code> fans out the relaxed structure into <code class="docutils literal notranslate"><span class="pre">number_of_strains</span></code> (5) strained structures (<code class="docutils literal notranslate"><span class="pre">wf.structure_lst[&quot;s_0&quot;]</span></code> … <code class="docutils literal notranslate"><span class="pre">[&quot;s_4&quot;]</span></code>). The loop below builds one <code class="docutils literal notranslate"><span class="pre">input_dict</span></code> and one independent <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> node per strained structure, so five QE calculations run to sample the energy-volume curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_strains</span> <span class="o">=</span> <span class="mi">5</span>
@@ -516,6 +521,7 @@
 </div>
 </div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">energy</span></code> and <code class="docutils literal notranslate"><span class="pre">volume</span></code> outputs of the five strained calculations are bundled with <code class="docutils literal notranslate"><span class="pre">inputs_to_dict</span></code> and then flattened into two plain lists with the <code class="docutils literal notranslate"><span class="pre">get_values_from_dict</span></code> node defined above, ready to be passed to <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">volume_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;s_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">job_strain_lst</span><span class="p">)}</span>
@@ -545,6 +551,7 @@
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">.draw()</span></code> renders the assembled node graph, and <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> exports it - using <code class="docutils literal notranslate"><span class="pre">wf.graph_as_dict</span></code> - to the PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> format so it can be loaded by another engine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
@@ -1135,6 +1142,7 @@
 </section>
 <section id="load-workflow-with-aiida">
 <h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">load_workflow_json</span></code> reconstructs the graph as an <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code>. The lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code> is overridden (4.04 -&gt; 4.05) to show the loaded graph can still be edited like one built natively with <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code>, before running it with <code class="docutils literal notranslate"><span class="pre">wg.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">orm</span><span class="p">,</span> <span class="n">load_profile</span>
@@ -1239,6 +1247,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p>The same JSON is loaded as a <code class="docutils literal notranslate"><span class="pre">jobflow</span></code> <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>, again after overriding the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -1378,6 +1387,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </section>
 <section id="load-workflow-with-pyiron-base">
 <h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code>’s loader turns the graph into a list of delayed jobs. <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes the dependency graph and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> executes the whole chain (relax + 5 strained SCF calculations), after overriding the lattice constant <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>

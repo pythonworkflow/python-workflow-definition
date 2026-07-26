@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="example_workflows/quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_workflows/quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_workflows/quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_workflows/quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -305,7 +305,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -321,6 +323,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -333,8 +343,66 @@
   <section class="tex2jax_ignore mathjax_ignore" id="nfdi4ing-benchmark">
 <h1>NFDI4Ing Benchmark<a class="headerlink" href="#nfdi4ing-benchmark" title="Link to this heading">#</a></h1>
 <p>To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark
-developed as part of <a class="reference external" href="https://www.inggrid.org/article/id/3726/">NFDI4Ing</a> is implemented for all three simulation codes
+developed as part of <a class="reference external" href="https://www.inggrid.org/article/id/3726/">NFDI4Ing</a> is implemented for all workflow engines
 based on the Python Workflow Definition.</p>
+<section id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
+<p>Unlike the <a class="reference internal" href="arithmetic.html"><span class="std std-doc">arithmetic</span></a> and energy-volume-curve examples, which pass Python objects between functions,
+this benchmark chains together external command line tools that each require their own conda environment (defined in
+<code class="docutils literal notranslate"><span class="pre">source/envs/*.yaml</span></code>) and communicate through files rather than in-memory values. The
+pipeline is defined by six Python functions in <a class="reference download internal" download="" href="_downloads/7849111caddeecc1f84b6e10d30bdd5e/workflow.py"><span class="xref download myst">workflow.py</span></a>, each of which
+copies its inputs into a stage-specific subdirectory (<code class="docutils literal notranslate"><span class="pre">preprocessing</span></code>, <code class="docutils literal notranslate"><span class="pre">processing</span></code> or <code class="docutils literal notranslate"><span class="pre">postprocessing</span></code>) and calls
+its external tool with <code class="docutils literal notranslate"><span class="pre">conda_subprocess.check_output</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_mesh</span><span class="p">(</span><span class="n">domain_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">source_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_to_xdmf</span><span class="p">(</span><span class="n">gmsh_output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">poisson</span><span class="p">(</span><span class="n">meshio_output_xdmf</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">meshio_output_h5</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_over_line</span><span class="p">(</span><span class="n">poisson_output_pvd_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">poisson_output_vtu_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">substitute_macros</span><span class="p">(</span><span class="n">pvbatch_output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ndofs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">domain_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">source_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compile_paper</span><span class="p">(</span><span class="n">macros_tex</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">generate_mesh</span></code> runs <a class="reference external" href="https://gmsh.info"><code class="docutils literal notranslate"><span class="pre">gmsh</span></code></a> on <code class="docutils literal notranslate"><span class="pre">unit_square.geo</span></code> to mesh a 2D square whose side length is set
+by the <code class="docutils literal notranslate"><span class="pre">domain_size</span></code> parameter, producing a <code class="docutils literal notranslate"><span class="pre">.msh</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convert_to_xdmf</span></code> runs <code class="docutils literal notranslate"><span class="pre">meshio</span> <span class="pre">convert</span></code> to turn the gmsh mesh into an XDMF/H5 file pair that the FEM solver can read.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">poisson</span></code> runs a <a class="reference external" href="https://fenicsproject.org">FEniCS</a>-based <code class="docutils literal notranslate"><span class="pre">poisson.py</span></code> script that solves the Poisson equation on
+the mesh, returning the number of degrees of freedom (<code class="docutils literal notranslate"><span class="pre">numdofs</span></code>) alongside the <code class="docutils literal notranslate"><span class="pre">.pvd</span></code>/<code class="docutils literal notranslate"><span class="pre">.vtu</span></code> result files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_over_line</span></code> runs ParaView’s <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code> with <code class="docutils literal notranslate"><span class="pre">postprocessing.py</span></code> to sample the FEM solution along a line and
+write it out as a CSV file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">substitute_macros</span></code> runs <code class="docutils literal notranslate"><span class="pre">prepare_paper_macros.py</span></code> to fill a LaTeX macro template with the plot data path, the
+domain size and the number of degrees of freedom.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compile_paper</span></code> runs <a class="reference external" href="https://tectonic-typesetting.github.io"><code class="docutils literal notranslate"><span class="pre">tectonic</span></code></a> to compile <code class="docutils literal notranslate"><span class="pre">paper.tex</span></code>, which references
+those macros and the plot, into <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code>.</p></li>
+</ul>
+<p>The connection of these Python functions is stored in the <a class="reference download internal" download="" href="_downloads/4fce43a14fb0221048f87bf1c5f7507a/workflow.json"><span class="xref download myst">workflow.json</span></a>
+JSON file, following the same <code class="docutils literal notranslate"><span class="pre">nodes</span></code>/<code class="docutils literal notranslate"><span class="pre">edges</span></code> structure as the other examples. Each function is a <code class="docutils literal notranslate"><span class="pre">function</span></code> node,
+<code class="docutils literal notranslate"><span class="pre">domain_size</span></code> and <code class="docutils literal notranslate"><span class="pre">source_directory</span></code> are <code class="docutils literal notranslate"><span class="pre">input</span></code> nodes, and edges connect a function’s input port either to another
+function’s output port or directly to an input node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.generate_mesh&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow.convert_to_xdmf&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;domain_size&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;source_directory&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;result&quot;</span><span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;domain_size&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;source_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;targetPort&quot;</span><span class="p">:</span> <span class="s2">&quot;gmsh_output_file&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">convert_to_xdmf</span></code> and <code class="docutils literal notranslate"><span class="pre">poisson</span></code> return a <code class="docutils literal notranslate"><span class="pre">dict</span></code> instead of a single value, the edges that read their output
+set <code class="docutils literal notranslate"><span class="pre">sourcePort</span></code> to the specific dictionary key (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;xdmf_file&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;numdofs&quot;</span></code>) rather than <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>Because every stage shells out to a different external tool in a different conda environment and passes file paths
+along the graph, this benchmark exercises a different part of the Python Workflow Definition than the arithmetic and
+energy-volume-curve examples: it shows that the same <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> produced by one engine can be handed to another
+engine, an execution manager like <a class="reference external" href="https://www.commonwl.org">CWL</a>/<code class="docutils literal notranslate"><span class="pre">cwltool</span></code>, or plain Python, and still reproduce the
+same chain of <code class="docutils literal notranslate"><span class="pre">gmsh</span></code>, <code class="docutils literal notranslate"><span class="pre">meshio</span></code>, FEniCS, <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code> and <code class="docutils literal notranslate"><span class="pre">tectonic</span></code> calls end to end.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -393,6 +461,23 @@ based on the Python Workflow Definition.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

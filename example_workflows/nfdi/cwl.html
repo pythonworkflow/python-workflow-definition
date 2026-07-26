@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overwrite source directory with absolute path &#8212; Python Workflow Definition</title>
+    <title>CWL &#8212; Python Workflow Definition</title>
   
   
   
@@ -171,7 +171,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -349,7 +349,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overwrite source directory with absolute path</h1>
+    <h1>CWL</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -359,10 +359,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overwrite-source-directory-with-absolute-path">Overwrite source directory with absolute path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -373,7 +372,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="cwl">
+<h1>CWL<a class="headerlink" href="#cwl" title="Link to this heading">#</a></h1>
+<p>This notebook executes the NFDI4Ing file-based workflow benchmark’s <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> with the <a class="reference external" href="https://www.commonwl.org/">Common Workflow Language</a> via <a class="reference external" href="https://github.com/common-workflow-language/cwltool"><code class="docutils literal notranslate"><span class="pre">cwltool</span></code></a>, instead of generating the JSON from a Python workflow engine like the other notebooks in this directory. <code class="docutils literal notranslate"><span class="pre">python_workflow_definition.cwl.write_workflow</span></code> translates the PWD graph into a CWL <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> plus one <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> wrapper per pipeline function; CWL then passes data between steps as pickled files on disk rather than in-memory Python objects, which matches this benchmark’s file-based nature.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 </pre></div>
@@ -401,8 +403,9 @@
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="overwrite-source-directory-with-absolute-path">
-<h1>Overwrite source directory with absolute path<a class="headerlink" href="#overwrite-source-directory-with-absolute-path" title="Link to this heading">#</a></h1>
+<section id="overwrite-source-directory-with-absolute-path">
+<h2>Overwrite source directory with absolute path<a class="headerlink" href="#overwrite-source-directory-with-absolute-path" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> stores <code class="docutils literal notranslate"><span class="pre">source_directory</span></code> as the relative path <code class="docutils literal notranslate"><span class="pre">&quot;source&quot;</span></code>. Because <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> stages each step’s inputs into its own temporary working directory, a relative path would no longer resolve once execution starts, so it is rewritten to an absolute path before export.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -433,8 +436,9 @@
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="execute-workflow">
-<h1>Execute workflow<a class="headerlink" href="#execute-workflow" title="Link to this heading">#</a></h1>
+<section id="execute-workflow">
+<h2>Execute workflow<a class="headerlink" href="#execute-workflow" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">write_workflow</span></code> reads <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> and writes out <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> (the CWL <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> definition), one <code class="docutils literal notranslate"><span class="pre">&lt;function&gt;_&lt;id&gt;.cwl</span></code> <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> per pipeline step, and <code class="docutils literal notranslate"><span class="pre">workflow.yml</span></code> with the input values pickled to disk. <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> then runs the six steps in dependency order, invoking <code class="docutils literal notranslate"><span class="pre">gmsh</span></code>, <code class="docutils literal notranslate"><span class="pre">meshio</span></code>, the Poisson solver, <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code> and <code class="docutils literal notranslate"><span class="pre">tectonic</span></code> in turn, and writes the workflow’s single output — the path to the compiled <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> — to <code class="docutils literal notranslate"><span class="pre">result.pickle</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
@@ -545,6 +549,7 @@
 </div>
 </div>
 </div>
+<p>The result is unpickled below to confirm it is the expected <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -558,6 +563,7 @@
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,10 +614,9 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overwrite-source-directory-with-absolute-path">Overwrite source directory with absolute path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
