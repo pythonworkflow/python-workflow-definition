@@ -20,14 +20,15 @@ from python_workflow_definition.shared import (
 
 
 def _get_function_argument(argument: str, position: int = 3) -> dict:
+    input_dict = {
+        "prefix": "--arg_" + argument + "=",
+        "separate": False,
+        "position": position,
+    }
     return {
         argument + "_file": {
             "type": "File",
-            "inputBinding": {
-                "prefix": "--arg_" + argument + "=",
-                "separate": False,
-                "position": position,
-            },
+            "inputBinding": input_dict,
         },
     }
 
@@ -43,11 +44,12 @@ def _get_function_template(function_name: str) -> dict:
 
 
 def _get_output_name(output_name: str) -> dict:
+    output_dict = {
+        "type": "File",
+        "outputBinding": {"glob": output_name + ".pickle"},
+    }
     return {
-        output_name + "_file": {
-            "type": "File",
-            "outputBinding": {"glob": output_name + ".pickle"},
-        }
+        output_name + "_file": output_dict
     }
 
 
@@ -219,13 +221,14 @@ def _write_workflow(workflow, directory_path: str = "."):
                     + v[SOURCE_PORT_LABEL]
                     + "_file"
                 )
+        step_dict = {
+            "run": node_script,
+            "in": in_dict,
+            "out": output,
+        }
         workflow_template["steps"].update(
             {
-                step_name_lst[ind] + "_" + str(ind): {
-                    "run": node_script,
-                    "in": in_dict,
-                    "out": output,
-                }
+                step_name_lst[ind] + "_" + str(ind): step_dict
             }
         )
     export_path = Path(directory_path)

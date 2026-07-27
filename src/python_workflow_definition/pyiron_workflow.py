@@ -318,9 +318,7 @@ def load_workflow_json(file_name: str) -> Workflow:
         PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
     )
 
-    input_values: dict[
-        int, object
-    ] = {}  # Type is actually more restrictive, must be jsonifyable object
+    input_values: dict[int, object] = {}
     nodes: dict[int, Function] = {}
     total_counter_dict = Counter(
         [n["value"] for n in content[NODES_LABEL] if n["type"] == "function"]
