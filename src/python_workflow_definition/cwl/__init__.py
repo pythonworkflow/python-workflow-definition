@@ -20,16 +20,16 @@ from python_workflow_definition.shared import (
 
 
 def _get_function_argument(argument: str, position: int = 3) -> dict:
-    input_dict = {
-        "prefix": "--arg_" + argument + "=",
-        "separate": False,
-        "position": position,
+    argument_dict = {
+        "type": "File",
+        "inputBinding": {
+            "prefix": "--arg_" + argument + "=",
+            "separate": False,
+            "position": position,
+        },
     }
     return {
-        argument + "_file": {
-            "type": "File",
-            "inputBinding": input_dict,
-        },
+        argument + "_file": argument_dict
     }
 
 
