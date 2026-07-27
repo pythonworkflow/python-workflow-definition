@@ -155,9 +155,7 @@ def _get_unique_objects(nodes_dict: dict):
     for k, v in nodes_dict.items():
         if not (
             isinstance(v, DelayedObject)
-            or (
-                isinstance(v, list) and any(isinstance(el, DelayedObject) for el in v)
-            )
+            or (isinstance(v, list) and any(isinstance(el, DelayedObject) for el in v))
             or (
                 isinstance(v, dict)
                 and any(isinstance(el, DelayedObject) for el in v.values())

@@ -21,8 +21,7 @@ from python_workflow_definition.shared import (
 
 def _get_function_argument(argument: str, position: int = 3) -> dict:
     return {
-        argument
-        + "_file": {
+        argument + "_file": {
             "type": "File",
             "inputBinding": {
                 "prefix": "--arg_" + argument + "=",
@@ -45,8 +44,7 @@ def _get_function_template(function_name: str) -> dict:
 
 def _get_output_name(output_name: str) -> dict:
     return {
-        output_name
-        + "_file": {
+        output_name + "_file": {
             "type": "File",
             "outputBinding": {"glob": output_name + ".pickle"},
         }
@@ -61,20 +59,16 @@ def _get_function(workflow):
     for funct_id in function_nodes_dict:
         target_ports = list(
             {
-                
-                    e[TARGET_PORT_LABEL]
-                    for e in workflow[EDGES_LABEL]
-                    if e["target"] == funct_id
-                
+                e[TARGET_PORT_LABEL]
+                for e in workflow[EDGES_LABEL]
+                if e["target"] == funct_id
             }
         )
         source_ports = list(
             {
-                
-                    e[SOURCE_PORT_LABEL]
-                    for e in workflow[EDGES_LABEL]
-                    if e["source"] == funct_id
-                
+                e[SOURCE_PORT_LABEL]
+                for e in workflow[EDGES_LABEL]
+                if e["source"] == funct_id
             }
         )
         funct_dict[funct_id] = {
@@ -227,9 +221,7 @@ def _write_workflow(workflow, directory_path: str = "."):
                 )
         workflow_template["steps"].update(
             {
-                step_name_lst[ind]
-                + "_"
-                + str(ind): {
+                step_name_lst[ind] + "_" + str(ind): {
                     "run": node_script,
                     "in": in_dict,
                     "out": output,

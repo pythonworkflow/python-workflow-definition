@@ -56,11 +56,9 @@ def update_node_names(workflow_dict: dict) -> dict:
     node_names_dict = {
         n["id"]: list(
             {
-                
-                    e[TARGET_PORT_LABEL]
-                    for e in workflow_dict[EDGES_LABEL]
-                    if e[SOURCE_LABEL] == n["id"]
-                
+                e[TARGET_PORT_LABEL]
+                for e in workflow_dict[EDGES_LABEL]
+                if e[SOURCE_LABEL] == n["id"]
             }
         )[0]
         for n in input_nodes

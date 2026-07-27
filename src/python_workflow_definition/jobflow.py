@@ -80,10 +80,10 @@ def _get_edges_and_extend_nodes(
                 )
             elif isinstance(v, dict) and any(
                 isinstance(el, dict)
-                    and "@module" in el
-                    and "@class" in el
-                    and "@version" in el
-                    for el in v.values()
+                and "@module" in el
+                and "@class" in el
+                and "@version" in el
+                for el in v.values()
             ):
                 node_dict_index = len(nodes_dict)
                 nodes_dict[node_dict_index] = get_dict
@@ -128,10 +128,10 @@ def _get_edges_and_extend_nodes(
                 )
             elif isinstance(v, list) and any(
                 isinstance(el, dict)
-                    and "@module" in el
-                    and "@class" in el
-                    and "@version" in el
-                    for el in v
+                and "@module" in el
+                and "@class" in el
+                and "@version" in el
+                for el in v
             ):
                 node_list_index = len(nodes_dict)
                 nodes_dict[node_list_index] = get_list
