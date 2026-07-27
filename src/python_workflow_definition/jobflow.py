@@ -1,5 +1,6 @@
 from importlib import import_module
 from inspect import isfunction
+from typing import Any
 
 import numpy as np
 from jobflow import Flow, job
@@ -39,7 +40,7 @@ def _get_nodes_dict(function_dict: dict):
 
 
 def _get_edge_from_dict(
-    target: str, key: str, value_dict: dict, nodes_mapping_dict: dict
+    target: int, key: str, value_dict: dict, nodes_mapping_dict: dict
 ) -> dict:
     if len(value_dict["attributes"]) == 1:
         return {
@@ -199,8 +200,8 @@ def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
     nodes_without_dep_lst = [
         k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
     ]
-    ordered_lst = []
-    total_new_dict = {}
+    ordered_lst: list = []
+    total_new_dict: dict[Any, dict] = {}
     while len(total_new_dict) < len(total_dict):
         for ind in sorted(total_dict.keys()):
             connect = total_dict[ind]
@@ -215,7 +216,7 @@ def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
 
 
 def _group_edges(edges_lst: list) -> dict:
-    total_dict = {}
+    total_dict: dict[Any, dict] = {}
     for ed_major in edges_lst:
         target_id = ed_major[TARGET_LABEL]
         tmp_lst = []
@@ -240,7 +241,7 @@ def _get_workflow(
         else:
             return getattr(getattr(obj, "output"), source_handle)
 
-    memory_dict = {}
+    memory_dict: dict[Any, Any] = {}
     for k in total_dict.keys():
         v = nodes_dict[k]
         if isfunction(v):

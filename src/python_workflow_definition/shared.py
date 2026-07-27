@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import Any
 
 NODES_LABEL = "nodes"
 EDGES_LABEL = "edges"
@@ -31,7 +32,7 @@ def get_kwargs(lst: list) -> dict:
 
 
 def get_source_handles(edges_lst: list) -> dict:
-    source_handle_dict = {}
+    source_handle_dict: dict[Any, list] = {}
     for ed in edges_lst:
         if ed[SOURCE_LABEL] not in source_handle_dict.keys():
             source_handle_dict[ed[SOURCE_LABEL]] = []

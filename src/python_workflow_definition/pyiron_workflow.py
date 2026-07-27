@@ -189,7 +189,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
         elif edge[TARGET_LABEL] not in remap_get_list_dict.values():
             edge_get_list_updated_lst.append(edge)
 
-    target_dict = {}
+    target_dict: dict[Any, list] = {}
     for edge in edge_get_list_updated_lst:
         for k in pyiron_workflow_modules.keys():
             if k == edge[TARGET_LABEL]:
@@ -197,7 +197,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
                     target_dict[k] = []
                 target_dict[k].append(edge)
 
-    source_dict = {}
+    source_dict: dict[Any, list] = {}
     for edge in edge_get_list_updated_lst:
         for k in pyiron_workflow_modules.keys():
             if k == edge[SOURCE_LABEL]:

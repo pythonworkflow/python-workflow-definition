@@ -1,6 +1,7 @@
 from concurrent.futures import Executor
 from importlib import import_module
 from inspect import isfunction
+from typing import Any
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.purepython import group_edges, resort_total_lst
@@ -58,7 +59,7 @@ def load_workflow_json(file_name: str, exe: Executor):
     total_lst = group_edges(edges_new_lst)
     total_new_lst = resort_total_lst(total_lst=total_lst, nodes_dict=nodes_new_dict)
 
-    result_dict = {}
+    result_dict: dict[Any, Any] = {}
     last_key = None
     for lst in total_new_lst:
         node = nodes_new_dict[lst[0]]
