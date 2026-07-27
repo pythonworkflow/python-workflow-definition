@@ -43,7 +43,7 @@ plot = [
 ]
 
 [tool.ruff]
-exclude = [".ci_support", "docs", "notebooks", "tests", "setup.py", "_version.py"]
+exclude = ["documentation", "example_workflows", "tests", "binder", "_version.py"]
 
 [tool.ruff.lint]
 select = [
