@@ -12,9 +12,7 @@ VERSION_LABEL = "version"
 
 
 def get_dict(**kwargs) -> dict:
-    # NOTE: In WG, this will automatically be wrapped in a dict with the `result` key
-    return {k: v for k, v in kwargs.items()}
-    # return {'dict': {k: v for k, v in kwargs.items()}}
+    return dict(kwargs.items())
 
 
 def get_list(**kwargs) -> list:
@@ -34,11 +32,11 @@ def get_kwargs(lst: list) -> dict:
 def get_source_handles(edges_lst: list) -> dict:
     source_handle_dict: dict[Any, list] = {}
     for ed in edges_lst:
-        if ed[SOURCE_LABEL] not in source_handle_dict.keys():
+        if ed[SOURCE_LABEL] not in source_handle_dict:
             source_handle_dict[ed[SOURCE_LABEL]] = []
         source_handle_dict[ed[SOURCE_LABEL]].append(ed[SOURCE_PORT_LABEL])
     return {
-        k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
+        k: list(range(len(v))) if len(v) > 1 and all(el is None for el in v) else v
         for k, v in source_handle_dict.items()
     }
 
@@ -55,19 +53,17 @@ def update_node_names(workflow_dict: dict) -> dict:
     input_nodes = [n for n in workflow_dict[NODES_LABEL] if n["type"] == "input"]
     node_names_dict = {
         n["id"]: list(
-            set(
-                [
-                    e[TARGET_PORT_LABEL]
-                    for e in workflow_dict[EDGES_LABEL]
-                    if e[SOURCE_LABEL] == n["id"]
-                ]
-            )
+            {
+                e[TARGET_PORT_LABEL]
+                for e in workflow_dict[EDGES_LABEL]
+                if e[SOURCE_LABEL] == n["id"]
+            }
         )[0]
         for n in input_nodes
     }
 
     counter_dict = Counter(node_names_dict.values())
-    node_names_useage_dict = {k: -1 for k in counter_dict.keys()}
+    node_names_useage_dict = dict.fromkeys(counter_dict.keys(), -1)
     for k, v in node_names_dict.items():
         node_names_useage_dict[v] += 1
         if counter_dict[v] > 1:
@@ -83,7 +79,7 @@ def update_node_names(workflow_dict: dict) -> dict:
 
 def set_result_node(workflow_dict):
     node_id_lst = [n["id"] for n in workflow_dict[NODES_LABEL]]
-    source_lst = list(set([e[SOURCE_LABEL] for e in workflow_dict[EDGES_LABEL]]))
+    source_lst = list({e[SOURCE_LABEL] for e in workflow_dict[EDGES_LABEL]})
 
     end_node_lst = []
     for ni in node_id_lst:

@@ -4,7 +4,7 @@ from inspect import isfunction
 from typing import Any
 
 import numpy as np
-from pyiron_workflow import Workflow, as_function_node, function_node
+from pyiron_workflow import Workflow, function_node
 from pyiron_workflow.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
@@ -111,8 +111,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
     item_node_lst = [
         e[SOURCE_LABEL]
         for e in edges_lst
-        if e[TARGET_LABEL] in pyiron_workflow_modules.keys()
-        and e[TARGET_PORT_LABEL] == "item"
+        if e[TARGET_LABEL] in pyiron_workflow_modules and e[TARGET_PORT_LABEL] == "item"
     ]
 
     values_from_dict_lst = [
@@ -129,8 +128,8 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
     nodes_remaining_dict = {
         k: v
         for k, v in nodes_dict.items()
-        if k not in pyiron_workflow_modules.keys()
-        and k not in remap_dict.keys()
+        if k not in pyiron_workflow_modules
+        and k not in remap_dict
         and k not in item_node_lst
         and k not in remap_get_list_dict.values()
     }
@@ -178,7 +177,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
                 SOURCE_PORT_LABEL: connected_edge[SOURCE_PORT_LABEL],
             }
             edge_get_list_updated_lst.append(edge_updated)
-        elif edge[SOURCE_LABEL] in remap_dict.keys():
+        elif edge[SOURCE_LABEL] in remap_dict:
             edge_updated = {
                 TARGET_LABEL: edge[TARGET_LABEL],
                 TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
@@ -191,7 +190,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
 
     target_dict: dict[Any, list] = {}
     for edge in edge_get_list_updated_lst:
-        for k in pyiron_workflow_modules.keys():
+        for k in pyiron_workflow_modules:
             if k == edge[TARGET_LABEL]:
                 if k not in target_dict:
                     target_dict[k] = []
@@ -199,22 +198,22 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
 
     source_dict: dict[Any, list] = {}
     for edge in edge_get_list_updated_lst:
-        for k in pyiron_workflow_modules.keys():
+        for k in pyiron_workflow_modules:
             if k == edge[SOURCE_LABEL]:
                 if k not in source_dict:
                     source_dict[k] = []
                 source_dict[k].append(edge)
 
     edge_new_lst, nodes_to_delete = [], []
-    for k in target_dict.keys():
+    for k, v in target_dict.items():
         source, sourcehandle = None, None
-        for edge in target_dict[k]:
+        for edge in v:
             if edge[SOURCE_PORT_LABEL] is None:
                 sourcehandle = nodes_dict[edge[SOURCE_LABEL]]
                 nodes_to_delete.append(edge[SOURCE_LABEL])
             else:
                 source = edge[SOURCE_LABEL]
-        if "s_" == source_dict[k][-1][TARGET_PORT_LABEL][:2]:
+        if source_dict[k][-1][TARGET_PORT_LABEL][:2] == "s_":
             edge_new_lst.append(
                 {
                     SOURCE_LABEL: nodes_final_order_dict[source],
@@ -247,16 +246,7 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
             if (
                 isfunction(source_node)
                 and source_node.__name__ == edge[SOURCE_PORT_LABEL]
-            ):
-                edge_new_lst.append(
-                    {
-                        TARGET_LABEL: nodes_final_order_dict[edge[TARGET_LABEL]],
-                        TARGET_PORT_LABEL: edge[TARGET_PORT_LABEL],
-                        SOURCE_LABEL: nodes_final_order_dict[edge[SOURCE_LABEL]],
-                        SOURCE_PORT_LABEL: None,
-                    }
-                )
-            elif (
+            ) or (
                 isfunction(source_node)
                 and source_node.__name__ == "get_dict"
                 and edge[SOURCE_PORT_LABEL] == "dict"
@@ -328,15 +318,13 @@ def load_workflow_json(file_name: str) -> Workflow:
         PythonWorkflowDefinitionWorkflow.load_json_file(file_name=file_name)
     )
 
-    input_values: dict[int, object] = (
-        {}
-    )  # Type is actually more restrictive, must be jsonifyable object
+    input_values: dict[int, object] = {}
     nodes: dict[int, Function] = {}
     total_counter_dict = Counter(
         [n["value"] for n in content[NODES_LABEL] if n["type"] == "function"]
     )
-    counter_dict = {k: -1 for k in total_counter_dict.keys()}
-    wf = Workflow(file_name.split(".")[0])
+    counter_dict = dict.fromkeys(total_counter_dict.keys(), -1)
+    wf = Workflow(file_name.split(".", maxsplit=1)[0])
     nodes_look_up_dict = {node["id"]: node["value"] for node in content[NODES_LABEL]}
     for node_dict in content[NODES_LABEL]:
         if node_dict["type"] == "function":
@@ -384,7 +372,7 @@ def load_workflow_json(file_name: str) -> Workflow:
         source_port = edge_dict[SOURCE_PORT_LABEL]
 
         if source_port is None:
-            if source_id in input_values.keys():  # Parent input value
+            if source_id in input_values:  # Parent input value
                 upstream = input_values[source_id]
             else:  # Single-output sibling
                 upstream = nodes[source_id]

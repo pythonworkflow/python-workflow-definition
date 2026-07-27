@@ -11,7 +11,6 @@ from python_workflow_definition.shared import (
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     convert_nodes_list_to_dict,
-    get_kwargs,
 )
 
 

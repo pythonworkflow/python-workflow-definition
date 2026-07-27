@@ -27,7 +27,7 @@ from python_workflow_definition.shared import (
 
 
 def _get_function_dict(flow: Flow):
-    return {job.uuid: job.function for job in flow.jobs}
+    return {j.uuid: j.function for j in flow.jobs}
 
 
 def _get_nodes_dict(function_dict: dict):
@@ -62,8 +62,8 @@ def _get_edges_and_extend_nodes(
     flow_dict: dict, nodes_mapping_dict: dict, nodes_dict: dict
 ):
     edges_lst = []
-    for job in flow_dict["jobs"]:
-        for k, v in job["function_kwargs"].items():
+    for j in flow_dict["jobs"]:
+        for k, v in j["function_kwargs"].items():
             if (
                 isinstance(v, dict)
                 and "@module" in v
@@ -72,20 +72,18 @@ def _get_edges_and_extend_nodes(
             ):
                 edges_lst.append(
                     _get_edge_from_dict(
-                        target=nodes_mapping_dict[job["uuid"]],
+                        target=nodes_mapping_dict[j["uuid"]],
                         key=k,
                         value_dict=v,
                         nodes_mapping_dict=nodes_mapping_dict,
                     )
                 )
             elif isinstance(v, dict) and any(
-                [
-                    isinstance(el, dict)
-                    and "@module" in el
-                    and "@class" in el
-                    and "@version" in el
-                    for el in v.values()
-                ]
+                isinstance(el, dict)
+                and "@module" in el
+                and "@class" in el
+                and "@version" in el
+                for el in v.values()
             ):
                 node_dict_index = len(nodes_dict)
                 nodes_dict[node_dict_index] = get_dict
@@ -122,20 +120,18 @@ def _get_edges_and_extend_nodes(
                         )
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_dict_index,
                         SOURCE_PORT_LABEL: None,
                     }
                 )
             elif isinstance(v, list) and any(
-                [
-                    isinstance(el, dict)
-                    and "@module" in el
-                    and "@class" in el
-                    and "@version" in el
-                    for el in v
-                ]
+                isinstance(el, dict)
+                and "@module" in el
+                and "@class" in el
+                and "@version" in el
+                for el in v
             ):
                 node_list_index = len(nodes_dict)
                 nodes_dict[node_list_index] = get_list
@@ -172,7 +168,7 @@ def _get_edges_and_extend_nodes(
                         )
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_list_index,
                         SOURCE_PORT_LABEL: None,
@@ -186,7 +182,7 @@ def _get_edges_and_extend_nodes(
                     node_index = {tv: tk for tk, tv in nodes_dict.items()}[v]
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_index,
                         SOURCE_PORT_LABEL: None,
@@ -196,10 +192,8 @@ def _get_edges_and_extend_nodes(
 
 
 def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
-    nodes_with_dep_lst = list(sorted(total_dict.keys()))
-    nodes_without_dep_lst = [
-        k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
-    ]
+    nodes_with_dep_lst = sorted(total_dict.keys())
+    nodes_without_dep_lst = [k for k in nodes_dict if k not in nodes_with_dep_lst]
     ordered_lst: list = []
     total_new_dict: dict[Any, dict] = {}
     while len(total_new_dict) < len(total_dict):
@@ -208,7 +202,7 @@ def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all(
-                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                    s in ordered_lst or s in nodes_without_dep_lst for s in source_lst
                 ):
                     ordered_lst.append(ind)
                     total_new_dict[ind] = connect
@@ -220,7 +214,7 @@ def _group_edges(edges_lst: list) -> dict:
     for ed_major in edges_lst:
         target_id = ed_major[TARGET_LABEL]
         tmp_lst = []
-        if target_id not in total_dict.keys():
+        if target_id not in total_dict:
             for ed in edges_lst:
                 if target_id == ed[TARGET_LABEL]:
                     tmp_lst.append(ed)
@@ -237,15 +231,15 @@ def _get_workflow(
 ) -> list:
     def get_attr_helper(obj, source_handle):
         if source_handle is None:
-            return getattr(obj, "output")
+            return obj.output
         else:
-            return getattr(getattr(obj, "output"), source_handle)
+            return getattr(obj.output, source_handle)
 
     memory_dict: dict[Any, Any] = {}
-    for k in total_dict.keys():
+    for k, subdict in total_dict.items():
         v = nodes_dict[k]
         if isfunction(v):
-            if k in source_handles_dict.keys():
+            if k in source_handles_dict:
                 fn = job(
                     method=v,
                     data=[el for el in source_handles_dict[k] if el is not None],
@@ -261,7 +255,7 @@ def _get_workflow(
                         source_handle=vw[SOURCE_PORT_LABEL],
                     )
                 )
-                for kw, vw in total_dict[k].items()
+                for kw, vw in subdict.items()
             }
             memory_dict[k] = fn(**kwargs)
     return list(memory_dict.values())
