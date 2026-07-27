@@ -28,9 +28,7 @@ def _get_function_argument(argument: str, position: int = 3) -> dict:
             "position": position,
         },
     }
-    return {
-        argument + "_file": argument_dict
-    }
+    return {argument + "_file": argument_dict}
 
 
 def _get_function_template(function_name: str) -> dict:
