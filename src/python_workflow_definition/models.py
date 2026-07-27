@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Annotated, Any, Literal, TypeVar, Union, Optional
+from typing import Annotated, Any, Literal, TypeVar
 
 from pydantic import (
     BaseModel,
@@ -26,7 +26,7 @@ __all__ = (
 )
 
 
-JsonPrimitive = Optional[str | int | float | bool]
+JsonPrimitive = str | int | float | bool | None
 AllowableDefaults = TypeAliasType(
     "AllowableDefaults",
     "JsonPrimitive | dict[str, AllowableDefaults] | list[AllowableDefaults]",
