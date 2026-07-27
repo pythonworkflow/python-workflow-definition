@@ -48,9 +48,7 @@ def _get_output_name(output_name: str) -> dict:
         "type": "File",
         "outputBinding": {"glob": output_name + ".pickle"},
     }
-    return {
-        output_name + "_file": output_dict
-    }
+    return {output_name + "_file": output_dict}
 
 
 def _get_function(workflow):
@@ -227,9 +225,7 @@ def _write_workflow(workflow, directory_path: str = "."):
             "out": output,
         }
         workflow_template["steps"].update(
-            {
-                step_name_lst[ind] + "_" + str(ind): step_dict
-            }
+            {step_name_lst[ind] + "_" + str(ind): step_dict}
         )
     export_path = Path(directory_path)
     export_path.mkdir(parents=True, exist_ok=True)
