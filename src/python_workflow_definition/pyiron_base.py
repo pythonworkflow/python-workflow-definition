@@ -136,13 +136,13 @@ def _get_unique_objects(nodes_dict: dict):
     unique_lst: list = []
     delayed_object_updated_dict: dict[Any, DelayedObject] = {}
     match_dict: dict[Any, Any] = {}
-    for dobj in delayed_object_dict:
+    for dobj, v in delayed_object_dict.items():
         match = False
         for obj in unique_lst:
             if (
                 delayed_object_updated_dict[obj]._python_function
-                == delayed_object_dict[dobj]._python_function
-                and delayed_object_dict[dobj]._input == delayed_object_dict[obj]._input
+                == v._python_function
+                and v._input == delayed_object_dict[obj]._input
             ):
                 delayed_object_updated_dict[obj] = delayed_object_dict[obj]
                 match_dict[dobj] = obj
@@ -150,7 +150,7 @@ def _get_unique_objects(nodes_dict: dict):
                 break
         if not match:
             unique_lst.append(dobj)
-            delayed_object_updated_dict[dobj] = delayed_object_dict[dobj]
+            delayed_object_updated_dict[dobj] = v
     update_dict = {}
     for k, v in nodes_dict.items():
         if not (

@@ -205,9 +205,9 @@ def write_workflow_json(graph_as_dict: dict, file_name: str = "workflow.json"):
                 source_dict[k].append(edge)
 
     edge_new_lst, nodes_to_delete = [], []
-    for k in target_dict:
+    for k, v in target_dict.items():
         source, sourcehandle = None, None
-        for edge in target_dict[k]:
+        for edge in v:
             if edge[SOURCE_PORT_LABEL] is None:
                 sourcehandle = nodes_dict[edge[SOURCE_LABEL]]
                 nodes_to_delete.append(edge[SOURCE_LABEL])

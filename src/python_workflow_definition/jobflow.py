@@ -236,7 +236,7 @@ def _get_workflow(
             return getattr(obj.output, source_handle)
 
     memory_dict: dict[Any, Any] = {}
-    for k in total_dict:
+    for k, subdict in total_dict.items():
         v = nodes_dict[k]
         if isfunction(v):
             if k in source_handles_dict:
@@ -255,7 +255,7 @@ def _get_workflow(
                         source_handle=vw[SOURCE_PORT_LABEL],
                     )
                 )
-                for kw, vw in total_dict[k].items()
+                for kw, vw in subdict.items()
             }
             memory_dict[k] = fn(**kwargs)
     return list(memory_dict.values())
