@@ -13,7 +13,7 @@ VERSION_LABEL = "version"
 
 def get_dict(**kwargs) -> dict:
     # NOTE: In WG, this will automatically be wrapped in a dict with the `result` key
-    return {k: v for k, v in kwargs.items()}
+    return dict(kwargs.items())
     # return {'dict': {k: v for k, v in kwargs.items()}}
 
 
@@ -38,7 +38,7 @@ def get_source_handles(edges_lst: list) -> dict:
             source_handle_dict[ed[SOURCE_LABEL]] = []
         source_handle_dict[ed[SOURCE_LABEL]].append(ed[SOURCE_PORT_LABEL])
     return {
-        k: list(range(len(v))) if len(v) > 1 and all([el is None for el in v]) else v
+        k: list(range(len(v))) if len(v) > 1 and all(el is None for el in v) else v
         for k, v in source_handle_dict.items()
     }
 
@@ -55,13 +55,13 @@ def update_node_names(workflow_dict: dict) -> dict:
     input_nodes = [n for n in workflow_dict[NODES_LABEL] if n["type"] == "input"]
     node_names_dict = {
         n["id"]: list(
-            set(
-                [
+            {
+                
                     e[TARGET_PORT_LABEL]
                     for e in workflow_dict[EDGES_LABEL]
                     if e[SOURCE_LABEL] == n["id"]
-                ]
-            )
+                
+            }
         )[0]
         for n in input_nodes
     }
@@ -83,7 +83,7 @@ def update_node_names(workflow_dict: dict) -> dict:
 
 def set_result_node(workflow_dict):
     node_id_lst = [n["id"] for n in workflow_dict[NODES_LABEL]]
-    source_lst = list(set([e[SOURCE_LABEL] for e in workflow_dict[EDGES_LABEL]]))
+    source_lst = list({e[SOURCE_LABEL] for e in workflow_dict[EDGES_LABEL]})
 
     end_node_lst = []
     for ni in node_id_lst:

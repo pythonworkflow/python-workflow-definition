@@ -79,13 +79,11 @@ def _get_edges_and_extend_nodes(
                     )
                 )
             elif isinstance(v, dict) and any(
-                [
-                    isinstance(el, dict)
+                isinstance(el, dict)
                     and "@module" in el
                     and "@class" in el
                     and "@version" in el
                     for el in v.values()
-                ]
             ):
                 node_dict_index = len(nodes_dict)
                 nodes_dict[node_dict_index] = get_dict
@@ -129,13 +127,11 @@ def _get_edges_and_extend_nodes(
                     }
                 )
             elif isinstance(v, list) and any(
-                [
-                    isinstance(el, dict)
+                isinstance(el, dict)
                     and "@module" in el
                     and "@class" in el
                     and "@version" in el
                     for el in v
-                ]
             ):
                 node_list_index = len(nodes_dict)
                 nodes_dict[node_list_index] = get_list
@@ -206,7 +202,7 @@ def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all(
-                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                    s in ordered_lst or s in nodes_without_dep_lst for s in source_lst
                 ):
                     ordered_lst.append(ind)
                     total_new_dict[ind] = connect

@@ -25,7 +25,7 @@ def resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all(
-                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                    s in ordered_lst or s in nodes_without_dep_lst for s in source_lst
                 ):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])

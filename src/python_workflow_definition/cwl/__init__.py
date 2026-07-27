@@ -60,22 +60,22 @@ def _get_function(workflow):
     funct_dict = {}
     for funct_id in function_nodes_dict:
         target_ports = list(
-            set(
-                [
+            {
+                
                     e[TARGET_PORT_LABEL]
                     for e in workflow[EDGES_LABEL]
                     if e["target"] == funct_id
-                ]
-            )
+                
+            }
         )
         source_ports = list(
-            set(
-                [
+            {
+                
                     e[SOURCE_PORT_LABEL]
                     for e in workflow[EDGES_LABEL]
                     if e["source"] == funct_id
-                ]
-            )
+                
+            }
         )
         funct_dict[funct_id] = {
             "targetPorts": target_ports,
@@ -89,7 +89,7 @@ def _write_function_cwl(workflow, directory_path: str = "."):
     export_path = Path(directory_path)
     export_path.mkdir(parents=True, exist_ok=True)
 
-    for i in function_nodes_dict.keys():
+    for i in function_nodes_dict:
         template: dict[str, Any] = {
             "cwlVersion": "v1.2",
             "class": "CommandLineTool",

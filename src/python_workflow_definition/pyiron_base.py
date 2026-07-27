@@ -35,7 +35,7 @@ def _resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
             if ind not in ordered_lst:
                 source_lst = [sd[SOURCE_LABEL] for sd in connect.values()]
                 if all(
-                    [s in ordered_lst or s in nodes_without_dep_lst for s in source_lst]
+                    s in ordered_lst or s in nodes_without_dep_lst for s in source_lst
                 ):
                     ordered_lst.append(ind)
                     total_new_lst.append([ind, connect])
@@ -93,7 +93,7 @@ def _get_delayed_object_dict(
 
 
 def get_dict(**kwargs) -> dict:
-    return {k: v for k, v in kwargs["kwargs"].items()}
+    return dict(kwargs["kwargs"].items())
 
 
 def get_list(**kwargs) -> list:
@@ -120,12 +120,12 @@ def _get_unique_objects(nodes_dict: dict):
     for k, v in nodes_dict.items():
         if isinstance(v, DelayedObject):
             delayed_object_dict[k] = v
-        elif isinstance(v, list) and any([isinstance(el, DelayedObject) for el in v]):
+        elif isinstance(v, list) and any(isinstance(el, DelayedObject) for el in v):
             delayed_object_dict[k] = DelayedObject(function=get_list)
-            delayed_object_dict[k]._input = {i: el for i, el in enumerate(v)}
+            delayed_object_dict[k]._input = dict(enumerate(v))
             delayed_object_dict[k]._python_function = get_list
         elif isinstance(v, dict) and any(
-            [isinstance(el, DelayedObject) for el in v.values()]
+            isinstance(el, DelayedObject) for el in v.values()
         ):
             delayed_object_dict[k] = DelayedObject(
                 function=get_dict,
@@ -156,11 +156,11 @@ def _get_unique_objects(nodes_dict: dict):
         if not (
             isinstance(v, DelayedObject)
             or (
-                isinstance(v, list) and any([isinstance(el, DelayedObject) for el in v])
+                isinstance(v, list) and any(isinstance(el, DelayedObject) for el in v)
             )
             or (
                 isinstance(v, dict)
-                and any([isinstance(el, DelayedObject) for el in v.values()])
+                and any(isinstance(el, DelayedObject) for el in v.values())
             )
         ):
             update_dict[k] = v
