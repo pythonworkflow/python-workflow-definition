@@ -27,7 +27,7 @@ from python_workflow_definition.shared import (
 
 
 def _get_function_dict(flow: Flow):
-    return {job.uuid: job.function for job in flow.jobs}
+    return {j.uuid: j.function for j in flow.jobs}
 
 
 def _get_nodes_dict(function_dict: dict):
@@ -62,8 +62,8 @@ def _get_edges_and_extend_nodes(
     flow_dict: dict, nodes_mapping_dict: dict, nodes_dict: dict
 ):
     edges_lst = []
-    for job in flow_dict["jobs"]:
-        for k, v in job["function_kwargs"].items():
+    for j in flow_dict["jobs"]:
+        for k, v in j["function_kwargs"].items():
             if (
                 isinstance(v, dict)
                 and "@module" in v
@@ -72,7 +72,7 @@ def _get_edges_and_extend_nodes(
             ):
                 edges_lst.append(
                     _get_edge_from_dict(
-                        target=nodes_mapping_dict[job["uuid"]],
+                        target=nodes_mapping_dict[j["uuid"]],
                         key=k,
                         value_dict=v,
                         nodes_mapping_dict=nodes_mapping_dict,
@@ -120,7 +120,7 @@ def _get_edges_and_extend_nodes(
                         )
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_dict_index,
                         SOURCE_PORT_LABEL: None,
@@ -168,7 +168,7 @@ def _get_edges_and_extend_nodes(
                         )
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_list_index,
                         SOURCE_PORT_LABEL: None,
@@ -182,7 +182,7 @@ def _get_edges_and_extend_nodes(
                     node_index = {tv: tk for tk, tv in nodes_dict.items()}[v]
                 edges_lst.append(
                     {
-                        TARGET_LABEL: nodes_mapping_dict[job["uuid"]],
+                        TARGET_LABEL: nodes_mapping_dict[j["uuid"]],
                         TARGET_PORT_LABEL: k,
                         SOURCE_LABEL: node_index,
                         SOURCE_PORT_LABEL: None,

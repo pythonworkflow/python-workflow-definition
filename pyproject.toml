@@ -69,6 +69,8 @@ select = [
 ignore = [
     # ignore line-length violations
     "E501",
+    # Too many statements
+    "PLR0915",
     # Too many branches
     "PLR0912",
 ]
