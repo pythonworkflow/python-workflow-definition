@@ -140,8 +140,7 @@ def _get_unique_objects(nodes_dict: dict):
         match = False
         for obj in unique_lst:
             if (
-                delayed_object_updated_dict[obj]._python_function
-                == v._python_function
+                delayed_object_updated_dict[obj]._python_function == v._python_function
                 and v._input == delayed_object_dict[obj]._input
             ):
                 delayed_object_updated_dict[obj] = delayed_object_dict[obj]
