@@ -34,7 +34,7 @@ def get_kwargs(lst: list) -> dict:
 def get_source_handles(edges_lst: list) -> dict:
     source_handle_dict: dict[Any, list] = {}
     for ed in edges_lst:
-        if ed[SOURCE_LABEL] not in source_handle_dict.keys():
+        if ed[SOURCE_LABEL] not in source_handle_dict:
             source_handle_dict[ed[SOURCE_LABEL]] = []
         source_handle_dict[ed[SOURCE_LABEL]].append(ed[SOURCE_PORT_LABEL])
     return {
@@ -67,7 +67,7 @@ def update_node_names(workflow_dict: dict) -> dict:
     }
 
     counter_dict = Counter(node_names_dict.values())
-    node_names_useage_dict = {k: -1 for k in counter_dict.keys()}
+    node_names_useage_dict = dict.fromkeys(counter_dict.keys(), -1)
     for k, v in node_names_dict.items():
         node_names_useage_dict[v] += 1
         if counter_dict[v] > 1:

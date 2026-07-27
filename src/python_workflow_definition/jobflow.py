@@ -196,10 +196,8 @@ def _get_edges_and_extend_nodes(
 
 
 def _resort_total_lst(total_dict: dict, nodes_dict: dict) -> dict:
-    nodes_with_dep_lst = list(sorted(total_dict.keys()))
-    nodes_without_dep_lst = [
-        k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
-    ]
+    nodes_with_dep_lst = sorted(total_dict.keys())
+    nodes_without_dep_lst = [k for k in nodes_dict if k not in nodes_with_dep_lst]
     ordered_lst: list = []
     total_new_dict: dict[Any, dict] = {}
     while len(total_new_dict) < len(total_dict):
@@ -220,7 +218,7 @@ def _group_edges(edges_lst: list) -> dict:
     for ed_major in edges_lst:
         target_id = ed_major[TARGET_LABEL]
         tmp_lst = []
-        if target_id not in total_dict.keys():
+        if target_id not in total_dict:
             for ed in edges_lst:
                 if target_id == ed[TARGET_LABEL]:
                     tmp_lst.append(ed)
@@ -237,15 +235,15 @@ def _get_workflow(
 ) -> list:
     def get_attr_helper(obj, source_handle):
         if source_handle is None:
-            return getattr(obj, "output")
+            return obj.output
         else:
-            return getattr(getattr(obj, "output"), source_handle)
+            return getattr(obj.output, source_handle)
 
     memory_dict: dict[Any, Any] = {}
-    for k in total_dict.keys():
+    for k in total_dict:
         v = nodes_dict[k]
         if isfunction(v):
-            if k in source_handles_dict.keys():
+            if k in source_handles_dict:
                 fn = job(
                     method=v,
                     data=[el for el in source_handles_dict[k] if el is not None],

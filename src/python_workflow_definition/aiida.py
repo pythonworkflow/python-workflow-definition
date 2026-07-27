@@ -99,7 +99,6 @@ def write_workflow_json(wg: WorkGraph, file_name: str) -> None:
     GRAPH_LEVEL_NAMES = ["graph_inputs", "graph_outputs", "graph_ctx"]
 
     for node in wg.tasks:
-
         if node.name in GRAPH_LEVEL_NAMES:
             continue
 

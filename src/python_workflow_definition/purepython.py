@@ -9,21 +9,15 @@ from python_workflow_definition.shared import (
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     TARGET_LABEL,
-    TARGET_PORT_LABEL,
     convert_nodes_list_to_dict,
-    get_dict,
     get_kwargs,
-    get_list,
-    get_source_handles,
     remove_result,
 )
 
 
 def resort_total_lst(total_lst: list, nodes_dict: dict) -> list:
-    nodes_with_dep_lst = list(sorted([v[0] for v in total_lst]))
-    nodes_without_dep_lst = [
-        k for k in nodes_dict.keys() if k not in nodes_with_dep_lst
-    ]
+    nodes_with_dep_lst = sorted([v[0] for v in total_lst])
+    nodes_without_dep_lst = [k for k in nodes_dict if k not in nodes_with_dep_lst]
     ordered_lst: list = []
     total_new_lst: list[list] = []
     while len(total_new_lst) < len(total_lst):
@@ -55,9 +49,9 @@ def group_edges(edges_lst: list) -> list:
 
 def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict):
     source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
-    if source in result_dict.keys():
+    if source in result_dict:
         result = result_dict[source]
-    elif source in nodes_new_dict.keys():
+    elif source in nodes_new_dict:
         result = nodes_new_dict[source]
     else:
         raise KeyError()

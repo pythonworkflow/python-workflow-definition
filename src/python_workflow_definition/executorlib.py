@@ -11,10 +11,6 @@ from python_workflow_definition.shared import (
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     convert_nodes_list_to_dict,
-    get_dict,
-    get_kwargs,
-    get_list,
-    get_source_handles,
     remove_result,
 )
 
@@ -25,9 +21,9 @@ def get_item(obj, key):
 
 def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict, exe: Executor):
     source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
-    if source in result_dict.keys():
+    if source in result_dict:
         result = result_dict[source]
-    elif source in nodes_new_dict.keys():
+    elif source in nodes_new_dict:
         result = nodes_new_dict[source]
     else:
         raise KeyError()
