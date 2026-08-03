@@ -1,6 +1,7 @@
 import json
 import pickle
 from pathlib import Path
+from typing import Any
 
 from yaml import CDumper as Dumper
 from yaml import dump
@@ -19,17 +20,15 @@ from python_workflow_definition.shared import (
 
 
 def _get_function_argument(argument: str, position: int = 3) -> dict:
-    return {
-        argument
-        + "_file": {
-            "type": "File",
-            "inputBinding": {
-                "prefix": "--arg_" + argument + "=",
-                "separate": False,
-                "position": position,
-            },
+    argument_dict = {
+        "type": "File",
+        "inputBinding": {
+            "prefix": "--arg_" + argument + "=",
+            "separate": False,
+            "position": position,
         },
     }
+    return {argument + "_file": argument_dict}
 
 
 def _get_function_template(function_name: str) -> dict:
@@ -43,10 +42,11 @@ def _get_function_template(function_name: str) -> dict:
 
 
 def _get_output_name(output_name: str) -> dict:
-    return {
-        output_name
-        + "_file": {"type": "File", "outputBinding": {"glob": output_name + ".pickle"}}
+    output_dict = {
+        "type": "File",
+        "outputBinding": {"glob": output_name + ".pickle"},
     }
+    return {output_name + "_file": output_dict}
 
 
 def _get_function(workflow):
@@ -54,24 +54,20 @@ def _get_function(workflow):
         n["id"]: n["value"] for n in workflow[NODES_LABEL] if n["type"] == "function"
     }
     funct_dict = {}
-    for funct_id in function_nodes_dict.keys():
+    for funct_id in function_nodes_dict:
         target_ports = list(
-            set(
-                [
-                    e[TARGET_PORT_LABEL]
-                    for e in workflow[EDGES_LABEL]
-                    if e["target"] == funct_id
-                ]
-            )
+            {
+                e[TARGET_PORT_LABEL]
+                for e in workflow[EDGES_LABEL]
+                if e["target"] == funct_id
+            }
         )
         source_ports = list(
-            set(
-                [
-                    e[SOURCE_PORT_LABEL]
-                    for e in workflow[EDGES_LABEL]
-                    if e["source"] == funct_id
-                ]
-            )
+            {
+                e[SOURCE_PORT_LABEL]
+                for e in workflow[EDGES_LABEL]
+                if e["source"] == funct_id
+            }
         )
         funct_dict[funct_id] = {
             "targetPorts": target_ports,
@@ -85,8 +81,8 @@ def _write_function_cwl(workflow, directory_path: str = "."):
     export_path = Path(directory_path)
     export_path.mkdir(parents=True, exist_ok=True)
 
-    for i in function_nodes_dict.keys():
-        template = {
+    for i in function_nodes_dict:
+        template: dict[str, Any] = {
             "cwlVersion": "v1.2",
             "class": "CommandLineTool",
             "baseCommand": "python",
@@ -141,10 +137,7 @@ def _write_workflow_config(workflow, directory_path: str = "."):
     export_path.mkdir(parents=True, exist_ok=True)
     with open(export_path / "workflow.yml", "w") as f:
         dump(
-            {
-                k + "_file": {"class": "File", "path": k + ".pickle"}
-                for k in input_dict.keys()
-            },
+            {k + "_file": {"class": "File", "path": k + ".pickle"} for k in input_dict},
             f,
             Dumper=Dumper,
         )
@@ -154,7 +147,7 @@ def _write_workflow_config(workflow, directory_path: str = "."):
 
 
 def _write_workflow(workflow, directory_path: str = "."):
-    workflow_template = {
+    workflow_template: dict[str, Any] = {
         "cwlVersion": "v1.2",
         "class": "Workflow",
         "inputs": {},
@@ -169,7 +162,7 @@ def _write_workflow(workflow, directory_path: str = "."):
     last_compute_id = [
         e[SOURCE_LABEL] for e in workflow[EDGES_LABEL] if e[TARGET_LABEL] == result_id
     ][0]
-    workflow_template["inputs"].update({k + "_file": "File" for k in input_dict.keys()})
+    workflow_template["inputs"].update({k + "_file": "File" for k in input_dict})
     if funct_dict[last_compute_id]["sourcePorts"] == [None]:
         workflow_template["outputs"] = {
             "result_file": {
@@ -208,29 +201,29 @@ def _write_workflow(workflow, directory_path: str = "."):
         for k, v in t[1].items():
             if v[SOURCE_LABEL] in input_id_dict:
                 in_dict[k + "_file"] = input_id_dict[v[SOURCE_LABEL]] + "_file"
+            elif v["sourcePort"] is None:
+                in_dict[k + "_file"] = (
+                    step_name_lst[v[SOURCE_LABEL]]
+                    + "_"
+                    + str(v[SOURCE_LABEL])
+                    + "/result_file"
+                )
             else:
-                if v["sourcePort"] is None:
-                    in_dict[k + "_file"] = (
-                        step_name_lst[v[SOURCE_LABEL]]
-                        + "_"
-                        + str(v[SOURCE_LABEL])
-                        + "/result_file"
-                    )
-                else:
-                    in_dict[k + "_file"] = (
-                        step_name_lst[v[SOURCE_LABEL]]
-                        + "_"
-                        + str(v[SOURCE_LABEL])
-                        + "/"
-                        + v[SOURCE_PORT_LABEL]
-                        + "_file"
-                    )
+                in_dict[k + "_file"] = (
+                    step_name_lst[v[SOURCE_LABEL]]
+                    + "_"
+                    + str(v[SOURCE_LABEL])
+                    + "/"
+                    + v[SOURCE_PORT_LABEL]
+                    + "_file"
+                )
+        step_dict = {
+            "run": node_script,
+            "in": in_dict,
+            "out": output,
+        }
         workflow_template["steps"].update(
-            {
-                step_name_lst[ind]
-                + "_"
-                + str(ind): {"run": node_script, "in": in_dict, "out": output}
-            }
+            {step_name_lst[ind] + "_" + str(ind): step_dict}
         )
     export_path = Path(directory_path)
     export_path.mkdir(parents=True, exist_ok=True)
@@ -239,7 +232,7 @@ def _write_workflow(workflow, directory_path: str = "."):
 
 
 def write_workflow(file_name: str, directory_path: str = "."):
-    with open(file_name, "r") as f:
+    with open(file_name) as f:
         workflow = json.load(f)
 
     _write_function_cwl(workflow=workflow, directory_path=directory_path)

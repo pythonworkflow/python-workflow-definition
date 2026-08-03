@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Annotated, Any, List, Literal, Optional, Type, TypeVar, Union
+from typing import Annotated, Any, Literal, TypeVar
 
 from pydantic import (
     BaseModel,
@@ -26,10 +26,10 @@ __all__ = (
 )
 
 
-JsonPrimitive = Union[str, int, float, bool, None]
+JsonPrimitive = str | int | float | bool | None
 AllowableDefaults = TypeAliasType(
     "AllowableDefaults",
-    "Union[JsonPrimitive, dict[str, AllowableDefaults], list[AllowableDefaults]]",
+    "JsonPrimitive | dict[str, AllowableDefaults] | list[AllowableDefaults]",
 )
 
 
@@ -47,7 +47,7 @@ class PythonWorkflowDefinitionInputNode(PythonWorkflowDefinitionBaseNode):
 
     type: Literal["input"]
     name: str
-    value: Optional[AllowableDefaults] = None
+    value: AllowableDefaults | None = None
 
 
 class PythonWorkflowDefinitionOutputNode(PythonWorkflowDefinitionBaseNode):
@@ -80,11 +80,9 @@ class PythonWorkflowDefinitionFunctionNode(PythonWorkflowDefinitionBaseNode):
 
 # Discriminated Union for Nodes
 PythonWorkflowDefinitionNode = Annotated[
-    Union[
-        PythonWorkflowDefinitionInputNode,
-        PythonWorkflowDefinitionOutputNode,
-        PythonWorkflowDefinitionFunctionNode,
-    ],
+    PythonWorkflowDefinitionInputNode
+    | PythonWorkflowDefinitionOutputNode
+    | PythonWorkflowDefinitionFunctionNode,
     Field(discriminator="type"),
 ]
 
@@ -93,13 +91,13 @@ class PythonWorkflowDefinitionEdge(BaseModel):
     """Model for edges connecting nodes."""
 
     target: int
-    targetPort: Optional[str] = None
+    targetPort: str | None = None
     source: int
-    sourcePort: Optional[str] = None
+    sourcePort: str | None = None
 
     @field_validator("sourcePort", mode="before")
     @classmethod
-    def handle_default_source(cls, v: Any) -> Optional[str]:
+    def handle_default_source(cls, v: Any) -> str | None:
         """
         Transforms incoming None/null for sourcePort to INTERNAL_DEFAULT_HANDLE.
         Runs before standard validation.
@@ -117,7 +115,7 @@ class PythonWorkflowDefinitionEdge(BaseModel):
         return v
 
     @field_serializer("sourcePort")
-    def serialize_source_handle(self, v: Optional[str]) -> Optional[str]:
+    def serialize_source_handle(self, v: str | None) -> str | None:
         """
         SERIALIZATION (Output): Converts internal INTERNAL_DEFAULT_HANDLE ("__result__")
         back to None.
@@ -131,13 +129,13 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
     """The main workflow model."""
 
     version: str
-    nodes: List[PythonWorkflowDefinitionNode]
-    edges: List[PythonWorkflowDefinitionEdge]
+    nodes: list[PythonWorkflowDefinitionNode]
+    edges: list[PythonWorkflowDefinitionEdge]
 
     def dump_json(
         self,
         *,
-        indent: Optional[int] = 2,
+        indent: int | None = 2,
         **kwargs,
     ) -> str:
         """
@@ -171,9 +169,9 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
 
     def dump_json_file(
         self,
-        file_name: Union[str, Path],
+        file_name: str | Path,
         *,
-        indent: Optional[int] = 2,
+        indent: int | None = 2,
         **kwargs,
     ) -> None:
         """
@@ -196,14 +194,14 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             with open(file_name, "w", encoding="utf-8") as f:
                 f.write(json_string)
             logger.info(f"Successfully wrote workflow model to {file_name}.")
-        except IOError as e:
+        except OSError as e:
             logger.error(
                 f"Error writing workflow model to file {file_name}: {e}", exc_info=True
             )
             raise
 
     @classmethod
-    def load_json_str(cls: Type[T], json_data: Union[str, bytes]) -> dict:
+    def load_json_str(cls: type[T], json_data: str | bytes) -> dict:
         """
         Loads and validates workflow data from a JSON string or bytes.
 
@@ -239,7 +237,7 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
             raise
 
     @classmethod
-    def load_json_file(cls: Type[T], file_name: Union[str, Path]) -> dict:
+    def load_json_file(cls: type[T], file_name: str | Path) -> dict:
         """
         Loads and validates workflow data from a JSON file.
 
@@ -263,6 +261,6 @@ class PythonWorkflowDefinitionWorkflow(BaseModel):
         except FileNotFoundError:
             logger.error(f"JSON file not found: {file_name}", exc_info=True)
             raise
-        except IOError as e:
+        except OSError as e:
             logger.error(f"Error reading JSON file {file_name}: {e}", exc_info=True)
             raise

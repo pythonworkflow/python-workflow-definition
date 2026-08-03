@@ -1,6 +1,7 @@
 from concurrent.futures import Executor
 from importlib import import_module
 from inspect import isfunction
+from typing import Any
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.purepython import group_edges, resort_total_lst
@@ -10,10 +11,6 @@ from python_workflow_definition.shared import (
     SOURCE_LABEL,
     SOURCE_PORT_LABEL,
     convert_nodes_list_to_dict,
-    get_dict,
-    get_kwargs,
-    get_list,
-    get_source_handles,
     remove_result,
 )
 
@@ -24,9 +21,9 @@ def get_item(obj, key):
 
 def _get_value(result_dict: dict, nodes_new_dict: dict, link_dict: dict, exe: Executor):
     source, source_handle = link_dict[SOURCE_LABEL], link_dict[SOURCE_PORT_LABEL]
-    if source in result_dict.keys():
+    if source in result_dict:
         result = result_dict[source]
-    elif source in nodes_new_dict.keys():
+    elif source in nodes_new_dict:
         result = nodes_new_dict[source]
     else:
         raise KeyError()
@@ -58,7 +55,7 @@ def load_workflow_json(file_name: str, exe: Executor):
     total_lst = group_edges(edges_new_lst)
     total_new_lst = resort_total_lst(total_lst=total_lst, nodes_dict=nodes_new_dict)
 
-    result_dict = {}
+    result_dict: dict[Any, Any] = {}
     last_key = None
     for lst in total_new_lst:
         node = nodes_new_dict[lst[0]]

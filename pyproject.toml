@@ -42,6 +42,39 @@ plot = [
     "ipython>=7.33.0,<=9.8.0",
 ]
 
+[tool.ruff]
+exclude = ["documentation", "example_workflows", "tests", "binder", "_version.py"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # flake8-comprehensions
+    "C4",
+    # eradicate
+    "ERA",
+    # pylint
+    "PL",
+]
+ignore = [
+    # ignore line-length violations
+    "E501",
+    # Too many statements
+    "PLR0915",
+    # Too many branches
+    "PLR0912",
+]
+
 [tool.hatch.build]
 include = [
     "src/python_workflow_definition"

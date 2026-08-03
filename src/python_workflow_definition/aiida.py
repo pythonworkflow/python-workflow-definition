@@ -1,6 +1,7 @@
 import traceback
 from dataclasses import replace
 from importlib import import_module
+from typing import Any
 
 from aiida import orm
 from aiida_pythonjob.data.serializer import general_serializer
@@ -90,15 +91,14 @@ def load_workflow_json(file_name: str) -> WorkGraph:
     return wg
 
 
-def write_workflow_json(wg: WorkGraph, file_name: str) -> dict:
-    data = {NODES_LABEL: [], EDGES_LABEL: []}
+def write_workflow_json(wg: WorkGraph, file_name: str) -> None:
+    data: dict[str, Any] = {NODES_LABEL: [], EDGES_LABEL: []}
     node_name_mapping = {}
     data_node_name_mapping = {}
     i = 0
     GRAPH_LEVEL_NAMES = ["graph_inputs", "graph_outputs", "graph_ctx"]
 
     for node in wg.tasks:
-
         if node.name in GRAPH_LEVEL_NAMES:
             continue
 
