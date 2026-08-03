@@ -4,8 +4,8 @@ from inspect import isfunction
 from typing import Any
 
 import numpy as np
-from pyiron_workflow import Workflow, function_node
-from pyiron_workflow.api import Function
+from pyiron_workflow._legacy import Workflow, function_node
+from pyiron_workflow._legacy.api import Function
 
 from python_workflow_definition.models import PythonWorkflowDefinitionWorkflow
 from python_workflow_definition.shared import (

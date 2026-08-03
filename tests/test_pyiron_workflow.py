@@ -2,7 +2,7 @@ import json
 import os
 import sys
 import unittest
-from pyiron_workflow import Workflow, to_function_node
+from pyiron_workflow._legacy import Workflow, to_function_node
 from python_workflow_definition.pyiron_workflow import load_workflow_json, write_workflow_json
 
 function_str = """

@@ -3,15 +3,15 @@ channels:
 dependencies:
 - python =3.12
 - click =8.1.8
-- pydantic =2.13.4
-- hatchling =1.28.0
+- pydantic =2.12.5
+- hatchling =1.31.0
 - hatch-vcs =0.5.0
 - jobflow =0.3.1
-- executorlib =1.7.4
-- pyiron_base =0.15.15
-- pyiron_workflow =0.15.5
+- executorlib =1.10.1
+- pyiron_base =0.15.16
+- pyiron_workflow =0.18.0
 - pygraphviz =1.14
 - aiida-workgraph =0.8.1
 - conda_subprocess =0.0.12
-- networkx =3.4.2
+- networkx =3.6.1
 - cwltool =3.2.20260413085819
