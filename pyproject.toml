@@ -28,13 +28,13 @@ jobflow = [
     "jobflow>=0.1.18,<=0.3.1",
 ]
 pyiron = [
-    "pyiron_base>=0.11.10,<=0.15.12",
+    "pyiron_base>=0.11.10,<=0.15.16",
 ]
 pyiron_workflow = [
     "pyiron_workflow>=0.13.0,<=0.18.0",
 ]
 executorlib = [
-    "executorlib>=1.7.4,<=1.9.1",
+    "executorlib>=1.7.4,<=1.10.1",
 ]
 plot = [
     "pygraphviz>=1.10,<=1.14",
