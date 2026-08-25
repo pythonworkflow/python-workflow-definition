@@ -381,7 +381,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">write_workflow</span></code> reads the existing <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> and generates the corresponding CWL description: one <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> <code class="docutils literal notranslate"><span class="pre">.cwl</span></code> file per function node, a <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> file that wires the steps together, and a <code class="docutils literal notranslate"><span class="pre">workflow.yml</span></code> file listing the input values (each serialized to its own pickle file). Every generated tool invokes <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">python_workflow_definition.cwl</span></code>, which loads the target function from <code class="docutils literal notranslate"><span class="pre">workflow.py</span></code> and calls it with the pickled inputs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -397,7 +397,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
   sys.exit(run())
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
-<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/arithmetic/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved 'workflow.cwl' to 'file:///home/jovyan/example_workflows/arithmetic/workflow.cwl'
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_prod_and_div_0
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_prod_and_div_0] start
@@ -433,13 +433,13 @@
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_square_2] completed success
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
 {
-    &quot;result_file&quot;: {
-        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/arithmetic/result.pickle&quot;,
-        &quot;basename&quot;: &quot;result.pickle&quot;,
-        &quot;class&quot;: &quot;File&quot;,
-        &quot;checksum&quot;: &quot;sha1$1fd8f217331336b1226b84e351c56fb9a8d93685&quot;,
-        &quot;size&quot;: 21,
-        &quot;path&quot;: &quot;/home/jovyan/example_workflows/arithmetic/result.pickle&quot;
+    "result_file": {
+        "location": "file:///home/jovyan/example_workflows/arithmetic/result.pickle",
+        "basename": "result.pickle",
+        "class": "File",
+        "checksum": "sha1$1fd8f217331336b1226b84e351c56fb9a8d93685",
+        "size": 21,
+        "path": "/home/jovyan/example_workflows/arithmetic/result.pickle"
     }
 }<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
 </pre></div>
@@ -449,7 +449,7 @@
 <p>The workflow’s final output is written to <code class="docutils literal notranslate"><span class="pre">result.pickle</span></code>; unpickling it gives the same numeric result produced by the other engines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"result.pickle"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>

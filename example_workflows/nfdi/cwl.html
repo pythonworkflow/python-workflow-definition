@@ -408,7 +408,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> stores <code class="docutils literal notranslate"><span class="pre">source_directory</span></code> as the relative path <code class="docutils literal notranslate"><span class="pre">&quot;source&quot;</span></code>. Because <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> stages each step’s inputs into its own temporary working directory, a relative path would no longer resolve once execution starts, so it is rewritten to an absolute path before export.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"workflow.json"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -417,19 +417,19 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_lst</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;source_directory&#39;</span><span class="p">:</span>
-        <span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">"nodes"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="s1">'name'</span> <span class="ow">in</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'source_directory'</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s2">"value"</span><span class="p">])</span>
     <span class="n">node_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_lst</span>
+<span class="n">content</span><span class="p">[</span><span class="s2">"nodes"</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_lst</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"workflow.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -441,7 +441,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">write_workflow</span></code> reads <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> and writes out <code class="docutils literal notranslate"><span class="pre">workflow.cwl</span></code> (the CWL <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> definition), one <code class="docutils literal notranslate"><span class="pre">&lt;function&gt;_&lt;id&gt;.cwl</span></code> <code class="docutils literal notranslate"><span class="pre">CommandLineTool</span></code> per pipeline step, and <code class="docutils literal notranslate"><span class="pre">workflow.yml</span></code> with the input values pickled to disk. <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> then runs the six steps in dependency order, invoking <code class="docutils literal notranslate"><span class="pre">gmsh</span></code>, <code class="docutils literal notranslate"><span class="pre">meshio</span></code>, the Poisson solver, <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code> and <code class="docutils literal notranslate"><span class="pre">tectonic</span></code> in turn, and writes the workflow’s single output — the path to the compiled <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> — to <code class="docutils literal notranslate"><span class="pre">result.pickle</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -456,7 +456,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
   sys.exit(run())
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
-<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/nfdi/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved 'workflow.cwl' to 'file:///home/jovyan/example_workflows/nfdi/workflow.cwl'
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step generate_mesh_0
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_mesh_0] start
@@ -536,13 +536,13 @@
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step compile_paper_5] completed success
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
 {
-    &quot;result_file&quot;: {
-        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/nfdi/result.pickle&quot;,
-        &quot;basename&quot;: &quot;result.pickle&quot;,
-        &quot;class&quot;: &quot;File&quot;,
-        &quot;checksum&quot;: &quot;sha1$a23617d3f4b4e6970b7f4fb9eb4d2148f9888e58&quot;,
-        &quot;size&quot;: 53,
-        &quot;path&quot;: &quot;/home/jovyan/example_workflows/nfdi/result.pickle&quot;
+    "result_file": {
+        "location": "file:///home/jovyan/example_workflows/nfdi/result.pickle",
+        "basename": "result.pickle",
+        "class": "File",
+        "checksum": "sha1$a23617d3f4b4e6970b7f4fb9eb4d2148f9888e58",
+        "size": 53,
+        "path": "/home/jovyan/example_workflows/nfdi/result.pickle"
     }
 }<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
 </pre></div>
@@ -552,7 +552,7 @@
 <p>The result is unpickled below to confirm it is the expected <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"result.pickle"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>

@@ -413,19 +413,19 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_mesh</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;generate_mesh&quot;</span><span class="p">,</span> <span class="n">_generate_mesh</span><span class="p">,</span> <span class="s2">&quot;generate_mesh&quot;</span><span class="p">)</span>
-<span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;convert_to_xdmf&quot;</span><span class="p">,</span> <span class="n">_convert_to_xdmf</span><span class="p">,</span> <span class="s2">&quot;convert_to_xdmf&quot;</span><span class="p">)</span>
-<span class="n">poisson</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;poisson&quot;</span><span class="p">,</span> <span class="n">_poisson</span><span class="p">,</span> <span class="s2">&quot;poisson&quot;</span><span class="p">)</span>
-<span class="n">plot_over_line</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;plot_over_line&quot;</span><span class="p">,</span> <span class="n">_plot_over_line</span><span class="p">,</span> <span class="s2">&quot;plot_over_line&quot;</span><span class="p">)</span>
-<span class="n">substitute_macros</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;substitute_macros&quot;</span><span class="p">,</span> <span class="n">_substitute_macros</span><span class="p">,</span> <span class="s2">&quot;substitute_macros&quot;</span><span class="p">)</span>
-<span class="n">compile_paper</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">&quot;compile_paper&quot;</span><span class="p">,</span> <span class="n">_compile_paper</span><span class="p">,</span> <span class="s2">&quot;compile_paper&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_mesh</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"generate_mesh"</span><span class="p">,</span> <span class="n">_generate_mesh</span><span class="p">,</span> <span class="s2">"generate_mesh"</span><span class="p">)</span>
+<span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"convert_to_xdmf"</span><span class="p">,</span> <span class="n">_convert_to_xdmf</span><span class="p">,</span> <span class="s2">"convert_to_xdmf"</span><span class="p">)</span>
+<span class="n">poisson</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"poisson"</span><span class="p">,</span> <span class="n">_poisson</span><span class="p">,</span> <span class="s2">"poisson"</span><span class="p">)</span>
+<span class="n">plot_over_line</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"plot_over_line"</span><span class="p">,</span> <span class="n">_plot_over_line</span><span class="p">,</span> <span class="s2">"plot_over_line"</span><span class="p">)</span>
+<span class="n">substitute_macros</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"substitute_macros"</span><span class="p">,</span> <span class="n">_substitute_macros</span><span class="p">,</span> <span class="s2">"substitute_macros"</span><span class="p">)</span>
+<span class="n">compile_paper</span> <span class="o">=</span> <span class="n">to_function_node</span><span class="p">(</span><span class="s2">"compile_paper"</span><span class="p">,</span> <span class="n">_compile_paper</span><span class="p">,</span> <span class="s2">"compile_paper"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">&quot;my_workflow&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">"my_workflow"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -439,7 +439,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">"source"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -467,8 +467,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span>
-    <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">meshio_output_dict</span><span class="p">[</span><span class="s2">&quot;xdmf_file&quot;</span><span class="p">],</span> 
-    <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">meshio_output_dict</span><span class="p">[</span><span class="s2">&quot;h5_file&quot;</span><span class="p">],</span>
+    <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">meshio_output_dict</span><span class="p">[</span><span class="s2">"xdmf_file"</span><span class="p">],</span> 
+    <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">meshio_output_dict</span><span class="p">[</span><span class="s2">"h5_file"</span><span class="p">],</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -478,8 +478,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">plot_over_line</span><span class="p">(</span>
-    <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">&quot;pvd_file&quot;</span><span class="p">],</span> 
-    <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">&quot;vtu_file&quot;</span><span class="p">],</span>
+    <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">"pvd_file"</span><span class="p">],</span> 
+    <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">"vtu_file"</span><span class="p">],</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -490,7 +490,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">macros_tex_file</span> <span class="o">=</span> <span class="n">substitute_macros</span><span class="p">(</span> 
     <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">pvbatch_output_file</span><span class="p">,</span> 
-    <span class="n">ndofs</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">&quot;numdofs&quot;</span><span class="p">],</span> 
+    <span class="n">ndofs</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">poisson_dict</span><span class="p">[</span><span class="s2">"numdofs"</span><span class="p">],</span> 
     <span class="n">domain_size</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">domain_size</span><span class="p">,</span>
     <span class="n">source_directory</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">source_directory</span><span class="p">,</span>
 <span class="p">)</span>
@@ -522,7 +522,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_workflow_nfdi.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">"pyiron_workflow_nfdi.json"</span>
 </pre></div>
 </div>
 </div>
@@ -547,7 +547,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;ab8c861a0e7f44b8b54d6acebc44dff5&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='ab8c861a0e7f44b8b54d6acebc44dff5' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
@@ -643,12 +643,12 @@
 2025-05-24 09:31:24,557 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;4cc4e3d9-39aa-4c20-a047-a029b6812d61&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;8527c563-c0b1-4ae5-a6c3-00ae25ad2508&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;58b31d24-51f9-4b9a-ac3e-88a7f01a09ad&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;b095dc38-f858-4c34-876c-df8f8b851a5f&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;656e820d-20d5-4665-bb8a-43807ed6b2e9&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;52de4e6d-7574-401b-bcdb-ae6c298cc6b9&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'4cc4e3d9-39aa-4c20-a047-a029b6812d61': {1: Response(output='/home/jovyan/example_workflows/nfdi/preprocessing/square.msh', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '8527c563-c0b1-4ae5-a6c3-00ae25ad2508': {1: Response(output={'xdmf_file': '/home/jovyan/example_workflows/nfdi/preprocessing/square.xdmf', 'h5_file': '/home/jovyan/example_workflows/nfdi/preprocessing/square.h5'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '58b31d24-51f9-4b9a-ac3e-88a7f01a09ad': {1: Response(output={'numdofs': 357, 'pvd_file': '/home/jovyan/example_workflows/nfdi/processing/poisson.pvd', 'vtu_file': '/home/jovyan/example_workflows/nfdi/processing/poisson000000.vtu'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ 'b095dc38-f858-4c34-876c-df8f8b851a5f': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/plotoverline.csv', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '656e820d-20d5-4665-bb8a-43807ed6b2e9': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/macros.tex', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '52de4e6d-7574-401b-bcdb-ae6c298cc6b9': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))}}
 </pre></div>
 </div>
 </div>
@@ -690,7 +690,7 @@ The job substitute_macros_63766eafd6b1980c7832dd8c9a97c96e was saved and receive
 The job compile_paper_128d1d58374953c00e95b8de62cbb10b was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf'
 </pre></div>
 </div>
 </div>

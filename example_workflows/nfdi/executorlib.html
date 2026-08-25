@@ -412,14 +412,14 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">"source"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;executorlib_nfdi.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">"executorlib_nfdi.json"</span>
 </pre></div>
 </div>
 </div>
@@ -439,20 +439,20 @@
     <span class="p">)</span>
     <span class="n">poisson_dict</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
         <span class="n">poisson</span><span class="p">,</span>
-        <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;xdmf_file&quot;</span><span class="p">),</span> 
-        <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;h5_file&quot;</span><span class="p">),</span>
+        <span class="n">meshio_output_xdmf</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"xdmf_file"</span><span class="p">),</span> 
+        <span class="n">meshio_output_h5</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">meshio_output_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"h5_file"</span><span class="p">),</span>
         <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">pvbatch_output_file</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
         <span class="n">plot_over_line</span><span class="p">,</span>
-        <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;pvd_file&quot;</span><span class="p">),</span> 
-        <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;vtu_file&quot;</span><span class="p">),</span>
+        <span class="n">poisson_output_pvd_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"pvd_file"</span><span class="p">),</span> 
+        <span class="n">poisson_output_vtu_file</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"vtu_file"</span><span class="p">),</span>
         <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">macros_tex_file</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
         <span class="n">substitute_macros</span><span class="p">,</span>
         <span class="n">pvbatch_output_file</span><span class="o">=</span><span class="n">pvbatch_output_file</span><span class="p">,</span> 
-        <span class="n">ndofs</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;numdofs&quot;</span><span class="p">),</span> 
+        <span class="n">ndofs</span><span class="o">=</span><span class="n">get_item_from_future</span><span class="p">(</span><span class="n">poisson_dict</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"numdofs"</span><span class="p">),</span> 
         <span class="n">domain_size</span><span class="o">=</span><span class="n">domain_size</span><span class="p">,</span>
         <span class="n">source_directory</span><span class="o">=</span><span class="n">source_directory</span><span class="p">,</span>
     <span class="p">)</span>
@@ -474,158 +474,158 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-    &quot;version&quot;: &quot;0.1.0&quot;,
-    &quot;nodes&quot;: [
+    "version": "0.1.0",
+    "nodes": [
         {
-            &quot;id&quot;: 0,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.generate_mesh&quot;
+            "id": 0,
+            "type": "function",
+            "value": "workflow.generate_mesh"
         },
         {
-            &quot;id&quot;: 1,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.convert_to_xdmf&quot;
+            "id": 1,
+            "type": "function",
+            "value": "workflow.convert_to_xdmf"
         },
         {
-            &quot;id&quot;: 2,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.poisson&quot;
+            "id": 2,
+            "type": "function",
+            "value": "workflow.poisson"
         },
         {
-            &quot;id&quot;: 3,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.plot_over_line&quot;
+            "id": 3,
+            "type": "function",
+            "value": "workflow.plot_over_line"
         },
         {
-            &quot;id&quot;: 4,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.substitute_macros&quot;
+            "id": 4,
+            "type": "function",
+            "value": "workflow.substitute_macros"
         },
         {
-            &quot;id&quot;: 5,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.compile_paper&quot;
+            "id": 5,
+            "type": "function",
+            "value": "workflow.compile_paper"
         },
         {
-            &quot;id&quot;: 6,
-            &quot;type&quot;: &quot;input&quot;,
-            &quot;value&quot;: 2.0,
-            &quot;name&quot;: &quot;domain_size&quot;
+            "id": 6,
+            "type": "input",
+            "value": 2.0,
+            "name": "domain_size"
         },
         {
-            &quot;id&quot;: 7,
-            &quot;type&quot;: &quot;input&quot;,
-            &quot;value&quot;: &quot;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/source&quot;,
-            &quot;name&quot;: &quot;source_directory&quot;
+            "id": 7,
+            "type": "input",
+            "value": "/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/source",
+            "name": "source_directory"
         },
         {
-            &quot;id&quot;: 8,
-            &quot;type&quot;: &quot;output&quot;,
-            &quot;name&quot;: &quot;result&quot;
+            "id": 8,
+            "type": "output",
+            "name": "result"
         }
     ],
-    &quot;edges&quot;: [
+    "edges": [
         {
-            &quot;target&quot;: 0,
-            &quot;targetPort&quot;: &quot;domain_size&quot;,
-            &quot;source&quot;: 6,
-            &quot;sourcePort&quot;: null
+            "target": 0,
+            "targetPort": "domain_size",
+            "source": 6,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 0,
-            &quot;targetPort&quot;: &quot;source_directory&quot;,
-            &quot;source&quot;: 7,
-            &quot;sourcePort&quot;: null
+            "target": 0,
+            "targetPort": "source_directory",
+            "source": 7,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 1,
-            &quot;targetPort&quot;: &quot;gmsh_output_file&quot;,
-            &quot;source&quot;: 0,
-            &quot;sourcePort&quot;: null
+            "target": 1,
+            "targetPort": "gmsh_output_file",
+            "source": 0,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 2,
-            &quot;targetPort&quot;: &quot;meshio_output_xdmf&quot;,
-            &quot;source&quot;: 1,
-            &quot;sourcePort&quot;: &quot;xdmf_file&quot;
+            "target": 2,
+            "targetPort": "meshio_output_xdmf",
+            "source": 1,
+            "sourcePort": "xdmf_file"
         },
         {
-            &quot;target&quot;: 2,
-            &quot;targetPort&quot;: &quot;meshio_output_h5&quot;,
-            &quot;source&quot;: 1,
-            &quot;sourcePort&quot;: &quot;h5_file&quot;
+            "target": 2,
+            "targetPort": "meshio_output_h5",
+            "source": 1,
+            "sourcePort": "h5_file"
         },
         {
-            &quot;target&quot;: 2,
-            &quot;targetPort&quot;: &quot;source_directory&quot;,
-            &quot;source&quot;: 7,
-            &quot;sourcePort&quot;: null
+            "target": 2,
+            "targetPort": "source_directory",
+            "source": 7,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 3,
-            &quot;targetPort&quot;: &quot;poisson_output_pvd_file&quot;,
-            &quot;source&quot;: 2,
-            &quot;sourcePort&quot;: &quot;pvd_file&quot;
+            "target": 3,
+            "targetPort": "poisson_output_pvd_file",
+            "source": 2,
+            "sourcePort": "pvd_file"
         },
         {
-            &quot;target&quot;: 3,
-            &quot;targetPort&quot;: &quot;poisson_output_vtu_file&quot;,
-            &quot;source&quot;: 2,
-            &quot;sourcePort&quot;: &quot;vtu_file&quot;
+            "target": 3,
+            "targetPort": "poisson_output_vtu_file",
+            "source": 2,
+            "sourcePort": "vtu_file"
         },
         {
-            &quot;target&quot;: 3,
-            &quot;targetPort&quot;: &quot;source_directory&quot;,
-            &quot;source&quot;: 7,
-            &quot;sourcePort&quot;: null
+            "target": 3,
+            "targetPort": "source_directory",
+            "source": 7,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 4,
-            &quot;targetPort&quot;: &quot;pvbatch_output_file&quot;,
-            &quot;source&quot;: 3,
-            &quot;sourcePort&quot;: null
+            "target": 4,
+            "targetPort": "pvbatch_output_file",
+            "source": 3,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 4,
-            &quot;targetPort&quot;: &quot;ndofs&quot;,
-            &quot;source&quot;: 2,
-            &quot;sourcePort&quot;: &quot;numdofs&quot;
+            "target": 4,
+            "targetPort": "ndofs",
+            "source": 2,
+            "sourcePort": "numdofs"
         },
         {
-            &quot;target&quot;: 4,
-            &quot;targetPort&quot;: &quot;domain_size&quot;,
-            &quot;source&quot;: 6,
-            &quot;sourcePort&quot;: null
+            "target": 4,
+            "targetPort": "domain_size",
+            "source": 6,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 4,
-            &quot;targetPort&quot;: &quot;source_directory&quot;,
-            &quot;source&quot;: 7,
-            &quot;sourcePort&quot;: null
+            "target": 4,
+            "targetPort": "source_directory",
+            "source": 7,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 5,
-            &quot;targetPort&quot;: &quot;macros_tex&quot;,
-            &quot;source&quot;: 4,
-            &quot;sourcePort&quot;: null
+            "target": 5,
+            "targetPort": "macros_tex",
+            "source": 4,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 5,
-            &quot;targetPort&quot;: &quot;plot_file&quot;,
-            &quot;source&quot;: 3,
-            &quot;sourcePort&quot;: null
+            "target": 5,
+            "targetPort": "plot_file",
+            "source": 3,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 5,
-            &quot;targetPort&quot;: &quot;source_directory&quot;,
-            &quot;source&quot;: 7,
-            &quot;sourcePort&quot;: null
+            "target": 5,
+            "targetPort": "source_directory",
+            "source": 7,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 8,
-            &quot;targetPort&quot;: null,
-            &quot;source&quot;: 5,
-            &quot;sourcePort&quot;: null
+            "target": 8,
+            "targetPort": null,
+            "source": 5,
+            "sourcePort": null
         }
     ]
 }
@@ -646,7 +646,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;c08748df7ab74ec08c14e5f16cebc987&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='c08748df7ab74ec08c14e5f16cebc987' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
@@ -753,12 +753,12 @@
 2026-01-16 08:10:39,265 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;fca356ed-0f12-49aa-90c5-3161982fb757&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
- &#39;2be5b5a6-4ba9-4962-b09c-c7565e4655a8&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
- &#39;e539fd0a-4e53-42b4-b79d-9d07a2f602d7&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
- &#39;e71edb93-5784-4a14-9cb8-29180644c4e1&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
- &#39;ca231d17-16ce-409c-a4cc-9a3988b7524a&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))},
- &#39;43798414-e406-411e-9daa-bf1bf3d20c25&#39;: {1: Response(output=&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'fca356ed-0f12-49aa-90c5-3161982fb757': {1: Response(output='/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.msh', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))},
+ '2be5b5a6-4ba9-4962-b09c-c7565e4655a8': {1: Response(output={'xdmf_file': '/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.xdmf', 'h5_file': '/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/preprocessing/square.h5'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))},
+ 'e539fd0a-4e53-42b4-b79d-9d07a2f602d7': {1: Response(output={'numdofs': 357, 'pvd_file': '/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson.pvd', 'vtu_file': '/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/processing/poisson000000.vtu'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))},
+ 'e71edb93-5784-4a14-9cb8-29180644c4e1': {1: Response(output='/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/plotoverline.csv', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))},
+ 'ca231d17-16ce-409c-a4cc-9a3988b7524a': {1: Response(output='/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/macros.tex', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))},
+ '43798414-e406-411e-9daa-bf1bf3d20c25': {1: Response(output='/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi'))}}
 </pre></div>
 </div>
 </div>
@@ -806,7 +806,7 @@ The job substitute_macros_317cac7b98bf8b6278cdf40a45350ccb was saved and receive
 The job compile_paper_32a7807be3644bd018cad61f46ebfb35 was saved and received the ID: 39
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf'
 </pre></div>
 </div>
 </div>
@@ -850,7 +850,7 @@ The job compile_paper_32a7807be3644bd018cad61f46ebfb35 was saved and received th
   import pkg_resources
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;compile_paper__compile_paper&#39;: &#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'compile_paper__compile_paper': '/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/nfdi/postprocessing/paper.pdf'}
 </pre></div>
 </div>
 </div>

@@ -420,7 +420,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;jobflow_qe.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">"jobflow_qe.json"</span>
 </pre></div>
 </div>
 </div>
@@ -438,7 +438,7 @@
 <p>We need to specify the typical QE input like pseudopotential(s) and structure model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pseudopotentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Al&quot;</span><span class="p">:</span> <span class="s2">&quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pseudopotentials</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Al"</span><span class="p">:</span> <span class="s2">"Al.pbe-n-kjpaw_psl.1.0.0.UPF"</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -446,7 +446,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">structure</span> <span class="o">=</span> <span class="n">get_bulk_structure</span><span class="p">(</span>
-    <span class="n">element</span><span class="o">=</span><span class="s2">&quot;Al&quot;</span><span class="p">,</span>
+    <span class="n">element</span><span class="o">=</span><span class="s2">"Al"</span><span class="p">,</span>
     <span class="n">a</span><span class="o">=</span><span class="mf">4.04</span><span class="p">,</span>
     <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
@@ -457,13 +457,13 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calc_mini</span> <span class="o">=</span> <span class="n">calculate_qe</span><span class="p">(</span>
-    <span class="n">working_directory</span><span class="o">=</span><span class="s2">&quot;mini&quot;</span><span class="p">,</span>
+    <span class="n">working_directory</span><span class="o">=</span><span class="s2">"mini"</span><span class="p">,</span>
     <span class="n">input_dict</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">structure</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
-        <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
-        <span class="s2">&quot;kpts&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-        <span class="s2">&quot;calculation&quot;</span><span class="p">:</span> <span class="s2">&quot;vc-relax&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;smearing&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+        <span class="s2">"structure"</span><span class="p">:</span> <span class="n">structure</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+        <span class="s2">"pseudopotentials"</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
+        <span class="s2">"kpts"</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"calculation"</span><span class="p">:</span> <span class="s2">"vc-relax"</span><span class="p">,</span>
+        <span class="s2">"smearing"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
@@ -487,13 +487,13 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job_strain_lst</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_strains</span><span class="p">):</span>
     <span class="n">calc_strain</span> <span class="o">=</span> <span class="n">calculate_qe</span><span class="p">(</span>
-        <span class="n">working_directory</span><span class="o">=</span><span class="s2">&quot;strain_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+        <span class="n">working_directory</span><span class="o">=</span><span class="s2">"strain_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
         <span class="n">input_dict</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">structure_lst</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;s_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;pseudopotentials&quot;</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
-            <span class="s2">&quot;kpts&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-            <span class="s2">&quot;calculation&quot;</span><span class="p">:</span> <span class="s2">&quot;scf&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;smearing&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+            <span class="s2">"structure"</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">structure_lst</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"s_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">),</span>
+            <span class="s2">"pseudopotentials"</span><span class="p">:</span> <span class="n">pseudopotentials</span><span class="p">,</span>
+            <span class="s2">"kpts"</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="s2">"calculation"</span><span class="p">:</span> <span class="s2">"scf"</span><span class="p">,</span>
+            <span class="s2">"smearing"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">)</span>
     <span class="n">job_strain_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calc_strain</span><span class="p">)</span>
@@ -534,117 +534,117 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-  &quot;version&quot;: &quot;0.1.0&quot;,
-  &quot;nodes&quot;: [
+  "version": "0.1.0",
+  "nodes": [
     {
-      &quot;id&quot;: 0,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.get_bulk_structure&quot;
+      "id": 0,
+      "type": "function",
+      "value": "workflow.get_bulk_structure"
     },
     {
-      &quot;id&quot;: 1,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 1,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 2,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.generate_structures&quot;
+      "id": 2,
+      "type": "function",
+      "value": "workflow.generate_structures"
     },
     {
-      &quot;id&quot;: 3,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 3,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 4,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 4,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 5,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 5,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 6,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 6,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 7,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.calculate_qe&quot;
+      "id": 7,
+      "type": "function",
+      "value": "workflow.calculate_qe"
     },
     {
-      &quot;id&quot;: 8,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.plot_energy_volume_curve&quot;
+      "id": 8,
+      "type": "function",
+      "value": "workflow.plot_energy_volume_curve"
     },
     {
-      &quot;id&quot;: 9,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;element&quot;,
-      &quot;value&quot;: &quot;Al&quot;
+      "id": 9,
+      "type": "input",
+      "name": "element",
+      "value": "Al"
     },
     {
-      &quot;id&quot;: 10,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;a&quot;,
-      &quot;value&quot;: 4.04
+      "id": 10,
+      "type": "input",
+      "name": "a",
+      "value": 4.04
     },
     {
-      &quot;id&quot;: 11,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;cubic&quot;,
-      &quot;value&quot;: true
+      "id": 11,
+      "type": "input",
+      "name": "cubic",
+      "value": true
     },
     {
-      &quot;id&quot;: 12,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_0&quot;,
-      &quot;value&quot;: &quot;mini&quot;
+      "id": 12,
+      "type": "input",
+      "name": "working_directory_0",
+      "value": "mini"
     },
     {
-      &quot;id&quot;: 13,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 13,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 14,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;pseudopotentials&quot;,
-      &quot;value&quot;: {
-        &quot;Al&quot;: &quot;Al.pbe-n-kjpaw_psl.1.0.0.UPF&quot;
+      "id": 14,
+      "type": "input",
+      "name": "pseudopotentials",
+      "value": {
+        "Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF"
       }
     },
     {
-      &quot;id&quot;: 15,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;kpts&quot;,
-      &quot;value&quot;: [
+      "id": 15,
+      "type": "input",
+      "name": "kpts",
+      "value": [
         3,
         3,
         3
       ]
     },
     {
-      &quot;id&quot;: 16,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;calculation_0&quot;,
-      &quot;value&quot;: &quot;vc-relax&quot;
+      "id": 16,
+      "type": "input",
+      "name": "calculation_0",
+      "value": "vc-relax"
     },
     {
-      &quot;id&quot;: 17,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;smearing&quot;,
-      &quot;value&quot;: 0.02
+      "id": 17,
+      "type": "input",
+      "name": "smearing",
+      "value": 0.02
     },
     {
-      &quot;id&quot;: 18,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;strain_lst&quot;,
-      &quot;value&quot;: [
+      "id": 18,
+      "type": "input",
+      "name": "strain_lst",
+      "value": [
         0.9,
         0.9500000000000001,
         1.0,
@@ -653,442 +653,442 @@
       ]
     },
     {
-      &quot;id&quot;: 19,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_1&quot;,
-      &quot;value&quot;: &quot;strain_0&quot;
+      "id": 19,
+      "type": "input",
+      "name": "working_directory_1",
+      "value": "strain_0"
     },
     {
-      &quot;id&quot;: 20,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 20,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 21,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;calculation_1&quot;,
-      &quot;value&quot;: &quot;scf&quot;
+      "id": 21,
+      "type": "input",
+      "name": "calculation_1",
+      "value": "scf"
     },
     {
-      &quot;id&quot;: 22,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_2&quot;,
-      &quot;value&quot;: &quot;strain_1&quot;
+      "id": 22,
+      "type": "input",
+      "name": "working_directory_2",
+      "value": "strain_1"
     },
     {
-      &quot;id&quot;: 23,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 23,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 24,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_3&quot;,
-      &quot;value&quot;: &quot;strain_2&quot;
+      "id": 24,
+      "type": "input",
+      "name": "working_directory_3",
+      "value": "strain_2"
     },
     {
-      &quot;id&quot;: 25,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 25,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 26,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_4&quot;,
-      &quot;value&quot;: &quot;strain_3&quot;
+      "id": 26,
+      "type": "input",
+      "name": "working_directory_4",
+      "value": "strain_3"
     },
     {
-      &quot;id&quot;: 27,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 27,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 28,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;working_directory_5&quot;,
-      &quot;value&quot;: &quot;strain_4&quot;
+      "id": 28,
+      "type": "input",
+      "name": "working_directory_5",
+      "value": "strain_4"
     },
     {
-      &quot;id&quot;: 29,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_dict&quot;
+      "id": 29,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_dict"
     },
     {
-      &quot;id&quot;: 30,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+      "id": 30,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_list"
     },
     {
-      &quot;id&quot;: 31,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;python_workflow_definition.shared.get_list&quot;
+      "id": 31,
+      "type": "function",
+      "value": "python_workflow_definition.shared.get_list"
     },
     {
-      &quot;id&quot;: 32,
-      &quot;type&quot;: &quot;output&quot;,
-      &quot;name&quot;: &quot;result&quot;
+      "id": 32,
+      "type": "output",
+      "name": "result"
     }
   ],
-  &quot;edges&quot;: [
+  "edges": [
     {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;element&quot;,
-      &quot;source&quot;: 9,
-      &quot;sourcePort&quot;: null
+      "target": 0,
+      "targetPort": "element",
+      "source": 9,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;a&quot;,
-      &quot;source&quot;: 10,
-      &quot;sourcePort&quot;: null
+      "target": 0,
+      "targetPort": "a",
+      "source": 10,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;cubic&quot;,
-      &quot;source&quot;: 11,
-      &quot;sourcePort&quot;: null
+      "target": 0,
+      "targetPort": "cubic",
+      "source": 11,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 12,
-      &quot;sourcePort&quot;: null
+      "target": 1,
+      "targetPort": "working_directory",
+      "source": 12,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 13,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 0,
-      &quot;sourcePort&quot;: null
+      "target": 13,
+      "targetPort": "structure",
+      "source": 0,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 13,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 13,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 13,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 13,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 13,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 16,
-      &quot;sourcePort&quot;: null
+      "target": 13,
+      "targetPort": "calculation",
+      "source": 16,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 13,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 13,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 13,
-      &quot;sourcePort&quot;: null
+      "target": 1,
+      "targetPort": "input_dict",
+      "source": 13,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 1,
-      &quot;sourcePort&quot;: &quot;structure&quot;
+      "target": 2,
+      "targetPort": "structure",
+      "source": 1,
+      "sourcePort": "structure"
     },
     {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;strain_lst&quot;,
-      &quot;source&quot;: 18,
-      &quot;sourcePort&quot;: null
+      "target": 2,
+      "targetPort": "strain_lst",
+      "source": 18,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 3,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 19,
-      &quot;sourcePort&quot;: null
+      "target": 3,
+      "targetPort": "working_directory",
+      "source": 19,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 20,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;s_0&quot;
+      "target": 20,
+      "targetPort": "structure",
+      "source": 2,
+      "sourcePort": "s_0"
     },
     {
-      &quot;target&quot;: 20,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 20,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 20,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 20,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 20,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 21,
-      &quot;sourcePort&quot;: null
+      "target": 20,
+      "targetPort": "calculation",
+      "source": 21,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 20,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 20,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 3,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 20,
-      &quot;sourcePort&quot;: null
+      "target": 3,
+      "targetPort": "input_dict",
+      "source": 20,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 22,
-      &quot;sourcePort&quot;: null
+      "target": 4,
+      "targetPort": "working_directory",
+      "source": 22,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 23,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;s_1&quot;
+      "target": 23,
+      "targetPort": "structure",
+      "source": 2,
+      "sourcePort": "s_1"
     },
     {
-      &quot;target&quot;: 23,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 23,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 23,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 23,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 23,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 21,
-      &quot;sourcePort&quot;: null
+      "target": 23,
+      "targetPort": "calculation",
+      "source": 21,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 23,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 23,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 23,
-      &quot;sourcePort&quot;: null
+      "target": 4,
+      "targetPort": "input_dict",
+      "source": 23,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 24,
-      &quot;sourcePort&quot;: null
+      "target": 5,
+      "targetPort": "working_directory",
+      "source": 24,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 25,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;s_2&quot;
+      "target": 25,
+      "targetPort": "structure",
+      "source": 2,
+      "sourcePort": "s_2"
     },
     {
-      &quot;target&quot;: 25,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 25,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 25,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 25,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 25,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 21,
-      &quot;sourcePort&quot;: null
+      "target": 25,
+      "targetPort": "calculation",
+      "source": 21,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 25,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 25,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 25,
-      &quot;sourcePort&quot;: null
+      "target": 5,
+      "targetPort": "input_dict",
+      "source": 25,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 6,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 26,
-      &quot;sourcePort&quot;: null
+      "target": 6,
+      "targetPort": "working_directory",
+      "source": 26,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 27,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;s_3&quot;
+      "target": 27,
+      "targetPort": "structure",
+      "source": 2,
+      "sourcePort": "s_3"
     },
     {
-      &quot;target&quot;: 27,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 27,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 27,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 27,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 27,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 21,
-      &quot;sourcePort&quot;: null
+      "target": 27,
+      "targetPort": "calculation",
+      "source": 21,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 27,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 27,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 6,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 27,
-      &quot;sourcePort&quot;: null
+      "target": 6,
+      "targetPort": "input_dict",
+      "source": 27,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 7,
-      &quot;targetPort&quot;: &quot;working_directory&quot;,
-      &quot;source&quot;: 28,
-      &quot;sourcePort&quot;: null
+      "target": 7,
+      "targetPort": "working_directory",
+      "source": 28,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 29,
-      &quot;targetPort&quot;: &quot;structure&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;s_4&quot;
+      "target": 29,
+      "targetPort": "structure",
+      "source": 2,
+      "sourcePort": "s_4"
     },
     {
-      &quot;target&quot;: 29,
-      &quot;targetPort&quot;: &quot;pseudopotentials&quot;,
-      &quot;source&quot;: 14,
-      &quot;sourcePort&quot;: null
+      "target": 29,
+      "targetPort": "pseudopotentials",
+      "source": 14,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 29,
-      &quot;targetPort&quot;: &quot;kpts&quot;,
-      &quot;source&quot;: 15,
-      &quot;sourcePort&quot;: null
+      "target": 29,
+      "targetPort": "kpts",
+      "source": 15,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 29,
-      &quot;targetPort&quot;: &quot;calculation&quot;,
-      &quot;source&quot;: 21,
-      &quot;sourcePort&quot;: null
+      "target": 29,
+      "targetPort": "calculation",
+      "source": 21,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 29,
-      &quot;targetPort&quot;: &quot;smearing&quot;,
-      &quot;source&quot;: 17,
-      &quot;sourcePort&quot;: null
+      "target": 29,
+      "targetPort": "smearing",
+      "source": 17,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 7,
-      &quot;targetPort&quot;: &quot;input_dict&quot;,
-      &quot;source&quot;: 29,
-      &quot;sourcePort&quot;: null
+      "target": 7,
+      "targetPort": "input_dict",
+      "source": 29,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 30,
-      &quot;targetPort&quot;: &quot;0&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: &quot;volume&quot;
+      "target": 30,
+      "targetPort": "0",
+      "source": 3,
+      "sourcePort": "volume"
     },
     {
-      &quot;target&quot;: 30,
-      &quot;targetPort&quot;: &quot;1&quot;,
-      &quot;source&quot;: 4,
-      &quot;sourcePort&quot;: &quot;volume&quot;
+      "target": 30,
+      "targetPort": "1",
+      "source": 4,
+      "sourcePort": "volume"
     },
     {
-      &quot;target&quot;: 30,
-      &quot;targetPort&quot;: &quot;2&quot;,
-      &quot;source&quot;: 5,
-      &quot;sourcePort&quot;: &quot;volume&quot;
+      "target": 30,
+      "targetPort": "2",
+      "source": 5,
+      "sourcePort": "volume"
     },
     {
-      &quot;target&quot;: 30,
-      &quot;targetPort&quot;: &quot;3&quot;,
-      &quot;source&quot;: 6,
-      &quot;sourcePort&quot;: &quot;volume&quot;
+      "target": 30,
+      "targetPort": "3",
+      "source": 6,
+      "sourcePort": "volume"
     },
     {
-      &quot;target&quot;: 30,
-      &quot;targetPort&quot;: &quot;4&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: &quot;volume&quot;
+      "target": 30,
+      "targetPort": "4",
+      "source": 7,
+      "sourcePort": "volume"
     },
     {
-      &quot;target&quot;: 8,
-      &quot;targetPort&quot;: &quot;volume_lst&quot;,
-      &quot;source&quot;: 30,
-      &quot;sourcePort&quot;: null
+      "target": 8,
+      "targetPort": "volume_lst",
+      "source": 30,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 31,
-      &quot;targetPort&quot;: &quot;0&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: &quot;energy&quot;
+      "target": 31,
+      "targetPort": "0",
+      "source": 3,
+      "sourcePort": "energy"
     },
     {
-      &quot;target&quot;: 31,
-      &quot;targetPort&quot;: &quot;1&quot;,
-      &quot;source&quot;: 4,
-      &quot;sourcePort&quot;: &quot;energy&quot;
+      "target": 31,
+      "targetPort": "1",
+      "source": 4,
+      "sourcePort": "energy"
     },
     {
-      &quot;target&quot;: 31,
-      &quot;targetPort&quot;: &quot;2&quot;,
-      &quot;source&quot;: 5,
-      &quot;sourcePort&quot;: &quot;energy&quot;
+      "target": 31,
+      "targetPort": "2",
+      "source": 5,
+      "sourcePort": "energy"
     },
     {
-      &quot;target&quot;: 31,
-      &quot;targetPort&quot;: &quot;3&quot;,
-      &quot;source&quot;: 6,
-      &quot;sourcePort&quot;: &quot;energy&quot;
+      "target": 31,
+      "targetPort": "3",
+      "source": 6,
+      "sourcePort": "energy"
     },
     {
-      &quot;target&quot;: 31,
-      &quot;targetPort&quot;: &quot;4&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: &quot;energy&quot;
+      "target": 31,
+      "targetPort": "4",
+      "source": 7,
+      "sourcePort": "energy"
     },
     {
-      &quot;target&quot;: 8,
-      &quot;targetPort&quot;: &quot;energy_lst&quot;,
-      &quot;source&quot;: 31,
-      &quot;sourcePort&quot;: null
+      "target": 8,
+      "targetPort": "energy_lst",
+      "source": 31,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 32,
-      &quot;targetPort&quot;: null,
-      &quot;source&quot;: 8,
-      &quot;sourcePort&quot;: null
+      "target": 32,
+      "targetPort": null,
+      "source": 8,
+      "sourcePort": null
     }
   ]
 }
@@ -1109,7 +1109,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;1682a1dbda304ec998030372ef5350ab&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='1682a1dbda304ec998030372ef5350ab' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
@@ -1158,7 +1158,7 @@
 05/26/2025 04:59:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe2
 [jupyter-pythonworkflow-fl--x---218119f8:02569] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 04:59:56 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;energy&#39;, &#39;volume&#39;])
+05/26/2025 04:59:56 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['energy', 'volume'])
 05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe2, type: PyFunction, finished.
 05/26/2025 04:59:57 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: generate_structures3
 05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: generate_structures3, type: PyFunction, finished.
@@ -1167,35 +1167,35 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 05/26/2025 04:59:58 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe4,get_dict12,get_dict13,get_dict14,get_dict15
 [jupyter-pythonworkflow-fl--x---218119f8:02586] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['structure'])
 05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe4, type: PyFunction, finished.
 05/26/2025 05:00:10 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict12,get_dict13,get_dict14,get_dict15
 05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict12, type: PyFunction, finished.
 05/26/2025 05:00:11 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe5,get_dict13,get_dict14,get_dict15
 [jupyter-pythonworkflow-fl--x---218119f8:02596] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['structure'])
 05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe5, type: PyFunction, finished.
 05/26/2025 05:00:22 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict13,get_dict14,get_dict15
 05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict13, type: PyFunction, finished.
 05/26/2025 05:00:23 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe6,get_dict14,get_dict15
 [jupyter-pythonworkflow-fl--x---218119f8:02606] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['structure'])
 05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe6, type: PyFunction, finished.
 05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict14,get_dict15
 05/26/2025 05:00:35 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict14, type: PyFunction, finished.
 05/26/2025 05:00:36 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe7,get_dict15
 [jupyter-pythonworkflow-fl--x---218119f8:02616] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 05:00:50 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:00:50 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['structure'])
 05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe7, type: PyFunction, finished.
 05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_dict15
 05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_dict15, type: PyFunction, finished.
 05/26/2025 05:00:51 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: calculate_qe8
 [jupyter-pythonworkflow-fl--x---218119f8:02626] mca_base_component_repository_open: unable to open mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
-05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys([&#39;structure&#39;])
+05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.calculation.calcfunction.CalcFunctionNode: [WARNING] Found extra results that are not included in the output: dict_keys(['structure'])
 05/26/2025 05:01:05 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: calculate_qe8, type: PyFunction, finished.
 05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_list16,get_list17
 05/26/2025 05:01:06 AM &lt;2497&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [111|WorkGraphEngine|update_task_state]: Task: get_list16, type: PyFunction, finished.
@@ -1234,7 +1234,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.05</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.05</span>
 </pre></div>
 </div>
 </div>
@@ -1360,7 +1360,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;plot_energy_volume_curve__plot_energy_volume_curve&#39;: None}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'plot_energy_volume_curve__plot_energy_volume_curve': None}
 </pre></div>
 </div>
 <img alt="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" src="../../_images/00ce3c223068484bcf4dba9a7a1500c5d8596f449dda925e4b421eda3e431098.png" />

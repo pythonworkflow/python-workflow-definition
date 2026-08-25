@@ -401,7 +401,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -412,7 +412,7 @@
 <p>ASE’s Quantum Espresso writer resolves the pseudopotential directory from the <code class="docutils literal notranslate"><span class="pre">ESPRESSO_PSEUDO</span></code> environment variable when no explicit path is given. Because <code class="docutils literal notranslate"><span class="pre">cwltool</span></code> runs every step in its own isolated temporary directory, the environment variable has to be forwarded explicitly with <code class="docutils literal notranslate"><span class="pre">--preserve-environment=ESPRESSO_PSEUDO</span></code>, so that <code class="docutils literal notranslate"><span class="pre">pw.x</span></code> can find the pseudopotential file shipped in <a class="reference internal" href="#espresso/pseudo"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">espresso/pseudo</span></code></span></a> from any step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ESPRESSO_PSEUDO&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;../../espresso/pseudo&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"ESPRESSO_PSEUDO"</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"../../espresso/pseudo"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -427,7 +427,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
   sys.exit(run())
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
-<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/quantum_espresso/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved 'workflow.cwl' to 'file:///home/jovyan/example_workflows/quantum_espresso/workflow.cwl'
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step get_bulk_structure_0
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step get_bulk_structure_0] start
@@ -656,13 +656,13 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_energy_volume_curve_8] completed success
 <span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
 {
-    &quot;result_file&quot;: {
-        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/quantum_espresso/result.pickle&quot;,
-        &quot;basename&quot;: &quot;result.pickle&quot;,
-        &quot;class&quot;: &quot;File&quot;,
-        &quot;checksum&quot;: &quot;sha1$dbc1aaddc8b7343d6d33b34edcf608b8f8801918&quot;,
-        &quot;size&quot;: 4,
-        &quot;path&quot;: &quot;/home/jovyan/example_workflows/quantum_espresso/result.pickle&quot;
+    "result_file": {
+        "location": "file:///home/jovyan/example_workflows/quantum_espresso/result.pickle",
+        "basename": "result.pickle",
+        "class": "File",
+        "checksum": "sha1$dbc1aaddc8b7343d6d33b34edcf608b8f8801918",
+        "size": 4,
+        "path": "/home/jovyan/example_workflows/quantum_espresso/result.pickle"
     }
 }<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
 </pre></div>
@@ -672,7 +672,7 @@ Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG
 <p><code class="docutils literal notranslate"><span class="pre">cwltool</span></code> runs one step per PWD function node - <code class="docutils literal notranslate"><span class="pre">get_bulk_structure</span></code>, the <code class="docutils literal notranslate"><span class="pre">vc-relax</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code>, <code class="docutils literal notranslate"><span class="pre">generate_structures</span></code>, the five strained <code class="docutils literal notranslate"><span class="pre">scf</span></code> <code class="docutils literal notranslate"><span class="pre">calculate_qe</span></code> steps and finally <code class="docutils literal notranslate"><span class="pre">plot_energy_volume_curve</span></code> - each reading its input pickles and writing its output pickle(s), exactly mirroring the fan-out of one relax followed by five parallel SCF calculations seen in the other notebooks. The workflow’s final output is declared as <code class="docutils literal notranslate"><span class="pre">result_file</span></code>, the pickle produced by the last step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"result.pickle"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>

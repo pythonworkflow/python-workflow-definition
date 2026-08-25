@@ -397,7 +397,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;executorlib_arithmetic.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">"executorlib_arithmetic.json"</span>
 </pre></div>
 </div>
 </div>
@@ -407,8 +407,8 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">export_workflow_filename</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
     <span class="n">future_prod_and_div</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_prod_and_div</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">future_prod</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
-    <span class="n">future_div</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+    <span class="n">future_prod</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"prod"</span><span class="p">)</span>
+    <span class="n">future_div</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"div"</span><span class="p">)</span>
     <span class="n">future_sum</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_sum</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">future_prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">future_div</span><span class="p">)</span>
     <span class="n">future_result</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_square</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">future_sum</span><span class="p">)</span>
 </pre></div>
@@ -423,77 +423,77 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-    &quot;version&quot;: &quot;0.1.0&quot;,
-    &quot;nodes&quot;: [
+    "version": "0.1.0",
+    "nodes": [
         {
-            &quot;id&quot;: 0,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.get_prod_and_div&quot;
+            "id": 0,
+            "type": "function",
+            "value": "workflow.get_prod_and_div"
         },
         {
-            &quot;id&quot;: 1,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.get_sum&quot;
+            "id": 1,
+            "type": "function",
+            "value": "workflow.get_sum"
         },
         {
-            &quot;id&quot;: 2,
-            &quot;type&quot;: &quot;function&quot;,
-            &quot;value&quot;: &quot;workflow.get_square&quot;
+            "id": 2,
+            "type": "function",
+            "value": "workflow.get_square"
         },
         {
-            &quot;id&quot;: 3,
-            &quot;type&quot;: &quot;input&quot;,
-            &quot;value&quot;: 1,
-            &quot;name&quot;: &quot;x&quot;
+            "id": 3,
+            "type": "input",
+            "value": 1,
+            "name": "x"
         },
         {
-            &quot;id&quot;: 4,
-            &quot;type&quot;: &quot;input&quot;,
-            &quot;value&quot;: 2,
-            &quot;name&quot;: &quot;y&quot;
+            "id": 4,
+            "type": "input",
+            "value": 2,
+            "name": "y"
         },
         {
-            &quot;id&quot;: 5,
-            &quot;type&quot;: &quot;output&quot;,
-            &quot;name&quot;: &quot;result&quot;
+            "id": 5,
+            "type": "output",
+            "name": "result"
         }
     ],
-    &quot;edges&quot;: [
+    "edges": [
         {
-            &quot;target&quot;: 0,
-            &quot;targetPort&quot;: &quot;x&quot;,
-            &quot;source&quot;: 3,
-            &quot;sourcePort&quot;: null
+            "target": 0,
+            "targetPort": "x",
+            "source": 3,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 0,
-            &quot;targetPort&quot;: &quot;y&quot;,
-            &quot;source&quot;: 4,
-            &quot;sourcePort&quot;: null
+            "target": 0,
+            "targetPort": "y",
+            "source": 4,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 1,
-            &quot;targetPort&quot;: &quot;x&quot;,
-            &quot;source&quot;: 0,
-            &quot;sourcePort&quot;: &quot;prod&quot;
+            "target": 1,
+            "targetPort": "x",
+            "source": 0,
+            "sourcePort": "prod"
         },
         {
-            &quot;target&quot;: 1,
-            &quot;targetPort&quot;: &quot;y&quot;,
-            &quot;source&quot;: 0,
-            &quot;sourcePort&quot;: &quot;div&quot;
+            "target": 1,
+            "targetPort": "y",
+            "source": 0,
+            "sourcePort": "div"
         },
         {
-            &quot;target&quot;: 2,
-            &quot;targetPort&quot;: &quot;x&quot;,
-            &quot;source&quot;: 1,
-            &quot;sourcePort&quot;: null
+            "target": 2,
+            "targetPort": "x",
+            "source": 1,
+            "sourcePort": null
         },
         {
-            &quot;target&quot;: 5,
-            &quot;targetPort&quot;: null,
-            &quot;source&quot;: 2,
-            &quot;sourcePort&quot;: null
+            "target": 5,
+            "targetPort": null,
+            "source": 2,
+            "sourcePort": null
         }
     ]
 }
@@ -514,7 +514,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;c08748df7ab74ec08c14e5f16cebc987&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='c08748df7ab74ec08c14e5f16cebc987' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
@@ -601,9 +601,9 @@
 2026-01-16 08:08:28,340 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;548e497c-81af-44a2-a626-cd9466984398&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))},
- &#39;c4ce346f-059c-4cb1-8e98-c7f4f0df837e&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))},
- &#39;e94efcd4-8074-48b1-865c-0e614fc9c846&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'548e497c-81af-44a2-a626-cd9466984398': {1: Response(output={'prod': 2, 'div': 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic'))},
+ 'c4ce346f-059c-4cb1-8e98-c7f4f0df837e': {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic'))},
+ 'e94efcd4-8074-48b1-865c-0e614fc9c846': {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic'))}}
 </pre></div>
 </div>
 </div>
@@ -682,7 +682,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;get_square__get_square&#39;: 6.25}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'get_square__get_square': 6.25}
 </pre></div>
 </div>
 </div>
