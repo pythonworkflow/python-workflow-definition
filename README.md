@@ -32,7 +32,8 @@ As a first example we define two Python functions which add multiple inputs:
 ```python
 def get_sum(x, y):
     return x + y
-    
+
+
 def get_prod_and_div(x: float, y: float) -> dict:
     return {"prod": x * y, "div": x / y}
 ```
