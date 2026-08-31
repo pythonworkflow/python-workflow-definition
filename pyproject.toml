@@ -31,7 +31,7 @@ pyiron = [
     "pyiron_base>=0.11.10,<=0.15.16",
 ]
 pyiron_workflow = [
-    "pyiron_workflow>=0.13.0,<=0.18.0",
+    "pyiron_workflow>=0.13.0,<=0.19.1",
 ]
 executorlib = [
     "executorlib>=1.7.4,<=1.10.1",
