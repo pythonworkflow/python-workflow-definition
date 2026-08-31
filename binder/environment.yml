@@ -11,7 +11,7 @@ dependencies:
 - pyiron_base =0.15.16
 - pyiron_workflow =0.18.0
 - pygraphviz =1.14
-- aiida-workgraph =0.8.1
+- aiida-workgraph =0.9.0
 - conda_subprocess =0.0.12
 - networkx =3.6.1
 - cwltool =3.2.20260413085819
