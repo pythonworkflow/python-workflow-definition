@@ -1,6 +1,7 @@
 title: Python Workflow Definition
 author: Jan Janssen
 copyright: "2026"
+logo: logo.png
 
 execute:
   execute_notebooks           : off
