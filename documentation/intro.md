@@ -10,7 +10,7 @@ different workflow engines to enable interoperability.
 
 ## Workflow Engines
 Currently supported workflow engines: 
-* [aiida-workgraph](https://github.com/aiidateam/aiida-workgraph)
+* [aiida-core](https://github.com/aiidateam/aiida-core)
 * [jobflow](https://github.com/materialsproject/jobflow)
 * [pyiron_base](https://github.com/pyiron/pyiron_base)
 * [pyiron_workflow](https://github.com/pyiron/pyiron_workflow)
