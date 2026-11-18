@@ -11,7 +11,9 @@ dependencies:
 - pyiron_base =0.15.19
 - pyiron_workflow =0.18.0
 - pygraphviz =1.14
-- aiida-workgraph =0.9.0
+- pip
+- pip:
+  - git+https://github.com/aiidateam/aiida-core.git@8c24cbc94dd58f2bb36e70402b51f4124fc90edb
 - conda_subprocess =0.0.12
 - networkx =3.6.1
 - cwltool =3.2.20260413085819

@@ -86,3 +86,11 @@ def ase_to_json(atoms):
 def json_to_ase(atoms_json):
     structure_restore = StructureResourceAttributes.model_validate_json(atoms_json)
     return get_ase_atoms(optimade_structure=StructureResource(id="ase", attributes=structure_restore))
+
+
+def collect_volumes(v0, v1, v2, v3, v4):
+    return [v0, v1, v2, v3, v4]
+
+
+def collect_energies(v0, v1, v2, v3, v4):
+    return [v0, v1, v2, v3, v4]
