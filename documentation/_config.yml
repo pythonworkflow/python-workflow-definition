@@ -9,6 +9,7 @@ execute:
 repository:
     url                       : https://github.com/pythonworkflow/python-workflow-definition
     path_to_book              : ""
+    branch                    : main
 
 launch_buttons:
   notebook_interface          : jupyterlab

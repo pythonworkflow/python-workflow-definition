@@ -70,9 +70,9 @@ jobs:
       shell: bash -l {0}
       run: |
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
-        sudo apt-get install -y $(cat binder/apt.txt)
+        xargs -r -a binder/apt.txt sudo apt-get install -y
     - name: Create Additional Conda Environments
       shell: bash -l {0}
       run: |
@@ -80,8 +80,9 @@ jobs:
         conda env create -n processing -f example_workflows/nfdi/source/envs/processing.yaml -y
         conda env create -n postprocessing -f example_workflows/nfdi/source/envs/postprocessing.yaml -y
     - name: Tests
-      shell: bash -l {0}
+      shell: bash -el {0}
       run: |
+        bash .github/scripts/generate-notebooks.sh example_workflows/nfdi/*_notebook.py
         cd example_workflows/nfdi/
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -90,6 +91,12 @@ jobs:
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: executed-notebooks-nfdi
+        path: example_workflows/nfdi/*_out.ipynb
+        if-no-files-found: error
 
   quantumespresso:
     runs-on: ubuntu-latest
@@ -111,13 +118,14 @@ jobs:
       run: |
         pip install --no-deps --no-build-isolation -e example_workflows/quantum_espresso/qe_xml_parser
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
     - name: Tests
-      shell: bash -l {0}
+      shell: bash -el {0}
       run: |
-        export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
+        export ESPRESSO_PSEUDO="$PWD/espresso/pseudo"
         cp -r example_workflows/quantum_espresso/espresso .
+        bash .github/scripts/generate-notebooks.sh example_workflows/quantum_espresso/*_notebook.py
         cd example_workflows/quantum_espresso
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -126,6 +134,12 @@ jobs:
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: executed-notebooks-quantum_espresso
+        path: example_workflows/quantum_espresso/*_out.ipynb
+        if-no-files-found: error
 
   arithmetic:
     runs-on: ubuntu-latest
@@ -143,11 +157,12 @@ jobs:
       shell: bash -l {0}
       run: |
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
     - name: Tests
-      shell: bash -l {0}
+      shell: bash -el {0}
       run: |
+        bash .github/scripts/generate-notebooks.sh example_workflows/arithmetic/*_notebook.py
         cd example_workflows/arithmetic
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -156,9 +171,18 @@ jobs:
         papermill pyiron_base.ipynb pyiron_base_out.ipynb -k "python3"
         papermill pyiron_workflow.ipynb pyiron_workflow_out.ipynb -k "python3"
         papermill universal_workflow.ipynb universal_workflow_out.ipynb -k "python3"
+    - name: Upload executed notebooks
+      uses: actions/upload-artifact@v4
+      with:
+        name: executed-notebooks-arithmetic
+        path: example_workflows/arithmetic/*_out.ipynb
+        if-no-files-found: error
 
   documentation:
+    needs: [nfdi4ing, quantumespresso, arithmetic]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v6
     - name: Conda config
@@ -169,16 +193,52 @@ jobs:
         miniforge-version: latest
         condarc-file: .condarc
         environment-file: documentation/environment.yml
-    - name: Install Jupyterbook
+    - name: Prepare book
       shell: bash -l {0}
       run: |
         cp documentation/_config.yml .
         cp documentation/_toc.yml .
         cp documentation/*.md .
         cp documentation/*.png .
+    - name: Collect executed notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-arithmetic
+        path: example_workflows/arithmetic/
+    - name: Collect executed nfdi notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-nfdi
+        path: example_workflows/nfdi/
+    - name: Collect executed qe notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-quantum_espresso
+        path: example_workflows/quantum_espresso/
+    - name: Build book with outputs
+      shell: bash -el {0}
+      run: |
+        for directory in arithmetic nfdi quantum_espresso; do
+          for engine in aiida cwl executorlib jobflow pyiron_base pyiron_workflow universal_workflow; do
+            mv "example_workflows/$directory/${engine}_out.ipynb" "example_workflows/$directory/$engine.ipynb"
+          done
+        done
         jupyter-book build . --path-output public
         mv public/_build/html public_html
         touch public_html/.nojekyll
+    - name: Upload book
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation
+        path: public_html/
+        if-no-files-found: error
+    - name: Deploy
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: public_html
+        clean: true
 
   unittest_matrix:
     runs-on: ${{ matrix.operating-system }}
