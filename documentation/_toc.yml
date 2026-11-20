@@ -5,16 +5,28 @@ chapters:
 - file: arithmetic.md
   sections:
     - file: example_workflows/arithmetic/aiida.ipynb
+    - file: example_workflows/arithmetic/cwl.ipynb
+    - file: example_workflows/arithmetic/executorlib.ipynb
     - file: example_workflows/arithmetic/jobflow.ipynb
     - file: example_workflows/arithmetic/pyiron_base.ipynb
+    - file: example_workflows/arithmetic/pyiron_workflow.ipynb
+    - file: example_workflows/arithmetic/universal_workflow.ipynb
 - file: evcurve.md
   sections:
     - file: example_workflows/quantum_espresso/aiida.ipynb
+    - file: example_workflows/quantum_espresso/cwl.ipynb
+    - file: example_workflows/quantum_espresso/executorlib.ipynb
     - file: example_workflows/quantum_espresso/jobflow.ipynb
     - file: example_workflows/quantum_espresso/pyiron_base.ipynb
+    - file: example_workflows/quantum_espresso/pyiron_workflow.ipynb
+    - file: example_workflows/quantum_espresso/universal_workflow.ipynb
 - file: nfdi.md
   sections:
     - file: example_workflows/nfdi/aiida.ipynb
+    - file: example_workflows/nfdi/cwl.ipynb
+    - file: example_workflows/nfdi/executorlib.ipynb
     - file: example_workflows/nfdi/jobflow.ipynb
     - file: example_workflows/nfdi/pyiron_base.ipynb
+    - file: example_workflows/nfdi/pyiron_workflow.ipynb
+    - file: example_workflows/nfdi/universal_workflow.ipynb
 - file: conclusion.md
