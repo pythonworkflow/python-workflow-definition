@@ -16,6 +16,21 @@ the connections between the different Python functions and a conda environment f
 The files are not intended to be human readable, but rather interact as a machine readable exchange format between the 
 different workflow engines to enable interoperability. 
 
+## Supported Workflow Frameworks
+The following workflow management systems and execution engines are currently supported. "Import from PWD" means a
+`workflow.json` can be loaded and executed by that engine; "Export to PWD" means a workflow defined natively in that
+engine can be converted to a `workflow.json`:
+
+| Name                                                                  | Import from Python Workflow Definition              | Export to Python Workflow Definition |
+|------------------------------------------------------------------------|-------------------------------------------------------|:---------------------------------------:|
+| [aiida-workgraph](https://github.com/aiidateam/aiida-workgraph)        | ✅                                                     | ✅                                       |
+| [jobflow](https://github.com/materialsproject/jobflow)                 | ✅                                                     | ✅                                       |
+| [pyiron_base](https://github.com/pyiron/pyiron_base)                   | ✅                                                     | ✅                                       |
+| [pyiron_workflow](https://github.com/pyiron/pyiron_workflow)           | ✅                                                     | ✅                                       |
+| [executorlib](https://github.com/pyiron/executorlib)                   | supported, but the workflow is executed directly       | ❌                                       |
+| [Python](https://www.python.org)                                       | supported, but the workflow is executed directly       | ❌                                       |
+| [CWL](https://github.com/common-workflow-language/)                    | supported, but inputs are stored in pickle files        | ❌                                       |
+
 ## Installation
 The Python Workflow Definition can either be installed via pypi or via conda. For the [pypi installation](https://pypi.org/project/python-workflow-definition/) use:
 ```
